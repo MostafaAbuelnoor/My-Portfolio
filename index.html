@@ -5,88 +5,265 @@
 	<meta charset="UTF-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css">
+	<script src="https://kit.fontawesome.com/ef1c0b5c9c.js" crossorigin="anonymous"></script>
+	<link href='//cdn.jsdelivr.net/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/style.css">
+	<script src="js/myscripts.js"></script>
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Mostafa Abuelnoor</title>
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>
+			<text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+	<title>Mostafa Saher</title>
 
 </head>
 
 <body>
-	<!---Navigation menu-->
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
+	<!---Navigation bar-->
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary smart-scroll">
 		<div class="container">
-			<a class="navbar-brand" href="#">Abuelnoor</a>
+			<a class="navbar-brand" href="#" id="logo" ><i class="fas fa-laptop-code"></i></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
 				aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
-			<div class="collapse navbar-collapse" id="navbarColor03" style="margin-left: 41%">
+			<div class="collapse navbar-collapse" id="navbarColor03" style="margin-left: 38%">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="#">My story</a>
+						<a class="nav-link" href="#story">My story</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Projects</a>
+						<a class="nav-link" href="#skills">Skills</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">My resume</a>
+						<a class="nav-link" href="#projects">Projects</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Contact me</a>
+						<a class="nav-link" href="/Mostafa's Resume Website.pdf" target="_blank">My resume</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#contact">Contact me</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!---Welcome-->
-	<div class="container">
-		<div class="intro">
-			<h2 style="font-size:clamp(20px, 2vw, 80px);">Hey, my name is</h2>
-			<h1 style="font-size:clamp(32px, 3vw, 80px);">Mostafa Abuelnoor.</h1>
+	<section id="weclome">
+		<div class="container">
+			<div class="intro">
+				<h2 style="font-size:clamp(20px, 2vw, 80px);">Hey, my name is</h2>
+				<h1 style="font-size:clamp(40px, 3vw, 80px);">Mostafa Saher.</h1>
+				<h1 style="font-size:clamp(40px, 3vw, 80px);">A Computer Enginneer.</h1>
+			</div>
 		</div>
-		<hr>
-	</div>
+	</section>
 	<!---My story-->
-	<div class="container">
-		<div class="story">
-			<h1 id="center">MY STORY</h1>
-			<hr>
-			<div class="row">
-				<div class="column">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Proin id euismod justo, ac blandit
-						diam. Etiam elementum hendrerit velit non tincidunt
-						. Donec lacinia nulla id finibus porttitor. Cras ut ipsum id
-						sapien tempus tempor. Phasellus nec nulla rhoncus, elementum nibh eget
-						, fermentum sapien. Phasellus nec metus vitae est lacinia ullamcorper et sed sapien. Integer
-						ultrices enim
-						dui, at dictum orci rhoncus vitae. Nulla in lobortis leo. Aliquam at volutpat orci, elementum
-						mollis
-						nisi</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Proin id euismod justo, ac blandit
-						diam. Etiam elementum hendrerit velit non tincidunt
-						. Donec lacinia nulla id finibus porttitor. Cras ut ipsum id
-						sapien tempus tempor. Phasellus nec nulla rhoncus, elementum nibh eget
-						, fermentum sapien. Phasellus nec metus vitae est lacinia ullamcorper et sed sapien. Integer
-						ultrices enim
-						dui, at dictum orci rhoncus vitae. Nulla in lobortis leo. Aliquam at volutpat orci, elementum
-						mollis
-						nisi</p>
-				</div>
-				<div class="column">
-					<img src="/images/My photo.JPG">
+	<section id="story">
+		<div class="container">
+			<div class="story">
+				<h1 id="center">MY STORY</h1>
+				<hr>
+				<div class="row">
+					<div class="column">
+						<img src="/images/headshot.JPG" alt="My picture">
+					</div>
+					<div class="column">
+						<p>My name is Mostafa and I am a Computer Engineer. I graduated from the American University Of
+							Sharjah (AUS) in may 2020,
+							majoring in computer engineering while minoring in computer science.</p>
+						<p>During my time at AUS I developed many skills, and was able to work on many hardware and
+							software projects.
+							I was also able to land a summer long internship with an indie game studio based in Abu
+							Dhabi, UAE.
+							During this internship I was able to polish up my software and game development ability.</p>
+						<p>I built this website to showcase some of my skills and the projects that I am most proud off.
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!---SKills-->
+	</section>
+	<!---Skills-->
+	<section id="skills" style="padding-top: 65px;">
+		<div class="container">
+			<div id="center">
+				<h1>SKILLS</h1>
+				<hr>
+				<h4>Some of the technologies I worked with*</h4>
+				<ul class="icons">
+					<li>
+						<img src="images/icons/androidstudio.svg" alt="Icon of android studio" class="icons-svg">
+						<p>Android Studio</p>
+					</li>
+					<li>
+						<i class="devicon-bootstrap-plain"></i>
+						<p>Bootstrap</p>
+					</li>
+					<li>
+						<i class="devicon-cplusplus-line"></i>
+						<p>C++</p>
+					</li>
+					<li>
+						<i class="devicon-csharp-line"></i>
+						<p>C#</p>
+					</li>
+					<li>
+						<i class="devicon-c-line"></i>
+						<p>C</p>
+					</li>
+					<li>
+						<i class="devicon-css3-plain"></i>
+						<p>CSS3</p>
+					</li>
+					<li>
+						<i class="devicon-html5-plain"></i>
+						<p>HTML5</p>
+					</li>
+				</ul>
+				<ul class="icons">
+					<li>
+						<i class="devicon-java-plain"></i>
+						<p>Java</p>
+					</li>
+					<li>
+						<i class="devicon-python-plain"></i>
+						<p>Python</p>
+					</li>
+					<li>
+						<i class="fab fa-raspberry-pi"></i>
+						<p>Raspberry Pi</p>
+					</li>
+					<li>
+						<img src="images/icons/scikit-learn.svg" alt="Icon of scikit-learn" class="icons-svg">
+						<p>SciKit Learn</p>
+					</li>
+					<li>
+						<span class="devicons devicons-unity_small"></span>
+						<p>Unity</p>
+					</li>
+				</ul>
+				<p style="font-size:small;">*List is not exhaustive</p>
+			</div>
+		</div>
+	</section>
 	<!---Projects-->
+	<section id="projects" style="padding-top: 65px;">
+		<div class="container">
+			<div>
+				<h1 id="center">PROJECTS</h1>
+				<hr>
+				<div>
+					<h4 id="center">Some of my most recent projects </h4>
+
+					<div class="row">
+						<div class="column">
+							<h1 id="center" class="project-h1">ARAB COVID-19 MAP</h1>
+							<p>I built this project to show some daily metrics and statistics for the COVID-19 pandemic
+								exclusively for the Arab World on different types of maps and graphs.</p>
+							<div id="center">
+								<a href="https://github.com/MostafaAbuelnoor/ArabCOVID" target="_blank"><button
+										type="button" class="btn btn-outline-primary">View</button></a>
+							</div>
+						</div>
+
+						<div class="column">
+							<img src="images/projects/treemap.gif" alt="A gif of a treemap of the arab COVID-19 project"
+								class="pic">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="column">
+							<h1 id="center" class="project-h1">ASIM</h1>
+							<p>This project uses machine learning to solve a 150 billion dollar problem. It predicts
+								whether or not a patient will show up to their booked appointment. </p>
+							<div id="center">
+								<a href="https://github.com/MostafaAbuelnoor/ASIM-Admin" target="_blank"><button
+										type="button" class="btn btn-outline-primary">View</button></a>
+							</div>
+						</div>
+						<div class="column">
+							<img src="images/projects/ASIM.png" alt="A banner of the ASIM project" class="pic">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="column">
+
+							<h1 id="center" class="project-h1">Maze Runner</h1>
+							<p>A virtual reality game I developed on Unity. The game has the player try to escape a maze
+								that's full of traps and darkness.</p>
+							<div id="center">
+								<a href="https://github.com/MostafaAbuelnoor/Maze-Runner" target="_blank"><button
+										type="button" class="btn btn-outline-primary">View</button></a>
+							</div>
+						</div>
+						<div class="column">
+							<img src="images/projects/Maze Runner.jpg" alt="An image from the maze runner project"
+								class="pic">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="column">
+							<h1 id="center" class="project-h1">LabServe</h1>
+							<p>An android mobile app that is designed to reserve a lab or observe if it has been
+								reserved already for AUS faculty and student.</p>
+							<div id="center">
+								<a href="https://github.com/MostafaAbuelnoor/Labserve" target="_blank"><button
+										type="button" class="btn btn-outline-primary">View</button></a>
+							</div>
+						</div>
+						<div class="column">
+							<img src="images/projects/labserve.png" alt="Pic of labserve app icon" class="pic">
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
 	<!---Contact me-->
+
+	<section id="contact" style="padding-top: 65px;">
+		<div class="container" id="center">
+			<div>
+				<h1 id="center">LIKE WHAT YOU SEE? GET IN TOUCH</h1>
+				<hr>
+				<ul class="talk-icons">
+					<li>
+						<a href="https://github.com/MostafaAbuelnoor" target="_blank"><i
+								class="devicon-github-plain"></i></a>
+						<p>MostafaAbuelnoor</p>
+					</li>
+					<li>
+						<a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank"><i
+								class="devicon-linkedin-plain"></i></a>
+						<p>Mostafa Abuelnoor</p>
+					</li>
+					<li>
+						<a href="mailto:mostafasaher@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+						<p>mostafasaher@gmail.com</p>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+
+	</section>
+
 </body>
 <footer>
+	<div class="container">
+		<div id="center">
+			<h6>©2020 Mostafa Saher. All Rights Reserved</h6>
+		</div>
+
+	</div>
+
 </footer>
 
 </html>

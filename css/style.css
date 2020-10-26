@@ -1,47 +1,12 @@
-/* :root{
-  --honeydew: #f1faeeff;
-  --powder-blue: #a8dadcff;
-  --celadon-blue: #457b9dff;
-  --prussian-blue: #1d3557ff;
-  --imperial-red: #e63946ff;
-  }
-  
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html {
-    overflow-x: hidden;
-  }
-
-  body {
-    height: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    background-color: var(--powder-blue);
-  }
- 
-  h1{
-    color: var(--imperial-red);
-    text-align: center;
-    padding-top: 25%;
-  }
-  h2{
-    color: #F7ECE1;
-  }
-  h3{
-    color: #F7ECE1;
-  }
-
-   */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html{
+  scroll-behavior: smooth;
+}
 body {
   height: 100%;
   max-width: 100%;
@@ -55,6 +20,9 @@ h1 {
 h2 {
   text-transform: none;
 }
+p{
+  font-size: 18px ;
+}
 
 .intro {
   margin-top: 100px;
@@ -62,7 +30,7 @@ h2 {
 }
 
 .story {
-  padding-top: 45%;
+  margin-top: 45%;
 }
 
 .container {
@@ -72,6 +40,7 @@ h2 {
   margin-right: auto;
   margin-left: auto;
 }
+
 /* Create two equal columns that floats next to each other */
 .column {
   float: left;
@@ -85,6 +54,79 @@ h2 {
   display: table;
   clear: both;
 }
+
+.navbar {
+  transition: top 0.5s ease;
+}
+
+.navbar-hide {
+  top: -96px;
+}
+
+.icons{
+  font-size: 90px;
+  list-style: none;
+  margin: auto;
+  display: inline-table;
+}
+.icons li {
+  padding: 13px;
+  display: inline-block;
+  color: #1a1a1a;
+}
+.icons p{
+  margin-top: -20%;
+  font-size: 18px;
+  text-align: center;
+}
+
+.icons-svg{
+  filter: invert(16%) sepia(0%) saturate(2051%) hue-rotate(129deg) brightness(108%) contrast(121%);
+  margin: auto;
+  width: 90px;
+  height: 90px;
+  vertical-align: .115px;
+}
+
+.talk-icons{
+  font-size: 90px;
+  list-style: none;
+  margin: auto;
+  display: inline-table;
+}
+.talk-icons li{
+  padding: 30px;
+  display: inline-block;
+  color: #1a1a1a;
+}
+.talk-icons p{
+
+  font-size: 18px;
+  text-align: center;
+}
+
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+.project-h1{
+  margin-top: 30px;
+  margin-bottom: 15px
+}
+
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .column {
@@ -92,7 +134,24 @@ h2 {
   }
 }
 
+.pic{
+  width: 330px;
+  padding-right: 30px;
+}
+
+
+
 
 #center {
   text-align: center;
 }
+
+#logo{
+  font-size: 25px;
+  color:rgba(255,255,255,.5);
+  
+}
+.fa-laptop-code:hover {
+  color: #f7f7f7;
+}
+

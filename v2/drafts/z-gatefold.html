@@ -60,7 +60,7 @@ input { caret-color: currentColor; }
 .masthead { position: relative; margin: 0; padding: 32px var(--gutter) 0; display: flex; justify-content: space-between; font-family: var(--display); font-weight: 700; font-size: 25.5vw; line-height: 0.8; letter-spacing: -0.01em; text-transform: uppercase; user-select: none; }
 .masthead i { display: block; font-style: normal; font-variation-settings: "wght" var(--w, 640); }
 .portrait { position: absolute; z-index: 1; bottom: 0; left: 58.5%; height: 82%; width: auto; transform: translateX(-50%); }
-.lede { position: absolute; z-index: 2; left: var(--gutter); bottom: 48px; width: min(440px, max(33vw, 360px)); }
+.lede { position: absolute; z-index: 2; left: var(--gutter); bottom: 64px; width: min(440px, max(33vw, 360px)); }
 h1 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 72px; line-height: 0.9; text-transform: uppercase; text-wrap: balance; }
 .roles { margin: 14px 0 0; font-size: 18px; line-height: 26px; font-weight: 600; text-wrap: balance; }
 .pitch { margin: 8px 0 20px; font-size: 16px; line-height: 24px; color: var(--on-cover-2); text-wrap: pretty; }
@@ -81,6 +81,8 @@ h1 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 72px; 
 @media (hover: hover) and (pointer: fine) { .btn:hover svg { transform: translateX(3px); } .btn--up:hover svg { transform: translateY(-3px); } }
 .msg { margin: 8px 0 0 18px; min-height: 20px; font-size: 14px; line-height: 20px; font-weight: 600; }
 .msg.is-error { color: var(--error); }
+.lede form { position: relative; }
+.lede .msg { position: absolute; left: 0; right: 0; top: 100%; }
 .is-invalid .field { border: 2px solid var(--error); }
 .field.is-pulse { animation: nudge 900ms var(--ease-out); }
 @keyframes nudge { 30% { transform: scale(1.03); } }
@@ -145,6 +147,7 @@ footer nav { display: flex; gap: 24px; }
   .portrait { position: relative; left: auto; bottom: auto; height: min(110vw, 520px); align-self: center; margin-top: -12vw; transform: none; }
   .js .portrait { transform: translateY(40px); }
   .js.is-loaded .portrait { transform: none; }
+  .lede .msg { position: static; }
   .lede { position: relative; left: auto; bottom: auto; width: auto; padding: 24px var(--gutter) 0; }
   h1 { font-size: 52px; }
   .ribbon { left: auto; right: 20px; width: 52px; height: min(110vw, 520px); transform: translate(0, -101%); }

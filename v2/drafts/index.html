@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drafts | Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..600&family=Archivo:wdth,wght@62..125,400..600&family=Funnel+Display:wght@500..600&family=Funnel+Sans:wght@400..500&family=B612:wght@400;700&family=Big+Shoulders+Display:wght@800&family=Hanken+Grotesk:wght@400&family=Schibsted+Grotesk:wght@400;700&family=Alegreya+Sans:wght@400;700&family=Reem+Kufi:wght@500&family=Sofia+Sans+Condensed:wght@800&family=Sofia+Sans:wght@400&family=Grenze+Gotisch:wght@700&family=EB+Garamond:wght@400&family=League+Gothic&family=Courier+Prime:wght@700&family=Libre+Franklin:wght@400&family=Radio+Canada+Big:wght@400;700&family=Red+Hat+Mono:wght@700&family=Manrope:wght@400;600&family=Syncopate:wght@400&family=Zilla+Slab:wght@700&family=Albert+Sans:wght@400&family=Caveat+Brush&family=Caveat:wght@700&family=Lexend:wght@300&family=Anybody:wdth,wght@50..150,800&family=Public+Sans:wght@400&family=Bodoni+Moda:opsz,wght@6..96,700&family=Source+Serif+4:wght@400&family=Host+Grotesk:wght@400;800&family=Overpass:wght@400;800&family=Overpass+Mono:wght@600&family=Alumni+Sans:wght@900&family=Onest:wght@400&family=Federo&family=Jost:wght@400&family=Young+Serif&family=Commissioner:wght@400&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #EDEDEA; --card: #FFFFFF; --ink: #161616; --ink-2: #5A5A55; --line: #D8D8D2; --gutter: clamp(16px, 4vw, 56px); }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Geist", system-ui, sans-serif; font-size: 16px; line-height: 24px; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-underline-offset: 0.22em; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+::selection { background: #161616; color: #fff; }
+.wrap { max-width: 1440px; margin: 0 auto; padding: 48px var(--gutter) 96px; }
+header.page { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+h1 { margin: 0; font-size: 48px; line-height: 1; font-weight: 600; letter-spacing: -0.04em; }
+header.page p { margin: 0; color: var(--ink-2); max-width: 56ch; }
+h2 { margin: 80px 0 8px; font-size: 30px; line-height: 36px; font-weight: 600; letter-spacing: -0.03em; }
+.sub { margin: 0 0 32px; color: var(--ink-2); max-width: 70ch; }
+
+/* draft cards */
+.draft { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; padding: 24px; margin-top: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+.frames { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 16px; align-items: start; }
+.frame { position: relative; overflow: hidden; border-radius: 8px; border: 1px solid var(--line); background: #fafafa; }
+.frame--d { aspect-ratio: 1440 / 900; }
+.frame--m { aspect-ratio: 390 / 844; }
+.frame iframe { position: absolute; top: 0; left: 0; border: 0; transform-origin: 0 0; pointer-events: none; }
+.frame--d iframe { width: 1440px; height: 900px; }
+.frame--m iframe { width: 390px; height: 844px; }
+.frame-label { margin: 8px 0 0; font-size: 12px; line-height: 16px; color: var(--ink-2); }
+.meta h3 { margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.02em; }
+.tag { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 12px; line-height: 16px; font-weight: 500; vertical-align: 4px; }
+.meta p { margin: 8px 0 0; color: var(--ink-2); }
+.meta dl { margin: 20px 0 0; display: grid; gap: 14px; }
+.meta dt { font-size: 12px; line-height: 16px; font-weight: 600; color: var(--ink-2); }
+.meta dd { margin: 4px 0 0; font-size: 14px; line-height: 20px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; line-height: 16px; font-variant-numeric: tabular-nums; }
+.chip i { width: 16px; height: 16px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); display: inline-block; }
+.open { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 10px 16px; border-radius: 8px; background: var(--ink); color: #fff; font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none; transition: transform 160ms cubic-bezier(.23,1,.32,1), background-color 150ms ease; }
+.open:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .open:hover { background: #333; } }
+
+.quiet { margin-top: 24px; padding: 20px 24px; border: 1px dashed #C4C4BC; border-radius: 16px; color: var(--ink-2); font-size: 14px; line-height: 20px; }
+.quiet b { color: var(--ink); font-weight: 600; }
+.quiet code { font-family: ui-monospace, "Cascadia Mono", Menlo, monospace; font-size: 13px; color: var(--ink); }
+.quiet ul { margin: 8px 0 0; padding-left: 18px; }
+.quiet li + li { margin-top: 4px; }
+
+/* color fields */
+.fields { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+.swatch { margin: 0; }
+.swatch .tile { position: relative; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; }
+.swatch img { position: absolute; bottom: 0; left: 50%; height: 92%; width: auto; transform: translateX(-50%); }
+.swatch figcaption { margin-top: 10px; font-size: 14px; line-height: 20px; }
+.swatch figcaption b { font-weight: 600; }
+.swatch figcaption span { display: block; color: var(--ink-2); font-size: 12px; line-height: 16px; font-variant-numeric: tabular-nums; }
+
+/* type */
+.types { display: grid; gap: 16px; }
+.type { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 32px; padding: 32px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; align-items: center; }
+.type small { display: block; font-size: 12px; line-height: 16px; color: var(--ink-2); margin-top: 4px; }
+.type .name { font-weight: 600; }
+.type .note { margin: 12px 0 0; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+.spec .big { margin: 0; font-size: 72px; line-height: 1; letter-spacing: -0.035em; }
+.spec .body { margin: 16px 0 0; font-size: 18px; line-height: 28px; max-width: 52ch; color: #333; }
+
+/* motion */
+.motion { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.motion section { padding: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+.motion h3 { margin: 0; font-size: 18px; line-height: 28px; font-weight: 600; }
+.motion ul { margin: 12px 0 0; padding-left: 18px; font-size: 14px; line-height: 20px; color: #333; }
+.motion li + li { margin-top: 8px; }
+.motion li b { font-weight: 600; color: var(--ink); }
+
+@media (max-width: 1000px) {
+  header.page, .draft, .type { grid-template-columns: 1fr; }
+  .motion { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) { .frames { grid-template-columns: 1fr; } .frame--m { display: none; } .spec .big { font-size: 48px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page">
+    <h1>Drafts</h1>
+    <p>The original site plus twenty-three directions. Same words, same photo, same one job: get the email. The newest, W and V, are at the top; the full history follows. Open a draft to scroll it, move the mouse over the hero and try the signup (any address works, nothing is sent).</p>
+  </header>
+
+  <h2>Latest: the magazine, cleaned up</h2>
+  <p class="sub">E again, with the colours, structure, controls and animations tidied into one system. The newsletter is After Class, and there is no signup bonus for now.</p>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="w-issue.html" title="Draft W preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="w-issue.html" title="Draft W phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>W. Issue One <span class="tag">Newest</span></h3>
+      <p>The site is issue one of After Class, with you as the cover star. Four parts, like a real magazine: the cover, the contents page, the editor’s letter and a back cover with a tear-out subscription card.</p>
+      <dl>
+        <dt>Colours</dt><dd>Six covers, three light and three dark. The page opens in light (lime) or dark (cobalt with lime type) to match the visitor’s system setting, and a picker on the cover and in the top bar switches between them. The choice is remembered on that device. Dark covers put a soft backdrop light behind you so the black sweater still separates.<div class="chips"><span class="chip"><i style="background:#D9F24B"></i>Lime</span><span class="chip"><i style="background:#A7D8F5"></i>Sky</span><span class="chip"><i style="background:#FFB3C7"></i>Blush</span><span class="chip"><i style="background:#2335C7"></i>Cobalt</span><span class="chip"><i style="background:#0F3D2E"></i>Forest</span><span class="chip"><i style="background:#4A1430"></i>Plum</span></div></dd>
+        <dt>Structure</dt><dd>No bar over your name. A slim top bar slides in once your name scrolls away; the After Class logo takes you back up. Signing up only happens on the cover: the top bar and the back cover card both glide you up to it and pulse the email field.</dd>
+        <dt>Buttons</dt><dd>On click the arrow launches off while a band fills the button; then the email field folds away, the button grows across the whole pill and a check pops in. A wrong address shakes the field.</dd>
+        <dt>Send-off</dt><dd>The subscriber label lands with a thud and a ripple through your name, the address types itself on, then a SUBSCRIBED stamp with today’s date is pressed onto it.</dd>
+      </dl>
+      <a class="open" href="w-issue.html">Open draft W</a>
+    </div>
+  </article>
+
+  <h2>E meets G</h2>
+  <p class="sub">E’s cover and living name, with G’s origami folded in.</p>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="v-crane.html" title="Draft V preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="v-crane.html" title="Draft V phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>V. Crane</h3>
+      <p>E’s lime cover, structure and type, without the magazine parts: no barcode, no volume number, no mailing label. G’s origami is now the paper the cover is made of, and the signup itself.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#D9F24B"></i>Lime #D9F24B</span><span class="chip"><i style="background:#111111"></i>Ink #111111</span><span class="chip"><i style="background:#3A4210"></i>Olive #3A4210</span><span class="chip"><i style="background:#F6F6F0"></i>Page #F6F6F0</span><span class="chip"><i style="background:#FFFFFF"></i>Paper #FFFFFF</span></div></dd>
+        <dt>Type</dt><dd>Big Shoulders Display for your name and the headlines, Hanken Grotesk for reading. The mono face left with the mailing label.</dd>
+        <dt>Mouse</dt><dd>Your name still gets bolder letter by letter near the cursor, with E’s soft gloss. After the page loads, one swell runs through the name so people discover that it moves. On phones, pressing the cover does the same.</dd>
+        <dt>Send-off</dt><dd>A square of paper lifts off the button and folds into a crane in G’s five steps. The crane flies up past the M, low across your name in front of your face, then lands on the middle bar of the F. Each letter swells as it passes, and the F dips under the landing. The crane stays there and flutters if the cursor comes close.</dd>
+        <dt>Also from G</dt><dd>A faint crease pattern on the cover, fold diagrams beside Thoughts, Opinions and Resources, and a crane mark beside the After Class logo.</dd>
+      </dl>
+      <a class="open" href="v-crane.html">Open draft V</a>
+    </div>
+  </article>
+
+  <div class="quiet">
+    <b>Saved: the After Class template.</b> Draft P, the newspaper front page, is kept as its own page in <code>v2/templates/after-class/</code>, with its own copy of the photo and scripts. It stays put even if the drafts folder is cleared, ready for when you design the actual issues.
+  </div>
+
+  <h2>Draft 0: the original</h2>
+  <p class="sub">The exam console version, kept as the starting point. Desktop on the left, phone on the right.</p>
+
+  <article class="draft">
+    <div>
+      <div class="frames">
+        <div><div class="frame frame--d"><iframe src="../../index.html" title="Draft 0 preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+        <div><div class="frame frame--m"><iframe src="../../index.html" title="Draft 0 phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+      </div>
+    </div>
+    <div class="meta">
+      <h3>0. Exam console</h3>
+      <p>The page is a certification exam screen. Scrolling moves through questions, one sample question shows how you teach, and your email is the answer to the last one. Signing up shows a score report.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#171717"></i>Graphite #171717</span><span class="chip"><i style="background:#FFB224"></i>Offer amber #FFB224</span><span class="chip"><i style="background:#38D98A"></i>Pass green #38D98A</span><span class="chip"><i style="background:#F0F0EE"></i>Ink #F0F0EE</span></div></dd>
+        <dt>Type</dt><dd>Atkinson Hyperlegible Next, with its mono for the timer and counters.</dd>
+        <dt>Logo</dt><dd>MS drawn from review-grid cells, the last cell as the amber flag.</dd>
+        <dt>Signature motion</dt><dd>On signup the review cells fill green one by one and the score report rises.</dd>
+        <dt>Why we moved on</dt><dd>You wanted minimal, your photo on a contrasting colour, and the newsletter as the whole point.</dd>
+      </dl>
+      <a class="open" href="../../index.html">Open draft 0</a>
+    </div>
+  </article>
+
+  <h2>Round one</h2>
+  <p class="sub">Desktop on the left, phone on the right.</p>
+
+  <article class="draft">
+    <div>
+      <div class="frames">
+        <div><div class="frame frame--d"><iframe src="a-dispatch.html" title="Draft A preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+        <div><div class="frame frame--m"><iframe src="a-dispatch.html" title="Draft A phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+      </div>
+    </div>
+    <div class="meta">
+      <h3>A. Dispatch</h3>
+      <p>A newsletter is mail. Your portrait is a postage stamp on sky blue; the signup is an envelope addressed “To: you”; subscribing stamps a postmark across it.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#A9C8EE"></i>Sky #A9C8EE</span><span class="chip"><i style="background:#2A3FD6"></i>Cobalt #2A3FD6</span><span class="chip"><i style="background:#F5F5F2"></i>Paper #F5F5F2</span><span class="chip"><i style="background:#121212"></i>Ink #121212</span></div></dd>
+        <dt>Type</dt><dd>Archivo, one family in two widths: expanded for names and headings, normal for reading.</dd>
+        <dt>Logo</dt><dd>A tiny perforated stamp holding your silhouette.</dd>
+        <dt>Signature motion</dt><dd>The portrait develops in like a print on load; the postmark thunks down on signup.</dd>
+        <dt>Honest risk</dt><dd>The stamp metaphor could get cute if pushed further. It stays at one stamp and one postmark.</dd>
+      </dl>
+      <a class="open" href="a-dispatch.html">Open draft A</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div>
+      <div class="frames">
+        <div><div class="frame frame--d"><iframe src="b-speaker.html" title="Draft B preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+        <div><div class="frame frame--m"><iframe src="b-speaker.html" title="Draft B phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+      </div>
+    </div>
+    <div class="meta">
+      <h3>B. Speaker card <span class="tag">My pick</span></h3>
+      <p>The slide that introduces the instructor before the session. Near-black stage, your portrait on a saffron field filling the right half, the newsletter as the session you sign up for.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#FFC21A"></i>Saffron #FFC21A</span><span class="chip"><i style="background:#0F0F0E"></i>Night #0F0F0E</span><span class="chip"><i style="background:#F2F1EC"></i>Chalk #F2F1EC</span><span class="chip"><i style="background:#A3A29C"></i>Muted #A3A29C</span></div></dd>
+        <dt>Type</dt><dd>Funnel Display for headings, Funnel Sans for text. Confident at 96px without shouting.</dd>
+        <dt>Logo</dt><dd>Your silhouette on a saffron square: the hero, shrunk to 32px.</dd>
+        <dt>Signature motion</dt><dd>The saffron field wipes in, you rise into it, the headline lines slide up from a mask. Signup morphs the button into a drawn check.</dd>
+        <dt>Honest risk</dt><dd>The most familiar of the three (event marketing has used this layout for years). It keeps the dark stage and warm accent you liked in the exam version.</dd>
+      </dl>
+      <a class="open" href="b-speaker.html">Open draft B</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div>
+      <div class="frames">
+        <div><div class="frame frame--d"><iframe src="c-field.html" title="Draft C preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+        <div><div class="frame frame--m"><iframe src="c-field.html" title="Draft C phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+      </div>
+    </div>
+    <div class="meta">
+      <h3>C. Field</h3>
+      <p>The page is the color. One mint field that softly lights under your cursor, fades to paper while you read, and returns for the final ask.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#A8E6C4"></i>Mint #A8E6C4</span><span class="chip"><i style="background:#0B2A1C"></i>Pine ink #0B2A1C</span><span class="chip"><i style="background:#F4F7F2"></i>Paper #F4F7F2</span><span class="chip"><i style="background:#2E5A45"></i>Moss #2E5A45</span></div></dd>
+        <dt>Type</dt><dd>Geist only. Plain and very legible, so the color does the talking.</dd>
+        <dt>Logo</dt><dd>Mint silhouette in a pine circle.</dd>
+        <dt>Signature motion</dt><dd>Cursor light on the field, page color shifting with the scroll, the topic under the center line lighting up.</dd>
+        <dt>Honest risk</dt><dd>The quietest draft. Its character rests on one color choice, so the color has to be exactly right.</dd>
+      </dl>
+      <a class="open" href="c-field.html">Open draft C</a>
+    </div>
+  </article>
+
+  <h2>Round two</h2>
+  <p class="sub">Each of these has its own version of A’s postmark (something happens to the photo when you subscribe) and its own version of C’s cursor light.</p>
+
+  <article class="draft">
+    <div>
+      <div class="frames">
+        <div><div class="frame frame--d"><iframe src="d-drawing.html" title="Draft D preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+        <div><div class="frame frame--m"><iframe src="d-drawing.html" title="Draft D phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+      </div>
+    </div>
+    <div class="meta">
+      <h3>D. Drawing sheet</h3>
+      <p>An engineer’s page is a technical drawing. Zoned frame, grid paper, your portrait dimensioned on a periwinkle field, your four roles as numbered callouts pointing at you, a title block in the corner.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#BCC6FF"></i>Periwinkle #BCC6FF</span><span class="chip"><i style="background:#14213D"></i>Navy ink #14213D</span><span class="chip"><i style="background:#2C4BDB"></i>Drafting blue #2C4BDB</span><span class="chip"><i style="background:#C8361F"></i>Markup red #C8361F</span></div></dd>
+        <dt>Type</dt><dd>B612, the typeface Airbus designed for cockpit screens, with its mono for coordinates and the title block.</dd>
+        <dt>Logo</dt><dd>Your silhouette in a periwinkle square with red registration ticks.</dd>
+        <dt>Mouse</dt><dd>A CAD crosshair with live X/Y coordinates; the grid lights up under the cursor like a lamp over the drawing board.</dd>
+        <dt>Send-off</dt><dd>A red revision cloud draws itself around your photo, a “Rev A” marker pops up and the title block logs the new subscriber.</dd>
+        <dt>Honest risk</dt><dd>The most detailed of the six. Lovely for engineers; on a phone the callouts fold away to keep it clean.</dd>
+      </dl>
+      <a class="open" href="d-drawing.html">Open draft D</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div>
+      <div class="frames">
+        <div><div class="frame frame--d"><iframe src="e-cover.html" title="Draft E preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+        <div><div class="frame frame--m"><iframe src="e-cover.html" title="Draft E phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+      </div>
+    </div>
+    <div class="meta">
+      <h3>E. Cover <span class="tag">Your favourite</span> <span class="tag" style="background:#5A5A55">My pick, round two</span></h3>
+      <p>The first screen is a magazine cover with you on it. A giant MOSTAFA masthead sits behind your head, the three topics run down the side as cover lines, and the page below is the contents spread.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#D9F24B"></i>Lime #D9F24B</span><span class="chip"><i style="background:#111111"></i>Ink #111111</span><span class="chip"><i style="background:#3A4210"></i>Olive #3A4210</span><span class="chip"><i style="background:#F6F6F0"></i>Page #F6F6F0</span></div></dd>
+        <dt>Type</dt><dd>Big Shoulders Display for the masthead and cover lines, Hanken Grotesk for reading.</dd>
+        <dt>Logo</dt><dd>The masthead itself: MOSTAFA in condensed caps.</dd>
+        <dt>Mouse</dt><dd>A glossy highlight follows the cursor across the cover, and the masthead letters swell bolder as you pass over them.</dd>
+        <dt>Send-off</dt><dd>A subscriber mailing label, with their email and a barcode, slaps onto the cover with a little thud.</dd>
+        <dt>Honest risk</dt><dd>Lime is loud. It’s the strongest contrast with your black sweater, but it will define the brand.</dd>
+      </dl>
+      <a class="open" href="e-cover.html">Open draft E</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div>
+      <div class="frames">
+        <div><div class="frame frame--d"><iframe src="f-transmit.html" title="Draft F preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+        <div><div class="frame frame--m"><iframe src="f-transmit.html" title="Draft F phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+      </div>
+    </div>
+    <div class="meta">
+      <h3>F. Transmission</h3>
+      <p>Your portrait is a live halftone signal: thousands of dots drawn in code on a rose field. The newsletter is the channel you tune in to.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#F7B8C9"></i>Rose #F7B8C9</span><span class="chip"><i style="background:#1A1020"></i>Aubergine ink #1A1020</span><span class="chip"><i style="background:#6B3A4E"></i>Plum #6B3A4E</span><span class="chip"><i style="background:#FCFCFC"></i>White #FCFCFC</span></div></dd>
+        <dt>Type</dt><dd>Schibsted Grotesk, a newspaper house face, to match the halftone print.</dd>
+        <dt>Logo</dt><dd>Your silhouette printed in halftone dots on a rose circle.</dd>
+        <dt>Mouse</dt><dd>The cursor becomes a lens: the real photo shows through it and the dots around it swell.</dd>
+        <dt>Send-off</dt><dd>The image streams off to the right row by row, then re-forms from the top with a scanline, and a “Received at you@…” chip appears.</dd>
+        <dt>Honest risk</dt><dd>Your face is shown as dots until someone hovers, so it’s less instantly personal than the others (on phones the dots always show).</dd>
+      </dl>
+      <a class="open" href="f-transmit.html">Open draft F</a>
+    </div>
+  </article>
+
+  <h2>Round three: more creative</h2>
+  <p class="sub">Unconventional worlds, each committed all the way, still with a send-off on the photo and a mouse effect.</p>
+
+  <article class="draft">
+    <div>
+      <div class="frames">
+        <div><div class="frame frame--d"><iframe src="g-fold.html" title="Draft G preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+        <div><div class="frame frame--m"><iframe src="g-fold.html" title="Draft G phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+      </div>
+    </div>
+    <div class="meta">
+      <h3>G. Fold <span class="tag">Your favourite</span></h3>
+      <p>One sheet of vermilion paper. The whole hero carries the crease pattern of an origami crane; the signup form is a white square of paper. Steps run down the margin as the navigation, numbered in Arabic numerals.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#E8573A"></i>Vermilion #E8573A</span><span class="chip"><i style="background:#16120F"></i>Sumi ink #16120F</span><span class="chip"><i style="background:#FBF3EE"></i>Paper #FBF3EE</span><span class="chip"><i style="background:#E8B04A"></i>Gold #E8B04A</span></div></dd>
+        <dt>Type</dt><dd>Alegreya Sans, a humanist face with a calligraphic hand, plus Reem Kufi for the Arabic seal and step numbers.</dd>
+        <dt>Logo</dt><dd>A black seal with مصطفى (your name in Arabic) in Kufi lettering.</dd>
+        <dt>Mouse</dt><dd>Raking light: the creases near the cursor catch the light and the paper warms under it.</dd>
+        <dt>Send-off</dt><dd>The paper square folds into a crane step by step (square, diamond, base, kite, crane), flaps twice and flies off the screen.</dd>
+        <dt>Honest risk</dt><dd>Vermilion is the closest colour to Ali’s orange, though redder. Please check the Arabic spelling of your name.</dd>
+      </dl>
+      <a class="open" href="g-fold.html">Open draft G</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div>
+      <div class="frames">
+        <div><div class="frame frame--d"><iframe src="h-meters.html" title="Draft H preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+        <div><div class="frame frame--m"><iframe src="h-meters.html" title="Draft H phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+      </div>
+    </div>
+    <div class="meta">
+      <h3>H. Meter bridge <span class="tag">My pick, round three</span></h3>
+      <p>A recording desk in walnut. You stand inside a giant VU meter with the needle sweeping behind your head, and your four roles are four channels on the meter bridge below.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#241913"></i>Walnut #241913</span><span class="chip"><i style="background:#F4D27C"></i>Lamp amber #F4D27C</span><span class="chip"><i style="background:#D3302A"></i>Peak red #D3302A</span><span class="chip"><i style="background:#F3E9D6"></i>Ivory #F3E9D6</span></div></dd>
+        <dt>Type</dt><dd>Sofia Sans Condensed for the big caps and meter numerals, Sofia Sans for reading.</dd>
+        <dt>Logo</dt><dd>A small VU meter face with its needle in the red.</dd>
+        <dt>Mouse</dt><dd>Your mouse is the signal: move it and all five needles swing with real meter physics (mass, overshoot, settle). Idle, they flutter gently.</dd>
+        <dt>Send-off</dt><dd>On the downbeat every needle slams into the red together, the peak lights flash and the meter shows “+3 VU” with the visitor’s email.</dd>
+        <dt>Honest risk</dt><dd>The most playful. Musicians and engineers will love it; it leans less on the newsletter’s topic.</dd>
+      </dl>
+      <a class="open" href="h-meters.html">Open draft H</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div>
+      <div class="frames">
+        <div><div class="frame frame--d"><iframe src="i-illuminated.html" title="Draft I preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+        <div><div class="frame frame--m"><iframe src="i-illuminated.html" title="Draft I phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+      </div>
+    </div>
+    <div class="meta">
+      <h3>I. Illuminated</h3>
+      <p>A manuscript page. Your portrait lives inside a gilded initial M, the first letter of your name, and the headline carries on as “ostafa.” A lapis vine grows down the margin as you scroll.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#D9AE45"></i>Gold #D9AE45</span><span class="chip"><i style="background:#213C8F"></i>Lapis #213C8F</span><span class="chip"><i style="background:#A82D18"></i>Minium red #A82D18</span><span class="chip"><i style="background:#F3EBD9"></i>Vellum #F3EBD9</span></div></dd>
+        <dt>Type</dt><dd>Grenze Gotisch, a readable blackletter, for the initial and headings; EB Garamond for reading.</dd>
+        <dt>Logo</dt><dd>A small red M on gold in a lapis frame.</dd>
+        <dt>Mouse</dt><dd>The gold leaf catches the light under your cursor.</dd>
+        <dt>Send-off</dt><dd>A vine grows from the button to your portrait and blooms on its corner, a gleam sweeps across the gold, and the visitor’s email is written into the margin.</dd>
+        <dt>Honest risk</dt><dd>The boldest leap from AI and cloud. Unforgettable, but it asks visitors to enjoy the contrast.</dd>
+      </dl>
+      <a class="open" href="i-illuminated.html">Open draft I</a>
+    </div>
+  </article>
+
+  <h2>Round four: the final round</h2>
+  <p class="sub">Six new ideas, each with its own fonts, colours and interface, and a send-off on the photo when someone subscribes. Mouse effects are kept soft this time (G’s raking light has been toned down too).</p>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="j-telegram.html" title="Draft J preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="j-telegram.html" title="Draft J phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>J. Telegram</h3>
+      <p>The page is a cable form. Your hello is ticker tape pasted onto it (“Hello stop. I’m Mostafa stop.”), your roles are more tape, and your photo is “attached”.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#E6DDF7"></i>Form lavender #E6DDF7</span><span class="chip"><i style="background:#C9B5F5"></i>Photo field #C9B5F5</span><span class="chip"><i style="background:#1A1625"></i>Ink #1A1625</span><span class="chip"><i style="background:#B3261A"></i>Stamp red #B3261A</span></div></dd>
+        <dt>Type</dt><dd>League Gothic for the form headings, Courier Prime for the tape, Libre Franklin for reading.</dd>
+        <dt>Mouse</dt><dd>A faint desk lamp over the form; tape strips lift a little when you hover them.</dd>
+        <dt>Send-off</dt><dd>A reply types itself out on fresh tape (“Welcome stop. First issue to you@… stop”), gets pasted across your photo, and a red Delivered stamp lands.</dd>
+        <dt>Honest risk</dt><dd>Lavender is the softest colour of the lot; the telegram voice is charming but needs a light touch in later copy.</dd>
+      </dl>
+      <a class="open" href="j-telegram.html">Open draft J</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="k-departures.html" title="Draft K preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="k-departures.html" title="Draft K phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>K. Departures <span class="tag">My pick, final round</span></h3>
+      <p>Airport wayfinding. Your photo is on a yellow gate sign, the signup is a boarding pass (Mostafa Saher → your inbox), and further down a split-flap board lists what departs with every issue.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#FFD200"></i>Sign yellow #FFD200</span><span class="chip"><i style="background:#111214"></i>Board #111214</span><span class="chip"><i style="background:#F2F2EF"></i>Terminal #F2F2EF</span><span class="chip"><i style="background:#F5F5F0"></i>Flap white #F5F5F0</span></div></dd>
+        <dt>Type</dt><dd>Radio Canada Big, a humanist signage sans, with Red Hat Mono on the flaps.</dd>
+        <dt>Mouse</dt><dd>Hover a board row and its letters shuffle and settle again, like a real split-flap.</dd>
+        <dt>Send-off</dt><dd>The boarding pass stub tears off and falls away, and the flaps over your photo spin from BOARDING to DEPARTED.</dd>
+        <dt>Honest risk</dt><dd>Yellow and black sits near draft B’s saffron; the airport story is very clear, which also makes it less mysterious.</dd>
+      </dl>
+      <a class="open" href="k-departures.html">Open draft K</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="l-pulsar.html" title="Draft L preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="l-pulsar.html" title="Draft L phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>L. Pulsar</h3>
+      <p>A record-sleeve catalogue: matte black, a catalogue number instead of a logo, white signal lines drawn over your photo, and colour-coded strips that spell words you have to decode.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#0D0D0D"></i>Matte black #0D0D0D</span><span class="chip"><i style="background:#6EC1FF"></i>Signal blue #6EC1FF</span><span class="chip"><i style="background:#EDEDED"></i>White #EDEDED</span><span class="chip"><i style="background:linear-gradient(90deg,#E8455B,#F2C431,#3FCF8E,#4B8BFF)"></i>Colour code</span></div></dd>
+        <dt>Type</dt><dd>Manrope for text, Syncopate in tiny wide caps for catalogue labels.</dd>
+        <dt>Mouse</dt><dd>The signal lines swell softly where the cursor passes; hover a colour strip and it decodes.</dd>
+        <dt>Send-off</dt><dd>A pulse travels up through the lines over your photo, and the colour strip decodes letter by letter into SUBSCRIBED.</dd>
+        <dt>Honest risk</dt><dd>The most designer-ish and the least explained; it rewards curious visitors.</dd>
+      </dl>
+      <a class="open" href="l-pulsar.html">Open draft L</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="m-theatre.html" title="Draft M preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="m-theatre.html" title="Draft M phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>M. Paper theatre</h3>
+      <p>A toy theatre cut from kraft board, in the same paper family as G. You stand in a paper arch against a painted sky with two paper clouds on strings; the signup is an admission tag.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#C8A27C"></i>Kraft #C8A27C</span><span class="chip"><i style="background:#D3E6F3"></i>Painted sky #D3E6F3</span><span class="chip"><i style="background:#B0101C"></i>Crimson #B0101C</span><span class="chip"><i style="background:#2A2623"></i>Charcoal #2A2623</span></div></dd>
+        <dt>Type</dt><dd>Zilla Slab, with the weight of wood type, and Albert Sans for reading.</dd>
+        <dt>Mouse</dt><dd>The light source follows the cursor a little, so every paper layer’s shadow leans gently away from it. The clouds sway on their own.</dd>
+        <dt>Send-off</dt><dd>A crank turns, a crimson envelope rides the slot along the bottom to the stage, rises beside you and opens to show “Issue 01, for you”.</dd>
+        <dt>Honest risk</dt><dd>Warm and handmade; the brown kraft ground is a mood you will either love or not.</dd>
+      </dl>
+      <a class="open" href="m-theatre.html">Open draft M</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="n-napkin.html" title="Draft N preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="n-napkin.html" title="Draft N phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>N. Napkin</h3>
+      <p>How a good teacher explains things: a marker sketch on dotted notebook paper. You stand on a yellow highlighter scribble with handwritten notes and arrows pointing at you.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#FFF04D"></i>Highlighter #FFF04D</span><span class="chip"><i style="background:#FF8FC7"></i>Pink #FF8FC7</span><span class="chip"><i style="background:#5FDCCB"></i>Teal #5FDCCB</span><span class="chip"><i style="background:#151515"></i>Marker #151515</span></div></dd>
+        <dt>Type</dt><dd>Caveat Brush for headlines, Caveat for notes, Lexend (designed for reading ease) for text.</dd>
+        <dt>Mouse</dt><dd>A faint highlighter glow trails the cursor.</dd>
+        <dt>Send-off</dt><dd>An arrow draws itself from the button to you, a pink ring circles your face, and a sticky note slaps on: “you’re in. first issue soon”.</dd>
+        <dt>Honest risk</dt><dd>The friendliest of all; closest to the creator look you originally moved away from.</dd>
+      </dl>
+      <a class="open" href="n-napkin.html">Open draft N</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="o-riso.html" title="Draft O preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="o-riso.html" title="Draft O phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>O. Riso</h3>
+      <p>A two-colour risograph poster: fluorescent pink and blue ink overprinting on uncoated paper, your photo printed as a duotone, plates slightly out of register.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#FF48B0"></i>Fluoro pink #FF48B0</span><span class="chip"><i style="background:#0078BF"></i>Riso blue #0078BF</span><span class="chip"><i style="background:#FFE800"></i>Yellow #FFE800</span><span class="chip"><i style="background:#F3F0E8"></i>Paper #F3F0E8</span></div></dd>
+        <dt>Type</dt><dd>Anybody, stretched from 55% to 150% width in the same headline, with Public Sans for reading.</dd>
+        <dt>Mouse</dt><dd>The pink plate drifts a few pixels out of register as you move.</dd>
+        <dt>Send-off</dt><dd>A roller sweeps down the poster and lays a yellow third pass: “You’re on the list” plus a dated “Copy 1 of 1” sticker.</dd>
+        <dt>Honest risk</dt><dd>The loudest and most fashionable; very current in design circles, so it may date sooner.</dd>
+      </dl>
+      <a class="open" href="o-riso.html">Open draft O</a>
+    </div>
+  </article>
+
+  <h2>Round five</h2>
+  <p class="sub">Six more, including one built entirely around the newsletter itself (P). Each still has a send-off on the photo when someone subscribes.</p>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="p-afterclass.html" title="Draft P preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="p-afterclass.html" title="Draft P phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>P. After Class <span class="tag">Saved as the newsletter template</span></h3>
+      <p>The site is the front page of the newsletter, <b>After Class</b> (from “what I’d tell you after class”), with a nameplate, dateline, your hello as the lead story in newspaper columns, your photo with a caption, and a clip-out subscription coupon.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#EEECE6"></i>Newsprint #EEECE6</span><span class="chip"><i style="background:#111111"></i>Ink #111111</span><span class="chip"><i style="background:#C8201A"></i>Press red #C8201A</span><span class="chip"><i style="background:#F6C5AE"></i>Salmon photo #F6C5AE</span></div></dd>
+        <dt>Type</dt><dd>Bodoni Moda for the nameplate and headlines, Source Serif 4 for the columns.</dd>
+        <dt>Mouse</dt><dd>Kept still on purpose: a front page is calm. The motion is in the load (the nameplate tightens into place) and the send-off.</dd>
+        <dt>Send-off</dt><dd>Scissors cut around the coupon, it lifts off the page, and a “Special edition: New reader joins” front page spins in like an old film and lands on your photo with the visitor’s email.</dd>
+        <dt>Status</dt><dd>After Class is now the newsletter’s name. This page is saved in v2/templates/after-class/ as a starting point for the issues themselves.</dd>
+      </dl>
+      <a class="open" href="p-afterclass.html">Open draft P</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="q-swiss.html" title="Draft Q preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="q-swiss.html" title="Draft Q phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>Q. Swiss</h3>
+      <p>International Typographic Style: a strict 12-column grid, one grotesk, black, white and Swiss red, with broken concentric rings like a 1950s concert poster.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#E1251B"></i>Swiss red #E1251B</span><span class="chip"><i style="background:#0A0A0A"></i>Black #0A0A0A</span><span class="chip"><i style="background:#FFFFFF"></i>White #FFFFFF</span></div></dd>
+        <dt>Type</dt><dd>Host Grotesk only, from huge tight headlines to small grid captions.</dd>
+        <dt>Mouse</dt><dd>The broken rings turn slowly to face the cursor.</dd>
+        <dt>Send-off</dt><dd>Red rings ripple out from the button across the page, and “You’re in.” prints in white over your photo.</dd>
+        <dt>Honest risk</dt><dd>Red behind a black sweater is the lowest contrast of this round, though the hue difference keeps you readable.</dd>
+      </dl>
+      <a class="open" href="q-swiss.html">Open draft Q</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="r-metro.html" title="Draft R preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="r-metro.html" title="Draft R phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>R. Metro <span class="tag">My pick, round five</span></h3>
+      <p>A metro map. Three coloured lines (Thoughts, Opinions, Resources) run into your interchange, where your photo sits on a green panel, and a dashed extension heads to “Your inbox”.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#D7262E"></i>Red line</span><span class="chip"><i style="background:#1F6FD1"></i>Blue line</span><span class="chip"><i style="background:#C98B00"></i>Gold line</span><span class="chip"><i style="background:#4FD39A"></i>Interchange #4FD39A</span></div></dd>
+        <dt>Type</dt><dd>Overpass, based on highway signage, with Overpass Mono for the departure board.</dd>
+        <dt>Mouse</dt><dd>Hover a line and it lights up while the others step back; a legend says where it goes.</dd>
+        <dt>Send-off</dt><dd>The dashed extension becomes real track, a train leaves your interchange and runs to “Your inbox”, and the terminus lights up green.</dd>
+        <dt>Honest risk</dt><dd>The map explains the newsletter very literally; on phones it shrinks, so labels are kept short.</dd>
+      </dl>
+      <a class="open" href="r-metro.html">Open draft R</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="s-poster.html" title="Draft S preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="s-poster.html" title="Draft S phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>S. See the Cloud</h3>
+      <p>A 1930s national-park travel poster: flat silkscreen planes of sky, sun and desert dunes, you standing in the landscape, and a ranger-style slogan, SEE THE CLOUD.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#9ED8D4"></i>Sky #9ED8D4</span><span class="chip"><i style="background:#E2A23B"></i>Dune #E2A23B</span><span class="chip"><i style="background:#8E4A1F"></i>Deep dune #8E4A1F</span><span class="chip"><i style="background:#F3E6C9"></i>Poster stock #F3E6C9</span></div></dd>
+        <dt>Type</dt><dd>Alumni Sans in blocky caps, Onest for reading.</dd>
+        <dt>Mouse</dt><dd>The flat layers slide gently against each other: soft parallax.</dd>
+        <dt>Send-off</dt><dd>A small plane crosses the sky towing a banner, “Welcome aboard, you@…”, and the slogan changes to SEE YOU INSIDE.</dd>
+        <dt>Honest risk</dt><dd>Playful and warm; the desert ties it to the Gulf, the travel framing is a metaphor visitors have to enjoy.</dd>
+      </dl>
+      <a class="open" href="s-poster.html">Open draft S</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="t-lattice.html" title="Draft T preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="t-lattice.html" title="Draft T phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>T. Lattice</h3>
+      <p>Vienna, 1905: white sheet pierced with perfect square holes, ruled in black, your portrait framed in silver. Strict, elegant and quiet.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#FFFFFF"></i>White</span><span class="chip"><i style="background:#0A0A0A"></i>Lacquer black</span><span class="chip"><i style="background:#C9CDD3"></i>Silver #C9CDD3</span></div></dd>
+        <dt>Type</dt><dd>Federo, based on Viennese lettering of the period, with Jost for reading.</dd>
+        <dt>Mouse</dt><dd>The square under the cursor fills black and fades, leaving a short trail.</dd>
+        <dt>Send-off</dt><dd>A wave of filled squares sweeps across the lattice and leaves a chequered black frame around your portrait.</dd>
+        <dt>Honest risk</dt><dd>The most restrained of the round; elegant, but it relies on the grid interaction to feel alive.</dd>
+      </dl>
+      <a class="open" href="t-lattice.html">Open draft T</a>
+    </div>
+  </article>
+
+  <article class="draft">
+    <div><div class="frames">
+      <div><div class="frame frame--d"><iframe src="u-loom.html" title="Draft U preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Desktop 1440</p></div>
+      <div><div class="frame frame--m"><iframe src="u-loom.html" title="Draft U phone preview" loading="lazy" tabindex="-1"></iframe></div><p class="frame-label">Phone 390</p></div>
+    </div></div>
+    <div class="meta">
+      <h3>U. Loom</h3>
+      <p>The Jacquard loom ran on punched cards, the ancestor of every computer. Midnight silk, gold weft and a cream punch card that really spells MOSTAFA in binary.</p>
+      <dl>
+        <dt>Palette</dt><dd><div class="chips"><span class="chip"><i style="background:#121C3B"></i>Midnight #121C3B</span><span class="chip"><i style="background:#D9A93B"></i>Gold weft #D9A93B</span><span class="chip"><i style="background:#EFE6CF"></i>Card #EFE6CF</span></div></dd>
+        <dt>Type</dt><dd>Young Serif for headlines, Commissioner for reading.</dd>
+        <dt>Mouse</dt><dd>The gold cloth catches a soft sheen where the cursor passes.</dd>
+        <dt>Send-off</dt><dd>The visitor’s email is punched into the card byte by byte, then a shuttle runs back and forth weaving it, in real binary, into the band under your photo.</dd>
+        <dt>Honest risk</dt><dd>The nerdiest idea here, which is the point for a computer engineer; dark like B, with gold instead of saffron.</dd>
+      </dl>
+      <a class="open" href="u-loom.html">Open draft U</a>
+    </div>
+  </article>
+
+  <div class="quiet">
+    <b>Also on the table.</b>
+    <ul>
+      <li><b>The straight creator layout:</b> white page, photo on a rounded color block, hello and the form beside it, the way most creator sites do it. I can build it at full polish if you would rather have the familiar version.</li>
+      <li><b>Considered and set aside:</b> a full WebGL shader background (folded into C as a light cursor glow, since you asked not to over-engineer), plus a few looser ideas (bookbinding, darkroom, collage). From those, A kept three habits: no ornament that isn’t structure, one measure that sets the sizes (the 22px perforation), and one slow reveal of the portrait.</li>
+      <li><b>Round three, set aside:</b> a hand-bent neon sign (too close to the glowing dark look AI sites default to), a decoratable isometric room, and an arcade aisle. What carried over: H’s gentle idle flutter comes from the arcade’s attract loop, and I writes the subscriber into the margin the way the room’s guest ledger would.</li>
+    </ul>
+  </div>
+
+  <h2>Colour behind the photo</h2>
+  <p class="sub">You wear black, so the field needs to be light and saturated for the sweater to separate. The number is the contrast between your sweater and the field (higher reads cleaner). Ultramarine and orange are shown for reference.</p>
+  <div class="fields">
+    <figure class="swatch"><div class="tile" style="background:#A9C8EE"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Sky</b><span>#A9C8EE · 10.9:1 · Draft A</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#FFC21A"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Saffron</b><span>#FFC21A · 11.4:1 · Draft B</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#A8E6C4"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Mint</b><span>#A8E6C4 · 13.0:1 · Draft C</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#BCC6FF"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Periwinkle</b><span>#BCC6FF · 11.1:1 · Draft D</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#D9F24B"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Lime</b><span>#D9F24B · 14.7:1 · Draft E</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#F7B8C9"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Rose</b><span>#F7B8C9 · 11.1:1 · Draft F</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#E8573A"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Vermilion</b><span>#E8573A · 5.1:1 · Draft G</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#F4D27C"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Lamp amber</b><span>#F4D27C · 12.6:1 · Draft H</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#D9AE45"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Gold</b><span>#D9AE45 · 8.9:1 · Draft I</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#C9B5F5"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Lavender</b><span>#C9B5F5 · 10:1 · Draft J</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#FFD200"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Sign yellow</b><span>#FFD200 · 12.7:1 · Draft K</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#6EC1FF"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Signal blue</b><span>#6EC1FF · 9.4:1 · Draft L</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#D3E6F3"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Painted sky</b><span>#D3E6F3 · 15:1 · Draft M</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#FFF04D"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Highlighter</b><span>#FFF04D · 15.6:1 · Draft N</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#FF48B0"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Fluoro pink</b><span>#FF48B0 · 6:1 · Draft O</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#F6C5AE"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Salmon</b><span>#F6C5AE · 11.9:1 · Draft P</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#E1251B"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Swiss red</b><span>#E1251B · 4.2:1 · Draft Q</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#4FD39A"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Interchange green</b><span>#4FD39A · 9.8:1 · Draft R</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#9ED8D4"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Poster sky</b><span>#9ED8D4 · 11.6:1 · Draft S</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#C9CDD3"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Silver</b><span>#C9CDD3 · 11.5:1 · Draft T</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#D9A93B"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Gold weft</b><span>#D9A93B · 8.5:1 · Draft U</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#FF8E7A"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Coral</b><span>#FF8E7A · 8.3:1 · warm, close to Ali</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#FF6A3D"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Orange</b><span>#FF6A3D · 6.5:1 · Ali’s, for reference</span></figcaption></figure>
+    <figure class="swatch"><div class="tile" style="background:#2A3FD6"><img src="assets/mostafa-cutout.png" alt=""></div><figcaption><b>Ultramarine</b><span>#2A3FD6 · 2.4:1 · sweater sinks in</span></figcaption></figure>
+  </div>
+
+  <h2>Type</h2>
+  <p class="sub">One family per draft, no italics, nothing heavier than semibold. All free, served from Google Fonts.</p>
+  <div class="types">
+    <div class="type">
+      <div><span class="name">Archivo</span><small>Draft A · variable width 62 to 125</small><p class="note">Expanded width reads like engraved stamp lettering; the same family at normal width carries the body copy.</p></div>
+      <div class="spec"><p class="big" style="font-family:Archivo;font-stretch:125%;font-weight:600;letter-spacing:-0.03em">Hello, I’m Mostafa.</p><p class="body" style="font-family:Archivo">Technical instructor, computer engineer, AI enthusiast and cloud specialist. I write letters about AI and cloud computing.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Funnel Display + Funnel Sans</span><small>Draft B · 2024, by NORD ID</small><p class="note">Slightly squeezed curves and open apertures. Feels like a conference title card, not a SaaS template.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Funnel Display';font-weight:600">Hello, I’m Mostafa.</p><p class="body" style="font-family:'Funnel Sans'">Technical instructor, computer engineer, AI enthusiast and cloud specialist. I write letters about AI and cloud computing.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Geist</span><small>Draft C · Swiss style grotesk</small><p class="note">Neutral and precise at every size. Tight tracking at display sizes keeps it from looking like a default.</p></div>
+      <div class="spec"><p class="big" style="font-family:Geist;font-weight:600;letter-spacing:-0.045em">Hello, I’m Mostafa.</p><p class="body" style="font-family:Geist">Technical instructor, computer engineer, AI enthusiast and cloud specialist. I write letters about AI and cloud computing.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">B612 + B612 Mono</span><small>Draft D · designed for Airbus cockpits</small><p class="note">Built to be read at a glance on instrument screens. An engineer’s typeface that isn’t a costume.</p></div>
+      <div class="spec"><p class="big" style="font-family:B612;font-weight:700;letter-spacing:-0.035em">Hello, I’m Mostafa.</p><p class="body" style="font-family:B612">Technical instructor, computer engineer, AI enthusiast and cloud specialist. I write letters about AI and cloud computing.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Big Shoulders Display + Hanken Grotesk</span><small>Draft E · condensed masthead, plain body</small><p class="note">Variable weight, which is what lets the masthead letters swell under the mouse.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Big Shoulders Display';font-weight:800;text-transform:uppercase;letter-spacing:0">Hello, I’m Mostafa.</p><p class="body" style="font-family:'Hanken Grotesk'">Technical instructor, computer engineer, AI enthusiast and cloud specialist. I write letters about AI and cloud computing.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Schibsted Grotesk</span><small>Draft F · newspaper house face</small><p class="note">Made for a news publisher; sits naturally next to halftone print.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Schibsted Grotesk';font-weight:700;letter-spacing:-0.045em">Hello, I’m Mostafa.</p><p class="body" style="font-family:'Schibsted Grotesk'">Technical instructor, computer engineer, AI enthusiast and cloud specialist. I write letters about AI and cloud computing.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Alegreya Sans + Reem Kufi</span><small>Draft G · humanist Latin, Kufi Arabic</small><p class="note">A sans with a pen in its bones, next to a geometric Kufi for the seal and step numbers.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Alegreya Sans';font-weight:700;letter-spacing:-0.035em">Hello, I’m Mostafa.</p><p class="body" style="font-family:'Alegreya Sans'">Technical instructor, computer engineer, AI enthusiast and cloud specialist. <span style="font-family:'Reem Kufi'">مصطفى ١ ٢ ٣</span></p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Sofia Sans Condensed + Sofia Sans</span><small>Draft H · instrument lettering</small><p class="note">Condensed caps with the squared confidence of panel labels and meter numerals.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Sofia Sans Condensed';font-weight:800;text-transform:uppercase">Hello, I’m Mostafa.</p><p class="body" style="font-family:'Sofia Sans'">Technical instructor, computer engineer, AI enthusiast and cloud specialist. I write letters about AI and cloud computing.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Grenze Gotisch + EB Garamond</span><small>Draft I · blackletter you can read</small><p class="note">A modern blackletter built for legibility, paired with Garamond, the classic book face.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Grenze Gotisch';font-weight:700">Hello, I’m Mostafa.</p><p class="body" style="font-family:'EB Garamond'">Technical instructor, computer engineer, AI enthusiast and cloud specialist. I write letters about AI and cloud computing.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">League Gothic + Courier Prime + Libre Franklin</span><small>Draft J · cable office</small><p class="note">A tall condensed gothic for the printed form, a typewriter face only where a teleprinter would print.</p></div>
+      <div class="spec"><p class="big" style="font-family:'League Gothic';text-transform:uppercase;letter-spacing:0.01em">Hello, I’m Mostafa.</p><p class="body"><span style="font-family:'Courier Prime';font-weight:700;background:#FFFDF6;padding:2px 8px;box-shadow:0 1px 2px rgba(0,0,0,.15)">HELLO STOP</span> <span style="font-family:'Libre Franklin'">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</span></p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Radio Canada Big + Red Hat Mono</span><small>Draft K · wayfinding</small><p class="note">A humanist signage sans that reads at a glance, with a sturdy mono for the split-flap cells.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Radio Canada Big';font-weight:700;letter-spacing:-0.035em">Hello, I’m Mostafa.</p><p class="body" style="font-family:'Radio Canada Big'">Technical instructor, computer engineer, AI enthusiast and cloud specialist. <span style="font-family:'Red Hat Mono';font-weight:700;background:#1E2024;color:#F5F5F0;padding:2px 8px;letter-spacing:0.2em">DEPARTED</span></p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Manrope + Syncopate</span><small>Draft L · record sleeve</small><p class="note">A calm geometric sans, plus tiny wide caps used the way catalogue numbers are printed on a sleeve spine.</p></div>
+      <div class="spec"><p class="big" style="font-family:Manrope;font-weight:600;letter-spacing:-0.04em">Hello, I’m Mostafa.</p><p class="body" style="font-family:Manrope"><span style="font-family:Syncopate;font-size:12px;letter-spacing:0.22em;text-transform:uppercase">Fac 26 · Newsletter</span><br>Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Zilla Slab + Albert Sans</span><small>Draft M · wood type</small><p class="note">A slab serif with the weight of letterpress wood type, softened by a friendly sans.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Zilla Slab';font-weight:700;letter-spacing:-0.02em">Hello, I’m Mostafa.</p><p class="body" style="font-family:'Albert Sans'">Technical instructor, computer engineer, AI enthusiast and cloud specialist. I write letters about AI and cloud computing.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Caveat Brush + Caveat + Lexend</span><small>Draft N · marker on paper</small><p class="note">Marker lettering for the voice, and Lexend, a face designed to make reading easier, for everything that needs to be read.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Caveat Brush'">Hello, I’m Mostafa.</p><p class="body" style="font-family:Lexend;font-weight:300">Technical instructor, computer engineer, AI enthusiast and cloud specialist. <span style="font-family:Caveat;font-weight:700;font-size:24px">no hype, I promise</span></p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Anybody + Public Sans</span><small>Draft O · stretched poster type</small><p class="note">One variable family stretched from 55% to 150% width within a single headline, the way riso posters mix wood type.</p></div>
+      <div class="spec"><p class="big" style="font-family:Anybody;font-weight:800;text-transform:uppercase;line-height:0.9"><span style="font-stretch:150%">Hello,</span> <span style="font-stretch:55%">I’m</span> <span style="font-stretch:112%;color:#0078BF">Mostafa.</span></p><p class="body" style="font-family:'Public Sans'">Technical instructor, computer engineer, AI enthusiast and cloud specialist. I write letters about AI and cloud computing.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Bodoni Moda + Source Serif 4</span><small>Draft P · newspaper</small><p class="note">A high-contrast Didone for the nameplate and headlines, a sturdy text serif for the columns.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Bodoni Moda';font-weight:700;letter-spacing:-0.025em">Hello, I’m Mostafa.</p><p class="body" style="font-family:'Source Serif 4'">Technical instructor, computer engineer, AI enthusiast and cloud specialist, now writing the newsletter I wish my students had.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Host Grotesk</span><small>Draft Q · Swiss grotesk</small><p class="note">One neo-grotesk family doing everything, in the Swiss tradition.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Host Grotesk';font-weight:800;letter-spacing:-0.055em">Hello, I’m Mostafa<span style="color:#E1251B">.</span></p><p class="body" style="font-family:'Host Grotesk'">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Overpass + Overpass Mono</span><small>Draft R · signage</small><p class="note">Based on the US highway sign alphabet: built for reading at speed.</p></div>
+      <div class="spec"><p class="big" style="font-family:Overpass;font-weight:800;letter-spacing:-0.04em">Hello, I’m Mostafa.</p><p class="body" style="font-family:Overpass">Technical instructor, computer engineer, AI enthusiast and cloud specialist. <span style="font-family:'Overpass Mono';font-weight:600;background:#121212;color:#4FD39A;padding:2px 8px;border-radius:4px">Next: your inbox</span></p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Alumni Sans + Onest</span><small>Draft S · travel poster caps</small><p class="note">Condensed block capitals in the spirit of 1930s silkscreen posters, with a friendly modern sans underneath.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Alumni Sans';font-weight:900;text-transform:uppercase">Hello, I’m Mostafa.</p><p class="body" style="font-family:Onest">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Federo + Jost</span><small>Draft T · Vienna 1905</small><p class="note">Geometric lettering from the Secession era, with a clean Futura-like companion.</p></div>
+      <div class="spec"><p class="big" style="font-family:Federo">Hello, I’m Mostafa.</p><p class="body" style="font-family:Jost">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p></div>
+    </div>
+    <div class="type">
+      <div><span class="name">Young Serif + Commissioner</span><small>Draft U · loom room</small><p class="note">A sturdy old-style serif with nineteenth-century warmth, and a contemporary sans for reading.</p></div>
+      <div class="spec"><p class="big" style="font-family:'Young Serif'">Hello, I’m <span style="color:#C79630">Mostafa.</span></p><p class="body" style="font-family:Commissioner">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p></div>
+    </div>
+  </div>
+
+  <h2>Motion baked in</h2>
+  <p class="sub">Shared rules: buttons press to 97% in 160ms, arrows nudge on hover (mouse only), reveals fire once on scroll, and everything calms down for people who turn on reduced motion.</p>
+  <div class="motion">
+    <section><h3>A. Dispatch</h3><ul><li><b>Load:</b> stamp settles in, portrait develops from a pale grey print to full color.</li><li><b>Scroll:</b> rows fade up with a light blur; the closing line lights word by word.</li><li><b>Signup:</b> button blurs while sending, then a dated postmark stamps across the photo.</li></ul></section>
+    <section><h3>B. Speaker card</h3><ul><li><b>Load:</b> saffron field wipes in from the right, you rise into it, headline lines slide up from a mask.</li><li><b>Scroll:</b> agenda rows stagger in; the closing band wipes across in saffron.</li><li><b>Signup:</b> label crossfades with blur into “You’re in” and a check draws itself.</li></ul></section>
+    <section><h3>C. Field</h3><ul><li><b>Load:</b> text rises out of a soft blur, portrait settles from slightly larger.</li><li><b>Scroll:</b> page color drifts mint to paper and back; the topic at screen center lights up.</li><li><b>Signup:</b> the pill dissolves into a confirmation in the same shape.</li></ul></section>
+    <section><h3>D. Drawing sheet</h3><ul><li><b>Load:</b> the field wipes up like a plotter, then dimensions, leader lines and callouts draw in, title block last.</li><li><b>Mouse:</b> CAD crosshair with X/Y readout; the grid glows under the cursor.</li><li><b>Signup:</b> a revision cloud draws around the photo, “Rev A” appears, the title block logs the new subscriber.</li></ul></section>
+    <section><h3>E. Cover</h3><ul><li><b>Load:</b> masthead letters rise one by one, you rise in front of them, cover lines follow.</li><li><b>Mouse:</b> glossy highlight tracks the cursor; masthead letters get bolder near it.</li><li><b>Signup:</b> a mailing label with the visitor’s email and barcode slaps onto the cover.</li></ul></section>
+    <section><h3>F. Transmission</h3><ul><li><b>Load:</b> the halftone portrait scans in top to bottom behind a white scanline.</li><li><b>Mouse:</b> a lens reveals the real photo; dots swell around it.</li><li><b>Signup:</b> dots stream out row by row, the image re-forms on arrival, and a “Received” chip appears.</li></ul></section>
+    <section><h3>G. Fold</h3><ul><li><b>Load:</b> the paper square swings down into place like a sheet being laid on the table.</li><li><b>Mouse:</b> raking light; creases near the cursor catch it. The step column tracks the section you are reading.</li><li><b>Signup:</b> the square folds into a crane in five steps and flies off with two wingbeats.</li></ul></section>
+    <section><h3>H. Meter bridge</h3><ul><li><b>Load:</b> the meter lamps warm up one channel after another.</li><li><b>Mouse:</b> needles swing with spring physics; peak lights flash past 0 VU. Idle flutter when still.</li><li><b>Signup:</b> every needle slams into the red on the same downbeat.</li></ul></section>
+    <section><h3>I. Illuminated</h3><ul><li><b>Load:</b> the gilded initial is uncovered top to bottom, the red M inks in, then you appear.</li><li><b>Scroll:</b> the lapis vine grows down the margin with your reading, leaves unfurling as it passes.</li><li><b>Signup:</b> a vine grows from the button to the portrait and blooms; gold flashes; the email is written into the margin.</li></ul></section>
+    <section><h3>J. Telegram</h3><ul><li><b>Load:</b> the tape strips print in, ticking character by character.</li><li><b>Mouse:</b> a faint lamp over the form; tape lifts on hover.</li><li><b>Signup:</b> a reply types out on new tape, is pasted on your photo, and a Delivered stamp lands.</li></ul></section>
+    <section><h3>K. Departures</h3><ul><li><b>Load:</b> the gate sign drops down and its flaps spin to BOARDING; board rows flip in as you scroll to them.</li><li><b>Mouse:</b> hover a board row and it reshuffles.</li><li><b>Signup:</b> the boarding pass stub tears off and the sign flips to DEPARTED.</li></ul></section>
+    <section><h3>L. Pulsar</h3><ul><li><b>Load:</b> the sleeve fades up and the colour strip unfolds block by block.</li><li><b>Mouse:</b> signal lines swell softly near the cursor; colour strips decode on hover.</li><li><b>Signup:</b> a pulse runs up the plot and the strip decodes into SUBSCRIBED.</li></ul></section>
+    <section><h3>M. Paper theatre</h3><ul><li><b>Load:</b> the set assembles: backdrop rises, the arch drops in front, clouds appear.</li><li><b>Mouse:</b> paper shadows lean gently away from the cursor.</li><li><b>Signup:</b> crank turns, a crimson envelope rides the slot to the stage and opens beside you.</li></ul></section>
+    <section><h3>N. Napkin</h3><ul><li><b>Load:</b> the highlighter swipes in, then the notes and arrows draw themselves on.</li><li><b>Mouse:</b> a faint highlighter glow follows the cursor.</li><li><b>Signup:</b> an arrow, a ring around your face, and a sticky note.</li></ul></section>
+    <section><h3>O. Riso</h3><ul><li><b>Load:</b> the pink plate prints, then the blue plate, then the type slides in.</li><li><b>Mouse:</b> the pink plate drifts out of register by a few pixels.</li><li><b>Signup:</b> a roller sweeps down and lays a yellow third pass over your photo.</li></ul></section>
+    <section><h3>P. After Class</h3><ul><li><b>Load:</b> the nameplate tightens into place, the photo is uncovered, columns set in order.</li><li><b>Mouse:</b> none on purpose; a front page is calm.</li><li><b>Signup:</b> scissors cut the coupon out, and a special edition spins in and lands on your photo.</li></ul></section>
+    <section><h3>Q. Swiss</h3><ul><li><b>Load:</b> headline lines rise out of masks, the red field wipes across, rings fade up.</li><li><b>Mouse:</b> the broken rings turn to face the cursor.</li><li><b>Signup:</b> red rings ripple out from the button; “You’re in.” prints on the photo.</li></ul></section>
+    <section><h3>R. Metro</h3><ul><li><b>Load:</b> the three lines draw into the interchange, then the stations appear.</li><li><b>Mouse:</b> hover a line to light it and read where it goes.</li><li><b>Signup:</b> the extension becomes track and a train runs to “Your inbox”.</li></ul></section>
+    <section><h3>S. See the Cloud</h3><ul><li><b>Load:</b> the silkscreen layers print one at a time, then you, then the slogan band.</li><li><b>Mouse:</b> soft parallax between sky, dunes and you.</li><li><b>Signup:</b> a plane tows a welcome banner across the sky.</li></ul></section>
+    <section><h3>T. Lattice</h3><ul><li><b>Load:</b> the silver frame settles into the lattice.</li><li><b>Mouse:</b> squares fill black under the cursor and fade.</li><li><b>Signup:</b> a wave of black squares sweeps the lattice and leaves a chequered frame.</li></ul></section>
+    <section><h3>U. Loom</h3><ul><li><b>Load:</b> the card drops in, the cloth weaves down row by row, you appear.</li><li><b>Mouse:</b> a soft sheen on the gold cloth.</li><li><b>Signup:</b> the email is punched into the card in binary and woven into the band by a running shuttle.</li></ul></section>
+    <section><h3>V. Crane</h3><ul><li><b>Load:</b> the letters of your name rise one by one, you rise in front of them, then one swell runs through the name.</li><li><b>Mouse:</b> letters get bolder near the cursor under a soft gloss; the perched crane flutters when you come close.</li><li><b>Signup:</b> a paper square folds into a crane, flies across your name and lands on the F.</li></ul></section>
+    <section><h3>W. Issue One</h3><ul><li><b>Load:</b> the letters of your name rise out of a mask, you rise in front of them, then one swell runs through the name.</li><li><b>Mouse:</b> letters get bolder near the cursor; the page corner lifts as you approach and turns to the contents.</li><li><b>Scroll:</b> the top bar slides in, contents rules draw across, the signature writes itself, the subscription card drops in.</li><li><b>Signup:</b> the button fills and grows across the pill, a label lands on the cover, the address types and a dated SUBSCRIBED stamp comes down.</li></ul></section>
+  </div>
+</div>
+
+<script>
+// scale each live preview to its frame
+const fit = () => document.querySelectorAll('.frame').forEach((f) => {
+  const ifr = f.querySelector('iframe');
+  ifr.style.transform = `scale(${f.clientWidth / parseFloat(getComputedStyle(ifr).width)})`;
+});
+new ResizeObserver(fit).observe(document.body);
+fit();
+</script>
+</body>
+</html>

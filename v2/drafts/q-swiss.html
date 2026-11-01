@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft Q, Swiss | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft Q: Swiss. International Typographic Style: a strict grid, one grotesk, black, white and Swiss red, concentric rings like a concert poster. Subscribing sends rings out from the button across your photo. */
+:root {
+  --white: #FFFFFF;
+  --black: #0A0A0A; --ink-rgb: 10 10 10;
+  --ink-2: #555555;
+  --red: #E1251B;        /* black sweater on red 4.2:1; red on white and white on red 4.7:1 */
+  --gutter: clamp(20px, 4vw, 64px);
+}
+html { scrollbar-color: #C9C9C9 var(--white); }
+body { background: var(--white); color: var(--black); font-family: "Host Grotesk", "Helvetica Neue", Arial, sans-serif; font-size: 17px; line-height: 26px; }
+::selection { background: var(--red); color: var(--white); }
+input { caret-color: var(--red); }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* ---------- header ---------- */
+.top { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 20px; padding: 20px var(--gutter); font-size: 14px; line-height: 18px; }
+.brand { grid-column: 1 / 4; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; }
+.top .meta { grid-column: 5 / 9; color: var(--ink-2); }
+.top-cta { grid-column: 11 / 13; justify-self: end; font-weight: 700; text-decoration: none; padding: 6px 12px; background: var(--black); color: var(--white); transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { background: var(--red); } }
+
+/* ---------- poster ---------- */
+.poster { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 20px; padding: 24px var(--gutter) 64px; min-height: calc(100svh - 58px); overflow: hidden; isolation: isolate; }
+.rings { position: absolute; z-index: -1; width: 1100px; height: 1100px; left: 56%; top: -120px; margin-left: -550px; pointer-events: none; transition: transform 1200ms var(--ease-out); }
+.rings circle { fill: none; stroke: var(--black); stroke-width: 1; }
+h1 { grid-column: 1 / 8; grid-row: 1; align-self: start; margin: 0; font-weight: 800; font-size: clamp(72px, 10.5vw, 176px); line-height: 0.86; letter-spacing: -0.055em; }
+h1 span { display: block; }
+h1 .dot { display: inline; color: var(--red); }
+.cols { grid-column: 1 / 8; grid-row: 2; align-self: end; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0 20px; margin-top: 40px; }
+.roles { grid-column: 1 / 4; margin: 0; font-weight: 700; font-size: 20px; line-height: 26px; }
+.pitch { grid-column: 4 / 8; margin: 0; color: var(--ink-2); text-wrap: pretty; }
+.form { grid-column: 1 / 8; margin-top: 28px; max-width: 640px; }
+.form__row { display: flex; border-top: 2px solid var(--black); border-bottom: 2px solid var(--black); }
+.form input { flex: 1; min-width: 0; height: 60px; padding: 0; border: 0; background: transparent; color: var(--black); font: inherit; font-size: 22px; font-weight: 500; letter-spacing: -0.01em; outline: none; }
+.form input::placeholder { color: #707070; opacity: 1; }
+.btn { display: inline-flex; align-items: center; gap: 10px; margin: 6px 0; padding: 0 20px; border: 0; background: var(--red); color: var(--white); font: inherit; font-size: 17px; font-weight: 700; cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+.btn svg { transition: transform 250ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: var(--black); } .btn:hover svg { transform: translateX(3px); } }
+.fine { margin: 10px 0 0; font-size: 13px; line-height: 18px; color: var(--ink-2); }
+.msg { margin: 4px 0 0; font-size: 14px; line-height: 20px; font-weight: 700; }
+.msg.is-error { color: #C0200F; }
+.is-invalid .form__row { border-color: #C0200F; }
+
+.red { grid-column: 8 / 13; grid-row: 1 / 3; position: relative; margin: 0; align-self: center; aspect-ratio: 4 / 5; background: var(--red); overflow: hidden; }
+.red img { position: absolute; bottom: 0; left: 50%; height: 90%; width: auto; transform: translateX(-50%); }
+.red .tick { position: absolute; left: 14px; top: 12px; z-index: 2; color: var(--white); font-size: 13px; line-height: 16px; font-weight: 700; }
+.red .welcome { position: absolute; z-index: 3; left: 16px; bottom: 14px; margin: 0; color: var(--white); font-weight: 800; font-size: clamp(40px, 5vw, 76px); line-height: 0.86; letter-spacing: -0.05em; clip-path: inset(0 0 100% 0); }
+.red .welcome.on { clip-path: inset(0 0 0 0); transition: clip-path 700ms var(--ease-in-out); }
+.wave { position: fixed; z-index: 30; left: 0; top: 0; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%; border: 2px solid var(--red); pointer-events: none; opacity: 0; }
+
+/* ---------- index ---------- */
+.index { padding: 112px var(--gutter) 96px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 20px; }
+.index h2 { grid-column: 1 / 5; margin: 0; font-weight: 800; font-size: 56px; line-height: 0.95; letter-spacing: -0.045em; text-wrap: balance; }
+.index > p { grid-column: 5 / 9; margin: 0; color: var(--ink-2); align-self: end; }
+.list { grid-column: 1 / 13; list-style: none; margin: 64px 0 0; padding: 0; }
+.list li { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 20px; padding: 20px 0 24px; border-top: 2px solid var(--black); align-items: baseline; }
+.list li:last-child { border-bottom: 2px solid var(--black); }
+.list h3 { grid-column: 1 / 6; margin: 0; font-weight: 800; font-size: 64px; line-height: 1; letter-spacing: -0.05em; transition: color 200ms ease; }
+.list p { grid-column: 7 / 12; margin: 0; text-wrap: pretty; }
+@media (hover: hover) and (pointer: fine) { .list li:hover h3 { color: var(--red); } }
+.tagline { padding: 32px var(--gutter) 144px; }
+.tagline p { margin: 0; max-width: 16ch; font-weight: 800; font-size: clamp(48px, 7vw, 112px); line-height: 0.9; letter-spacing: -0.05em; text-wrap: balance; }
+.final { background: var(--red); color: var(--white); padding: 88px var(--gutter); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 20px; align-items: end; }
+.final h2 { grid-column: 1 / 7; margin: 0; font-weight: 800; font-size: 72px; line-height: 0.9; letter-spacing: -0.05em; text-wrap: balance; }
+.final .form { grid-column: 7 / 13; margin: 0; }
+.final .form__row { border-color: var(--white); }
+.final input { color: var(--white); }
+.final input::placeholder { color: #FFFFFF; opacity: 0.95; }
+.final .btn { background: var(--white); color: var(--black); }
+@media (hover: hover) and (pointer: fine) { .final .btn:hover { background: var(--black); color: var(--white); } }
+.final .fine { color: #FFFFFF; }
+.final .msg.is-error { color: var(--white); }
+.final :focus-visible { outline-color: var(--white); }
+footer { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 20px; padding: 24px var(--gutter) 32px; font-size: 14px; line-height: 20px; }
+footer span { grid-column: 1 / 5; } footer nav { grid-column: 7 / 13; display: flex; gap: 24px; }
+
+/* ---------- load ---------- */
+.js h1 span { clip-path: inset(0 0 100% 0); transform: translateY(18%); }
+.js .red { clip-path: inset(0 100% 0 0); }
+.js .red img { opacity: 0; transform: translate(-50%, 20px); }
+.js .rings { opacity: 0; }
+.js .poster [data-in] { opacity: 0; transform: translateY(10px); }
+.js.is-loaded h1 span { clip-path: inset(-10% 0 -10% 0); transform: none; transition: clip-path 800ms var(--ease-in-out), transform 900ms var(--ease-out); transition-delay: calc(var(--i, 0) * 110ms); }
+.js.is-loaded .red { clip-path: inset(0 0 0 0); transition: clip-path 900ms var(--ease-in-out) 250ms; }
+.js.is-loaded .red img { opacity: 1; transform: translateX(-50%); transition: opacity 700ms var(--ease-out) 800ms, transform 900ms var(--ease-out) 800ms; }
+.js.is-loaded .rings { opacity: 0.16; transition: opacity 1600ms ease 400ms, transform 1200ms var(--ease-out); }
+.js.is-loaded .poster [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(500ms + var(--i, 0) * 80ms); }
+@media (prefers-reduced-motion: reduce) { .js h1 span { clip-path: none; transform: none; } .js .red { clip-path: none; } .js .red img { transform: translateX(-50%) !important; } .js .poster [data-in] { transform: none !important; } .wave { display: none; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .poster { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .red { grid-column: 1; grid-row: 1; margin-bottom: 28px; }
+  h1, .cols, .form { grid-column: 1; grid-row: auto; }
+  .cols { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 24px; }
+  .roles, .pitch { grid-column: 1; }
+  .top .meta { display: none; } .brand { grid-column: 1 / 9; } .top-cta { grid-column: 9 / 13; }
+  .index, .final, footer { grid-template-columns: minmax(0, 1fr); }
+  .index h2, .index > p, .list, .final h2, .final .form, footer span, footer nav { grid-column: 1; }
+  .index > p { margin-top: 12px; }
+  .list li { grid-template-columns: minmax(0, 1fr); } .list h3, .list p { grid-column: 1; } .list h3 { font-size: 44px; margin-bottom: 8px; }
+  .final h2 { font-size: 48px; margin-bottom: 24px; }
+}
+@media (max-width: 520px) { .form__row { flex-direction: column; } .btn { height: 52px; margin: 0 0 8px; justify-content: center; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" fill="#E1251B"/><circle cx="0" cy="0" r="14" fill="none" stroke="#fff" stroke-width="2"/><circle cx="0" cy="0" r="22" fill="none" stroke="#fff" stroke-width="2"/></svg>
+    <span>Mostafa Saher</span>
+  </a>
+  <span class="meta">Newsletter. AI and cloud computing.</span>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="poster" id="poster" aria-labelledby="hello">
+    <svg class="rings" id="rings" viewBox="0 0 1100 1100" aria-hidden="true">
+      <circle cx="550" cy="550" r="120"/><circle cx="550" cy="550" r="190" stroke-dasharray="640 560"/><circle cx="550" cy="550" r="260"/><circle cx="550" cy="550" r="330" stroke-dasharray="1200 873"/><circle cx="550" cy="550" r="400"/><circle cx="550" cy="550" r="470" stroke-dasharray="1800 1153"/><circle cx="550" cy="550" r="540"/>
+    </svg>
+    <h1 id="hello"><span style="--i:0">Hello,</span><span style="--i:1">I’m</span><span style="--i:2">Mostafa<span class="dot">.</span></span></h1>
+    <div class="cols">
+      <p class="roles" data-in style="--i:0">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:1">I write a newsletter about AI and cloud computing: what I think, where I stand, and the resources I’d actually hand a student.</p>
+    </div>
+    <form class="form" id="subscribe" data-signup data-hero data-in style="--i:2" novalidate>
+      <label class="sr-only" for="email-1">Email address</label>
+      <div class="form__row">
+        <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+    <figure class="red" id="red">
+      <span class="tick" aria-hidden="true">AI · Cloud · Teaching</span>
+      <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+      <p class="welcome" id="welcome" aria-hidden="true">You’re<br>in.</p>
+    </figure>
+  </section>
+
+  <section class="index" aria-labelledby="index">
+    <h2 id="index" data-reveal>In every issue.</h2>
+    <p data-reveal style="--i:1">Three things, written the way I explain them in class. Nothing else.</p>
+    <ul class="list">
+      <li data-reveal><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></li>
+      <li data-reveal style="--i:1"><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></li>
+      <li data-reveal style="--i:2"><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next">
+    <h2 id="next" data-reveal>Get the next issue.</h2>
+    <form class="form" data-signup data-reveal style="--i:1" novalidate>
+      <label class="sr-only" for="email-2">Email address</label>
+      <div class="form__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = DraftKit;
+  const poster = document.getElementById('poster'), red = document.getElementById('red'), rings = document.getElementById('rings');
+  K.ready(red.querySelector('img'));
+  K.reveals();
+
+  // the broken rings turn slowly to face the cursor
+  K.pointer(poster, (x, y, inside) => {
+    const r = rings.getBoundingClientRect(), p = poster.getBoundingClientRect();
+    const cx = r.left - p.left + r.width / 2, cy = r.top - p.top + r.height / 2;
+    const a = inside ? Math.atan2(y - cy, x - cx) * 180 / Math.PI : 0;
+    rings.style.transform = `rotate(${(a * 0.25).toFixed(1)}deg)`;
+  }, 0.08);
+
+  // send-off: red rings ripple out from the button and across the photo, then "You're in." prints in the red field
+  async function ripple(form) {
+    const b = form.querySelector('.btn').getBoundingClientRect();
+    const rr = red.getBoundingClientRect();
+    const dist = Math.hypot(rr.right - b.left, rr.top - b.top) * 2.4;
+    if (!K.reduce) for (let i = 0; i < 4; i++) {
+      const w = document.createElement('span'); w.className = 'wave';
+      w.style.left = `${b.left + b.width / 2}px`; w.style.top = `${b.top + b.height / 2}px`;
+      document.body.appendChild(w);
+      w.animate([{ transform: 'scale(0.4)', opacity: 0.9 }, { transform: `scale(${dist / 20})`, opacity: 0 }], { duration: 1500, delay: i * 140, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'forwards' }).finished.then(() => w.remove());
+    }
+    await K.sleep(K.reduce ? 0 : 650);
+    document.getElementById('welcome').classList.add('on');
+  }
+  K.forms({ doneLabel: 'Subscribed', message: (v) => `Subscribed. Issues go to ${v}.`, onSuccess: () => ripple(document.getElementById('subscribe')) });
+})();
+</script>
+</body>
+</html>

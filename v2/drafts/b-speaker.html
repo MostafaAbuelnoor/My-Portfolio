@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft B, Speaker card | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..700&family=Funnel+Sans:wght@400..600&display=swap" rel="stylesheet">
+<style>
+/* Draft B: Speaker card. The site is the slide that introduces the instructor before the session starts. */
+:root {
+  --night: #0F0F0E;
+  --night-2: #181816;
+  --night-3: #22221F;
+  --line: #34342F;
+  --text: #F2F1EC;
+  --text-2: #A3A29C;     /* 7.5:1 on night */
+  --saffron: #FFC21A;    /* black sweater on saffron = 11.4:1 */
+  --saffron-hi: #FFD04D;
+  --on-saffron: #0F0F0E;
+  --error: #FF8A7A;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --gutter: clamp(20px, 4vw, 64px);
+  --display: "Funnel Display", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: #44443E var(--night); color-scheme: dark; }
+body {
+  margin: 0; background: var(--night); color: var(--text);
+  font-family: "Funnel Sans", system-ui, sans-serif; font-size: 18px; line-height: 28px;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--saffron); color: var(--on-saffron); }
+input { caret-color: var(--saffron); }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--saffron); outline-offset: 3px; border-radius: 4px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- header ---------- */
+.top {
+  position: absolute; inset: 0 0 auto 0; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px var(--gutter);
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--display); font-weight: 600; font-size: 16px; }
+.mark { width: 32px; height: 32px; border-radius: 8px; background: var(--saffron); overflow: hidden; display: block; }
+.top-cta {
+  font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none; color: var(--on-saffron);
+  padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(15,15,14,.85);
+  transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out);
+}
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { background: var(--on-saffron); color: var(--saffron); } }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); min-height: 100svh; }
+.hero__text { display: flex; flex-direction: column; justify-content: center; padding: 120px var(--gutter) 64px; }
+.hero__inner { max-width: 600px; }
+h1 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 96px; line-height: 0.98; letter-spacing: -0.035em; }
+.line { display: block; overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+.line > span { display: block; }
+.roles { list-style: none; margin: 32px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 0; font-size: 20px; line-height: 28px; color: var(--text); }
+.roles li:not(:last-child):not(.br):not(:nth-child(2))::after { content: "/"; color: var(--saffron); margin: 0 12px; font-weight: 600; }
+.roles .br { flex-basis: 100%; height: 0; }
+.pitch { margin: 32px 0 0; padding-top: 24px; border-top: 1px solid var(--line); color: var(--text-2); max-width: 46ch; text-wrap: pretty; }
+.pitch strong { color: var(--text); font-weight: 600; }
+
+/* form */
+.form { margin-top: 24px; }
+.form__row { display: flex; gap: 8px; }
+.form input {
+  flex: 1; min-width: 0; height: 56px; padding: 0 16px;
+  background: var(--night-2); color: var(--text); border: 1px solid var(--line); border-radius: 8px;
+  font: inherit; font-size: 18px; outline: none;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+.form input::placeholder { color: #8C8B85; opacity: 1; }
+.form input:hover { border-color: #4A4A44; }
+.form input:focus { border-color: var(--saffron); background: var(--night-3); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 56px; padding: 0 20px; border: 0; border-radius: 8px;
+  background: var(--saffron); color: var(--on-saffron);
+  font: inherit; font-size: 16px; font-weight: 600; white-space: nowrap; cursor: pointer;
+  transition: background-color 150ms ease, transform 160ms var(--ease-out);
+}
+.btn:active { transform: scale(0.97); }
+.btn .arrow { transition: transform 200ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: var(--saffron-hi); } .btn:hover .arrow { transform: translateX(3px); } }
+.btn__swap { display: grid; }
+.btn__swap > * { grid-area: 1 / 1; display: inline-flex; align-items: center; gap: 8px; transition: opacity 200ms ease, filter 200ms ease, transform 260ms var(--ease-out); }
+.btn__done { opacity: 0; filter: blur(4px); transform: translateY(6px); }
+.btn__done path { stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 360ms var(--ease-out) 120ms; }
+.is-done .btn__idle { opacity: 0; filter: blur(4px); transform: translateY(-6px); }
+.is-done .btn__done { opacity: 1; filter: none; transform: none; }
+.is-done .btn__done path { stroke-dashoffset: 0; }
+.is-busy .btn__idle { opacity: 0.55; filter: blur(2px); }
+.fine { margin: 12px 0 0; font-size: 14px; line-height: 20px; color: var(--text-2); }
+.msg { margin: 8px 0 0; min-height: 20px; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: var(--error); }
+.is-invalid input { border-color: var(--error); }
+
+/* field */
+.field { position: relative; background: var(--saffron); overflow: hidden; }
+.field img { position: absolute; bottom: 0; left: 50%; height: min(90%, 880px); width: auto; transform: translateX(-50%); }
+
+/* ---------- agenda ---------- */
+.agenda { padding: 128px var(--gutter) 96px; }
+h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 60px; line-height: 1; letter-spacing: -0.03em; text-wrap: balance; }
+.agenda__lede { margin: 16px 0 0; color: var(--text-2); max-width: 46ch; }
+.items { list-style: none; margin: 64px 0 0; padding: 0; }
+.item { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 4fr) minmax(0, 4fr); gap: 32px; padding: 32px 0; border-top: 1px solid var(--line); align-items: baseline; }
+.item:last-child { border-bottom: 1px solid var(--line); }
+.item h3 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 36px; line-height: 40px; letter-spacing: -0.02em; }
+.item p { margin: 0; text-wrap: pretty; }
+.item .eg { color: var(--text-2); font-size: 16px; line-height: 24px; }
+.item .eg b { color: var(--saffron); font-weight: 600; }
+
+/* ---------- tagline ---------- */
+.tagline { padding: 96px var(--gutter) 160px; }
+.tagline p { margin: 0; max-width: 17ch; font-family: var(--display); font-weight: 500; font-size: 72px; line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance; }
+.w { color: rgba(242,241,236,.2); transition: color 500ms var(--ease-out); }
+.w.is-on { color: var(--text); }
+
+/* ---------- final band ---------- */
+.band { background: var(--saffron); color: var(--on-saffron); padding: 96px var(--gutter); }
+.band__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); gap: 48px; align-items: end; }
+.band h2 { font-size: 72px; }
+.band .form input { background: #FFF7DD; color: var(--on-saffron); border-color: rgba(15,15,14,.5); }
+.band .form input::placeholder { color: #6B5A1E; }
+.band .form input:focus { border-color: var(--on-saffron); background: #fff; }
+.band .btn { background: var(--on-saffron); color: var(--saffron); }
+@media (hover: hover) and (pointer: fine) { .band .btn:hover { background: #2A2A27; } }
+.band .fine { color: #4A3D0E; }
+.band :focus-visible { outline-color: var(--on-saffron); }
+.band .msg.is-error { color: #8A1C0C; }
+.band .is-invalid input { border-color: #8A1C0C; }
+
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 14px; line-height: 20px; color: var(--text-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- motion ---------- */
+.js .field { clip-path: inset(0 0 0 100%); }
+.js .field img { opacity: 0; transform: translate(-50%, 40px); }
+.js .line > span { transform: translateY(105%); }
+.js .hero [data-in] { opacity: 0; transform: translateY(14px); }
+.js .top { opacity: 0; }
+.js.is-loaded .field { clip-path: inset(0 0 0 0); transition: clip-path 1000ms var(--ease-in-out); }
+.js.is-loaded .field img { opacity: 1; transform: translate(-50%, 0); transition: opacity 700ms var(--ease-out) 550ms, transform 1000ms var(--ease-out) 550ms; }
+.js.is-loaded .line > span { transform: none; transition: transform 900ms var(--ease-out); transition-delay: calc(200ms + var(--i, 0) * 90ms); }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(450ms + var(--i, 0) * 70ms); }
+.js.is-loaded .top { opacity: 1; transition: opacity 600ms ease 900ms; }
+.js [data-reveal] { opacity: 0; transform: translateY(16px); }
+.js [data-reveal].is-in { opacity: 1; transform: none; transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(var(--i, 0) * 80ms); }
+.js .band { clip-path: inset(0 100% 0 0); }
+.js .band.is-in { clip-path: inset(0 0 0 0); transition: clip-path 900ms var(--ease-in-out); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .field, .js .band { clip-path: none !important; }
+  .js .field img { transform: translate(-50%, 0) !important; }
+  .js .line > span, .js .hero [data-in], .js [data-reveal] { transform: none !important; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1180px) { h1 { font-size: 72px; } .tagline p, .band h2 { font-size: 60px; } }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; }
+  .field { order: -1; height: min(72vw, 440px); }
+  .field img { height: 96%; }
+  .top { position: relative; background: var(--saffron); }
+  .top-cta { color: var(--on-saffron); }
+  .hero__text { padding: 40px var(--gutter) 64px; }
+  h1 { font-size: 60px; }
+  .roles { font-size: 18px; flex-direction: column; gap: 4px; }
+  .roles li::after { content: none !important; }
+  .roles .br { display: none; }
+  .roles li { display: flex; align-items: center; gap: 12px; }
+  .roles li::before { content: ""; width: 6px; height: 6px; background: var(--saffron); }
+  .item { grid-template-columns: 1fr; gap: 8px; }
+  .band__inner { grid-template-columns: 1fr; }
+  h2, .band h2 { font-size: 48px; }
+  .tagline p { font-size: 40px; line-height: 1.05; }
+  .brand { color: var(--on-saffron); }
+  .mark { background: var(--on-saffron); }
+  .mark svg * { fill: var(--saffron); }
+}
+@media (max-width: 520px) {
+  h1 { font-size: 48px; }
+  .form__row { flex-direction: column; }
+  .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="13.5" r="5.5" fill="#0F0F0E"/><path d="M5 32c0-7 4.9-11.5 11-11.5S27 25 27 32z" fill="#0F0F0E"/></svg></span>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hello">
+    <div class="hero__text">
+      <div class="hero__inner">
+        <h1 id="hello"><span class="line"><span style="--i:0">Hello, I’m</span></span><span class="line"><span style="--i:1">Mostafa.</span></span></h1>
+        <ul class="roles" data-in style="--i:0" aria-label="What I do">
+          <li>Technical instructor</li><li>Computer engineer</li><li class="br" aria-hidden="true"></li><li>AI enthusiast</li><li>Cloud specialist</li>
+        </ul>
+        <p class="pitch" data-in style="--i:1"><strong>I write a newsletter about AI and cloud computing.</strong> My thoughts, my opinions, and the resources I’d actually hand a student.</p>
+        <form class="form" id="subscribe" data-in style="--i:2" novalidate>
+          <label class="sr-only" for="email-1">Email address</label>
+          <div class="form__row">
+            <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+            <button class="btn" type="submit"><span class="btn__swap"><span class="btn__idle">Subscribe free <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="btn__done" aria-hidden="true">You’re in <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span></button>
+          </div>
+          <p class="fine">Free. Unsubscribe in one click.</p>
+          <p class="msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+    <figure class="field" style="margin:0">
+      <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+    </figure>
+  </section>
+
+  <section class="agenda" aria-labelledby="agenda">
+    <h2 id="agenda" data-reveal>What each issue covers</h2>
+    <p class="agenda__lede" data-reveal style="--i:1">Three things, written the way I explain them in class.</p>
+    <ul class="items">
+      <li class="item" data-reveal><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p><p class="eg"><b>Example</b> Why IAM roles and policies confuse everyone, and the analogy that fixes it.</p></li>
+      <li class="item" data-reveal style="--i:1"><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p><p class="eg"><b>Example</b> Does your first RAG app need a vector database? Usually not.</p></li>
+      <li class="item" data-reveal style="--i:2"><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p><p class="eg"><b>Example</b> The free labs I’d use to learn Amazon Bedrock this month.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This newsletter is what I’d tell you after class.</p>
+  </section>
+
+  <section class="band" aria-labelledby="next-issue" data-band>
+    <div class="band__inner">
+      <h2 id="next-issue">Get the next issue.</h2>
+      <form class="form" novalidate>
+        <label class="sr-only" for="email-2">Email address</label>
+        <div class="form__row">
+          <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__swap"><span class="btn__idle">Subscribe free <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="btn__done" aria-hidden="true">You’re in <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span></button>
+        </div>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const img = document.querySelector('.field img');
+  const go = () => requestAnimationFrame(() => root.classList.add('is-loaded'));
+  Promise.all([document.fonts ? document.fonts.ready : 0, img.decode ? img.decode().catch(() => 0) : 0]).then(go);
+  setTimeout(go, 1500);
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+  document.querySelectorAll('[data-reveal], [data-band]').forEach((el) => io.observe(el));
+
+  document.querySelectorAll('[data-words]').forEach((p) => {
+    p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+    const wio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.target.classList.toggle('is-on', e.isIntersecting || e.boundingClientRect.top < 0));
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 1 });
+    p.querySelectorAll('.w').forEach((w) => wio.observe(w));
+  });
+
+  const ENDPOINT = null; // newsletter service endpoint goes here later
+  const valid = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  document.querySelectorAll('.form').forEach((form) => {
+    const input = form.querySelector('input');
+    const msg = form.querySelector('.msg');
+    const btn = form.querySelector('.btn');
+    input.addEventListener('input', () => { form.classList.remove('is-invalid'); msg.classList.remove('is-error'); msg.textContent = ''; input.removeAttribute('aria-invalid'); });
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (form.classList.contains('is-done')) return;
+      const v = input.value.trim();
+      if (!valid(v)) {
+        form.classList.add('is-invalid'); msg.classList.add('is-error'); input.setAttribute('aria-invalid', 'true');
+        msg.textContent = v ? 'That address is missing something. Check it and try again.' : 'Add your email address first.';
+        input.focus(); return;
+      }
+      form.classList.add('is-busy'); btn.disabled = true;
+      await new Promise((r) => setTimeout(r, 650));
+      form.classList.remove('is-busy'); form.classList.add('is-done');
+      msg.textContent = `Done. Watch ${v} for the next issue.`;
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft A, Dispatch | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes letters about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&display=swap" rel="stylesheet">
+<style>
+/* Draft A: Dispatch. A newsletter is mail. The portrait is a postage stamp; subscribing addresses the envelope; success is a postmark. */
+:root {
+  --paper: #F5F5F2;
+  --paper-2: #ECECE7;
+  --ink: #121212;
+  --ink-2: #55554F;
+  --rule: #D6D6CF;
+  --sky: #A9C8EE;        /* stamp field: black sweater on sky blue = 10.9:1 */
+  --cobalt: #2A3FD6;     /* action: white on cobalt = 7.5:1 */
+  --cobalt-press: #2234B8;
+  --error: #B42318;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --gutter: clamp(20px, 4vw, 64px);
+  --pitch: 22px;   /* perforation pitch: the one ruling measure */
+  --hole: 7px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: #B9B9B2 var(--paper); }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  font-stretch: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+::selection { background: var(--sky); color: var(--ink); }
+input { caret-color: var(--cobalt); }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 3px; border-radius: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.wide { font-stretch: 125%; }
+
+/* ---------- perforation ---------- */
+.perf {
+  -webkit-mask:
+    linear-gradient(#000 0 0) center / calc(100% - 2 * var(--hole)) calc(100% - 2 * var(--hole)) no-repeat,
+    radial-gradient(circle at center, #0000 calc(var(--hole) - 0.5px), #000 var(--hole)) calc(var(--pitch) / -2) calc(var(--pitch) / -2) / var(--pitch) var(--pitch);
+          mask:
+    linear-gradient(#000 0 0) center / calc(100% - 2 * var(--hole)) calc(100% - 2 * var(--hole)) no-repeat,
+    radial-gradient(circle at center, #0000 calc(var(--hole) - 0.5px), #000 var(--hole)) calc(var(--pitch) / -2) calc(var(--pitch) / -2) / var(--pitch) var(--pitch);
+}
+
+/* ---------- header ---------- */
+.top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px var(--gutter);
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 600; font-size: 16px; letter-spacing: 0.01em; }
+.mark { --pitch: 6px; --hole: 1.6px; display: block; width: 30px; height: 36px; background: #fff; padding: 4px; filter: drop-shadow(0 1px 1px rgba(18,18,18,.18)); }
+.mark__in { display: block; width: 100%; height: 100%; background: var(--sky); position: relative; overflow: hidden; }
+.mark__in svg { position: absolute; inset: auto 0 0 0; width: 100%; height: auto; }
+.top-cta {
+  font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none;
+  padding: 8px 12px; border: 1px solid var(--ink); border-radius: 2px;
+  transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out);
+}
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { background: var(--ink); color: var(--paper); } }
+
+/* ---------- hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 120px);
+  padding: 16px var(--gutter) 64px;
+  min-height: calc(100svh - 88px);
+  overflow-x: clip;
+}
+.stamp-wrap { position: relative; margin: 0; filter: drop-shadow(0 1px 1px rgba(18,18,18,.10)) drop-shadow(0 18px 28px rgba(30,40,90,.12)); }
+.stamp {
+  --w: round(down, min(40vw, (100svh - 200px) * 0.8, 600px), 22px);
+  width: var(--w);
+  height: round(down, calc(var(--w) * 1.25), 22px);
+  background: #fff;
+  padding: 18px;
+  transform: rotate(-1.2deg);
+}
+.stamp__field { position: relative; height: 100%; background: var(--sky); overflow: hidden; }
+.stamp__field img {
+  position: absolute; bottom: 0; left: 50%;
+  height: 93%; width: auto; transform: translateX(-50%);
+}
+.stamp__ins {
+  position: absolute; top: 14px; z-index: 1;
+  font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; font-stretch: 125%;
+}
+.stamp__ins--l { left: 16px; }
+.stamp__ins--r { right: 16px; }
+.stamp__name {
+  position: absolute; left: 16px; bottom: 14px; z-index: 1; color: #fff;
+  font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; font-stretch: 125%;
+}
+.postmark {
+  position: absolute; top: 6%; right: -22%; width: 62%; height: auto;
+  color: var(--ink); mix-blend-mode: multiply; pointer-events: none;
+  opacity: 0; transform: scale(1.3) rotate(-18deg); transform-origin: 30% 50%;
+}
+.is-sent .postmark {
+  opacity: 0.82; transform: scale(1) rotate(-9deg);
+  transition: opacity 120ms ease-out, transform 280ms var(--ease-out);
+}
+
+.hero__text { max-width: 640px; }
+h1 {
+  margin: 0; font-stretch: 125%; font-weight: 600;
+  font-size: 72px; line-height: 1; letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.roles { margin: 24px 0 0; font-size: 24px; line-height: 32px; max-width: 28ch; text-wrap: balance; }
+.pitch { margin: 16px 0 0; color: var(--ink-2); max-width: 46ch; text-wrap: pretty; }
+
+/* ---------- envelope form ---------- */
+.envelope { margin-top: 40px; max-width: 560px; }
+.envelope__row {
+  display: flex; align-items: stretch;
+  border: 1px solid var(--ink); border-radius: 2px; background: #fff;
+  transition: box-shadow 150ms ease;
+}
+.envelope__row:focus-within { box-shadow: 0 0 0 3px rgba(42,63,214,.22); }
+.envelope__to {
+  display: flex; align-items: center; padding: 0 0 0 16px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; font-stretch: 125%; color: var(--ink-2);
+}
+.envelope input {
+  flex: 1; min-width: 0; height: 56px; padding: 0 12px;
+  border: 0; background: transparent; color: var(--ink);
+  font: inherit; font-size: 18px; outline: none;
+}
+.envelope input::placeholder { color: #6E6E68; opacity: 1; }
+.btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 4px; padding: 0 20px; min-height: 48px;
+  border: 0; border-radius: 1px; background: var(--cobalt); color: #fff;
+  font: inherit; font-size: 16px; font-weight: 600; cursor: pointer;
+  transition: background-color 150ms ease, transform 160ms var(--ease-out);
+}
+.btn svg { transition: transform 200ms var(--ease-out); }
+.btn:active { transform: scale(0.97); background: var(--cobalt-press); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { background: var(--cobalt-press); }
+  .btn:hover svg { transform: translateX(3px); }
+}
+.btn__label { transition: opacity 180ms ease, filter 180ms ease; }
+.btn.is-busy .btn__label { opacity: 0.6; filter: blur(2px); }
+.fine { margin: 12px 0 0; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+.msg { margin: 12px 0 0; min-height: 20px; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: var(--error); }
+.envelope.is-invalid .envelope__row { border-color: var(--error); }
+.envelope.is-done .envelope__row { border-color: var(--cobalt); }
+
+/* ---------- letters ---------- */
+section { scroll-margin-top: 24px; }
+.letters { padding: 96px var(--gutter); border-top: 1px solid var(--rule); }
+.letters__head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: end; }
+h2 { margin: 0; font-stretch: 125%; font-weight: 600; font-size: 48px; line-height: 1.05; letter-spacing: -0.025em; text-wrap: balance; }
+.letters__head p { margin: 0; color: var(--ink-2); max-width: 44ch; }
+.rows { list-style: none; margin: 64px 0 0; padding: 0; }
+.row {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px;
+  padding: 32px 0; border-top: 1px solid var(--rule);
+}
+.row:last-child { border-bottom: 1px solid var(--rule); }
+.row h3 { margin: 0; font-stretch: 125%; font-weight: 500; font-size: 36px; line-height: 40px; letter-spacing: -0.02em; }
+.row p { margin: 0; max-width: 52ch; text-wrap: pretty; }
+
+/* ---------- tagline reveal ---------- */
+.tagline { padding: 128px var(--gutter); }
+.tagline p {
+  margin: 0; max-width: 18ch; font-weight: 500; font-size: 60px; line-height: 1.04; letter-spacing: -0.03em; text-wrap: balance;
+}
+.w { color: rgba(18,18,18,.22); transition: color 500ms var(--ease-out); }
+.w.is-on { color: var(--ink); }
+
+/* ---------- final ---------- */
+.final { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: end; padding: 96px var(--gutter); background: var(--paper-2); }
+.final .envelope { margin-top: 32px; }
+
+footer {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 32px var(--gutter); font-size: 14px; line-height: 20px; color: var(--ink-2);
+}
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- motion: load and reveal ---------- */
+.js .stamp-wrap { opacity: 0; transform: translateY(24px); }
+.js .stamp__field img { filter: grayscale(1) contrast(0.55) brightness(1.35); opacity: 0.35; }
+.js .hero [data-in] { opacity: 0; transform: translateY(14px); }
+.js.is-loaded .stamp-wrap { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out); }
+.js.is-loaded .stamp__field img { filter: none; opacity: 1; transition: filter 1600ms var(--ease-out) 350ms, opacity 1200ms var(--ease-out) 350ms; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(250ms + var(--i, 0) * 70ms); }
+.js [data-reveal] { opacity: 0; transform: translateY(16px); filter: blur(4px); }
+.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out), filter 800ms var(--ease-out); transition-delay: calc(var(--i, 0) * 70ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .stamp-wrap, .js .hero [data-in], .js [data-reveal] { transform: none !important; filter: none !important; }
+  .js .stamp__field img { filter: none; opacity: 1; }
+  .is-sent .postmark { transform: rotate(-9deg); transition: opacity 200ms ease; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) { h1 { font-size: 60px; } .roles { font-size: 20px; line-height: 28px; } }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; min-height: 0; padding-top: 8px; }
+  .stamp { --w: round(down, min(78vw, 360px), 22px); }
+  .postmark { right: -30%; }
+  h1 { font-size: 48px; }
+  .letters__head, .row, .final { grid-template-columns: 1fr; gap: 16px; }
+  .rows { margin-top: 40px; }
+  .row h3 { font-size: 30px; line-height: 36px; }
+  .tagline { padding: 96px var(--gutter); }
+  .tagline p { font-size: 36px; line-height: 40px; }
+  h2 { font-size: 36px; }
+}
+@media (max-width: 520px) {
+  .envelope__row { flex-wrap: wrap; }
+  .envelope input { flex-basis: calc(100% - 56px); }
+  .btn { flex: 1 0 calc(100% - 8px); }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <span class="mark perf" aria-hidden="true"><span class="mark__in"><svg viewBox="0 0 22 28"><circle cx="11" cy="12" r="5" fill="#121212"/><path d="M1 28c0-6.5 4.5-10.5 10-10.5S21 21.5 21 28z" fill="#121212"/></svg></span></span>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hello">
+    <figure class="stamp-wrap">
+      <div class="stamp perf">
+        <div class="stamp__field">
+          <span class="stamp__ins stamp__ins--l">AI &amp; Cloud</span>
+          <span class="stamp__ins stamp__ins--r">Vol. 1</span>
+          <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+          <span class="stamp__name">Mostafa Saher</span>
+        </div>
+      </div>
+      <svg class="postmark" viewBox="0 0 300 130" aria-hidden="true">
+        <defs><path id="pm-arc" d="M65 65m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/></defs>
+        <g fill="none" stroke="currentColor" stroke-width="2.4">
+          <circle cx="65" cy="65" r="58"/><circle cx="65" cy="65" r="34"/>
+          <path d="M132 40q12-9 24 0t24 0t24 0t24 0t24 0t24 0"/>
+          <path d="M132 65q12-9 24 0t24 0t24 0t24 0t24 0t24 0"/>
+          <path d="M132 90q12-9 24 0t24 0t24 0t24 0t24 0t24 0"/>
+        </g>
+        <text font-family="Archivo" font-stretch="125%" font-weight="600" font-size="10.5" letter-spacing="2.6" fill="currentColor"><textPath href="#pm-arc">SUBSCRIBED · AI AND CLOUD · M. SAHER ·</textPath></text>
+        <text id="pm-day" x="65" y="63" text-anchor="middle" font-family="Archivo" font-stretch="125%" font-weight="600" font-size="15" fill="currentColor">01 OCT</text>
+        <text id="pm-year" x="65" y="80" text-anchor="middle" font-family="Archivo" font-stretch="125%" font-weight="600" font-size="12" letter-spacing="2" fill="currentColor">2026</text>
+      </svg>
+    </figure>
+
+    <div class="hero__text">
+      <h1 id="hello" data-in style="--i:0">Hello, I’m Mostafa.</h1>
+      <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:2">I write letters about AI and cloud computing: what I think, where I stand, and the resources I’d actually hand a student.</p>
+      <form class="envelope" id="subscribe" data-in style="--i:3" novalidate>
+        <label class="sr-only" for="email-1">Email address</label>
+        <div class="envelope__row">
+          <span class="envelope__to" aria-hidden="true">To</span>
+          <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__label">Get the letters</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="letters" aria-labelledby="whats-inside">
+    <div class="letters__head">
+      <h2 id="whats-inside" data-reveal>What’s in the letters</h2>
+      <p data-reveal style="--i:1">Three kinds of things, written the way I explain them in class. No filler, no recycled press releases.</p>
+    </div>
+    <ul class="rows">
+      <li class="row" data-reveal><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></li>
+      <li class="row" data-reveal style="--i:1"><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></li>
+      <li class="row" data-reveal style="--i:2"><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. These letters are what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next-letter">
+    <div>
+      <h2 id="next-letter" data-reveal>The next letter could be yours.</h2>
+      <form class="envelope" data-reveal style="--i:1" novalidate>
+        <label class="sr-only" for="email-2">Email address</label>
+        <div class="envelope__row">
+          <span class="envelope__to" aria-hidden="true">To</span>
+          <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__label">Get the letters</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const img = document.querySelector('.stamp__field img');
+  const go = () => requestAnimationFrame(() => root.classList.add('is-loaded'));
+  Promise.all([document.fonts ? document.fonts.ready : 0, img.decode ? img.decode().catch(() => 0) : 0]).then(go);
+  setTimeout(go, 1500);
+
+  // postmark carries today's date
+  const d = new Date();
+  document.getElementById('pm-day').textContent = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }).toUpperCase();
+  document.getElementById('pm-year').textContent = d.getFullYear();
+
+  // scroll reveals
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+  // word-by-word tagline: each word lights as it crosses a line 40% up from the bottom
+  document.querySelectorAll('[data-words]').forEach((p) => {
+    p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+    const wio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.target.classList.toggle('is-on', e.isIntersecting || e.boundingClientRect.top < 0));
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 1 });
+    p.querySelectorAll('.w').forEach((w) => wio.observe(w));
+  });
+
+  // forms: demo only. Point ENDPOINT at the newsletter service later.
+  const ENDPOINT = null;
+  const valid = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  document.querySelectorAll('.envelope').forEach((form) => {
+    const input = form.querySelector('input');
+    const msg = form.querySelector('.msg');
+    const btn = form.querySelector('.btn');
+    const label = form.querySelector('.btn__label');
+    input.addEventListener('input', () => { form.classList.remove('is-invalid'); msg.classList.remove('is-error'); msg.textContent = ''; input.removeAttribute('aria-invalid'); });
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const v = input.value.trim();
+      if (!valid(v)) {
+        form.classList.add('is-invalid'); msg.classList.add('is-error'); input.setAttribute('aria-invalid', 'true');
+        msg.textContent = v ? 'That address is missing something. Check it and try again.' : 'Add your email address first.';
+        input.focus(); return;
+      }
+      btn.classList.add('is-busy'); btn.disabled = true;
+      await new Promise((r) => setTimeout(r, 650));
+      btn.classList.remove('is-busy');
+      label.textContent = 'Posted';
+      form.classList.add('is-done');
+      msg.textContent = `You’re on the list. The first letter goes to ${v}.`;
+      document.body.classList.add('is-sent');
+    });
+  });
+})();
+</script>
+</body>
+</html>

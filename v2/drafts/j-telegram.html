@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft J, Telegram | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Courier+Prime:wght@400;700&family=Libre+Franklin:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft J: Telegram. The page is a cable form; the headline is ticker tape pasted on it. Subscribing prints a reply on new tape and pastes it onto your photo. */
+:root {
+  --form: #E6DDF7;       /* pale lavender cable form */
+  --field: #C9B5F5;      /* black sweater on it 10:1 */
+  --tape: #FFFDF6;
+  --ink: #1A1625; --ink-rgb: 26 22 37;   /* 13.5:1 on form */
+  --ink-2: #4A4258;      /* 7.3:1 */
+  --red: #B3261A;        /* 5:1 */
+  --gutter: clamp(20px, 4vw, 64px);
+  --gothic: "League Gothic", "Arial Narrow", sans-serif;
+  --tele: "Courier Prime", ui-monospace, monospace;
+}
+html { scrollbar-color: #A795D6 var(--form); }
+body { background: var(--form); color: var(--ink); font-family: "Libre Franklin", system-ui, sans-serif; font-size: 18px; line-height: 28px; }
+::selection { background: var(--ink); color: var(--form); }
+input { caret-color: var(--red); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.tape { display: inline-block; padding: 0.12em 0.45em 0.08em; background: var(--tape); color: var(--ink); font-family: var(--tele); font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; transform: rotate(var(--r, 0deg)); box-shadow: 0 1px 1px rgba(26,22,37,.14), 0 8px 16px -10px rgba(40,20,90,.45); transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .tape:hover { transform: rotate(var(--r, 0deg)) translateY(-2px); box-shadow: 0 2px 2px rgba(26,22,37,.12), 0 14px 22px -12px rgba(40,20,90,.5); } }
+
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 24px var(--gutter); }
+.brand { text-decoration: none; font-size: 14px; line-height: 20px; }
+.top-cta { font-family: var(--gothic); font-size: 24px; line-height: 28px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; padding: 6px 14px 4px; border: 1.5px solid var(--ink); transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { background: var(--ink); color: var(--form); } }
+
+/* ---------- the cable form ---------- */
+.cable { position: relative; margin: 0 var(--gutter); border: 1.5px solid var(--ink); isolation: isolate; overflow: hidden; }
+.lamp { position: absolute; z-index: -1; left: 0; top: 0; width: 700px; height: 700px; margin: -350px 0 0 -350px; pointer-events: none; background: radial-gradient(closest-side, rgba(255,255,255,.28), rgba(255,255,255,0)); opacity: 0; transition: opacity 500ms ease; }
+.cable.is-hover .lamp { opacity: 1; }
+.cable__head { display: grid; grid-template-columns: auto 1fr; align-items: stretch; border-bottom: 1.5px solid var(--ink); }
+.cable__title { margin: 0; padding: 10px 24px 4px; font-family: var(--gothic); font-size: 72px; line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; border-right: 1.5px solid var(--ink); }
+.cable__fields { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cable__fields div { padding: 10px 16px; border-left: 1px solid rgba(26,22,37,.35); font-size: 12px; line-height: 16px; color: var(--ink-2); }
+.cable__fields div:first-child { border-left: 0; }
+.cable__fields b { display: block; margin-top: 6px; font-family: var(--tele); font-size: 16px; line-height: 20px; color: var(--ink); font-weight: 700; }
+.cable__body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); min-height: calc(100svh - 230px); }
+.message { padding: clamp(24px, 4vw, 56px); display: flex; flex-direction: column; justify-content: center; border-right: 1.5px solid var(--ink); background-image: repeating-linear-gradient(transparent 0 55px, rgba(26,22,37,.14) 55px 56px); }
+.label { font-size: 12px; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+h1 { margin: 12px 0 0; font-weight: 400; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+h1 .tape { font-size: clamp(34px, 3.4vw, 52px); line-height: 1.05; white-space: nowrap; }
+.roles { margin: 24px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.roles .tape { font-size: 17px; line-height: 24px; }
+.pitch { margin: 24px 0 0; max-width: 44ch; color: var(--ink-2); text-wrap: pretty; }
+
+/* deliver-to field */
+.form { margin-top: 28px; max-width: 540px; }
+.form__row { display: flex; align-items: flex-end; gap: 16px; }
+.field { flex: 1; min-width: 0; }
+.field label { display: block; }
+.field input { width: 100%; height: 48px; padding: 0 2px; border: 0; border-bottom: 1.5px dashed var(--ink); background: transparent; color: var(--ink); font-family: var(--tele); font-size: 20px; outline: none; }
+.field input::placeholder { color: #5F5670; opacity: 1; }
+.field input:focus { border-bottom-style: solid; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 2px 22px 0; border: 0; background: var(--ink); color: var(--form); font-family: var(--gothic); font-size: 26px; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #352C48; } }
+.fine { margin: 10px 0 0; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+.msg { margin: 4px 0 0; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: var(--red); }
+.is-invalid .field input { border-bottom-color: var(--red); }
+
+/* the attached photograph */
+.photo { position: relative; margin: 0; display: grid; place-items: end center; padding: 32px 32px 0; }
+.photo__field { position: relative; width: 100%; height: 100%; min-height: 420px; background: var(--field); }
+.photo__field::before, .photo__field::after { content: ""; position: absolute; width: 28px; height: 28px; background: var(--ink); z-index: 2; }
+.photo__field::before { top: 0; left: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.photo__field::after { top: 0; right: 0; clip-path: polygon(0 0, 100% 0, 100% 100%); }
+.photo img { position: absolute; bottom: 0; left: 50%; height: 94%; width: auto; transform: translateX(-50%); }
+.photo__cap { position: absolute; left: 16px; top: 14px; z-index: 3; font-size: 12px; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); padding-left: 24px; }
+
+/* send-off: a reply prints on fresh tape, then is pasted onto the photograph */
+.reply { position: absolute; z-index: 4; left: 50%; bottom: 13%; width: max-content; max-width: 92%; font-size: 15px; line-height: 22px; white-space: normal; opacity: 0; pointer-events: none; transform-origin: 50% 50%; }
+.reply.is-printing { opacity: 1; transform: translate(-50%, -40px) rotate(0deg) scale(1.04); }
+.reply.is-pasted { opacity: 1; transform: translate(-50%, 0) rotate(-2.5deg); transition: transform 380ms var(--ease-out); }
+.reply .caret { display: inline-block; width: 0.6em; height: 1em; margin-left: 2px; vertical-align: -2px; background: var(--red); animation: blink 700ms steps(2, jump-none) infinite; }
+.reply.is-pasted .caret { display: none; }
+@keyframes blink { 50% { opacity: 0; } }
+.stamp { position: absolute; z-index: 5; right: 22px; top: 22px; padding: 6px 10px 3px; border: 2.5px solid var(--red); color: var(--red); font-family: var(--gothic); font-size: 26px; line-height: 1; letter-spacing: 0.06em; text-transform: uppercase; mix-blend-mode: multiply; opacity: 0; transform: rotate(8deg) scale(1.25); pointer-events: none; }
+.stamp.on { opacity: 0.9; transform: rotate(8deg); transition: opacity 90ms linear, transform 260ms var(--ease-out); }
+
+/* ---------- body sections ---------- */
+.carries { padding: 120px var(--gutter) 88px; }
+h2 { margin: 0; font-family: var(--gothic); font-weight: 400; font-size: 88px; line-height: 0.92; letter-spacing: 0.01em; text-transform: uppercase; text-wrap: balance; }
+.carries > p { margin: 16px 0 0; color: var(--ink-2); max-width: 46ch; }
+.lines { list-style: none; margin: 56px 0 0; padding: 0; border-top: 1.5px solid var(--ink); }
+.lines li { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 32px; align-items: center; padding: 28px 0; border-bottom: 1px solid rgba(26,22,37,.35); }
+.lines .tape { font-size: 28px; line-height: 36px; justify-self: start; }
+.lines p { margin: 0; max-width: 50ch; text-wrap: pretty; }
+.tagline { padding: 40px var(--gutter) 152px; }
+.tagline p { margin: 0; max-width: 20ch; font-family: var(--gothic); font-size: 104px; line-height: 0.92; text-transform: uppercase; text-wrap: balance; }
+.final { margin: 0 var(--gutter); padding: 72px clamp(24px, 5vw, 72px); border: 1.5px solid var(--ink); background: var(--field); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 540px); gap: 48px; align-items: end; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 14px; line-height: 20px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load: tape prints in, character by character ---------- */
+.js .hero .tape[data-print] { clip-path: inset(0 100% 0 0); }
+.js .photo__field { opacity: 0; transform: translateY(18px); }
+.js .hero [data-in] { opacity: 0; transform: translateY(12px); }
+.js.is-loaded .hero .tape[data-print] { clip-path: inset(0 0 0 0); transition: clip-path 900ms steps(16); transition-delay: calc(200ms + var(--i, 0) * 260ms); }
+.js.is-loaded .photo__field { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out) 150ms, transform 900ms var(--ease-out) 150ms; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(900ms + var(--i, 0) * 80ms); }
+@media (prefers-reduced-motion: reduce) { .js .hero .tape[data-print] { clip-path: none; } .js .photo__field, .js .hero [data-in] { transform: none !important; } .lamp { display: none; } }
+@media (hover: none), (pointer: coarse) { .lamp { display: none; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) { h1 .tape { font-size: 44px; } .cable__fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cable__fields div:nth-child(3) { border-left: 0; } .cable__fields div:nth-child(n+3) { border-top: 1px solid rgba(26,22,37,.35); } }
+@media (max-width: 860px) {
+  .cable { margin: 0 12px; }
+  .cable__head { grid-template-columns: 1fr; }
+  .cable__title { border-right: 0; border-bottom: 1.5px solid var(--ink); font-size: 56px; }
+  .cable__body { grid-template-columns: 1fr; min-height: 0; }
+  .photo { order: -1; padding: 20px 20px 0; }
+  .photo__field { min-height: min(100vw, 440px); }
+  .message { border-right: 0; border-top: 1.5px solid var(--ink); }
+  h1 .tape { font-size: 34px; }
+  .lines li, .final { grid-template-columns: 1fr; gap: 12px; }
+  h2 { font-size: 60px; } .tagline p { font-size: 60px; }
+  .final { margin: 0 12px; }
+}
+@media (max-width: 520px) { .form__row { flex-direction: column; align-items: stretch; } .btn { justify-content: center; } h1 .tape { white-space: normal; font-size: 30px; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home"><span class="tape" style="--r:-1.5deg">Mostafa Saher stop</span></a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="cable hero" id="cable" aria-labelledby="hello">
+    <div class="lamp" aria-hidden="true"></div>
+    <div class="cable__head">
+      <p class="cable__title" aria-hidden="true">Telegram</p>
+      <div class="cable__fields">
+        <div>Office of origin<b>M. Saher</b></div>
+        <div>Class<b>Newsletter</b></div>
+        <div>Subject<b>AI + Cloud</b></div>
+        <div>Date<b id="cable-date">05 Oct 2026</b></div>
+      </div>
+    </div>
+    <div class="cable__body">
+      <div class="message">
+        <span class="label" data-in style="--i:0">Message</span>
+        <h1 id="hello"><span class="sr-only">Hello, I’m Mostafa.</span>
+          <span class="tape" data-print style="--i:0;--r:-1deg" aria-hidden="true">Hello stop</span>
+          <span class="tape" data-print style="--i:1;--r:0.6deg" aria-hidden="true">I’m Mostafa stop</span>
+        </h1>
+        <ul class="roles" aria-label="What I do">
+          <li class="tape" data-print style="--i:2;--r:-0.5deg">Technical instructor</li>
+          <li class="tape" data-print style="--i:2.4;--r:0.4deg">Computer engineer</li>
+          <li class="tape" data-print style="--i:2.8;--r:-0.8deg">AI enthusiast</li>
+          <li class="tape" data-print style="--i:3.2;--r:0.5deg">Cloud specialist stop</li>
+        </ul>
+        <p class="pitch" data-in style="--i:1">I write a newsletter about AI and cloud computing: what I think, where I stand, and the resources I’d actually hand a student.</p>
+        <form class="form" id="subscribe" data-signup data-hero data-in style="--i:2" novalidate>
+          <div class="form__row">
+            <div class="field"><label class="label" for="email-1">Deliver to</label><input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required></div>
+            <button class="btn" type="submit"><span class="btn__label">Wire me issues</span></button>
+          </div>
+          <p class="fine">Free. Unsubscribe in one click.</p>
+          <p class="msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <figure class="photo">
+        <div class="photo__field">
+          <span class="photo__cap" aria-hidden="true">Photograph attached</span>
+          <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+          <p class="tape reply" id="reply" aria-hidden="true"><span id="reply-text"></span><span class="caret"></span></p>
+          <span class="stamp" id="stamp" aria-hidden="true">Delivered</span>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="carries" aria-labelledby="carries">
+    <h2 id="carries" data-reveal>Every cable carries</h2>
+    <p data-reveal style="--i:1">Three things, written the way I explain them in class. Short, plain and worth the read.</p>
+    <ul class="lines">
+      <li data-reveal><span class="tape" style="--r:-1deg">Thoughts stop</span><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></li>
+      <li data-reveal style="--i:1"><span class="tape" style="--r:0.8deg">Opinions stop</span><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></li>
+      <li data-reveal style="--i:2"><span class="tape" style="--r:-0.6deg">Resources stop</span><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next">
+    <h2 id="next" data-reveal>Wire me the next one.</h2>
+    <form class="form" data-signup data-reveal style="--i:1" novalidate>
+      <div class="form__row">
+        <div class="field"><label class="label" for="email-2">Deliver to</label><input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required></div>
+        <button class="btn" type="submit"><span class="btn__label">Wire me issues</span></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = DraftKit;
+  const cable = document.getElementById('cable');
+  K.ready(cable.querySelector('.photo img'));
+  K.reveals();
+  document.getElementById('cable-date').textContent = K.today();
+
+  // a soft desk lamp follows the cursor over the form (kept faint on purpose)
+  const lamp = cable.querySelector('.lamp');
+  K.pointer(cable, (x, y) => { lamp.style.transform = `translate3d(${x}px, ${y}px, 0)`; }, 0.1);
+
+  // send-off: the reply types out on fresh tape above the photo, then gets pasted down with a delivered stamp
+  const reply = document.getElementById('reply'), text = document.getElementById('reply-text'), stamp = document.getElementById('stamp');
+  async function wire(email) {
+    const msg = `Welcome stop first issue to ${email} stop`;
+    reply.classList.remove('is-pasted'); reply.classList.add('is-printing'); text.textContent = '';
+    if (K.reduce) { text.textContent = msg; reply.classList.add('is-pasted'); stamp.classList.add('on'); return; }
+    for (const ch of msg) { text.textContent += ch; await K.sleep(ch === ' ' ? 45 : 28); }
+    await K.sleep(250);
+    reply.classList.remove('is-printing'); reply.classList.add('is-pasted');
+    await K.sleep(320);
+    stamp.classList.add('on');
+  }
+  K.forms({ doneLabel: 'Wired', message: (v) => `Subscribed. Issues go to ${v}.`, onSuccess: (form, v) => wire(v) });
+})();
+</script>
+</body>
+</html>

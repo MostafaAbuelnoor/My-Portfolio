@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft N, Napkin | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Caveat:wght@500..700&family=Lexend:wght@300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft N: Napkin. The way a good teacher explains things: a marker sketch on notebook paper. Subscribing draws an arrow to your photo, circles you, and slaps on a sticky note. */
+:root {
+  --paper: #FFFFFF;
+  --dot: #E2E2E2;
+  --ink: #151515; --ink-rgb: 21 21 21;   /* 18:1 */
+  --ink-2: #5A5A5A;      /* 6.9:1 */
+  --yellow: #FFF04D;     /* black sweater on highlighter 15.6:1 */
+  --pink: #FF8FC7;
+  --teal: #5FDCCB;
+  --gutter: clamp(20px, 4vw, 64px);
+  --marker: "Caveat Brush", "Comic Sans MS", cursive;
+  --hand: "Caveat", "Comic Sans MS", cursive;
+}
+html { scrollbar-color: #C9C9C9 var(--paper); }
+body { background-color: var(--paper); background-image: radial-gradient(var(--dot) 1.2px, transparent 1.4px); background-size: 24px 24px; color: var(--ink); font-family: "Lexend", system-ui, sans-serif; font-weight: 300; font-size: 18px; line-height: 30px; }
+::selection { background: var(--yellow); color: var(--ink); }
+input { caret-color: var(--ink); }
+:focus-visible { outline: 2.5px solid var(--ink); outline-offset: 4px; border-radius: 6px; }
+.hl { position: relative; z-index: 0; white-space: nowrap; }
+.hl::before { content: ""; position: absolute; z-index: -1; left: -0.12em; right: -0.12em; top: 52%; bottom: 0.02em; background: var(--hl, var(--pink)); border-radius: 0.3em 0.15em 0.35em 0.2em; transform: rotate(-1.2deg) skewX(-8deg); transform-origin: 0 50%; }
+.wobble { border: 2.5px solid var(--ink); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; }
+
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 22px var(--gutter); }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--marker); font-size: 28px; line-height: 1; }
+.top-cta { font-family: var(--hand); font-weight: 700; font-size: 24px; line-height: 1; text-decoration: none; padding: 8px 16px 10px; transition: transform 160ms var(--ease-out), background-color 150ms ease; }
+.top-cta:active { transform: scale(0.97) rotate(-1deg); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { background: var(--yellow); } }
+
+/* ---------- hero ---------- */
+.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: clamp(24px, 4vw, 72px); align-items: center; padding: 0 var(--gutter) 56px; min-height: calc(100svh - 82px); isolation: isolate; }
+.glow { position: absolute; z-index: -1; left: 0; top: 0; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, rgba(255,240,77,.38), rgba(255,240,77,0)); opacity: 0; transition: opacity 500ms ease; }
+.hero.is-hover .glow { opacity: 1; }
+.hero__text { max-width: 580px; }
+h1 { margin: 0; font-family: var(--marker); font-weight: 400; font-size: 104px; line-height: 0.9; letter-spacing: -0.01em; text-wrap: balance; }
+.lede { margin: 24px 0 0; font-size: 20px; line-height: 32px; max-width: 40ch; text-wrap: pretty; }
+.lede b { font-weight: 500; }
+
+/* form: a scribbled box */
+.form { margin-top: 32px; max-width: 520px; }
+.form label { display: block; font-family: var(--hand); font-weight: 700; font-size: 26px; line-height: 30px; }
+.form__row { display: flex; gap: 12px; margin-top: 8px; }
+.form input { flex: 1; min-width: 0; height: 54px; padding: 0 16px; background: #fff; color: var(--ink); font: inherit; font-weight: 400; font-size: 18px; outline: none; transition: background-color 150ms ease; }
+.form input::placeholder { color: #6E6E6E; opacity: 1; }
+.form input:focus { background: #FFFBD1; }
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 54px; padding: 0 22px 2px; background: var(--ink); color: var(--paper); font-family: var(--hand); font-weight: 700; font-size: 26px; white-space: nowrap; cursor: pointer; transition: transform 160ms var(--ease-out), background-color 150ms ease; }
+.btn:active { transform: scale(0.97) rotate(-1deg); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { transform: rotate(-1.5deg); } }
+.fine { margin: 10px 0 0; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+.msg { margin: 4px 0 0; font-size: 14px; line-height: 20px; font-weight: 500; }
+.msg.is-error { color: #B3121F; }
+.is-invalid input { border-color: #B3121F; }
+
+/* the sketch: you on a highlighter blob, with notes and arrows */
+.sketch { position: relative; margin: 0; height: min(calc(100svh - 150px), 720px); aspect-ratio: 5 / 6; justify-self: center; }
+.blob { position: absolute; inset: 8% 6% 0 10%; width: auto; height: auto; }
+.blob svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.sketch img { position: absolute; z-index: 1; bottom: 0; left: 52%; height: 88%; width: auto; transform: translateX(-50%); }
+.note { position: absolute; z-index: 2; font-family: var(--hand); font-weight: 700; font-size: 26px; line-height: 28px; white-space: nowrap; }
+.note--a { left: -4%; top: 8%; transform: rotate(-6deg); }
+.note--b { right: -6%; top: 22%; transform: rotate(5deg); }
+.note--c { left: -10%; top: 52%; transform: rotate(-3deg); }
+.note--d { right: -8%; top: 64%; transform: rotate(4deg); }
+.doodles { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.doodles path { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* send-off overlay */
+.ink { position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.ink path { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.ink .ring { stroke: #E2266F; stroke-width: 3.5; }
+.sticky { position: absolute; z-index: 6; right: 2%; top: 4%; width: 190px; padding: 18px 16px 20px; background: var(--pink); font-family: var(--hand); font-weight: 700; font-size: 26px; line-height: 28px; box-shadow: 0 1px 1px rgba(0,0,0,.12), 0 16px 24px -14px rgba(0,0,0,.45); opacity: 0; transform: rotate(-14deg) scale(1.25) translateY(-30px); pointer-events: none; }
+.sticky small { display: block; margin-top: 6px; font-size: 19px; line-height: 22px; font-weight: 500; word-break: break-all; }
+.sticky.on { opacity: 1; transform: rotate(5deg); transition: opacity 90ms linear, transform 360ms var(--ease-out); }
+
+/* ---------- sections ---------- */
+.inside { padding: 112px var(--gutter) 96px; }
+h2 { margin: 0; font-family: var(--marker); font-weight: 400; font-size: 72px; line-height: 0.95; text-wrap: balance; }
+.inside > p { margin: 14px 0 0; color: var(--ink-2); max-width: 46ch; }
+.three { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); }
+.three h3 { margin: 0; font-family: var(--marker); font-weight: 400; font-size: 48px; line-height: 1; }
+.three p { margin: 14px 0 0; text-wrap: pretty; }
+.three .side { margin-top: 10px; font-family: var(--hand); font-weight: 600; font-size: 22px; line-height: 26px; color: var(--ink-2); }
+.tagline { padding: 40px var(--gutter) 144px; }
+.tagline p { margin: 0; max-width: 20ch; font-family: var(--marker); font-size: 84px; line-height: 0.98; text-wrap: balance; }
+.final { position: relative; margin: 0 auto; width: min(100% - 2 * var(--gutter), 720px); padding: 56px clamp(24px, 5vw, 56px) 48px; background: var(--yellow); transform: rotate(-1deg); box-shadow: 0 1px 1px rgba(0,0,0,.1), 0 24px 40px -24px rgba(0,0,0,.35); }
+.final::before { content: ""; position: absolute; top: -14px; left: 50%; width: 120px; height: 28px; margin-left: -60px; background: rgba(95,220,203,.75); transform: rotate(2deg); }
+.final h2 { font-size: 64px; }
+.final input { background: #fff; }
+.final .fine { color: #4D4710; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 64px var(--gutter) 32px; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load: notes and arrows draw on ---------- */
+.js .blob { clip-path: inset(0 100% 0 0); }
+.js .sketch img { opacity: 0; transform: translate(-50%, 24px); }
+.js .note { opacity: 0; }
+.js .doodles path { stroke-dasharray: var(--len, 300); stroke-dashoffset: var(--len, 300); }
+.js .hero [data-in] { opacity: 0; transform: translateY(12px); }
+.js .hl::before { transform: rotate(-1.2deg) skewX(-8deg) scaleX(0); }
+.js.is-loaded .blob { clip-path: inset(0 0 0 0); transition: clip-path 700ms cubic-bezier(0.65, 0, 0.35, 1) 100ms; }
+.js.is-loaded .sketch img { opacity: 1; transform: translateX(-50%); transition: opacity 600ms var(--ease-out) 500ms, transform 900ms var(--ease-out) 500ms; }
+.js.is-loaded .note { opacity: 1; transition: opacity 300ms ease; transition-delay: calc(1100ms + var(--i, 0) * 220ms); }
+.js.is-loaded .doodles path { stroke-dashoffset: 0; transition: stroke-dashoffset 500ms cubic-bezier(0.65, 0, 0.35, 1); transition-delay: calc(1000ms + var(--i, 0) * 220ms); }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(150ms + var(--i, 0) * 80ms); }
+.js.is-loaded .hl::before { transform: rotate(-1.2deg) skewX(-8deg); transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1) 600ms; }
+.js .three .hl::before, .js .three .hl.on::before { transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1) 200ms; }
+.js .three li:not(.is-in) .hl::before { transform: rotate(-1.2deg) skewX(-8deg) scaleX(0); }
+@media (prefers-reduced-motion: reduce) { .js .blob { clip-path: none; } .js .doodles path { stroke-dashoffset: 0; } .js .hl::before { transform: rotate(-1.2deg) skewX(-8deg) !important; } .js .sketch img { transform: translateX(-50%) !important; } .js .hero [data-in] { transform: none !important; } .glow { display: none; } }
+@media (hover: none), (pointer: coarse) { .glow { display: none; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) { h1 { font-size: 84px; } .note { font-size: 22px; } }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .sketch { order: -1; height: auto; width: min(100%, 420px); }
+  .note--a { left: 0; } .note--b { right: 0; } .note--c { left: -2%; } .note--d { right: 0; }
+  h1 { font-size: 68px; }
+  .three { grid-template-columns: 1fr; }
+  h2 { font-size: 52px; } .tagline p { font-size: 52px; } .final h2 { font-size: 48px; }
+  .sticky { width: 160px; font-size: 22px; }
+}
+@media (max-width: 520px) { .form__row { flex-direction: column; } .btn { justify-content: center; } .note { font-size: 19px; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 20c0-8 6-14 14-14 9 0 15 6 14 15-1 8-7 13-15 13C11 34 6 28 6 20z" fill="#FFF04D"/><circle cx="20" cy="17" r="4.5" fill="#151515"/><path d="M11 33c1-5 4.5-8 9-8s8 3 9 8" fill="#151515"/></svg>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta wobble" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" id="hero" aria-labelledby="hello">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="hero__text">
+      <h1 id="hello" data-in style="--i:0">Hello, I’m <span class="hl">Mostafa.</span></h1>
+      <p class="lede" data-in style="--i:1"><b>I write a newsletter about AI and cloud computing:</b> what I think, where I stand, and the resources I’d actually hand a student. Explained the way I’d sketch it for you on a napkin.</p>
+      <form class="form" id="subscribe" data-signup data-hero data-in style="--i:2" novalidate>
+        <label for="email-1">Your email, please</label>
+        <div class="form__row">
+          <input class="wobble" id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn wobble" type="submit"><span class="btn__label">Count me in</span></button>
+        </div>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <figure class="sketch" id="sketch">
+      <div class="blob" aria-hidden="true"><svg viewBox="0 0 400 460" preserveAspectRatio="none"><defs><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="5"/><feDisplacementMap in="SourceGraphic" scale="12"/></filter></defs><path d="M40 70 C90 10 300 0 360 60 C410 120 395 300 380 400 C370 450 70 460 30 420 C0 360 -5 140 40 70 Z" fill="#FFF04D" filter="url(#rough)"/></svg></div>
+      <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck, on a yellow highlighter scribble">
+      <ul aria-label="What I do" style="list-style:none;margin:0;padding:0">
+        <li class="note note--a" style="--i:0">technical instructor</li>
+        <li class="note note--b" style="--i:1">computer engineer</li>
+        <li class="note note--c" style="--i:2">AI enthusiast</li>
+        <li class="note note--d" style="--i:3">cloud specialist</li>
+      </ul>
+      <svg class="doodles" id="doodles" viewBox="0 0 500 600" preserveAspectRatio="none" aria-hidden="true">
+        <path style="--i:0" d="M70 92 C110 110 150 120 196 150 M188 140 L198 151 L184 156"/>
+        <path style="--i:1" d="M440 176 C400 170 350 175 318 200 M330 192 L316 202 L330 208"/>
+        <path style="--i:2" d="M60 352 C100 340 130 330 170 336 M158 328 L172 337 L158 344"/>
+        <path style="--i:3" d="M450 418 C420 410 390 412 360 430 M370 420 L357 432 L372 436"/>
+      </svg>
+      <svg class="ink" id="ink" viewBox="0 0 500 600" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div class="sticky" id="sticky" aria-hidden="true">you’re in. first issue soon<small id="sticky-to"></small></div>
+    </figure>
+  </section>
+
+  <section class="inside" aria-labelledby="inside">
+    <h2 id="inside" data-reveal>What’s on the napkin</h2>
+    <p data-reveal style="--i:1">Three things in every issue, explained the way I explain them in class.</p>
+    <ul class="three">
+      <li data-reveal><h3><span class="hl" style="--hl:var(--yellow)">Thoughts</span></h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p><p class="side">the stuff from class</p></li>
+      <li data-reveal style="--i:1"><h3><span class="hl" style="--hl:var(--pink)">Opinions</span></h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p><p class="side">no hype, I promise</p></li>
+      <li data-reveal style="--i:2"><h3><span class="hl" style="--hl:var(--teal)">Resources</span></h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p><p class="side">tested by me first</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next">
+    <h2 id="next">Want the next napkin?</h2>
+    <form class="form" data-signup novalidate>
+      <label for="email-2">Your email, please</label>
+      <div class="form__row">
+        <input class="wobble" id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn wobble" type="submit"><span class="btn__label">Count me in</span></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = DraftKit;
+  const hero = document.getElementById('hero'), sketch = document.getElementById('sketch');
+  K.ready(sketch.querySelector('img'));
+  K.reveals();
+  document.querySelectorAll('#doodles path').forEach((p) => p.style.setProperty('--len', Math.ceil(p.getTotalLength() + 2)));
+
+  // a faint highlighter glow trails the cursor (deliberately soft)
+  const glow = hero.querySelector('.glow');
+  K.pointer(hero, (x, y) => { glow.style.transform = `translate3d(${x}px, ${y}px, 0)`; }, 0.1);
+
+  // send-off: an arrow from the button to you, a ring around your face, then a sticky note
+  const ink = document.getElementById('ink'), sticky = document.getElementById('sticky');
+  function draw(path, dur, delay) {
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+    return path.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: dur, delay, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', fill: 'forwards' }).finished;
+  }
+  async function scribble(form, email) {
+    document.getElementById('sticky-to').textContent = email;
+    const sr = sketch.getBoundingClientRect(), br = form.querySelector('.btn').getBoundingClientRect();
+    const sx = 500 / sr.width, sy = 600 / sr.height;
+    const ax = (br.left + br.width / 2 - sr.left) * sx, ay = (br.top - sr.top) * sy;
+    const fx = 262, fy = 150; // face, in sketch units
+    const wide = innerWidth > 860;
+    const arrow = wide
+      ? `M${ax} ${ay} C${ax + 40} ${ay - 160} ${fx - 170} ${fy + 160} ${fx - 70} ${fy + 50} M${fx - 82} ${fy + 38} L${fx - 70} ${fy + 50} L${fx - 88} ${fy + 56}`
+      : `M${fx} ${fy + 380} C${fx + 80} ${fy + 320} ${fx + 60} ${fy + 200} ${fx + 70} ${fy + 90}`;
+    ink.innerHTML = `<path d="${arrow}"/><path class="ring" d="M${fx - 12} ${fy - 82} C${fx + 70} ${fy - 90} ${fx + 96} ${fy - 10} ${fx + 70} ${fy + 52} C${fx + 40} ${fy + 100} ${fx - 70} ${fy + 96} ${fx - 82} ${fy + 20} C${fx - 92} ${fy - 50} ${fx - 40} ${fy - 86} ${fx + 10} ${fy - 84}"/>`;
+    if (K.reduce) { sticky.classList.add('on'); return; }
+    const [a, r] = ink.querySelectorAll('path');
+    await draw(a, 650, 0);
+    await draw(r, 700, 0);
+    sticky.classList.add('on');
+  }
+  K.forms({ doneLabel: 'You’re in', message: (v) => `Subscribed. Issues go to ${v}.`, onSuccess: (form, v) => scribble(document.getElementById('subscribe'), v) });
+})();
+</script>
+</body>
+</html>

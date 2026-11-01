@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft T, Lattice | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Federo&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft T: Lattice. Vienna, 1905: white sheet pierced with perfect square holes, ruled in black lacquer, your portrait framed in silver. The cell under the cursor fills black; subscribing sends a wave through the lattice and leaves a chequered frame around you. */
+:root {
+  --white: #FFFFFF;
+  --black: #0A0A0A; --ink-rgb: 10 10 10;
+  --ink-2: #5A5A5A;      /* 6.9:1 */
+  --silver: #C9CDD3;     /* black sweater on silver 11.5:1 */
+  --cell: 22px;
+  --gutter: clamp(20px, 4vw, 64px);
+  --vienna: "Federo", "Futura", sans-serif;
+}
+html { scrollbar-color: #BDBDBD var(--white); }
+body { background: var(--white); color: var(--black); font-family: "Jost", system-ui, sans-serif; font-size: 18px; line-height: 28px; font-weight: 400; }
+::selection { background: var(--black); color: var(--white); }
+input { caret-color: var(--black); }
+:focus-visible { outline: 2px solid var(--black); outline-offset: 4px; }
+
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 22px var(--gutter); border-bottom: 1.5px solid var(--black); }
+.brand { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; font-family: var(--vienna); font-size: 22px; letter-spacing: 0.06em; }
+.top-cta { font-family: var(--vienna); font-size: 18px; letter-spacing: 0.06em; text-decoration: none; padding: 8px 16px 6px; border: 1.5px solid var(--black); transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { background: var(--black); color: var(--white); } }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 88px); align-items: center; padding: 40px var(--gutter) 64px; min-height: calc(100svh - 86px); }
+h1 { margin: 0; font-family: var(--vienna); font-weight: 400; font-size: clamp(60px, 7.2vw, 112px); line-height: 0.95; letter-spacing: 0.01em; text-wrap: balance; }
+.rule { display: flex; gap: 6px; margin: 28px 0 0; }
+.rule i { width: 14px; height: 14px; border: 1.5px solid var(--black); }
+.rule i:nth-child(3n) { background: var(--black); }
+.roles { margin: 24px 0 0; font-size: 22px; line-height: 32px; font-weight: 500; max-width: 30ch; text-wrap: balance; }
+.pitch { margin: 10px 0 0; color: var(--ink-2); max-width: 44ch; text-wrap: pretty; }
+.form { margin-top: 30px; max-width: 520px; }
+.form__row { display: flex; border: 1.5px solid var(--black); }
+.form input { flex: 1; min-width: 0; height: 56px; padding: 0 16px; border: 0; background: transparent; color: var(--black); font: inherit; font-size: 18px; outline: none; }
+.form input::placeholder { color: #6E6E6E; opacity: 1; }
+.form__row:focus-within { box-shadow: 0 0 0 1.5px var(--black); }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 0 22px; border: 0; border-left: 1.5px solid var(--black); background: var(--black); color: var(--white); font-family: var(--vienna); font-size: 18px; letter-spacing: 0.06em; cursor: pointer; transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.btn i { width: 10px; height: 10px; border: 1.5px solid currentColor; transition: background-color 150ms ease; }
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: var(--white); color: var(--black); } .btn:hover i { background: var(--black); } }
+.fine { margin: 10px 0 0; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+.msg { margin: 4px 0 0; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: #A3160E; }
+.is-invalid .form__row { border-color: #A3160E; }
+
+/* the lattice panel */
+.lattice { position: relative; margin: 0; justify-self: end; width: 100%; max-width: 640px; height: min(calc(100svh - 190px), 700px); }
+.lattice canvas { position: absolute; left: 0; top: 0; }
+.frame { position: absolute; z-index: 2; background: var(--silver); border: 2px solid var(--black); overflow: hidden; }
+.frame img { position: absolute; bottom: 0; left: 50%; height: 92%; width: auto; transform: translateX(-50%); }
+.caption { position: absolute; z-index: 3; left: 0; bottom: -34px; margin: 0; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+
+/* ---------- three patterns ---------- */
+.patterns { padding: 120px var(--gutter) 96px; border-top: 1.5px solid var(--black); }
+h2 { margin: 0; font-family: var(--vienna); font-weight: 400; font-size: 60px; line-height: 1; letter-spacing: 0.01em; text-wrap: balance; }
+.patterns > p { margin: 12px 0 0; color: var(--ink-2); max-width: 46ch; }
+.three { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1.5px solid var(--black); }
+.three li { padding: 32px 32px 24px 0; }
+.three li + li { padding-left: 32px; border-left: 1.5px solid var(--black); }
+.motif { display: grid; grid-template-columns: repeat(4, 18px); gap: 4px; margin-bottom: 22px; }
+.motif i { width: 18px; height: 18px; border: 1.5px solid var(--black); }
+.motif i.f { background: var(--black); }
+.three h3 { margin: 0; font-family: var(--vienna); font-weight: 400; font-size: 36px; line-height: 40px; letter-spacing: 0.02em; }
+.three p { margin: 8px 0 0; text-wrap: pretty; }
+.tagline { padding: 48px var(--gutter) 144px; }
+.tagline p { margin: 0; max-width: 20ch; font-family: var(--vienna); font-size: clamp(44px, 6vw, 88px); line-height: 1; text-wrap: balance; }
+.final { margin: 0 var(--gutter); padding: 72px clamp(24px, 5vw, 72px); background: var(--black); color: var(--white); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 48px; align-items: end; box-shadow: inset 0 0 0 10px var(--black), inset 0 0 0 11.5px var(--white); }
+.final .form__row { border-color: var(--white); }
+.final input { color: var(--white); }
+.final input::placeholder { color: #BDBDBD; }
+.final .btn { background: var(--white); color: var(--black); border-left-color: var(--white); }
+@media (hover: hover) and (pointer: fine) { .final .btn:hover { background: var(--black); color: var(--white); } }
+.final .fine { color: #BDBDBD; }
+.final .msg.is-error { color: #FF9A8A; }
+.final :focus-visible { outline-color: var(--white); }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 14px; line-height: 20px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load ---------- */
+.js .frame { opacity: 0; transform: scale(0.97); }
+.js .hero [data-in] { opacity: 0; transform: translateY(12px); }
+.js.is-loaded .frame { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out) 600ms, transform 900ms var(--ease-out) 600ms; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(200ms + var(--i, 0) * 80ms); }
+@media (prefers-reduced-motion: reduce) { .js .frame, .js .hero [data-in] { transform: none !important; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .lattice { order: -1; height: min(120vw, 520px); justify-self: stretch; max-width: none; margin-bottom: 36px; }
+  .three { grid-template-columns: minmax(0, 1fr); }
+  .three li, .three li + li { padding: 24px 0; border-left: 0; border-bottom: 1.5px solid var(--black); }
+  .final { grid-template-columns: minmax(0, 1fr); margin: 0 12px; }
+  h2 { font-size: 44px; }
+}
+@media (max-width: 520px) { .form__row { flex-direction: column; } .btn { border-left: 0; border-top: 1.5px solid var(--black); height: 52px; justify-content: center; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect x="0.75" y="0.75" width="30.5" height="30.5" fill="none" stroke="#0A0A0A" stroke-width="1.5"/><g fill="none" stroke="#0A0A0A" stroke-width="1.5"><rect x="5" y="5" width="6" height="6"/><rect x="13" y="5" width="6" height="6"/><rect x="21" y="5" width="6" height="6"/><rect x="5" y="13" width="6" height="6"/><rect x="21" y="13" width="6" height="6"/><rect x="5" y="21" width="6" height="6"/><rect x="13" y="21" width="6" height="6"/><rect x="21" y="21" width="6" height="6"/></g><rect x="13" y="13" width="6" height="6" fill="#0A0A0A"/></svg>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" id="hero" aria-labelledby="hello">
+    <div>
+      <h1 id="hello" data-in style="--i:0">Hello, I’m Mostafa.</h1>
+      <div class="rule" data-in style="--i:1" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:2">I write a newsletter about AI and cloud computing: what I think, where I stand, and the resources I’d actually hand a student. Made with care, like good craft.</p>
+      <form class="form" id="subscribe" data-signup data-hero data-in style="--i:3" novalidate>
+        <label class="sr-only" for="email-1">Email address</label>
+        <div class="form__row">
+          <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><i aria-hidden="true"></i><span class="btn__label">Subscribe</span></button>
+        </div>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <figure class="lattice" id="lattice">
+      <canvas id="cv" aria-hidden="true"></canvas>
+      <div class="frame" id="frame"><img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck, framed in silver"></div>
+      <p class="caption" id="caption">Move across the lattice.</p>
+    </figure>
+  </section>
+
+  <section class="patterns" aria-labelledby="patterns">
+    <h2 id="patterns" data-reveal>Three patterns in every issue</h2>
+    <p data-reveal style="--i:1">Written the way I explain things in class: clear structure, nothing ornamental.</p>
+    <ul class="three">
+      <li data-reveal><div class="motif" aria-hidden="true"><i class="f"></i><i></i><i></i><i></i></div><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></li>
+      <li data-reveal style="--i:1"><div class="motif" aria-hidden="true"><i class="f"></i><i></i><i class="f"></i><i></i></div><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></li>
+      <li data-reveal style="--i:2"><div class="motif" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i></i></div><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next">
+    <h2 id="next" data-reveal>Receive the next issue.</h2>
+    <form class="form" data-signup data-reveal style="--i:1" novalidate>
+      <label class="sr-only" for="email-2">Email address</label>
+      <div class="form__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><i aria-hidden="true"></i><span class="btn__label">Subscribe</span></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = DraftKit;
+  const box = document.getElementById('lattice'), cv = document.getElementById('cv'), ctx = cv.getContext('2d'), frame = document.getElementById('frame');
+  K.ready(frame.querySelector('img'));
+  K.reveals();
+
+  // grid geometry snapped to whole cells; the silver frame sits on cell lines
+  const C = 22;
+  let cols = 0, rows = 0, alpha = [], keep = [], fx0 = 0, fy0 = 0, fx1 = 0, fy1 = 0, raf = 0, last = 0, wave = null;
+  function layout() {
+    const r = box.getBoundingClientRect();
+    cols = Math.floor(r.width / C); rows = Math.floor(r.height / C);
+    const W = cols * C, H = rows * C, d = Math.min(2, devicePixelRatio || 1);
+    cv.width = W * d; cv.height = H * d; cv.style.width = `${W}px`; cv.style.height = `${H}px`;
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+    const m = Math.max(2, Math.round(Math.min(cols, rows) * 0.14));
+    fx0 = m; fy0 = m; fx1 = cols - m; fy1 = rows - m;
+    Object.assign(frame.style, { left: `${fx0 * C}px`, top: `${fy0 * C}px`, width: `${(fx1 - fx0) * C}px`, height: `${(fy1 - fy0) * C}px` });
+    alpha = new Float32Array(cols * rows); keep = keep.length === cols * rows ? keep : new Uint8Array(cols * rows);
+    draw();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.lineWidth = 1.5; ctx.strokeStyle = '#0A0A0A';
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      if (x >= fx0 && x < fx1 && y >= fy0 && y < fy1) continue;
+      const px = x * C + 4, py = y * C + 4, s = C - 8, i = y * cols + x;
+      ctx.strokeRect(px + 0.5, py + 0.5, s - 1, s - 1);
+      const a = Math.max(alpha[i], keep[i] ? 1 : 0);
+      if (a > 0.01) { ctx.fillStyle = `rgba(10,10,10,${a})`; ctx.fillRect(px, py, s, s); }
+    }
+  }
+  function tick(now) {
+    const dt = last ? Math.min(64, now - last) : 16; last = now;
+    let busy = false;
+    if (wave) {
+      const t = now - wave.t0;
+      for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+        const i = y * cols + x, start = Math.hypot(x - wave.x, y - wave.y) * 38;
+        if (t >= start && t < start + 140) alpha[i] = 1;
+        if (t >= start + 260 && wave.ring(x, y)) keep[i] = 1;
+      }
+      if (t > wave.end) wave = null; else busy = true;
+    }
+    for (let i = 0; i < alpha.length; i++) if (alpha[i] > 0) { alpha[i] = Math.max(0, alpha[i] - dt / 650); busy = true; }
+    draw();
+    raf = busy ? requestAnimationFrame(tick) : 0;
+    if (!raf) last = 0;
+  }
+  const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+  const img = frame.querySelector('img');
+  (img.complete ? Promise.resolve() : new Promise((r) => img.addEventListener('load', r, { once: true }))).then(layout);
+  let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(layout, 120); });
+
+  // the cell under the cursor fills in black lacquer, then fades
+  if (K.finePointer) box.addEventListener('pointermove', (e) => {
+    const r = cv.getBoundingClientRect(), x = Math.floor((e.clientX - r.left) / C), y = Math.floor((e.clientY - r.top) / C);
+    if (x < 0 || y < 0 || x >= cols || y >= rows) return;
+    alpha[y * cols + x] = 1; kick();
+  });
+
+  // send-off: a wave of filled cells spreads from the form side, leaving a chequered frame around the portrait
+  function ripple() {
+    const ring = (x, y) => {
+      const inBand = x >= fx0 - 1 && x <= fx1 && y >= fy0 - 1 && y <= fy1 && !(x >= fx0 && x < fx1 && y >= fy0 && y < fy1);
+      return inBand && (x + y) % 2 === 0;
+    };
+    document.getElementById('caption').textContent = 'Welcome. Your frame is set.';
+    if (K.reduce) { for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) if (ring(x, y)) keep[y * cols + x] = 1; draw(); return; }
+    wave = { x: 0, y: Math.floor(rows / 2), t0: performance.now(), ring, end: Math.hypot(cols, rows) * 38 + 700 };
+    kick();
+  }
+  K.forms({ doneLabel: 'Received', message: (v) => `Subscribed. Issues go to ${v}.`, onSuccess: () => ripple() });
+})();
+</script>
+</body>
+</html>

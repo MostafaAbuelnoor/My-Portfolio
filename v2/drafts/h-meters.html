@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft H, Meter bridge | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:wght@500..800&family=Sofia+Sans:wght@400..600&display=swap" rel="stylesheet">
+<style>
+/* Draft H: Meter bridge. A recording desk. You stand inside a giant VU meter; your four roles are four channels. Every needle answers the mouse, and subscribing slams them all into the red on one downbeat. */
+:root {
+  --walnut: #241913;
+  --walnut-2: #2E2119;
+  --rail: #4A3A2E;
+  --ivory: #F3E9D6;      /* 14.3:1 on walnut */
+  --muted: #BFAE98;      /* 8:1 on walnut */
+  --amber: #F4D27C;      /* lamp-lit meter face; black sweater on it 12.6:1 */
+  --ink: #15110D;
+  --red: #D3302A;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --gutter: clamp(20px, 4vw, 64px);
+  --cond: "Sofia Sans Condensed", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: #6B5444 var(--walnut); color-scheme: dark; }
+body { margin: 0; background: var(--walnut); color: var(--ivory); overflow-x: clip; font-family: "Sofia Sans", system-ui, sans-serif; font-size: 18px; line-height: 28px; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--amber); color: var(--ink); }
+input { caret-color: var(--amber); }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 24px var(--gutter); }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--cond); font-weight: 700; font-size: 18px; letter-spacing: 0.04em; text-transform: uppercase; }
+.top-cta { font-family: var(--cond); font-size: 16px; line-height: 20px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 8px 14px; border: 1.5px solid var(--rail); border-radius: 6px; transition: border-color 150ms ease, background-color 150ms ease, transform 160ms var(--ease-out); }
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { border-color: var(--amber); } }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 96px); align-items: center; padding: 8px var(--gutter) 32px; }
+.hero__text { max-width: 560px; }
+h1 { margin: 0; font-family: var(--cond); font-weight: 800; font-size: 96px; line-height: 0.88; letter-spacing: -0.015em; text-transform: uppercase; text-wrap: balance; }
+.pitch { margin: 24px 0 0; color: var(--muted); max-width: 42ch; text-wrap: pretty; }
+.pitch strong { color: var(--ivory); font-weight: 600; }
+
+/* master meter: you stand in front of the needle */
+.master { --h: min(calc(100svh - 380px), 600px); position: relative; height: var(--h); aspect-ratio: 4 / 5; border-radius: 22px; padding: 12px; background: var(--walnut-2); box-shadow: inset 0 0 0 1.5px var(--rail), 0 30px 60px -30px rgba(0,0,0,.6); }
+.face { position: relative; height: 100%; border-radius: 12px; background: var(--amber); overflow: hidden; }
+.face svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.face .needle-layer { z-index: 1; }
+.face img { position: absolute; z-index: 2; bottom: 0; left: 50%; height: 77%; width: auto; transform: translateX(-50%); }
+.face .caption { position: absolute; z-index: 3; left: 16px; bottom: 14px; padding: 4px 10px; border-radius: 4px; background: var(--ink); color: var(--amber); font-family: var(--cond); font-size: 14px; line-height: 18px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.glass { position: absolute; inset: 12px; z-index: 4; border-radius: 12px; pointer-events: none; background: linear-gradient(160deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 38%); }
+
+/* form */
+.form { margin-top: 32px; max-width: 520px; }
+.form__row { display: flex; gap: 8px; }
+.form input { flex: 1; min-width: 0; height: 54px; padding: 0 16px; border: 1.5px solid var(--rail); border-radius: 8px; background: #1B130E; color: var(--ivory); font: inherit; font-size: 18px; outline: none; transition: border-color 150ms ease; }
+.form input::placeholder { color: #A89880; opacity: 1; }
+.form input:hover { border-color: #6B5444; }
+.form input:focus { border-color: var(--amber); }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 0 20px; border: 0; border-radius: 8px; background: var(--amber); color: var(--ink); font-family: var(--cond); font-size: 18px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97) translateY(1px); }
+.btn i { width: 10px; height: 10px; border-radius: 50%; background: #7A2A1F; transition: background-color 150ms ease; }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #FADD92; } }
+.btn__label { transition: opacity 180ms ease, filter 180ms ease; }
+.is-busy .btn__label { opacity: 0.6; filter: blur(2px); }
+.is-done .btn i { background: var(--red); }
+.fine { margin: 10px 0 0; font-size: 14px; line-height: 20px; color: var(--muted); }
+.msg { margin: 4px 0 0; min-height: 20px; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: #FF9A8A; }
+.is-invalid input { border-color: #FF9A8A; }
+
+/* the bridge: four channels, one per role */
+.bridge { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; padding: 12px; border-radius: 16px; background: var(--walnut-2); box-shadow: inset 0 0 0 1.5px var(--rail); }
+.ch { position: relative; padding: 10px 10px 12px; border-radius: 8px; background: #1B130E; }
+.ch .mface { position: relative; border-radius: 6px; background: var(--amber); aspect-ratio: 200 / 84; overflow: hidden; }
+.ch svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ch .label { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; font-family: var(--cond); font-size: 15px; line-height: 18px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.ch .label span:first-child { color: var(--muted); font-weight: 600; }
+.led { width: 10px; height: 10px; border-radius: 50%; background: #4A2019; transition: background-color 80ms linear; flex: none; }
+.led.on { background: radial-gradient(circle at 40% 35%, #FFD3C8, #FF4A3A 55%, #B5231B); }
+
+/* ---------- sections ---------- */
+.bus { padding: 128px var(--gutter) 96px; }
+h2 { margin: 0; font-family: var(--cond); font-weight: 800; font-size: 72px; line-height: 0.9; text-transform: uppercase; text-wrap: balance; }
+.bus > p { margin: 16px 0 0; color: var(--muted); max-width: 46ch; }
+.rows { list-style: none; margin: 56px 0 0; padding: 0; }
+.row { display: grid; grid-template-columns: 24px minmax(0, 4fr) minmax(0, 7fr); gap: 24px; align-items: baseline; padding: 28px 0; border-top: 1.5px solid var(--rail); }
+.row:last-child { border-bottom: 1.5px solid var(--rail); }
+.row .led { align-self: center; }
+.row h3 { margin: 0; font-family: var(--cond); font-weight: 800; font-size: 44px; line-height: 1; text-transform: uppercase; }
+.row p { margin: 0; color: var(--muted); max-width: 48ch; text-wrap: pretty; }
+.row.is-in .led { background: radial-gradient(circle at 40% 35%, #FFF1C9, var(--amber) 55%, #B98E2C); transition: background-color 300ms ease; }
+
+.tagline { padding: 48px var(--gutter) 160px; }
+.tagline p { margin: 0; max-width: 18ch; font-family: var(--cond); font-weight: 800; font-size: 88px; line-height: 0.92; text-transform: uppercase; text-wrap: balance; }
+.w { color: rgba(243,233,214,.14); transition: color 300ms linear; }
+.w.is-on { color: var(--amber); }
+
+.final { margin: 0 var(--gutter); padding: 88px clamp(24px, 5vw, 72px); border-radius: 22px; background: var(--amber); color: var(--ink); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 48px; align-items: end; }
+.final input { background: #FFF4D6; color: var(--ink); border-color: rgba(21,17,13,.6); }
+.final input::placeholder { color: #6E5A2C; }
+.final input:focus { border-color: var(--ink); }
+.final .btn { background: var(--ink); color: var(--amber); }
+@media (hover: hover) and (pointer: fine) { .final .btn:hover { background: #33281F; } }
+.final .fine { color: #5A4A28; }
+.final :focus-visible { outline-color: var(--ink); }
+.final .msg.is-error { color: #8A1C0C; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 14px; line-height: 20px; color: var(--muted); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load + reveal: power on ---------- */
+.js .face { filter: brightness(0.35) saturate(0.6); }
+.js .ch .mface { filter: brightness(0.35) saturate(0.6); }
+.js .hero [data-in] { opacity: 0; transform: translateY(14px); }
+.js.is-loaded .face { filter: none; transition: filter 700ms var(--ease-out) 150ms; }
+.js.is-loaded .ch .mface { filter: none; transition: filter 500ms var(--ease-out); transition-delay: calc(500ms + var(--i, 0) * 110ms); }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(200ms + var(--i, 0) * 80ms); }
+.js [data-reveal] { opacity: 0; transform: translateY(16px); }
+.js [data-reveal].is-in { opacity: 1; transform: none; transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(var(--i, 0) * 80ms); }
+@media (prefers-reduced-motion: reduce) { .js .hero [data-in], .js [data-reveal] { transform: none !important; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1180px) { h1 { font-size: 80px; } }
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .master { order: -1; --h: min(110vw, 500px); justify-self: center; }
+  .bridge { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  h1 { font-size: 64px; }
+  .row { grid-template-columns: 24px 1fr; }
+  .row p { grid-column: 2; }
+  .final { grid-template-columns: 1fr; }
+  h2 { font-size: 52px; }
+  .tagline p { font-size: 52px; }
+}
+@media (max-width: 520px) { h1 { font-size: 56px; } .form__row { flex-direction: column; } .btn { justify-content: center; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#F4D27C"/><path d="M6 20 A13 13 0 0 1 28 20" fill="none" stroke="#15110D" stroke-width="1.6"/><path d="M23.5 13.6 A13 13 0 0 1 28 20" fill="none" stroke="#D3302A" stroke-width="2.4"/><line x1="17" y1="28" x2="23" y2="11" stroke="#15110D" stroke-width="1.8" stroke-linecap="round"/><circle cx="17" cy="28" r="2.4" fill="#15110D"/></svg>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hello">
+    <div class="hero__text">
+      <h1 id="hello" data-in style="--i:0">Hello, I’m Mostafa.</h1>
+      <p class="pitch" data-in style="--i:1"><strong>I write a newsletter about AI and cloud computing.</strong> My thoughts, my opinions, and the resources I’d actually hand a student. Move your mouse: the desk is listening.</p>
+      <form class="form" id="subscribe" data-in style="--i:2" novalidate>
+        <label class="sr-only" for="email-1">Email address</label>
+        <div class="form__row">
+          <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><i aria-hidden="true"></i><span class="btn__label">Subscribe</span></button>
+        </div>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <figure class="master" style="margin:0">
+      <div class="face">
+        <svg id="master-scale" viewBox="0 0 400 500" aria-hidden="true"></svg>
+        <svg class="needle-layer" viewBox="0 0 400 500" aria-hidden="true"><line id="master-needle" x1="200" y1="560" x2="200" y2="40" stroke="#15110D" stroke-width="3" stroke-linecap="round"/></svg>
+        <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+        <span class="caption" id="caption">Master · Mostafa Saher</span>
+      </div>
+      <div class="glass" aria-hidden="true"></div>
+    </figure>
+
+    <div class="bridge" aria-label="What I do">
+      <div class="ch" style="--i:0"><div class="mface"><svg viewBox="0 16 200 84" aria-hidden="true"></svg></div><div class="label"><span>Ch 1</span><span>Technical instructor</span><i class="led" aria-hidden="true"></i></div></div>
+      <div class="ch" style="--i:1"><div class="mface"><svg viewBox="0 16 200 84" aria-hidden="true"></svg></div><div class="label"><span>Ch 2</span><span>Computer engineer</span><i class="led" aria-hidden="true"></i></div></div>
+      <div class="ch" style="--i:2"><div class="mface"><svg viewBox="0 16 200 84" aria-hidden="true"></svg></div><div class="label"><span>Ch 3</span><span>AI enthusiast</span><i class="led" aria-hidden="true"></i></div></div>
+      <div class="ch" style="--i:3"><div class="mface"><svg viewBox="0 16 200 84" aria-hidden="true"></svg></div><div class="label"><span>Ch 4</span><span>Cloud specialist</span><i class="led" aria-hidden="true"></i></div></div>
+    </div>
+  </section>
+
+  <section class="bus" aria-labelledby="bus">
+    <h2 id="bus" data-reveal>On every issue</h2>
+    <p data-reveal style="--i:1">Three signals, mixed the way I explain things in class.</p>
+    <ul class="rows">
+      <li class="row" data-reveal><i class="led" aria-hidden="true"></i><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></li>
+      <li class="row" data-reveal style="--i:1"><i class="led" aria-hidden="true"></i><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></li>
+      <li class="row" data-reveal style="--i:2"><i class="led" aria-hidden="true"></i><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next">
+    <h2 id="next" data-reveal>Get the next issue.</h2>
+    <form class="form" data-reveal style="--i:1" novalidate>
+      <label class="sr-only" for="email-2">Email address</label>
+      <div class="form__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><i aria-hidden="true"></i><span class="btn__label">Subscribe</span></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const img = document.querySelector('.face img');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const go = () => requestAnimationFrame(() => root.classList.add('is-loaded'));
+  Promise.all([document.fonts ? document.fonts.ready : 0, img.decode ? img.decode().catch(() => 0) : 0]).then(go);
+  setTimeout(go, 1500);
+
+  // VU scale: positions along the arc as on a real meter (0 VU sits about 4/5 of the way)
+  const MARKS = [[-20, 0], [-10, 0.25], [-7, 0.37], [-5, 0.47], [-3, 0.6], [-2, 0.66], [-1, 0.72], [0, 0.79], [1, 0.86], [2, 0.93], [3, 1]];
+  const NS = 'http://www.w3.org/2000/svg';
+  function face(svg, cx, cy, r, span, size, lx = cx, ly = cy - r * 0.62) {
+    const a = (f) => (-span + 2 * span * f) * Math.PI / 180;
+    const pt = (f, rr) => [cx + rr * Math.sin(a(f)), cy - rr * Math.cos(a(f))];
+    const arc = (f0, f1, rr) => { const [x0, y0] = pt(f0, rr), [x1, y1] = pt(f1, rr); return `M${x0} ${y0} A${rr} ${rr} 0 0 1 ${x1} ${y1}`; };
+    let out = `<path d="${arc(0, 0.79, r)}" fill="none" stroke="#15110D" stroke-width="${size * 0.12}"/>`;
+    out += `<path d="${arc(0.79, 1, r)}" fill="none" stroke="#D3302A" stroke-width="${size * 0.5}"/>`;
+    for (let f = 0; f <= 1.001; f += 0.025) { const [x0, y0] = pt(f, r), [x1, y1] = pt(f, r - size * 0.6); out += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="${f > 0.79 ? '#D3302A' : '#15110D'}" stroke-width="${size * 0.08}"/>`; }
+    MARKS.forEach(([v, f]) => {
+      const [x0, y0] = pt(f, r), [x1, y1] = pt(f, r - size * 1.1), [tx, ty] = pt(f, r + size * 1.15);
+      out += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="${v > 0 ? '#D3302A' : '#15110D'}" stroke-width="${size * 0.16}"/>`;
+      out += `<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle" font-family="Sofia Sans Condensed" font-weight="700" font-size="${size * (Math.abs(v) >= 10 || v === 0 ? 1.15 : 1)}" fill="${v > 0 ? '#D3302A' : '#15110D'}">${v > 0 ? '+' + v : v}</text>`;
+    });
+    out += `<text x="${lx}" y="${ly}" text-anchor="middle" font-family="Sofia Sans Condensed" font-weight="800" font-size="${size * 1.9}" fill="#15110D">VU</text>`;
+    svg.innerHTML = out;
+  }
+  face(document.getElementById('master-scale'), 200, 560, 500, 22, 13, 340, 150);
+  const chSvgs = [...document.querySelectorAll('.ch svg')];
+  chSvgs.forEach((s) => { face(s, 100, 150, 118, 38, 8); s.insertAdjacentHTML('beforeend', '<line class="n" x1="100" y1="150" x2="100" y2="20" stroke="#15110D" stroke-width="2" stroke-linecap="round"/><circle cx="100" cy="150" r="40" fill="#1B130E"/>'); });
+
+  // ballistics: every needle is a damped spring chasing a level; the mouse is the signal
+  const meters = [
+    { el: document.getElementById('master-needle'), cx: 200, cy: 560, span: 22, g: 1, k: 0.010, c: 0.17 },
+    ...chSvgs.map((s, i) => ({ el: s.querySelector('.n'), cx: 100, cy: 150, span: 38, g: [0.9, 1.08, 1.2, 0.98][i], k: [0.014, 0.011, 0.016, 0.012][i], c: [0.2, 0.17, 0.22, 0.18][i], led: s.closest('.ch').querySelector('.led') })),
+  ].map((m) => ({ ...m, pos: 0, vel: 0 }));
+  let speed = 0, lastX = null, lastY = null, slamUntil = 0, raf = 0, t = 0, heroOn = true, last = 0;
+  new IntersectionObserver((es) => { heroOn = es[0].isIntersecting; if (heroOn) kick(); }).observe(document.querySelector('.hero'));
+  addEventListener('pointermove', (e) => {
+    if (lastX !== null) speed = Math.min(80, speed * 0.6 + Math.hypot(e.clientX - lastX, e.clientY - lastY) * 0.4);
+    lastX = e.clientX; lastY = e.clientY; kick();
+  });
+  function frame(now) {
+    const dt = last ? Math.min(4, (now - last) / 16.67) : 1; last = now; t += dt;
+    speed *= Math.pow(0.94, dt);
+    const slam = now < slamUntil;
+    let busy = slam || speed > 0.3;
+    meters.forEach((m, i) => {
+      const ambient = 0.12 + 0.05 * Math.sin(t * 0.031 + i * 1.7) + 0.03 * Math.sin(t * 0.087 + i);
+      const target = slam ? 1.04 : Math.min(1.02, ambient + (speed / 55) * m.g);
+      m.vel += (m.k * (target - m.pos) * 6 - m.c * m.vel) * dt;
+      m.pos += m.vel * dt;
+      const ang = -m.span + 2 * m.span * Math.max(-0.02, Math.min(1.06, m.pos));
+      m.el.setAttribute('transform', `rotate(${ang} ${m.cx} ${m.cy})`);
+      if (m.led) m.led.classList.toggle('on', m.pos > 0.79);
+      if (Math.abs(m.vel) > 0.0005) busy = true;
+    });
+    raf = (busy || (!reduce && heroOn)) ? requestAnimationFrame(frame) : 0;
+  }
+  const kick = () => { if (!raf) { last = 0; raf = requestAnimationFrame(frame); } };
+  if (!reduce) kick(); else frame(performance.now());
+
+  // send-off: on the downbeat every needle slams into the red together
+  function downbeat(email) {
+    document.getElementById('caption').textContent = `+3 VU · ${email}`;
+    slamUntil = performance.now() + 900; kick();
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+  document.querySelectorAll('[data-words]').forEach((p) => {
+    p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+    const wio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.target.classList.toggle('is-on', e.isIntersecting || e.boundingClientRect.top < 0));
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 1 });
+    p.querySelectorAll('.w').forEach((w) => wio.observe(w));
+  });
+
+  const ENDPOINT = null; // newsletter service endpoint goes here later
+  const valid = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  document.querySelectorAll('.form').forEach((form) => {
+    const input = form.querySelector('input'), msg = form.querySelector('.msg'), btn = form.querySelector('.btn'), lbl = form.querySelector('.btn__label');
+    input.addEventListener('input', () => { form.classList.remove('is-invalid'); msg.classList.remove('is-error'); msg.textContent = ''; input.removeAttribute('aria-invalid'); });
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (form.classList.contains('is-done')) return;
+      const v = input.value.trim();
+      if (!valid(v)) {
+        form.classList.add('is-invalid'); msg.classList.add('is-error'); input.setAttribute('aria-invalid', 'true');
+        msg.textContent = v ? 'That address is missing something. Check it and try again.' : 'Add your email address first.';
+        input.focus(); return;
+      }
+      form.classList.add('is-busy'); btn.disabled = true;
+      await new Promise((r) => setTimeout(r, 450));
+      form.classList.remove('is-busy'); form.classList.add('is-done'); lbl.textContent = 'On air';
+      msg.textContent = `Subscribed. Issues go to ${v}.`;
+      if (form.id === 'subscribe') downbeat(v);
+      else { scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); setTimeout(() => downbeat(v), 650); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

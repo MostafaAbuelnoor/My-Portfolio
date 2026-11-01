@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft M, Paper theatre | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Albert+Sans:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft M: Paper theatre. A toy theatre cut from kraft board: you stand in a paper arch with two paper clouds hanging above. Subscribing turns a crank; a crimson envelope rides the slot to the stage and opens beside you. */
+:root {
+  --kraft: #C8A27C;
+  --kraft-deep: #B48C64;
+  --paper: #FBFAF6;
+  --backdrop: #D3E6F3;   /* painted-sky backdrop; black sweater on it 15:1 */
+  --char: #2A2623; --ink-rgb: 42 38 35;  /* 6.4:1 on kraft, 14.4:1 on paper */
+  --ink-2: #5E544C;      /* 7:1 on paper */
+  --crimson: #B0101C;
+  --gutter: clamp(20px, 4vw, 64px);
+  --sx: 0; --sy: 6;
+  --slab: "Zilla Slab", Georgia, serif;
+}
+html { scrollbar-color: #9C7A57 var(--kraft); }
+body { background: var(--kraft); color: var(--char); font-family: "Albert Sans", system-ui, sans-serif; font-size: 18px; line-height: 28px; }
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.32; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .32 0 0 0 0 .2 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)'/%3E%3C/svg%3E"); }
+::selection { background: var(--crimson); color: var(--paper); }
+input { caret-color: var(--crimson); }
+:focus-visible { outline: 2px solid var(--char); outline-offset: 3px; }
+.cut { filter: drop-shadow(calc(var(--sx) * 1px) calc(var(--sy) * 1px) 6px rgba(42,38,35,.32)) drop-shadow(0 1px 0 rgba(42,38,35,.25)); }
+
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 22px var(--gutter); }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--slab); font-weight: 700; font-size: 20px; }
+.top-cta { font-family: var(--slab); font-weight: 600; font-size: 17px; text-decoration: none; padding: 8px 16px; background: var(--paper); border-radius: 2px; transition: transform 160ms var(--ease-out); }
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { transform: translateY(-1px); } }
+
+/* ---------- hero ---------- */
+.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 96px); align-items: center; padding: 0 var(--gutter) 72px; min-height: calc(100svh - 80px); }
+.hero__text { max-width: 560px; }
+h1 { margin: 0; font-family: var(--slab); font-weight: 700; font-size: 88px; line-height: 0.95; letter-spacing: -0.02em; text-wrap: balance; }
+.roles { margin: 20px 0 0; font-size: 22px; line-height: 30px; font-weight: 500; max-width: 28ch; text-wrap: balance; }
+.pitch { margin: 12px 0 0; max-width: 44ch; text-wrap: pretty; }
+
+/* the tag: a paper ticket for the form */
+.tag { position: relative; margin-top: 32px; max-width: 480px; padding: 22px 24px 18px 56px; background: var(--paper); border-radius: 4px; -webkit-mask: radial-gradient(circle 9px at 28px 30px, #0000 98%, #000); mask: radial-gradient(circle 9px at 28px 30px, #0000 98%, #000); }
+.tag-wrap { position: relative; }
+.tag label { display: block; font-family: var(--slab); font-weight: 600; font-size: 15px; line-height: 20px; color: var(--ink-2); }
+.tag__row { display: flex; gap: 10px; margin-top: 8px; }
+.tag input { flex: 1; min-width: 0; height: 48px; padding: 0 12px; border: 1.5px solid #D8D2C8; border-radius: 3px; background: #fff; color: var(--char); font: inherit; font-size: 17px; outline: none; transition: border-color 150ms ease; }
+.tag input::placeholder { color: #776B60; opacity: 1; }
+.tag input:focus { border-color: var(--char); }
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 18px; border: 0; border-radius: 3px; background: var(--crimson); color: var(--paper); font-family: var(--slab); font-size: 17px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #8E0C16; } }
+.fine { margin: 10px 0 0; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+.msg { margin: 4px 0 0; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: var(--crimson); }
+.is-invalid input { border-color: var(--crimson); }
+
+/* the slot the envelope rides, and the crank */
+.slot { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 36px; height: 6px; border-radius: 3px; background: #7E6247; box-shadow: inset 0 2px 2px rgba(0,0,0,.35); }
+.crank { position: absolute; left: calc(var(--gutter) - 8px); bottom: 18px; width: 42px; height: 42px; }
+.crank svg { width: 100%; height: 100%; transform-origin: 50% 50%; }
+.is-cranking .crank svg { animation: turn 1600ms var(--ease-in-out); }
+@keyframes turn { to { transform: rotate(720deg); } }
+.env { position: absolute; z-index: 6; left: 0; top: 0; width: 64px; height: 44px; pointer-events: none; opacity: 0; }
+.env svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.env .flap { transform-origin: 50% 0; transform-box: fill-box; transition: transform 380ms var(--ease-out); }
+.env.is-open .flap { transform: scaleY(-1); }
+.env .card { transform: translateY(8px); opacity: 0; transition: transform 500ms var(--ease-out) 200ms, opacity 200ms ease 200ms; }
+.env.is-open .card { transform: translateY(-26px); opacity: 1; }
+
+/* the stage */
+.stage { position: relative; margin: 0; height: min(calc(100svh - 170px), 700px); aspect-ratio: 4 / 5; overflow: hidden; }
+.stage__back { position: absolute; inset: 4% 6% 0; background: var(--backdrop); }
+.stage__back img { position: absolute; bottom: 0; left: 50%; height: 84%; width: auto; transform: translateX(-50%); }
+.stage__front { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; }
+.stage__front path { fill: var(--kraft); }
+.stage__front .lip { fill: none; stroke: var(--kraft-deep); stroke-width: 3; }
+.cloud { position: absolute; z-index: 2; top: 3%; width: 22%; transform-origin: 50% 0; animation: sway 6s ease-in-out infinite alternate; }
+.cloud--a { left: 18%; } .cloud--b { right: 16%; width: 18%; animation-duration: 7.5s; animation-delay: -2s; top: 6%; }
+.cloud svg { display: block; width: 100%; height: auto; overflow: visible; }
+@keyframes sway { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
+
+/* ---------- programme ---------- */
+.programme { padding: 112px var(--gutter) 96px; }
+.sheet { max-width: 980px; padding: clamp(28px, 5vw, 64px); background: var(--paper); }
+h2 { margin: 0; font-family: var(--slab); font-weight: 700; font-size: 56px; line-height: 1; letter-spacing: -0.02em; text-wrap: balance; }
+.sheet > p { margin: 12px 0 0; color: var(--ink-2); max-width: 46ch; }
+.acts { list-style: none; margin: 40px 0 0; padding: 0; }
+.acts li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 24px; padding: 24px 0; border-top: 1.5px solid var(--char); }
+.acts .act { font-family: var(--slab); font-weight: 600; font-size: 16px; line-height: 24px; color: var(--crimson); }
+.acts h3 { margin: 0; font-family: var(--slab); font-weight: 700; font-size: 32px; line-height: 36px; }
+.acts p { margin: 6px 0 0; max-width: 52ch; color: var(--ink-2); text-wrap: pretty; }
+.tagline { padding: 40px var(--gutter) 144px; }
+.tagline p { margin: 0; max-width: 19ch; font-family: var(--slab); font-weight: 700; font-size: 72px; line-height: 1; letter-spacing: -0.02em; text-wrap: balance; }
+.final { margin: 0 var(--gutter); padding: 72px clamp(24px, 5vw, 72px); background: var(--paper); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px); gap: 48px; align-items: end; }
+.final .tag { margin-top: 0; padding: 0; -webkit-mask: none; mask: none; background: transparent; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 14px; line-height: 20px; }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load: the set is assembled layer by layer ---------- */
+.js .stage__back { opacity: 0; transform: translateY(20px); }
+.js .stage__front { opacity: 0; transform: translateY(-14px); }
+.js .cloud { opacity: 0; }
+.js .hero [data-in] { opacity: 0; transform: translateY(14px); }
+.js.is-loaded .stage__back { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out) 100ms, transform 900ms var(--ease-out) 100ms; }
+.js.is-loaded .stage__front { opacity: 1; transform: none; transition: opacity 600ms var(--ease-out) 450ms, transform 900ms var(--ease-out) 450ms; }
+.js.is-loaded .cloud { opacity: 1; transition: opacity 800ms ease 900ms; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(250ms + var(--i, 0) * 80ms); }
+@media (prefers-reduced-motion: reduce) { .cloud { animation: none; } .js .stage__back, .js .stage__front, .js .hero [data-in] { transform: none !important; } .is-cranking .crank svg { animation: none; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) { h1 { font-size: 68px; } }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; min-height: 0; padding-bottom: 96px; }
+  .stage { order: -1; height: auto; width: min(100%, 440px); justify-self: center; }
+  h1 { font-size: 56px; }
+  .acts li { grid-template-columns: 1fr; gap: 4px; }
+  .final { grid-template-columns: 1fr; margin: 0 12px; }
+  h2 { font-size: 40px; } .tagline p { font-size: 44px; }
+}
+@media (max-width: 520px) { .tag__row { flex-direction: column; } .btn { justify-content: center; } .tag { padding-left: 24px; padding-top: 44px; -webkit-mask: radial-gradient(circle 9px at 50% 20px, #0000 98%, #000); mask: radial-gradient(circle 9px at 50% 20px, #0000 98%, #000); } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M0 0H36V36H0Z M8 33 V17 A10 10 0 0 1 28 17 V33 Z" fill="#2A2623" fill-rule="evenodd"/><circle cx="18" cy="21" r="3.6" fill="#2A2623"/><path d="M11 33c0-4.4 3.1-7.2 7-7.2s7 2.8 7 7.2z" fill="#2A2623"/></svg>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta cut" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" id="hero" aria-labelledby="hello">
+    <div class="hero__text">
+      <h1 id="hello" data-in style="--i:0">Hello, I’m Mostafa.</h1>
+      <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:2">I write a newsletter about AI and cloud computing: what I think, where I stand, and the resources I’d actually hand a student.</p>
+      <div class="tag-wrap cut" data-in style="--i:3">
+        <form class="tag" id="subscribe" data-signup data-hero novalidate>
+          <label for="email-1">Admit one, to</label>
+          <div class="tag__row">
+            <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+            <button class="btn" type="submit"><span class="btn__label">Send it</span></button>
+          </div>
+          <p class="fine">Free. Unsubscribe in one click.</p>
+          <p class="msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+
+    <figure class="stage" id="stage">
+      <div class="stage__back cut"><img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck, framed by a paper arch"></div>
+      <div class="cloud cloud--a cut" aria-hidden="true"><svg viewBox="0 0 120 90"><line x1="60" y1="-200" x2="60" y2="30" stroke="#2A2623" stroke-width="1"/><path d="M22 78 a20 20 0 0 1 4-39 a26 26 0 0 1 48-10 a20 20 0 0 1 28 18 a16 16 0 0 1-4 31 Z" fill="#FBFAF6"/></svg></div>
+      <div class="cloud cloud--b cut" aria-hidden="true"><svg viewBox="0 0 120 90"><line x1="60" y1="-200" x2="60" y2="30" stroke="#2A2623" stroke-width="1"/><path d="M22 78 a20 20 0 0 1 4-39 a26 26 0 0 1 48-10 a20 20 0 0 1 28 18 a16 16 0 0 1-4 31 Z" fill="#FBFAF6"/></svg></div>
+      <svg class="stage__front cut" viewBox="0 0 400 500" preserveAspectRatio="none" aria-hidden="true"><path fill-rule="evenodd" d="M0 0H400V500H0Z M44 470 V198 A156 156 0 0 1 356 198 V470 Z"/><path class="lip" d="M44 470 V198 A156 156 0 0 1 356 198 V470"/></svg>
+    </figure>
+
+    <div class="slot" aria-hidden="true"></div>
+    <div class="crank" aria-hidden="true"><svg viewBox="0 0 42 42"><circle cx="21" cy="21" r="16" fill="#FBFAF6" stroke="#2A2623" stroke-width="1.5"/><circle cx="21" cy="21" r="3" fill="#2A2623"/><line x1="21" y1="21" x2="21" y2="5" stroke="#2A2623" stroke-width="2.5" stroke-linecap="round"/><circle cx="21" cy="6" r="3.2" fill="#B0101C"/></svg></div>
+    <div class="env cut" id="env" aria-hidden="true"><svg viewBox="0 0 64 44"><g class="card"><rect x="8" y="2" width="48" height="34" fill="#FBFAF6" stroke="#2A2623" stroke-width="1"/><text x="32" y="16" text-anchor="middle" font-family="Zilla Slab" font-weight="700" font-size="7" fill="#2A2623">ISSUE 01</text><text x="32" y="26" text-anchor="middle" font-family="Zilla Slab" font-size="6" fill="#B0101C">for you</text></g><rect x="0" y="6" width="64" height="38" fill="#B0101C"/><path d="M0 44 L32 24 L64 44" fill="none" stroke="#8E0C16" stroke-width="1.2"/><path class="flap" d="M0 6 L32 28 L64 6 Z" fill="#C8202C"/></svg></div>
+  </section>
+
+  <section class="programme" aria-labelledby="prog">
+    <div class="sheet cut" data-reveal>
+      <h2 id="prog">Tonight’s programme, every issue</h2>
+      <p>Three acts, written the way I explain things in class.</p>
+      <ol class="acts">
+        <li><span class="act">Act one</span><div><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></div></li>
+        <li><span class="act">Act two</span><div><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></div></li>
+        <li><span class="act">Act three</span><div><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final cut" aria-labelledby="next">
+    <h2 id="next" data-reveal>Save a seat for the next issue.</h2>
+    <form class="tag" data-signup data-reveal style="--i:1" novalidate>
+      <label for="email-2">Admit one, to</label>
+      <div class="tag__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Send it</span></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = DraftKit;
+  const hero = document.getElementById('hero'), stage = document.getElementById('stage');
+  K.ready(stage.querySelector('img'));
+  K.reveals();
+
+  // the light source follows the cursor a little, so every paper layer's shadow leans away from it
+  const rootStyle = document.documentElement.style;
+  K.pointer(document.body, (x, y, inside) => {
+    const nx = inside ? (x / innerWidth - 0.5) : 0, ny = inside ? ((y - scrollY) / innerHeight - 0.3) : 0;
+    rootStyle.setProperty('--sx', (-nx * 7).toFixed(2)); rootStyle.setProperty('--sy', (6 - ny * 4).toFixed(2));
+  }, 0.08);
+
+  // send-off: crank turns, the envelope rides the slot to the stage, rises into the arch and opens
+  const env = document.getElementById('env');
+  async function perform(form) {
+    if (K.reduce) { env.style.opacity = 1; env.classList.add('is-open'); return; }
+    const hr = hero.getBoundingClientRect(), tr = form.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+    const slotY = hr.height - 36 - 40;
+    const x0 = tr.left - hr.left + 20, x1 = sr.left - hr.left + sr.width * 0.24, yUp = sr.top - hr.top + sr.height * 0.66;
+    hero.classList.add('is-cranking');
+    env.style.opacity = 1;
+    const a = env.animate([
+      { transform: `translate(${x0}px, ${slotY}px)`, offset: 0 },
+      { transform: `translate(${x1}px, ${slotY}px)`, offset: 0.6, easing: 'cubic-bezier(0.77, 0, 0.175, 1)' },
+      { transform: `translate(${x1}px, ${yUp}px) scale(2.1)`, offset: 1 },
+    ], { duration: 1900, easing: 'cubic-bezier(0.77, 0, 0.175, 1)', fill: 'forwards' });
+    await a.finished;
+    env.classList.add('is-open');
+    setTimeout(() => hero.classList.remove('is-cranking'), 200);
+  }
+  K.forms({ doneLabel: 'Sent', message: (v) => `You’re in. Issues go to ${v}.`, onSuccess: (form) => perform(document.getElementById('subscribe')) });
+})();
+</script>
+</body>
+</html>

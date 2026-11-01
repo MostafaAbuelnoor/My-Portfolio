@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft G, Fold | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Draft G: Fold. One sheet of vermilion paper. The page carries the crease pattern of a crane; subscribing folds your square into a crane and sends it off. */
+:root {
+  --shu: #E8573A;        /* vermilion washi; black sweater on it 5.1:1 */
+  --shu-deep: #C9422A;
+  --sumi: #16120F;       /* 5.2:1 on vermilion, 17:1 on paper */
+  --sumi-2: #3D1006;     /* 4.6:1 on vermilion */
+  --sheet: #FBF3EE;      /* the folding square */
+  --ink-2: #5A4A42;      /* 7.7:1 on sheet */
+  --gold: #E8B04A;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --gutter: clamp(20px, 4vw, 64px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: #B83A22 var(--sheet); }
+body { margin: 0; background: var(--sheet); color: var(--sumi); overflow-x: clip; font-family: "Alegreya Sans", system-ui, sans-serif; font-size: 19px; line-height: 28px; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--sumi); color: var(--sheet); }
+input { caret-color: var(--shu-deep); }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--sumi); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.ar { font-family: "Reem Kufi", "Alegreya Sans", sans-serif; }
+
+/* ---------- the sheet ---------- */
+.hero { position: relative; min-height: 100svh; background: var(--shu); overflow: hidden; isolation: isolate; display: grid; grid-template-columns: 184px minmax(0, 1fr) minmax(0, 0.9fr); }
+/* kozo fibres in the paper */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -2; opacity: 0.22; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .12 0 0 0 0 .05 0 0 0 1.4 -.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+.creases { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+.creases line, .creases rect { stroke: rgba(251,243,238,.32); stroke-width: 1; fill: none; vector-effect: non-scaling-stroke; }
+.creases .v { stroke-dasharray: 7 6; }
+.creases-lit { -webkit-mask: radial-gradient(200px circle at var(--mx, -999px) var(--my, -999px), #000, transparent 75%); mask: radial-gradient(200px circle at var(--mx, -999px) var(--my, -999px), #000, transparent 75%); }
+.creases-lit line, .creases-lit rect { stroke: rgba(255,250,245,.55); stroke-width: 1.2; }
+/* raking light across the paper, under the cursor */
+.light { position: absolute; z-index: -1; left: 0; top: 0; width: 760px; height: 760px; margin: -380px 0 0 -380px; pointer-events: none; background: radial-gradient(closest-side, rgba(255,236,224,.18), rgba(255,236,224,0)); opacity: 0; transition: opacity 500ms ease; }
+.hero.is-hover .light, .hero.is-hover .creases-lit { opacity: 1; }
+.creases-lit { opacity: 0; transition: opacity 400ms ease; }
+
+/* step column: fold steps are the navigation */
+.steps { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: space-between; padding: 28px 0 28px var(--gutter); }
+.brand { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 10px; text-decoration: none; }
+.seal { display: grid; place-items: center; width: 44px; height: 44px; background: var(--sumi); color: var(--shu); font-size: 15px; line-height: 1; border-radius: 3px; }
+.steps ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.steps a { display: grid; grid-template-columns: 22px auto; align-items: center; gap: 8px; text-decoration: none; font-size: 14px; line-height: 18px; font-weight: 500; color: var(--sumi-2); transition: color 150ms ease; }
+.steps a .ar { font-size: 15px; }
+.steps a i { grid-column: 1; grid-row: 1; justify-self: center; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); opacity: 0; transform: scale(0.6); transition: opacity 200ms ease, transform 300ms var(--ease-out); }
+.steps a[aria-current="true"] { color: var(--sumi); }
+.steps a[aria-current="true"] i { opacity: 1; transform: none; }
+.steps a[aria-current="true"] .ar { opacity: 0; }
+.steps .ar { grid-column: 1; grid-row: 1; justify-self: center; transition: opacity 150ms ease; }
+@media (hover: hover) and (pointer: fine) { .steps a:hover { color: var(--sumi); } }
+
+.hero__text { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: center; padding: 96px clamp(16px, 3vw, 48px) 72px 0; }
+.hero__inner { max-width: 560px; }
+.top-cta { position: absolute; z-index: 3; top: 28px; right: var(--gutter); font-size: 15px; line-height: 20px; font-weight: 700; text-decoration: none; padding: 8px 16px; background: var(--sumi); color: var(--sheet); border-radius: 3px; transition: transform 160ms var(--ease-out), background-color 150ms ease; }
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { background: #33291F; } }
+h1 { margin: 0; font-weight: 700; font-size: 92px; line-height: 0.92; letter-spacing: -0.035em; text-wrap: balance; }
+.roles { margin: 24px 0 0; font-size: 24px; line-height: 32px; font-weight: 500; max-width: 26ch; text-wrap: balance; }
+
+/* the square: the form is a sheet of paper you are about to fold */
+.square {
+  position: relative; margin-top: 28px; width: min(100%, 400px); aspect-ratio: 1 / 1; padding: 26px; background: var(--sheet); color: var(--sumi);
+  display: flex; flex-direction: column; justify-content: space-between;
+  box-shadow: 0 1px 1px rgba(60,10,0,.18), 0 22px 40px -18px rgba(60,10,0,.55);
+  background-image: linear-gradient(45deg, transparent calc(50% - .5px), rgba(232,87,58,.22) 50%, transparent calc(50% + .5px)), linear-gradient(-45deg, transparent calc(50% - .5px), rgba(232,87,58,.14) 50%, transparent calc(50% + .5px));
+  transition: opacity 200ms ease;
+}
+.square p.lede { margin: 0; font-size: 20px; line-height: 28px; text-wrap: pretty; }
+.square p.lede strong { font-weight: 700; }
+.field label { display: block; margin-bottom: 8px; font-size: 14px; line-height: 18px; font-weight: 700; color: var(--ink-2); }
+.field input { width: 100%; height: 52px; padding: 0 14px; border: 0; border-bottom: 1.5px solid var(--sumi); background: rgba(232,87,58,.06); color: var(--sumi); font: inherit; font-size: 19px; outline: none; transition: background-color 150ms ease; }
+.field input::placeholder { color: #7A675E; opacity: 1; }
+.field input:focus { background: rgba(232,87,58,.12); }
+.btn { margin-top: 12px; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; border: 0; border-radius: 3px; background: var(--sumi); color: var(--sheet); font: inherit; font-size: 17px; font-weight: 700; cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+.btn svg { transition: transform 300ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #33291F; } .btn:hover svg { transform: rotate(-12deg) translateY(-2px); } }
+.btn__label { transition: opacity 180ms ease, filter 180ms ease; }
+.is-busy .btn__label { opacity: 0.6; filter: blur(2px); }
+.fine { margin: 8px 0 0; font-size: 14px; line-height: 18px; color: var(--ink-2); }
+.msg { margin: 4px 0 0; min-height: 18px; font-size: 14px; line-height: 18px; font-weight: 700; }
+.msg.is-error { color: #A0261A; }
+.is-invalid .field input { border-color: #A0261A; }
+.square.is-folding { opacity: 0 !important; transition: none !important; }
+.square .done { position: absolute; inset: 0; padding: 28px; display: flex; flex-direction: column; justify-content: center; gap: 12px; opacity: 0; pointer-events: none; }
+.square .done b { font-size: 34px; line-height: 36px; letter-spacing: -0.02em; }
+.square .done span { color: var(--ink-2); }
+.square .done i { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); }
+.square.is-folded .done { opacity: 1; transition: opacity 500ms ease 150ms; }
+.square.is-folded > :not(.done) { visibility: hidden; }
+.crane { position: fixed; z-index: 60; left: 0; top: 0; width: 100px; height: 100px; pointer-events: none; overflow: visible; }
+.crane polygon { fill: var(--sheet); stroke: rgba(22,18,15,.35); stroke-width: 0.6; stroke-linejoin: round; }
+.crane line { stroke: rgba(232,87,58,.45); stroke-width: 0.6; }
+
+.portrait { position: relative; margin: 0; z-index: 1; }
+.portrait img { position: absolute; bottom: 0; right: clamp(0px, 3vw, 48px); height: min(90%, 860px); width: auto; }
+
+/* ---------- inside: three fold diagrams ---------- */
+.inside { padding: 128px var(--gutter) 96px; }
+h2 { margin: 0; font-weight: 700; font-size: 56px; line-height: 1; letter-spacing: -0.035em; text-wrap: balance; }
+.inside > p { margin: 16px 0 0; color: var(--ink-2); max-width: 46ch; }
+.diagrams { list-style: none; margin: 64px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; }
+.diagrams svg { display: block; width: 100%; max-width: 220px; height: auto; aspect-ratio: 1; margin-bottom: 24px; }
+.diagrams svg rect, .diagrams svg polygon { fill: var(--shu); }
+.diagrams svg line { stroke: var(--sheet); stroke-width: 1.2; }
+.diagrams svg .v { stroke-dasharray: 4 3; }
+.diagrams .num { display: flex; align-items: baseline; gap: 10px; font-size: 14px; line-height: 18px; font-weight: 700; color: var(--ink-2); }
+.diagrams .num .ar { font-size: 16px; }
+.diagrams h3 { margin: 6px 0 0; font-size: 32px; line-height: 36px; letter-spacing: -0.02em; }
+.diagrams p { margin: 8px 0 0; max-width: 34ch; text-wrap: pretty; }
+
+.tagline { padding: 32px var(--gutter) 160px; }
+.tagline p { margin: 0; max-width: 19ch; font-weight: 700; font-size: 64px; line-height: 1; letter-spacing: -0.04em; text-wrap: balance; }
+.w { color: rgba(22,18,15,.16); transition: color 500ms var(--ease-out); }
+.w.is-on { color: var(--sumi); }
+.final { position: relative; background: var(--shu); padding: 112px var(--gutter); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: center; overflow: hidden; }
+.final h2 { max-width: 12ch; font-size: 72px; }
+.final .square { margin-top: 0; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 28px var(--gutter); font-size: 15px; line-height: 20px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load + reveal: the sheet unfolds ---------- */
+.js .portrait img { opacity: 0; transform: translateY(30px); }
+.js .hero [data-in] { opacity: 0; transform: translateY(14px); }
+.js .square[data-in] { transform: perspective(900px) rotateX(-70deg); transform-origin: 50% 0; }
+.js.is-loaded .portrait img { opacity: 1; transform: none; transition: opacity 800ms var(--ease-out) 200ms, transform 1100ms var(--ease-out) 200ms; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(250ms + var(--i, 0) * 90ms); }
+.js [data-reveal] { opacity: 0; transform: translateY(16px); }
+.js [data-reveal].is-in { opacity: 1; transform: none; transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(var(--i, 0) * 90ms); }
+@media (prefers-reduced-motion: reduce) {
+  .js .portrait img, .js .hero [data-in], .js [data-reveal], .js .square[data-in] { transform: none !important; }
+  .light, .creases-lit { display: none; }
+}
+@media (hover: none), (pointer: coarse) { .light, .creases-lit { display: none; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1180px) { h1 { font-size: 72px; } }
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .steps { flex-direction: row; align-items: center; padding: 20px var(--gutter); }
+  .steps ol { display: none; }
+  .brand { flex-direction: row; align-items: center; }
+  .portrait { order: 1; height: min(100vw, 460px); }
+  .portrait img { right: 50%; transform: translateX(50%); }
+  .js .portrait img { transform: translate(50%, 30px); }
+  .js.is-loaded .portrait img { transform: translateX(50%); }
+  .hero__text { order: 2; padding: 24px var(--gutter) 64px; }
+  .top-cta { top: 22px; }
+  h1 { font-size: 56px; }
+  .roles { font-size: 20px; line-height: 28px; }
+  .diagrams { grid-template-columns: 1fr; }
+  .final { grid-template-columns: 1fr; }
+  .final h2 { font-size: 48px; }
+  .tagline p { font-size: 40px; }
+  h2 { font-size: 40px; }
+}
+@media (max-width: 520px) { .square { aspect-ratio: auto; gap: 24px; padding: 22px; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<main>
+  <section class="hero" id="hero" aria-labelledby="hello">
+    <svg class="creases" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+      <rect x="0" y="0" width="1000" height="1000"/>
+      <line x1="0" y1="0" x2="1000" y2="1000"/><line x1="1000" y1="0" x2="0" y2="1000"/>
+      <line class="v" x1="500" y1="0" x2="500" y2="1000"/><line class="v" x1="0" y1="500" x2="1000" y2="500"/>
+      <line x1="500" y1="0" x2="293" y2="500"/><line x1="500" y1="0" x2="707" y2="500"/><line x1="500" y1="1000" x2="293" y2="500"/><line x1="500" y1="1000" x2="707" y2="500"/>
+      <line class="v" x1="293" y1="500" x2="0" y2="207"/><line class="v" x1="707" y1="500" x2="1000" y2="207"/><line class="v" x1="293" y1="500" x2="0" y2="793"/><line class="v" x1="707" y1="500" x2="1000" y2="793"/>
+    </svg>
+    <svg class="creases creases-lit" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+      <rect x="0" y="0" width="1000" height="1000"/>
+      <line x1="0" y1="0" x2="1000" y2="1000"/><line x1="1000" y1="0" x2="0" y2="1000"/>
+      <line class="v" x1="500" y1="0" x2="500" y2="1000"/><line class="v" x1="0" y1="500" x2="1000" y2="500"/>
+      <line x1="500" y1="0" x2="293" y2="500"/><line x1="500" y1="0" x2="707" y2="500"/><line x1="500" y1="1000" x2="293" y2="500"/><line x1="500" y1="1000" x2="707" y2="500"/>
+      <line class="v" x1="293" y1="500" x2="0" y2="207"/><line class="v" x1="707" y1="500" x2="1000" y2="207"/><line class="v" x1="293" y1="500" x2="0" y2="793"/><line class="v" x1="707" y1="500" x2="1000" y2="793"/>
+    </svg>
+    <div class="light" aria-hidden="true"></div>
+
+    <nav class="steps" aria-label="Steps">
+      <a class="brand" href="#" aria-label="Mostafa Saher, home"><span class="seal ar" aria-hidden="true">مصطفى</span></a>
+      <ol>
+        <li><a href="#hero" aria-current="true"><i aria-hidden="true"></i><span class="ar" aria-hidden="true">١</span>Hello</a></li>
+        <li><a href="#inside"><i aria-hidden="true"></i><span class="ar" aria-hidden="true">٢</span>Inside</a></li>
+        <li><a href="#fold"><i aria-hidden="true"></i><span class="ar" aria-hidden="true">٣</span>Fold yours</a></li>
+      </ol>
+      <span aria-hidden="true"></span>
+    </nav>
+
+    <div class="hero__text">
+      <div class="hero__inner">
+        <h1 id="hello" data-in style="--i:0">Hello, I’m Mostafa.</h1>
+        <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+        <form class="square" id="subscribe" data-in style="--i:2" novalidate>
+          <p class="lede"><strong>A newsletter about AI and cloud computing.</strong> My thoughts, my opinions, and the resources I’d actually hand a student.</p>
+          <div>
+            <div class="field"><label for="email-1">Where should it land?</label><input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required></div>
+            <button class="btn" type="submit"><span class="btn__label">Fold and send</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M2 12 L22 3 L15 21 L11 13 Z M11 13 L22 3"/></svg></button>
+            <p class="fine">Free. Unsubscribe in one click.</p>
+            <p class="msg" role="status" aria-live="polite"></p>
+          </div>
+          <div class="done" aria-hidden="true"><i></i><b>Folded and sent.</b><span class="done-to"></span></div>
+        </form>
+      </div>
+    </div>
+    <a class="top-cta" href="#fold">Subscribe</a>
+    <figure class="portrait"><img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck"></figure>
+  </section>
+
+  <section class="inside" id="inside" aria-labelledby="inside-h">
+    <h2 id="inside-h" data-reveal>Three folds in every issue.</h2>
+    <p data-reveal style="--i:1">Written the way I explain things in class: one clear step at a time.</p>
+    <ol class="diagrams">
+      <li data-reveal>
+        <svg viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="10" width="80" height="80"/><line x1="10" y1="10" x2="90" y2="90"/><line class="v" x1="90" y1="10" x2="10" y2="90"/></svg>
+        <div class="num"><span class="ar">١</span>Step one</div><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p>
+      </li>
+      <li data-reveal style="--i:1">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,8 78,50 50,92 22,50"/><line x1="50" y1="8" x2="50" y2="92"/><line class="v" x1="22" y1="50" x2="78" y2="50"/><line x1="50" y1="8" x2="36" y2="50"/><line x1="50" y1="8" x2="64" y2="50"/></svg>
+        <div class="num"><span class="ar">٢</span>Step two</div><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p>
+      </li>
+      <li data-reveal style="--i:2">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="6,30 32,60 44,10 56,56 84,12 96,42 68,72 40,74"/><line x1="32" y1="60" x2="56" y2="56"/><line class="v" x1="56" y1="56" x2="68" y2="72"/></svg>
+        <div class="num"><span class="ar">٣</span>Step three</div><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This newsletter is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" id="fold" aria-labelledby="fold-h">
+    <h2 id="fold-h" data-reveal>Fold one for yourself.</h2>
+    <form class="square" data-reveal style="--i:1" novalidate>
+      <p class="lede"><strong>The next issue, folded and sent.</strong> Thoughts, opinions and resources on AI and cloud.</p>
+      <div>
+        <div class="field"><label for="email-2">Where should it land?</label><input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required></div>
+        <button class="btn" type="submit"><span class="btn__label">Fold and send</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M2 12 L22 3 L15 21 L11 13 Z M11 13 L22 3"/></svg></button>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </div>
+      <div class="done" aria-hidden="true"><i></i><b>Folded and sent.</b><span class="done-to"></span></div>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const hero = document.getElementById('hero');
+  const img = hero.querySelector('.portrait img');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const go = () => requestAnimationFrame(() => root.classList.add('is-loaded'));
+  Promise.all([document.fonts ? document.fonts.ready : 0, img.decode ? img.decode().catch(() => 0) : 0]).then(go);
+  setTimeout(go, 1500);
+
+  // raking light: creases near the cursor catch it, and the paper warms under it
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce;
+  if (fine) {
+    const light = hero.querySelector('.light'), lit = hero.querySelector('.creases-lit');
+    let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+    const tick = () => {
+      x += (tx - x) * 0.1; y += (ty - y) * 0.1;
+      light.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      lit.style.setProperty('--mx', `${x}px`); lit.style.setProperty('--my', `${y}px`);
+      raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.4 ? requestAnimationFrame(tick) : 0;
+    };
+    hero.addEventListener('pointermove', (e) => { const r = hero.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; hero.classList.add('is-hover'); if (!raf) raf = requestAnimationFrame(tick); });
+    hero.addEventListener('pointerleave', () => hero.classList.remove('is-hover'));
+  }
+
+  // step column follows the section in view
+  const stepLinks = [...document.querySelectorAll('.steps ol a')];
+  const sio = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    stepLinks.forEach((a) => a.setAttribute('aria-current', a.getAttribute('href') === `#${e.target.id}` ? 'true' : 'false'));
+  }), { rootMargin: '-45% 0px -45% 0px' });
+  ['hero', 'inside', 'fold'].forEach((id) => sio.observe(document.getElementById(id)));
+
+  // send-off: the square folds (square, diamond, base, kite, crane) and flies off with two wingbeats
+  const K = [
+    [[10,10],[50,10],[90,10],[90,50],[90,90],[50,90],[10,90],[10,50]],
+    [[50,4],[73,27],[96,50],[73,73],[50,96],[27,73],[4,50],[27,27]],
+    [[50,10],[60,35],[66,58],[58,78],[50,94],[42,78],[34,58],[40,35]],
+    [[50,6],[58,40],[62,60],[55,80],[50,96],[45,80],[38,60],[42,40]],
+    [[6,30],[32,60],[44,8],[56,54],[84,10],[96,40],[68,70],[40,72]],
+  ];
+  const DOWN = [[6,30],[32,60],[40,46],[56,54],[80,48],[96,40],[68,70],[40,72]];
+  const ease = (t) => 1 - Math.pow(1 - t, 3), inOut = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const lerp = (a, b, t) => a.map((p, i) => [p[0] + (b[i][0] - p[0]) * t, p[1] + (b[i][1] - p[1]) * t]);
+  const pts = (P) => P.map((p) => p.join(',')).join(' ');
+  function fold(square) {
+    const r = square.getBoundingClientRect();
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'crane'); svg.setAttribute('viewBox', '0 0 100 100'); svg.setAttribute('aria-hidden', 'true');
+    svg.innerHTML = '<polygon/><line x1="32" y1="60" x2="56" y2="54"/>';
+    document.body.appendChild(svg);
+    const poly = svg.querySelector('polygon'), crease = svg.querySelector('line');
+    const size = r.width / 0.8;
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    square.classList.add('is-folding');
+    const t0 = performance.now(), FOLD = 1500, FLY = 1300;
+    const step = (now) => {
+      const t = Math.max(0, now - t0); // a frame can be stamped slightly before t0
+      let P, s, x = cx, y = cy, rot = 0;
+      if (t < FOLD) {
+        const k = (t / FOLD) * (K.length - 1), i = Math.min(K.length - 2, Math.floor(k));
+        P = lerp(K[i], K[i + 1], inOut(k - i));
+        s = size * (1 - 0.55 * ease(t / FOLD));
+        crease.style.opacity = t > FOLD * 0.8 ? 1 : 0;
+      } else {
+        const p = Math.min(1, (t - FOLD) / FLY);
+        const beat = Math.sin(p * Math.PI * 4);
+        P = lerp(K[4], DOWN, Math.max(0, beat) * 0.9);
+        s = size * 0.45 * (1 - 0.6 * p);
+        x = cx + ease(p) * (innerWidth - cx + 120); y = cy - ease(p) * (cy + 160) + Math.sin(p * Math.PI) * 30; rot = -14 * p;
+        svg.style.opacity = 1 - Math.max(0, (p - 0.8) / 0.2);
+      }
+      poly.setAttribute('points', pts(P));
+      svg.style.width = svg.style.height = `${s}px`;
+      svg.style.transform = `translate(${x - s / 2}px, ${y - s / 2}px) rotate(${rot}deg)`;
+      if (t < FOLD + FLY) requestAnimationFrame(step); else { svg.remove(); square.classList.remove('is-folding'); square.classList.add('is-folded'); }
+    };
+    requestAnimationFrame(step);
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+  document.querySelectorAll('[data-words]').forEach((p) => {
+    p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+    const wio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.target.classList.toggle('is-on', e.isIntersecting || e.boundingClientRect.top < 0));
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 1 });
+    p.querySelectorAll('.w').forEach((w) => wio.observe(w));
+  });
+
+  const ENDPOINT = null; // newsletter service endpoint goes here later
+  const valid = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  document.querySelectorAll('form.square').forEach((form) => {
+    const input = form.querySelector('input'), msg = form.querySelector('.msg'), btn = form.querySelector('.btn');
+    input.addEventListener('input', () => { form.classList.remove('is-invalid'); msg.classList.remove('is-error'); msg.textContent = ''; input.removeAttribute('aria-invalid'); });
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (form.classList.contains('is-folded')) return;
+      const v = input.value.trim();
+      if (!valid(v)) {
+        form.classList.add('is-invalid'); msg.classList.add('is-error'); input.setAttribute('aria-invalid', 'true');
+        msg.textContent = v ? 'That address is missing something. Check it and try again.' : 'Add your email address first.';
+        input.focus(); return;
+      }
+      form.classList.add('is-busy'); btn.disabled = true;
+      await new Promise((r) => setTimeout(r, 450));
+      form.classList.remove('is-busy');
+      msg.textContent = `Subscribed. Issues will land at ${v}.`;
+      form.querySelector('.done-to').textContent = `It will land at ${v}.`;
+      if (reduce) form.classList.add('is-folded'); else fold(form);
+    });
+  });
+})();
+</script>
+</body>
+</html>

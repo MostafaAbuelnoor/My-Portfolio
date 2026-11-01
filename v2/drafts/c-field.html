@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft C, Field | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..600&display=swap" rel="stylesheet">
+<style>
+/* Draft C: Field. The page is the color. One living field of mint that the cursor lights, receding to paper as you read and returning for the ask. */
+:root {
+  --mint: #A8E6C4;       /* black sweater on mint = 13:1 */
+  --paper: #F4F7F2;
+  --ink: #0B2A1C;        /* 10.9:1 on mint, 14.3:1 on paper */
+  --ink-2: #2E5A45;      /* 5.5:1 on mint */
+  --ink-3: #4F6F60;
+  --pill: #F6FBF7;
+  --error: #9B1C1C;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --gutter: clamp(20px, 4vw, 64px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: #6FA98A transparent; }
+body {
+  margin: 0; color: var(--ink); background: var(--mint); overflow-x: clip;
+  font-family: "Geist", system-ui, sans-serif; font-size: 18px; line-height: 28px;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 700ms ease;
+}
+body[data-ground="paper"] { background: var(--paper); }
+::selection { background: var(--ink); color: var(--mint); }
+input { caret-color: var(--ink); }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* grain over everything: the field has tooth, not gloss */
+.grain {
+  position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: 0.09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- header ---------- */
+.top { position: absolute; inset: 0 0 auto 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 24px var(--gutter); }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; }
+.mark { width: 32px; height: 32px; border-radius: 50%; background: var(--ink); overflow: hidden; display: block; }
+.top-cta { font-size: 14px; line-height: 20px; font-weight: 500; text-decoration: underline; text-underline-offset: 0.3em; padding: 8px 4px; transition: text-decoration-color 150ms ease; }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { text-decoration-color: transparent; } }
+
+/* ---------- hero ---------- */
+.hero { position: relative; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); overflow: hidden; isolation: isolate; }
+.light {
+  position: absolute; z-index: -1; left: 0; top: 0; width: 900px; height: 900px; margin: -450px 0 0 -450px; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(255,255,255,.55), rgba(255,255,255,0));
+  opacity: 0; transition: opacity 600ms ease; will-change: transform;
+}
+.hero:hover .light { opacity: 1; }
+.hero__text { display: flex; flex-direction: column; justify-content: center; padding: 120px var(--gutter) 80px; }
+.hero__inner { max-width: 640px; }
+h1 { margin: 0; font-weight: 600; font-size: 96px; line-height: 0.95; letter-spacing: -0.045em; text-wrap: balance; }
+.roles { margin: 32px 0 0; font-size: 24px; line-height: 32px; letter-spacing: -0.01em; color: var(--ink-2); max-width: 26ch; text-wrap: balance; }
+.pitch { margin: 16px 0 0; max-width: 44ch; text-wrap: pretty; }
+.portrait { position: relative; margin: 0; }
+.portrait img { position: absolute; bottom: 0; right: clamp(0px, 4vw, 72px); height: min(90%, 880px); width: auto; }
+
+/* pill form */
+.form { margin-top: 40px; max-width: 520px; }
+.pill { position: relative; display: grid; border-radius: 999px; background: var(--pill); box-shadow: 0 1px 2px rgba(11,42,28,.08), 0 10px 30px -12px rgba(11,42,28,.25); }
+.pill > * { grid-area: 1 / 1; }
+.pill__fields { display: flex; align-items: center; padding: 6px; transition: opacity 220ms ease, filter 220ms ease, transform 300ms var(--ease-out); }
+.pill input { flex: 1; min-width: 0; height: 52px; padding: 0 16px 0 18px; border: 0; background: transparent; color: var(--ink); font: inherit; font-size: 18px; outline: none; }
+.pill input::placeholder { color: #557566; opacity: 1; }
+.pill:focus-within { outline: 2px solid var(--ink); outline-offset: 2px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; height: 52px; padding: 0 22px; border: 0; border-radius: 999px;
+  background: var(--ink); color: var(--mint); font: inherit; font-size: 16px; font-weight: 600; white-space: nowrap; cursor: pointer;
+  transition: background-color 150ms ease, transform 160ms var(--ease-out);
+}
+.btn:active { transform: scale(0.97); }
+.btn svg { transition: transform 200ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #134330; } .btn:hover svg { transform: translateX(3px); } }
+.btn__label { transition: opacity 180ms ease, filter 180ms ease; }
+.is-busy .btn__label { opacity: 0.6; filter: blur(2px); }
+.pill__done { display: flex; align-items: center; gap: 12px; padding: 0 24px; font-weight: 500; opacity: 0; filter: blur(6px); transform: translateY(8px); pointer-events: none; transition: opacity 260ms ease 120ms, filter 260ms ease 120ms, transform 400ms var(--ease-out) 120ms; }
+.pill__done span.tick { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--mint); }
+.is-done .pill__fields { opacity: 0; filter: blur(6px); transform: translateY(-8px); pointer-events: none; }
+.is-done .pill__done { opacity: 1; filter: none; transform: none; }
+.fine { margin: 12px 0 0 20px; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+.msg { margin: 8px 0 0 20px; min-height: 20px; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: var(--error); }
+.is-invalid .pill { outline: 2px solid var(--error); outline-offset: 2px; }
+
+/* ---------- pillars: the one in the middle of the screen is lit ---------- */
+.pillars { padding: 128px var(--gutter); }
+.pillars__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: end; }
+h2 { margin: 0; font-weight: 600; font-size: 48px; line-height: 1.05; letter-spacing: -0.035em; text-wrap: balance; }
+.pillars__head p { margin: 0; color: var(--ink-3); max-width: 42ch; }
+.plist { list-style: none; margin: 80px 0 0; padding: 0; }
+.p { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; align-items: center; padding: 24px 0; }
+.p h3 { margin: 0; font-weight: 600; font-size: 128px; line-height: 1; letter-spacing: -0.055em; color: rgba(11,42,28,.24); transition: color 500ms var(--ease-out); }
+.p p { margin: 0; max-width: 40ch; color: var(--ink-3); transform: translateX(-8px); transition: color 500ms var(--ease-out), transform 600ms var(--ease-out); text-wrap: pretty; }
+.p.is-active h3 { color: var(--ink); }
+.p.is-active p { transform: none; color: var(--ink); }
+
+/* ---------- tagline ---------- */
+.tagline { padding: 64px var(--gutter) 160px; }
+.tagline p { margin: 0; max-width: 18ch; font-weight: 500; font-size: 60px; line-height: 1.04; letter-spacing: -0.04em; text-wrap: balance; }
+.w { color: rgba(11,42,28,.18); transition: color 500ms var(--ease-out); }
+.w.is-on { color: var(--ink); }
+
+/* ---------- final ---------- */
+.final { padding: 160px var(--gutter); text-align: center; }
+.final h2 { font-size: 72px; letter-spacing: -0.045em; }
+.final .form { margin: 40px auto 0; text-align: left; }
+
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 14px; line-height: 20px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- motion ---------- */
+.js .hero [data-in] { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+.js .portrait img { opacity: 0; transform: translateY(24px) scale(1.015); transform-origin: 50% 100%; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; filter: none; transition: opacity 800ms var(--ease-out), transform 900ms var(--ease-out), filter 800ms var(--ease-out); transition-delay: calc(120ms + var(--i, 0) * 80ms); }
+.js.is-loaded .portrait img { opacity: 1; transform: none; transition: opacity 900ms var(--ease-out) 200ms, transform 1300ms var(--ease-out) 200ms; }
+.js [data-reveal] { opacity: 0; transform: translateY(16px); }
+.js [data-reveal].is-in { opacity: 1; transform: none; transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(var(--i, 0) * 80ms); }
+@media (hover: none), (pointer: coarse) { .light { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .light { display: none; }
+  .js .hero [data-in], .js .portrait img, .js [data-reveal] { transform: none !important; filter: none !important; }
+  .p p { transform: none; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1180px) { h1 { font-size: 72px; } .p h3 { font-size: 96px; } }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .portrait { order: -1; height: min(80vw, 460px); margin-top: 72px; }
+  .portrait img { right: 50%; transform: translateX(50%); height: 94%; }
+  .js .portrait img { transform: translate(50%, 24px); }
+  .js.is-loaded .portrait img { transform: translateX(50%); }
+  .hero__text { padding: 32px var(--gutter) 64px; }
+  h1 { font-size: 60px; }
+  .roles { font-size: 20px; line-height: 28px; }
+  .pillars { padding: 96px var(--gutter); }
+  .pillars__head, .p { grid-template-columns: 1fr; gap: 12px; }
+  .p h3 { font-size: 72px; }
+  .p p { transform: none; }
+  .tagline p { font-size: 40px; line-height: 1.05; }
+  .final { padding: 112px var(--gutter); }
+  .final h2 { font-size: 48px; }
+}
+@media (max-width: 520px) {
+  h1 { font-size: 48px; }
+  .pill { border-radius: 28px; }
+  .pill__fields { flex-direction: column; align-items: stretch; gap: 6px; }
+  .pill input { height: 52px; }
+  .btn { justify-content: center; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<div class="grain" aria-hidden="true"></div>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="13" r="5.2" fill="#A8E6C4"/><path d="M6 32c0-6.8 4.6-11.2 10-11.2S26 25.2 26 32z" fill="#A8E6C4"/></svg></span>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hello" data-ground="mint">
+    <div class="light" aria-hidden="true"></div>
+    <div class="hero__text">
+      <div class="hero__inner">
+        <h1 id="hello" data-in style="--i:0">Hello, I’m Mostafa.</h1>
+        <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+        <p class="pitch" data-in style="--i:2">I write a newsletter about AI and cloud computing: what I think, where I stand, and the resources I’d actually hand a student.</p>
+        <form class="form" id="subscribe" data-in style="--i:3" novalidate>
+          <label class="sr-only" for="email-1">Email address</label>
+          <div class="pill">
+            <div class="pill__fields">
+              <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+              <button class="btn" type="submit"><span class="btn__label">Get the newsletter</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            </div>
+            <div class="pill__done" aria-hidden="true"><span class="tick"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>You’re in. Check your inbox.</div>
+          </div>
+          <p class="fine">Free. Unsubscribe in one click.</p>
+          <p class="msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+    <figure class="portrait">
+      <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+    </figure>
+  </section>
+
+  <section class="pillars" aria-labelledby="inside" data-ground="paper">
+    <div class="pillars__head">
+      <h2 id="inside" data-reveal>Three things in every issue.</h2>
+      <p data-reveal style="--i:1">Written the way I explain them in class: plainly, with the context that usually gets skipped.</p>
+    </div>
+    <ul class="plist">
+      <li class="p"><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></li>
+      <li class="p"><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></li>
+      <li class="p"><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write" data-ground="paper">
+    <p data-words>I teach AI and cloud for a living. This newsletter is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next" data-ground="mint">
+    <h2 id="next" data-reveal>Get the next one.</h2>
+    <form class="form" data-reveal style="--i:1" novalidate>
+      <label class="sr-only" for="email-2">Email address</label>
+      <div class="pill">
+        <div class="pill__fields">
+          <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__label">Get the newsletter</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="pill__done" aria-hidden="true"><span class="tick"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>You’re in. Check your inbox.</div>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer data-ground="mint">
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const img = document.querySelector('.portrait img');
+  const go = () => requestAnimationFrame(() => root.classList.add('is-loaded'));
+  Promise.all([document.fonts ? document.fonts.ready : 0, img.decode ? img.decode().catch(() => 0) : 0]).then(go);
+  setTimeout(go, 1500);
+
+  // the field follows the cursor, lerped so it trails like light, not like a sticker
+  const hero = document.querySelector('.hero');
+  const light = document.querySelector('.light');
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (fine) {
+    let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+    const tick = () => { x += (tx - x) * 0.08; y += (ty - y) * 0.08; light.style.transform = `translate3d(${x}px, ${y}px, 0)`; raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(tick) : 0; };
+    hero.addEventListener('pointermove', (e) => { const r = hero.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; if (!raf) raf = requestAnimationFrame(tick); });
+  }
+
+  // ground color follows whichever section owns the middle of the screen
+  const gio = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) document.body.dataset.ground = e.target.dataset.ground; });
+  }, { rootMargin: '-50% 0px -50% 0px' });
+  document.querySelectorAll('[data-ground]').forEach((s) => gio.observe(s));
+
+  // pillar under the center line is lit
+  const pio = new IntersectionObserver((entries) => {
+    entries.forEach((e) => e.target.classList.toggle('is-active', e.isIntersecting));
+  }, { rootMargin: '-42% 0px -42% 0px' });
+  document.querySelectorAll('.p').forEach((p) => pio.observe(p));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+  document.querySelectorAll('[data-words]').forEach((p) => {
+    p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+    const wio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.target.classList.toggle('is-on', e.isIntersecting || e.boundingClientRect.top < 0));
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 1 });
+    p.querySelectorAll('.w').forEach((w) => wio.observe(w));
+  });
+
+  const ENDPOINT = null; // newsletter service endpoint goes here later
+  const valid = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  document.querySelectorAll('.form').forEach((form) => {
+    const input = form.querySelector('input');
+    const msg = form.querySelector('.msg');
+    const btn = form.querySelector('.btn');
+    input.addEventListener('input', () => { form.classList.remove('is-invalid'); msg.classList.remove('is-error'); msg.textContent = ''; input.removeAttribute('aria-invalid'); });
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (form.classList.contains('is-done')) return;
+      const v = input.value.trim();
+      if (!valid(v)) {
+        form.classList.add('is-invalid'); msg.classList.add('is-error'); input.setAttribute('aria-invalid', 'true');
+        msg.textContent = v ? 'That address is missing something. Check it and try again.' : 'Add your email address first.';
+        input.focus(); return;
+      }
+      form.classList.add('is-busy'); btn.disabled = true;
+      await new Promise((r) => setTimeout(r, 650));
+      form.classList.remove('is-busy'); form.classList.add('is-done');
+      msg.textContent = `Sent a welcome note to ${v}.`;
+    });
+  });
+})();
+</script>
+</body>
+</html>

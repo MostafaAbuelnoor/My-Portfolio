@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T00:00:00Z",
+  "title": "Design System: Mostafa Saher",
+  "extensions": {
+    "colorMeta": {
+      "graphite-ground": { "role": "neutral", "displayName": "Graphite Ground", "canonical": "#171717", "tonalRamp": ["#000000", "#171717", "#1D1D1D", "#262626", "#3A3A3A", "#5E5E5E", "#939391", "#F0F0EE"] },
+      "graphite-pane": { "role": "neutral", "displayName": "Graphite Pane", "canonical": "#1D1D1D", "tonalRamp": ["#000000", "#171717", "#1D1D1D", "#262626", "#3A3A3A", "#5E5E5E", "#939391", "#F0F0EE"] },
+      "graphite-raise": { "role": "neutral", "displayName": "Graphite Raise", "canonical": "#262626", "tonalRamp": ["#000000", "#171717", "#1D1D1D", "#262626", "#3A3A3A", "#5E5E5E", "#939391", "#F0F0EE"] },
+      "exhibit-black": { "role": "neutral", "displayName": "Exhibit Black", "canonical": "#000000", "tonalRamp": ["#000000", "#171717", "#1D1D1D", "#262626", "#3A3A3A", "#5E5E5E", "#939391", "#F0F0EE"] },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "#303030", "tonalRamp": ["#000000", "#171717", "#1D1D1D", "#303030", "#4A4A4A", "#5E5E5E", "#939391", "#F0F0EE"] },
+      "hairline-strong": { "role": "neutral", "displayName": "Hairline Strong", "canonical": "#4A4A4A", "tonalRamp": ["#000000", "#171717", "#1D1D1D", "#303030", "#4A4A4A", "#5E5E5E", "#939391", "#F0F0EE"] },
+      "cell-off": { "role": "neutral", "displayName": "Cell Off", "canonical": "#3A3A3A", "tonalRamp": ["#000000", "#171717", "#1D1D1D", "#262626", "#3A3A3A", "#5E5E5E", "#939391", "#F0F0EE"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#F0F0EE", "tonalRamp": ["#171717", "#303030", "#4A4A4A", "#6B6B69", "#939391", "#B8B8B5", "#F0F0EE", "#FFFFFF"] },
+      "ink-muted": { "role": "neutral", "displayName": "Ink Muted", "canonical": "#B8B8B5", "tonalRamp": ["#171717", "#303030", "#4A4A4A", "#6B6B69", "#939391", "#B8B8B5", "#F0F0EE", "#FFFFFF"] },
+      "ink-faint": { "role": "neutral", "displayName": "Ink Faint", "canonical": "#939391", "tonalRamp": ["#171717", "#303030", "#4A4A4A", "#6B6B69", "#939391", "#B8B8B5", "#F0F0EE", "#FFFFFF"] },
+      "offer-amber": { "role": "primary", "displayName": "Offer Amber", "canonical": "#FFB224", "tonalRamp": ["#1B1300", "#3A2600", "#6B4700", "#A06C00", "#D48F0A", "#FFB224", "#FFC45A", "#FFE6B8"] },
+      "offer-amber-hover": { "role": "primary", "displayName": "Offer Amber Hover", "canonical": "#FFC45A", "tonalRamp": ["#1B1300", "#3A2600", "#6B4700", "#A06C00", "#D48F0A", "#FFB224", "#FFC45A", "#FFE6B8"] },
+      "on-offer": { "role": "primary", "displayName": "Amber Ink", "canonical": "#1B1300", "tonalRamp": ["#1B1300", "#3A2600", "#6B4700", "#A06C00", "#D48F0A", "#FFB224", "#FFC45A", "#FFE6B8"] },
+      "pass-green": { "role": "secondary", "displayName": "Pass Green", "canonical": "#38D98A", "tonalRamp": ["#03200F", "#083A1D", "#0F5C31", "#188248", "#24AA63", "#38D98A", "#7FE8B4", "#C6F6DD"] },
+      "on-pass": { "role": "secondary", "displayName": "Pass Ink", "canonical": "#03200F", "tonalRamp": ["#03200F", "#083A1D", "#0F5C31", "#188248", "#24AA63", "#38D98A", "#7FE8B4", "#C6F6DD"] },
+      "fail-red": { "role": "tertiary", "displayName": "Fail Red", "canonical": "#FF6F61", "tonalRamp": ["#2E0805", "#52110B", "#7C1D14", "#A82C20", "#D8483B", "#FF6F61", "#FF9F95", "#FFD5D0"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The item-1 greeting only." },
+      "headline": { "displayName": "Headline", "purpose": "The signup question." },
+      "title": { "displayName": "Title", "purpose": "Score-report title and footer name." },
+      "question": { "displayName": "Question", "purpose": "Question stems, max 34em." },
+      "lede": { "displayName": "Lede", "purpose": "The sentence under a display or headline, in Ink Muted." },
+      "body": { "displayName": "Body", "purpose": "Option text, explanations, report body." },
+      "label": { "displayName": "Label", "purpose": "Pane-bar tags, flag toggle, nav steps, legends." },
+      "mono-data": { "displayName": "Mono Data", "purpose": "Timer, counter, option keys, cells, stamp, data log. Tabular figures." },
+      "mono-state": { "displayName": "Mono State", "purpose": "Not answered / Answered / Flagged state text." }
+    },
+    "shadows": [
+      { "name": "current-cell-ring", "value": "inset 0 0 0 1px var(--ink)", "purpose": "Doubles the border of the current bottom-nav cell. A stroke, not elevation; the system has no drop shadows." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Reveals, cell fills and the mark's flag colour change." },
+      { "name": "state", "value": "140ms", "purpose": "Colour, border and background transitions on controls." },
+      { "name": "cell-fill", "value": "300ms ease-out", "purpose": "Review cell state changes." },
+      { "name": "rise", "value": "420ms ease-out, from opacity 0 and translateY(8px)", "purpose": "Explanation reveal after checking an answer." },
+      { "name": "success-sequence", "value": "report rise 520ms after 360ms delay; review cells fill 420ms staggered 90ms", "purpose": "The one authored moment, on signup success." },
+      { "name": "reduced-motion", "value": "all animation and transition durations 1ms", "purpose": "prefers-reduced-motion: reduce." }
+    ],
+    "breakpoints": [
+      { "name": "wide", "value": "min-width 1100px", "purpose": "Intro options in a 2x2 grid." },
+      { "name": "single-column", "value": "max-width 899px", "purpose": "Panes stack, splitter hides, offer rises above the intro question." },
+      { "name": "compact", "value": "max-width 560px", "purpose": "Compact bars, icon-only nav steps and flag, stacked answer row." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Offer Button",
+      "kind": "button",
+      "refersTo": "button-offer",
+      "description": "The amber call to action; always leads to or submits the signup.",
+      "html": "<a class=\"ds-btn-offer\" href=\"#\">Get the free practice exam <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M6 13l6 6 6-6\"/></svg></a>",
+      "css": ".ds-btn-offer { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px; border: 1px solid transparent; border-radius: 6px; background: var(--offer, #FFB224); color: var(--on-offer, #1B1300); font-family: var(--sans, 'Atkinson Hyperlegible Next', system-ui, sans-serif); font-size: 1.0625rem; font-weight: 800; text-decoration: none; cursor: pointer; transition: background-color 140ms, transform 80ms; } .ds-btn-offer:hover { background: var(--offer-hover, #FFC45A); } .ds-btn-offer:active { transform: translateY(1px); } .ds-btn-offer:focus-visible { outline: 2px solid var(--ink, #F0F0EE); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ink Button",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "In-question action such as Check my answer; outlined and faint when disabled.",
+      "html": "<button class=\"ds-btn-ink\" type=\"button\">Check my answer</button> <button class=\"ds-btn-ink\" type=\"button\" disabled>Check my answer</button>",
+      "css": ".ds-btn-ink { min-height: 52px; padding: 0 22px; border: 1px solid transparent; border-radius: 6px; background: var(--ink, #F0F0EE); color: var(--ground, #171717); font-family: var(--sans, 'Atkinson Hyperlegible Next', system-ui, sans-serif); font-size: 1.0625rem; font-weight: 800; cursor: pointer; transition: background-color 140ms, border-color 140ms, color 140ms, transform 80ms; } .ds-btn-ink:hover:not(:disabled) { background: #FFFFFF; } .ds-btn-ink:active:not(:disabled) { transform: translateY(1px); } .ds-btn-ink:focus-visible { outline: 2px solid var(--ink, #F0F0EE); outline-offset: 3px; } .ds-btn-ink:disabled { border-color: var(--rule-strong, #4A4A4A); background: transparent; color: var(--ink-3, #939391); cursor: not-allowed; }"
+    },
+    {
+      "name": "Keyed Option Rows",
+      "kind": "custom",
+      "refersTo": "option",
+      "description": "A-D answer rows with rest, checked, correct and wrong states.",
+      "html": "<div class=\"ds-options\"><label class=\"ds-option\"><input type=\"radio\" name=\"ds\"><span class=\"ds-option__key\">A</span><span>Turn on prompt caching</span></label><label class=\"ds-option is-checked\"><input type=\"radio\" name=\"ds\" checked><span class=\"ds-option__key\">B</span><span>Buy Provisioned Throughput</span></label><label class=\"ds-option is-correct\"><input type=\"radio\" name=\"ds\"><span class=\"ds-option__key\">C</span><span>Correct answer</span></label><label class=\"ds-option is-wrong\"><input type=\"radio\" name=\"ds\"><span class=\"ds-option__key\">D</span><span>Wrong pick</span></label></div>",
+      "css": ".ds-options { display: grid; gap: 8px; font-family: var(--sans, 'Atkinson Hyperlegible Next', system-ui, sans-serif); color: var(--ink, #F0F0EE); } .ds-option { position: relative; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 14px; min-height: 52px; padding: 10px 16px 10px 12px; border: 1px solid var(--rule-strong, #4A4A4A); border-radius: 6px; background: var(--pane, #1D1D1D); font-size: 1.0625rem; line-height: 1.4; cursor: pointer; transition: border-color 140ms, background-color 140ms; } .ds-option input { position: absolute; opacity: 0; pointer-events: none; } .ds-option__key { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--rule-strong, #4A4A4A); border-radius: 4px; font-family: var(--mono, 'Atkinson Hyperlegible Mono', ui-monospace, monospace); font-size: 0.875rem; font-weight: 600; color: var(--ink-2, #B8B8B5); transition: background-color 140ms, border-color 140ms, color 140ms; } .ds-option:hover { border-color: var(--ink-3, #939391); background: var(--raise, #262626); } .ds-option:has(input:focus-visible) { outline: 2px solid var(--ink, #F0F0EE); outline-offset: 3px; } .ds-option.is-checked { border-color: var(--ink, #F0F0EE); background: var(--raise, #262626); } .ds-option.is-checked .ds-option__key { border-color: var(--ink, #F0F0EE); background: var(--ink, #F0F0EE); color: var(--ground, #171717); } .ds-option.is-correct { border-color: var(--pass, #38D98A); } .ds-option.is-correct .ds-option__key { border-color: var(--pass, #38D98A); background: var(--pass, #38D98A); color: var(--on-pass, #03200F); } .ds-option.is-wrong { border-color: var(--fail, #FF6F61); } .ds-option.is-wrong .ds-option__key { border-color: var(--fail, #FF6F61); background: var(--fail, #FF6F61); color: var(--ground, #171717); }"
+    },
+    {
+      "name": "Answer Input",
+      "kind": "input",
+      "refersTo": "answer-input",
+      "description": "The email answer field; amber on focus, red when invalid.",
+      "html": "<input class=\"ds-answer\" type=\"email\" placeholder=\"you@example.com\"> <input class=\"ds-answer\" type=\"email\" aria-invalid=\"true\" value=\"not-an-email\">",
+      "css": ".ds-answer { width: 100%; max-width: 480px; height: 64px; padding: 0 20px; border: 1px solid var(--rule-strong, #4A4A4A); border-radius: 6px; background: var(--pane, #1D1D1D); color: var(--ink, #F0F0EE); font-family: var(--sans, 'Atkinson Hyperlegible Next', system-ui, sans-serif); font-size: 1.3125rem; transition: border-color 140ms, background-color 140ms; } .ds-answer::placeholder { color: var(--ink-3, #939391); opacity: 1; } .ds-answer:hover { border-color: var(--ink-3, #939391); } .ds-answer:focus { outline: none; border-color: var(--offer, #FFB224); background: var(--raise, #262626); } .ds-answer:focus-visible { outline: 2px solid var(--offer, #FFB224); outline-offset: 2px; } .ds-answer[aria-invalid=\"true\"] { border-color: var(--fail, #FF6F61); }"
+    },
+    {
+      "name": "Bottom Nav",
+      "kind": "nav",
+      "refersTo": "cell",
+      "description": "Fixed Previous / review cells / Next bar; current cell double-stroked, answered cell green, flagged cell amber-cornered.",
+      "html": "<nav class=\"ds-navbar\"><a class=\"ds-step\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 6l-6 6 6 6\"/></svg>Previous</a><ol class=\"ds-cells\"><li><a class=\"ds-cell is-answered\" href=\"#\">1</a></li><li><a class=\"ds-cell is-current\" href=\"#\">2</a></li><li><a class=\"ds-cell is-flagged\" href=\"#\">3</a></li></ol><a class=\"ds-step\" href=\"#\">Next<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 6l6 6-6 6\"/></svg></a></nav>",
+      "css": ".ds-navbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; height: 64px; padding: 0 24px; border-top: 1px solid var(--rule, #303030); background: var(--ground, #171717); color: var(--ink, #F0F0EE); font-family: var(--sans, 'Atkinson Hyperlegible Next', system-ui, sans-serif); } .ds-navbar .ds-step:last-child { justify-self: end; } .ds-step { display: inline-flex; align-items: center; gap: 8px; justify-self: start; min-height: 42px; padding: 0 14px; border: 1px solid var(--rule-strong, #4A4A4A); border-radius: 6px; color: inherit; font-size: 0.9375rem; font-weight: 600; text-decoration: none; transition: background-color 140ms, border-color 140ms; } .ds-step:hover { border-color: var(--ink-3, #939391); background: var(--raise, #262626); } .ds-step:focus-visible, .ds-cell:focus-visible { outline: 2px solid var(--ink, #F0F0EE); outline-offset: 3px; } .ds-cells { display: flex; gap: 8px; margin: 0; padding: 0; list-style: none; } .ds-cell { position: relative; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--rule-strong, #4A4A4A); border-radius: 4px; background: var(--ground, #171717); color: var(--ink-2, #B8B8B5); font-family: var(--mono, 'Atkinson Hyperlegible Mono', ui-monospace, monospace); font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: background-color 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms cubic-bezier(0.16, 1, 0.3, 1), color 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-cell:hover { border-color: var(--ink-3, #939391); } .ds-cell.is-current { border-color: var(--ink, #F0F0EE); color: var(--ink, #F0F0EE); box-shadow: inset 0 0 0 1px var(--ink, #F0F0EE); } .ds-cell.is-answered { border-color: var(--pass, #38D98A); background: var(--pass, #38D98A); color: var(--on-pass, #03200F); } .ds-cell.is-flagged::after { content: ''; position: absolute; top: -1px; right: -1px; width: 12px; height: 12px; border-top-right-radius: 4px; background: var(--offer, #FFB224); clip-path: polygon(0 0, 100% 0, 100% 100%); }"
+    },
+    {
+      "name": "Pane Bar with Flag Toggle",
+      "kind": "custom",
+      "refersTo": "pane-bar",
+      "description": "44px bar opening every stem pane: mono state text and the flag-for-review toggle.",
+      "html": "<div class=\"ds-pane-bar\"><span class=\"ds-state\">Not answered</span><button class=\"ds-flag\" type=\"button\" aria-pressed=\"true\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path class=\"ds-flag__fill\" d=\"M5 4h11l-2 4 2 4H5z\" stroke=\"none\"/><path d=\"M5 21V4M5 4h11l-2 4 2 4H5\"/></svg>Flagged</button></div>",
+      "css": ".ds-pane-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 6px 24px; border-bottom: 1px solid var(--rule, #303030); background: var(--pane, #1D1D1D); color: var(--ink-2, #B8B8B5); font-family: var(--sans, 'Atkinson Hyperlegible Next', system-ui, sans-serif); font-size: 0.9375rem; } .ds-state { font-family: var(--mono, 'Atkinson Hyperlegible Mono', ui-monospace, monospace); font-size: 0.8125rem; color: var(--ink-3, #939391); } .ds-flag { display: inline-flex; align-items: center; gap: 8px; min-height: 30px; padding: 0 10px; border: 1px solid transparent; border-radius: 4px; background: transparent; color: var(--ink-2, #B8B8B5); font: inherit; font-weight: 600; cursor: pointer; transition: color 140ms, border-color 140ms; } .ds-flag:hover { border-color: var(--rule-strong, #4A4A4A); color: var(--ink, #F0F0EE); } .ds-flag:focus-visible { outline: 2px solid var(--ink, #F0F0EE); outline-offset: 3px; } .ds-flag__fill { fill: transparent; transition: fill 140ms; } .ds-flag[aria-pressed=\"true\"] { color: var(--offer, #FFB224); } .ds-flag[aria-pressed=\"true\"] .ds-flag__fill { fill: var(--offer, #FFB224); }"
+    },
+    {
+      "name": "Score Report",
+      "kind": "custom",
+      "refersTo": "report-stamp",
+      "description": "Signup success: green result stamp, title and body under a hairline.",
+      "html": "<div class=\"ds-report\"><p class=\"ds-report__stamp\">Pass</p><h3 class=\"ds-report__title\">You're on the list.</h3><p class=\"ds-report__body\">I'll email <strong>you@example.com</strong> when the practice exam is ready.</p></div>",
+      "css": ".ds-report { max-width: 760px; padding-top: 32px; border-top: 1px solid var(--rule, #303030); font-family: var(--sans, 'Atkinson Hyperlegible Next', system-ui, sans-serif); color: var(--ink, #F0F0EE); } .ds-report__stamp { display: inline-block; margin: 0; padding: 6px 12px; border-radius: 4px; background: var(--pass, #38D98A); color: var(--on-pass, #03200F); font-family: var(--mono, 'Atkinson Hyperlegible Mono', ui-monospace, monospace); font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; } .ds-report__title { margin: 18px 0 0; font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; } .ds-report__body { max-width: 34em; margin: 12px 0 0; font-size: 1.125rem; color: var(--ink-2, #B8B8B5); } .ds-report__body strong { color: var(--ink, #F0F0EE); font-weight: 600; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Exam Console",
+    "overview": "The site is a night-mode certification test console. Every surface borrows the working furniture of a proctored exam: a sticky exam bar with a question counter and an elapsed timer, split item panes (exhibit on the left, stem on the right) divided by a draggable splitter, keyed A–D option rows, a flag-for-review toggle, a numbered review grid, and a fixed Previous / cells / Next bar. Scrolling moves through questions; success shows as a score report. The world is the interface, not a costume over one.\n\nMaterial is flat and hairlined. Depth comes from three stepped graphite tones and 1px rules, never from shadow, glow, gradient or card. Colour prints flat at full saturation and carries state, not decoration: amber is the offer and the flag, green is answered and correct, red is a wrong answer or an error. Everything else is hue-free graphite and near-white ink. Density is calm: one question per viewport-tall item, generous gutters, large display type in the stem.\n\nMotion is quiet and functional: 140ms state transitions, a single rise for revealed content, and one authored moment when a signup succeeds (the review cells fill green in sequence and the score report rises). Reduced motion collapses all of it.",
+    "keyCharacteristics": [
+      "Graphite ground, black exhibit panes, 1px hairline structure.",
+      "Flat, fully saturated state colour: amber offer/flag, green pass, red fail.",
+      "One typeface family: Atkinson Hyperlegible Next for all prose and UI, Atkinson Hyperlegible Mono only for machine-read values.",
+      "Exam-console components are the vocabulary: exam bar, pane bars, keyed options, review cells, bottom nav.",
+      "The MS mark is drawn from review-grid cells, with the final cell as the amber flag."
+    ],
+    "rules": [
+      { "name": "The One Meaning Rule", "body": "Amber means offer or flag, green means answered or correct, red means wrong or error. A colour never appears outside its meaning, and never as decoration.", "section": "colors" },
+      { "name": "The Flat Print Rule", "body": "State colours print as flat fills or 1px strokes at full saturation. No gradients, tints, glows or translucent washes.", "section": "colors" },
+      { "name": "The Hue-Free Ground Rule", "body": "Grounds, panes and rules are neutral grey or pure black; they carry no blue or warm cast.", "section": "colors" },
+      { "name": "The Machine Voice Rule", "body": "Mono is reserved for values a console would print: timer, counters, cell numbers, option keys, state text, data logs, code and the result stamp. Headings, prose and buttons are never mono.", "section": "typography" },
+      { "name": "The Three Weights Rule", "body": "Only 400, 600 and 800 of Next (and 400, 600 of Mono) are loaded; use only those.", "section": "typography" },
+      { "name": "The No-Lift Rule", "body": "Nothing floats. Hover and selection change tone and stroke, never shadow or scale. The only movement on press is a 1px downward nudge on buttons.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do build new surfaces from the console vocabulary: exam bar, split panes with 44px pane bars, keyed options, review cells, bottom nav.",
+      "Do keep colour to its single meaning: Offer Amber for the offer and flags, Pass Green for answered and correct, Fail Red for wrong answers and errors.",
+      "Do separate regions with 1px Hairline rules and stepped graphite tones.",
+      "Do use Atkinson Hyperlegible Mono only for timer, counters, cells, option keys, state text, data and code.",
+      "Do use 140ms colour transitions for state, the 420ms ease-out rise (cubic-bezier(0.16, 1, 0.3, 1)) for revealed content, and respect prefers-reduced-motion.",
+      "Do keep every tap target at least 44px on small screens."
+    ],
+    "donts": [
+      "Don't use drop shadows, glows, gradients or card containers.",
+      "Don't tint grounds, panes or exhibits with a hue; they stay neutral grey or black.",
+      "Don't use amber, green or red decoratively or for anything outside its meaning.",
+      "Don't set headings, buttons or prose in mono.",
+      "Don't add a second authored animation; the signup success sequence is the one moment.",
+      "Don't use round portraits, pill-shaped cards or friendly-creator styling; corners stay at 6px or less."
+    ]
+  }
+}

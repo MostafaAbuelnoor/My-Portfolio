@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft K, Departures | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@400..700&family=Red+Hat+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft K: Departures. Airport wayfinding: yellow signs, a split-flap board, a boarding pass for a form. Subscribing tears the stub and the sign flips to departed. */
+:root {
+  --floor: #F2F2EF;
+  --ink: #111111; --ink-rgb: 17 17 17;
+  --ink-2: #55575C;      /* 6.5:1 */
+  --sign: #FFD200;       /* black sweater on sign yellow 12.7:1 */
+  --board: #111214;
+  --flap: #1E2024;
+  --flap-ink: #F5F5F0;   /* 14.9:1 on flap */
+  --gutter: clamp(20px, 4vw, 64px);
+  --flapfont: "Red Hat Mono", ui-monospace, monospace;
+}
+html { scrollbar-color: #A9AAA6 var(--floor); }
+body { background: var(--floor); color: var(--ink); font-family: "Radio Canada Big", system-ui, sans-serif; font-size: 18px; line-height: 28px; }
+::selection { background: var(--sign); color: var(--ink); }
+input { caret-color: var(--ink); }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+
+/* split-flap cells */
+.flaps { display: inline-flex; gap: 3px; }
+.cell { position: relative; display: inline-grid; place-items: center; width: 1.05em; height: 1.45em; border-radius: 3px; background: var(--flap); color: var(--flap-ink); font-family: var(--flapfont); font-weight: 700; line-height: 1; text-transform: uppercase; overflow: hidden; }
+.cell::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0,0,0,.65); }
+.cell.flip { animation: flip 90ms linear; }
+@keyframes flip { 0% { transform: scaleY(1); } 50% { transform: scaleY(0.2); filter: brightness(1.6); } 100% { transform: scaleY(1); } }
+.cell.y { color: var(--sign); }
+
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 22px var(--gutter); }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; font-size: 17px; }
+.top-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; line-height: 20px; text-decoration: none; padding: 8px 14px; border-radius: 6px; background: var(--sign); color: var(--ink); transition: transform 160ms var(--ease-out), background-color 150ms ease; }
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { background: #FFDD33; } }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr); gap: clamp(32px, 5vw, 80px); align-items: center; padding: 8px var(--gutter) 48px; min-height: calc(100svh - 82px); }
+h1 { margin: 0; font-weight: 700; font-size: 84px; line-height: 0.95; letter-spacing: -0.035em; text-wrap: balance; }
+.roles { margin: 20px 0 0; font-size: 22px; line-height: 30px; max-width: 30ch; text-wrap: balance; }
+.pitch { margin: 12px 0 0; color: var(--ink-2); max-width: 46ch; text-wrap: pretty; }
+
+/* boarding pass: the form */
+.pass { position: relative; margin-top: 32px; max-width: 600px; display: grid; grid-template-columns: minmax(0, 1fr) 132px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.08)) drop-shadow(0 18px 30px rgba(0,0,0,.12)); }
+.pass__main, .pass__stub { background: #fff; padding: 18px 20px; }
+.pass__main { border-radius: 14px 0 0 14px; -webkit-mask: radial-gradient(circle 10px at 100% 0, #0000 98%, #000) top right / 100% 51% no-repeat, radial-gradient(circle 10px at 100% 100%, #0000 98%, #000) bottom right / 100% 51% no-repeat; mask: radial-gradient(circle 10px at 100% 0, #0000 98%, #000) top right / 100% 51% no-repeat, radial-gradient(circle 10px at 100% 100%, #0000 98%, #000) bottom right / 100% 51% no-repeat; }
+.pass__stub { border-radius: 0 14px 14px 0; border-left: 2px dashed #C9C9C4; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; -webkit-mask: radial-gradient(circle 10px at 0 0, #0000 98%, #000) top left / 100% 51% no-repeat, radial-gradient(circle 10px at 0 100%, #0000 98%, #000) bottom left / 100% 51% no-repeat; mask: radial-gradient(circle 10px at 0 0, #0000 98%, #000) top left / 100% 51% no-repeat, radial-gradient(circle 10px at 0 100%, #0000 98%, #000) bottom left / 100% 51% no-repeat; transform-origin: 0 100%; }
+.pass__route { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 15px; line-height: 20px; }
+.pass__route span { color: var(--ink-2); font-weight: 500; }
+.pass__route svg { flex: none; }
+.pass__meta { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 4px 24px; margin-top: 12px; font-size: 12px; line-height: 16px; color: var(--ink-2); }
+.pass__meta b { display: block; color: var(--ink); font-family: var(--flapfont); font-size: 15px; line-height: 20px; }
+.pass label { display: block; margin-top: 14px; font-size: 12px; line-height: 16px; color: var(--ink-2); }
+.pass__row { display: flex; gap: 8px; margin-top: 4px; }
+.pass input { flex: 1; min-width: 0; height: 48px; padding: 0 12px; border: 1.5px solid #CFCFCA; border-radius: 8px; background: var(--floor); color: var(--ink); font-family: var(--flapfont); font-size: 16px; outline: none; transition: border-color 150ms ease; }
+.pass input::placeholder { color: #66686D; opacity: 1; }
+.pass input:focus { border-color: var(--ink); }
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 18px; border: 0; border-radius: 8px; background: var(--ink); color: var(--sign); font: inherit; font-size: 16px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+.btn svg { transition: transform 260ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #2A2A2A; } .btn:hover svg { transform: translate(2px, -2px); } }
+.stub-code { font-family: var(--flapfont); font-weight: 700; font-size: 22px; line-height: 26px; }
+.stub-small { font-size: 11px; line-height: 14px; color: var(--ink-2); }
+.bars { display: block; width: 92px; height: 54px; }
+.fine { margin: 10px 0 0; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+.msg { margin: 4px 0 0; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: #A3160E; }
+.is-invalid input { border-color: #A3160E; }
+.is-torn .pass__stub { animation: tear 900ms var(--ease-in-out) forwards; }
+@keyframes tear { 0% { transform: none; } 25% { transform: rotate(4deg) translateX(6px); } 100% { transform: rotate(24deg) translate(40px, 220px); opacity: 0; } }
+
+/* the sign with your photo */
+.sign { position: relative; margin: 0; height: min(calc(100svh - 150px), 720px); border-radius: 18px; background: var(--sign); overflow: hidden; }
+.sign img { position: absolute; bottom: 0; left: 50%; height: 82%; width: auto; transform: translateX(-50%); }
+.sign__bar { position: absolute; top: 0; left: 0; right: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; background: var(--board); color: var(--sign); }
+.sign__bar .gate { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; line-height: 22px; }
+.sign__bar .gate i { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 6px; background: var(--sign); color: var(--ink); font-style: normal; font-weight: 700; }
+.sign__bar .flaps { font-size: 18px; }
+.sign__arrow { position: absolute; z-index: 1; right: 22px; top: 82px; width: 76px; height: 76px; transition: transform 500ms var(--ease-out); }
+.is-departed .sign__arrow { transform: translate(8px, -8px); }
+
+/* ---------- departures board ---------- */
+.board-sec { padding: 96px var(--gutter); background: var(--board); color: var(--flap-ink); }
+.board-sec h2 { margin: 0; font-weight: 700; font-size: 56px; line-height: 1; letter-spacing: -0.03em; color: var(--sign); }
+.board-sec > p { margin: 12px 0 0; color: #B9BAB5; max-width: 46ch; }
+.board { margin-top: 48px; display: grid; gap: 4px; }
+.board__head, .row { display: grid; grid-template-columns: 120px minmax(0, 260px) minmax(0, 1fr) 150px; gap: 24px; align-items: center; }
+.board__head { padding: 0 0 8px; font-size: 13px; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: #9FA09B; border-bottom: 1px solid #2E3034; }
+.row { padding: 14px 0; border-bottom: 1px solid #2E3034; }
+.row .flaps { font-size: 22px; }
+.row p { margin: 0; color: #C9CAC5; font-size: 16px; line-height: 24px; text-wrap: pretty; }
+
+.tagline { padding: 120px var(--gutter) 140px; }
+.tagline p { margin: 0; max-width: 18ch; font-weight: 700; font-size: 72px; line-height: 1; letter-spacing: -0.04em; text-wrap: balance; }
+.final { margin: 0 var(--gutter); padding: 72px clamp(24px, 5vw, 72px); border-radius: 18px; background: var(--sign); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 48px; align-items: end; }
+.final h2 { margin: 0; font-weight: 700; font-size: 64px; line-height: 1; letter-spacing: -0.035em; }
+.final .pass__row { margin-top: 0; }
+.final input { background: #fff; border-color: rgba(17,17,17,.4); }
+.final .fine { color: #3B3A2E; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 14px; line-height: 20px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load ---------- */
+.js .sign { clip-path: inset(0 0 100% 0); }
+.js .sign img { opacity: 0; transform: translate(-50%, 30px); }
+.js .hero [data-in] { opacity: 0; transform: translateY(14px); }
+.js.is-loaded .sign { clip-path: inset(0 0 0 0); transition: clip-path 900ms var(--ease-in-out); }
+.js.is-loaded .sign img { opacity: 1; transform: translateX(-50%); transition: opacity 700ms var(--ease-out) 600ms, transform 1000ms var(--ease-out) 600ms; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(200ms + var(--i, 0) * 80ms); }
+@media (prefers-reduced-motion: reduce) { .js .sign { clip-path: none; } .js .sign img { transform: translateX(-50%) !important; } .js .hero [data-in] { transform: none !important; } .cell.flip { animation: none; } .is-torn .pass__stub { animation: none; opacity: 0.35; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) { h1 { font-size: 64px; } .board__head, .row { grid-template-columns: 100px minmax(0, 200px) minmax(0, 1fr); } .board__head span:last-child, .row > :last-child { display: none; } }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .sign { order: -1; height: min(110vw, 480px); }
+  h1 { font-size: 52px; }
+  .board__head { display: none; }
+  .row { grid-template-columns: 1fr; gap: 8px; }
+  .row .flaps { font-size: 18px; }
+  .final { grid-template-columns: 1fr; margin: 0 12px; }
+  .tagline p { font-size: 44px; } .board-sec h2, .final h2 { font-size: 40px; }
+}
+@media (max-width: 560px) { .sign__bar .flaps { font-size: 13px; } .sign__bar .gate { font-size: 15px; } .pass { grid-template-columns: 1fr; } .pass__main { border-radius: 14px 14px 0 0; -webkit-mask: none; mask: none; } .pass__stub { border-left: 0; border-top: 2px dashed #C9C9C4; border-radius: 0 0 14px 14px; flex-direction: row; -webkit-mask: none; mask: none; } .pass__row { flex-direction: column; } .btn { justify-content: center; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="7" fill="#FFD200"/><path d="M11 23 L23 11 M13 11 H23 V21" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="square"/></svg>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" id="hero" aria-labelledby="hello">
+    <div>
+      <h1 id="hello" data-in style="--i:0">Hello, I’m Mostafa.</h1>
+      <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:2">I write a newsletter about AI and cloud computing: what I think, where I stand, and the resources I’d actually hand a student.</p>
+      <form class="pass" id="subscribe" data-signup data-hero data-in style="--i:3" novalidate>
+        <div class="pass__main">
+          <div class="pass__route">Mostafa Saher <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h16M14 6l6 6-6 6"/></svg> <span>Your inbox</span></div>
+          <div class="pass__meta"><div>Flight<b>NL 001</b></div><div>Class<b>Free</b></div><div>Gate<b>M</b></div></div>
+          <label for="email-1">Passenger email</label>
+          <div class="pass__row">
+            <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+            <button class="btn" type="submit"><span class="btn__label">Board</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></button>
+          </div>
+          <p class="fine">Free. Unsubscribe in one click.</p>
+          <p class="msg" role="status" aria-live="polite"></p>
+        </div>
+        <div class="pass__stub" aria-hidden="true">
+          <span class="stub-small">Seat</span><span class="stub-code">1A</span>
+          <svg class="bars" id="bars" viewBox="0 0 92 54"></svg>
+          <span class="stub-small">AI · Cloud</span>
+        </div>
+      </form>
+    </div>
+
+    <figure class="sign" id="sign">
+      <div class="sign__bar"><span class="gate"><i>M</i>Newsletter</span><span class="flaps" id="sign-flaps" aria-label="Status: boarding"></span></div>
+      <svg class="sign__arrow" viewBox="0 0 76 76" aria-hidden="true"><path d="M18 58 L56 20 M26 20 H56 V50" fill="none" stroke="#111" stroke-width="8" stroke-linecap="square"/></svg>
+      <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+    </figure>
+  </section>
+
+  <section class="board-sec" aria-labelledby="dep">
+    <h2 id="dep" data-reveal>Departures, every issue</h2>
+    <p data-reveal style="--i:1">Three things on every flight, written the way I explain them in class.</p>
+    <div class="board" id="board" data-reveal style="--i:2">
+      <div class="board__head" aria-hidden="true"><span>Seq</span><span>Destination</span><span>What it carries</span><span>Remark</span></div>
+      <div class="row"><span class="flaps" data-text="01" data-w="2"></span><span class="flaps" data-text="THOUGHTS" data-w="9"></span><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p><span class="flaps y" data-text="ON TIME" data-w="7"></span></div>
+      <div class="row"><span class="flaps" data-text="02" data-w="2"></span><span class="flaps" data-text="OPINIONS" data-w="9"></span><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p><span class="flaps y" data-text="ON TIME" data-w="7"></span></div>
+      <div class="row"><span class="flaps" data-text="03" data-w="2"></span><span class="flaps" data-text="RESOURCES" data-w="9"></span><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p><span class="flaps y" data-text="ON TIME" data-w="7"></span></div>
+    </div>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next">
+    <h2 id="next" data-reveal>Catch the next flight.</h2>
+    <form class="form" data-signup data-reveal style="--i:1" novalidate>
+      <label class="sr-only" for="email-2">Email address</label>
+      <div class="pass__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Board</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = DraftKit;
+  const sign = document.getElementById('sign');
+  K.ready(sign.querySelector('img'));
+  K.reveals();
+
+  // barcode on the stub
+  (() => { let x = 0, s = 7, out = ''; while (x < 90) { s = (s * 1103515245 + 12345) >>> 0; const w = 1 + (s % 3); out += `<rect x="${x}" y="0" width="${w}" height="54" fill="#111"/>`; x += w + 1 + ((s >> 4) % 2); } document.getElementById('bars').innerHTML = out; })();
+
+  // split-flap: each cell cycles through the drum before landing on its letter
+  const DRUM = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  function build(el, width) { el.innerHTML = ''; for (let i = 0; i < width; i++) { const c = document.createElement('span'); c.className = 'cell'; c.textContent = ' '; el.appendChild(c); } }
+  function flipTo(el, text, { steps = 8, speed = 45 } = {}) {
+    const cells = [...el.children];
+    const target = text.toUpperCase().padEnd(cells.length, ' ').slice(0, cells.length);
+    el.setAttribute('aria-label', text);
+    return Promise.all(cells.map((c, i) => new Promise((done) => {
+      if (K.reduce) { c.textContent = target[i]; return done(); }
+      let n = steps + i * 2 + Math.floor(Math.random() * 4);
+      const tick = () => {
+        c.classList.remove('flip'); void c.offsetWidth; c.classList.add('flip');
+        c.textContent = n <= 0 ? target[i] : DRUM[Math.floor(Math.random() * DRUM.length)];
+        if (n-- > 0) setTimeout(tick, speed); else done();
+      };
+      setTimeout(tick, i * 30);
+    })));
+  }
+  const signFlaps = document.getElementById('sign-flaps');
+  build(signFlaps, 9);
+  setTimeout(() => flipTo(signFlaps, 'BOARDING'), 900);
+
+  // board rows flip in when the board scrolls into view
+  const rows = [...document.querySelectorAll('#board .flaps')];
+  rows.forEach((f) => build(f, +f.dataset.w));
+  const bio = new IntersectionObserver((es) => { if (es[0].isIntersecting) { rows.forEach((f, i) => setTimeout(() => flipTo(f, f.dataset.text), i * 90)); bio.disconnect(); } }, { threshold: 0.3 });
+  bio.observe(document.getElementById('board'));
+  // hover a row: it shuffles and settles again (mouse only, quick and quiet)
+  if (K.finePointer) document.querySelectorAll('#board .row').forEach((r) => {
+    let busy = false;
+    r.addEventListener('pointerenter', async () => { if (busy) return; busy = true; const f = r.querySelectorAll('.flaps')[1]; await flipTo(f, f.dataset.text, { steps: 3, speed: 40 }); busy = false; });
+  });
+
+  // send-off: the stub tears off and the sign over the photo flips to departed
+  async function depart() {
+    document.getElementById('subscribe').classList.add('is-torn');
+    await flipTo(signFlaps, 'DEPARTED', { steps: 10 });
+    sign.classList.add('is-departed');
+  }
+  K.forms({ doneLabel: 'Boarded', message: (v) => `You’re on board. Issues go to ${v}.`, onSuccess: () => depart() });
+})();
+</script>
+</body>
+</html>

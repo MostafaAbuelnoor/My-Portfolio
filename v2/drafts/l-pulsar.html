@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft L, Pulsar | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft L: Pulsar. A record-sleeve catalogue. Matte black, one white signal plot laid over your portrait, and a colour-coded strip that spells words you have to decode. Subscribing sends a pulse through the plot and decodes the strip. */
+:root {
+  --black: #0D0D0D;
+  --white: #EDEDED; --ink-rgb: 237 237 237;   /* 16.6:1 */
+  --muted: #9A9A9A;      /* 6.9:1 */
+  --field: #6EC1FF;      /* the one decoded colour; black sweater on it 9.4:1 */
+  --gutter: clamp(20px, 4vw, 64px);
+  --wide: "Syncopate", system-ui, sans-serif;
+}
+html { scrollbar-color: #3A3A3A var(--black); color-scheme: dark; }
+body { background: var(--black); color: var(--white); font-family: "Manrope", system-ui, sans-serif; font-size: 17px; line-height: 28px; }
+::selection { background: var(--field); color: var(--black); }
+input { caret-color: var(--field); }
+:focus-visible { outline: 2px solid var(--field); outline-offset: 3px; }
+.cat { font-family: var(--wide); font-size: 11px; line-height: 16px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+
+/* colour code: each letter is a hue; the word only shows when decoded */
+.code { display: flex; gap: 4px; }
+.code span { position: relative; display: grid; place-items: center; width: 30px; height: 30px; font-family: var(--wide); font-weight: 700; font-size: 12px; color: transparent; transition: color 200ms ease, transform 300ms var(--ease-out); }
+.code.is-decoded span, .code:hover span { color: var(--c-ink); }
+.code.is-decoded span { animation: decode 420ms var(--ease-out) both; animation-delay: calc(var(--k) * 60ms); }
+@keyframes decode { 0% { transform: rotateX(90deg); } 100% { transform: none; } }
+
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 28px var(--gutter); }
+.brand { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
+.brand b { font-family: var(--wide); font-weight: 700; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; }
+.top-cta { font-family: var(--wide); font-size: 11px; line-height: 16px; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; padding: 10px 14px; border: 1px solid #4A4A4A; transition: border-color 150ms ease, transform 160ms var(--ease-out); }
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { border-color: var(--white); } }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(32px, 6vw, 112px); align-items: center; padding: 0 var(--gutter) 64px; min-height: calc(100svh - 92px); }
+.hero__text { max-width: 560px; }
+h1 { margin: 20px 0 0; font-weight: 600; font-size: 72px; line-height: 1; letter-spacing: -0.04em; text-wrap: balance; }
+.hero .code { margin-top: 28px; }
+.roles { margin: 24px 0 0; font-size: 20px; line-height: 30px; max-width: 30ch; text-wrap: balance; }
+.pitch { margin: 12px 0 0; color: var(--muted); max-width: 44ch; text-wrap: pretty; }
+.form { margin-top: 32px; max-width: 520px; }
+.form__row { display: flex; border-bottom: 1px solid #5A5A5A; transition: border-color 150ms ease; }
+.form__row:focus-within { border-bottom-color: var(--field); }
+.form input { flex: 1; min-width: 0; height: 56px; padding: 0; border: 0; background: transparent; color: var(--white); font: inherit; font-size: 20px; outline: none; }
+.form input::placeholder { color: #8E8E8E; opacity: 1; }
+.btn { display: inline-flex; align-items: center; gap: 12px; padding: 0 0 0 16px; border: 0; background: transparent; color: var(--white); font-family: var(--wide); font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: color 150ms ease, transform 160ms var(--ease-out); }
+.btn i { width: 10px; height: 10px; background: var(--field); transition: transform 250ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { color: var(--field); } .btn:hover i { transform: rotate(45deg); } }
+.fine { margin: 10px 0 0; font-size: 13px; line-height: 20px; color: var(--muted); }
+.msg { margin: 4px 0 0; font-size: 13px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: #FF9A8A; }
+.is-invalid .form__row { border-bottom-color: #FF9A8A; }
+
+/* the sleeve: blue field, portrait, signal plot over it */
+.sleeve { position: relative; margin: 0; aspect-ratio: 4 / 5; max-height: calc(100svh - 160px); justify-self: end; width: 100%; max-width: 600px; background: var(--field); overflow: hidden; }
+.sleeve img { position: absolute; bottom: 0; left: 50%; height: 92%; width: auto; transform: translateX(-50%); }
+.sleeve canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.sleeve__no { position: absolute; left: 16px; top: 14px; z-index: 2; font-family: var(--wide); font-weight: 700; font-size: 11px; letter-spacing: 0.22em; color: var(--black); }
+
+/* ---------- catalogue ---------- */
+.catalogue { padding: 120px var(--gutter) 96px; }
+h2 { margin: 0; font-weight: 600; font-size: 48px; line-height: 1.05; letter-spacing: -0.035em; text-wrap: balance; }
+.catalogue > p { margin: 16px 0 0; color: var(--muted); max-width: 46ch; }
+.items { list-style: none; margin: 64px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid #2A2A2A; }
+.items li { padding: 32px 32px 32px 0; border-right: 1px solid #2A2A2A; }
+.items li + li { padding-left: 32px; }
+.items li:last-child { border-right: 0; }
+.items h3 { margin: 16px 0 0; font-weight: 600; font-size: 28px; line-height: 34px; letter-spacing: -0.02em; }
+.items p { margin: 8px 0 0; color: var(--muted); text-wrap: pretty; }
+.items .code span { width: 22px; height: 22px; font-size: 9px; }
+
+.tagline { padding: 48px var(--gutter) 152px; }
+.tagline p { margin: 0; max-width: 20ch; font-weight: 600; font-size: 64px; line-height: 1.02; letter-spacing: -0.045em; text-wrap: balance; }
+.final { margin: 0 var(--gutter); padding: 72px 0; border-top: 1px solid #2A2A2A; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 48px; align-items: end; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 13px; line-height: 20px; color: var(--muted); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load ---------- */
+.js .sleeve { opacity: 0; }
+.js .hero [data-in] { opacity: 0; transform: translateY(12px); }
+.js .hero .code span { transform: scaleY(0); }
+.js.is-loaded .sleeve { opacity: 1; transition: opacity 1200ms ease 100ms; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 800ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(300ms + var(--i, 0) * 90ms); }
+.js.is-loaded .hero .code span { transform: none; transition: transform 500ms var(--ease-out); transition-delay: calc(700ms + var(--k) * 45ms); }
+@media (prefers-reduced-motion: reduce) { .js .hero [data-in], .js .hero .code span { transform: none !important; } .code.is-decoded span { animation: none; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) { h1 { font-size: 56px; } }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .sleeve { order: -1; justify-self: stretch; max-height: none; }
+  .items { grid-template-columns: 1fr; }
+  .items li, .items li + li { padding: 28px 0; border-right: 0; border-bottom: 1px solid #2A2A2A; }
+  .final { grid-template-columns: minmax(0, 1fr); }
+  h1 { font-size: 48px; } .tagline p { font-size: 40px; } h2 { font-size: 36px; }
+}
+@media (max-width: 420px) { .code span { width: 24px; height: 24px; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" fill="#6EC1FF"/><path d="M4 24 H12 L14 18 L16 28 L18 8 L20 26 L22 20 H30" fill="none" stroke="#0D0D0D" stroke-width="2" stroke-linejoin="round"/></svg>
+    <b>Mostafa Saher</b>
+  </a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" id="hero" aria-labelledby="hello">
+    <div class="hero__text">
+      <span class="cat" data-in style="--i:0">Fac 26 · Newsletter · AI and cloud</span>
+      <h1 id="hello" data-in style="--i:1">Hello, I’m Mostafa.</h1>
+      <div class="code" id="code" data-word="NEWSLETTER" aria-hidden="true" title="Hover to decode"></div>
+      <p class="roles" data-in style="--i:2">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:3">I write a newsletter about AI and cloud computing: what I think, where I stand, and the resources I’d actually hand a student.</p>
+      <form class="form" id="subscribe" data-signup data-hero data-in style="--i:4" novalidate>
+        <label class="sr-only" for="email-1">Email address</label>
+        <div class="form__row">
+          <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__label">Subscribe</span><i aria-hidden="true"></i></button>
+        </div>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <figure class="sleeve" id="sleeve">
+      <span class="sleeve__no" aria-hidden="true">FAC 26</span>
+      <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+      <canvas id="plot" aria-hidden="true"></canvas>
+    </figure>
+  </section>
+
+  <section class="catalogue" aria-labelledby="cat-h">
+    <span class="cat" data-reveal>Catalogue</span>
+    <h2 id="cat-h" data-reveal style="--i:1">Three pressings in every issue.</h2>
+    <p data-reveal style="--i:2">Written the way I explain things in class. Hover a code to read it.</p>
+    <ul class="items">
+      <li data-reveal><span class="cat">Fac 26/1</span><div class="code" data-word="THOUGHTS" aria-hidden="true"></div><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></li>
+      <li data-reveal style="--i:1"><span class="cat">Fac 26/2</span><div class="code" data-word="OPINIONS" aria-hidden="true"></div><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></li>
+      <li data-reveal style="--i:2"><span class="cat">Fac 26/3</span><div class="code" data-word="RESOURCES" aria-hidden="true"></div><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next">
+    <h2 id="next" data-reveal>Get the next pressing.</h2>
+    <form class="form" data-signup data-reveal style="--i:1" novalidate>
+      <label class="sr-only" for="email-2">Email address</label>
+      <div class="form__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Subscribe</span><i aria-hidden="true"></i></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = DraftKit;
+  const sleeve = document.getElementById('sleeve');
+  K.ready(sleeve.querySelector('img'));
+  K.reveals();
+
+  // colour alphabet: every letter owns a hue, so a word is a strip of colours
+  const hueOf = (ch) => ((ch.charCodeAt(0) - 65) * 137.508) % 360;
+  function paint(el, word) {
+    el.innerHTML = [...word].map((ch, k) => {
+      const h = hueOf(ch), l = [0, 4, 6, 8].includes(Math.round(h / 45) % 8) ? 52 : 60;
+      return `<span style="--k:${k};background:hsl(${h} 78% ${l}%);--c-ink:#0D0D0D">${ch}</span>`;
+    }).join('');
+  }
+  document.querySelectorAll('.code').forEach((el) => paint(el, el.dataset.word));
+
+  // the signal plot: stacked ridges over the lower half of the portrait
+  const cv = document.getElementById('plot'), ctx = cv.getContext('2d');
+  const N = 30, P = 90;
+  let W = 0, H = 0, seeds = [], mx = -999, my = -999, pulse = -1, pulseT0 = 0, raf = 0;
+  const rnd = (s) => { let x = s; return () => { x = (x * 16807) % 2147483647; return x / 2147483647; }; };
+  for (let i = 0; i < N; i++) { const r = rnd(1000 + i * 77); seeds.push(Array.from({ length: P }, () => r())); }
+  function size() { const b = sleeve.getBoundingClientRect(); W = b.width; H = b.height; const d = Math.min(2, devicePixelRatio || 1); cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); draw(performance.now()); }
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    const top = H * 0.5, gap = (H * 0.46) / N, x0 = W * 0.08, x1 = W * 0.92;
+    let p = -1;
+    if (pulse >= 0) { p = Math.min(1, (now - pulseT0) / 1500); if (p >= 1) pulse = -1; }
+    ctx.lineWidth = 1.25; ctx.lineJoin = 'round';
+    for (let i = 0; i < N; i++) {
+      const base = top + i * gap;
+      const boostPulse = p >= 0 ? 2.4 * Math.exp(-Math.pow(i / N - (1 - p), 2) / 0.006) : 0;
+      ctx.strokeStyle = `rgba(237,237,237,${0.5 + 0.35 * Math.min(1, boostPulse)})`;
+      ctx.beginPath();
+      for (let j = 0; j < P; j++) {
+        const t = j / (P - 1), x = x0 + (x1 - x0) * t;
+        const env = Math.exp(-Math.pow((t - 0.5) / 0.16, 2));
+        let a = (seeds[i][j] * 0.8 + 0.2) * env * gap * 3.2 + seeds[i][(j + 7) % P] * gap * 0.25;
+        const dx = x - mx, dy = base - my; a *= 1 + 0.45 * Math.exp(-(dx * dx + dy * dy) / (2 * 70 * 70)) + boostPulse;
+        j ? ctx.lineTo(x, base - a) : ctx.moveTo(x, base - a);
+      }
+      ctx.stroke();
+    }
+    raf = pulse >= 0 ? requestAnimationFrame(draw) : 0;
+  }
+  const ready = sleeve.querySelector('img');
+  (ready.complete ? Promise.resolve() : new Promise((r) => ready.addEventListener('load', r, { once: true }))).then(size);
+  addEventListener('resize', size);
+  // the signal answers the cursor, gently
+  K.pointer(sleeve, (x, y, inside) => { mx = inside ? x : -999; my = inside ? y : -999; if (!raf) draw(performance.now()); }, 0.14);
+
+  // send-off: a pulse travels up through the plot and the strip decodes to SUBSCRIBED
+  function send() {
+    const code = document.getElementById('code');
+    paint(code, 'SUBSCRIBED'); code.classList.add('is-decoded');
+    if (K.reduce) return;
+    pulse = 0; pulseT0 = performance.now(); if (!raf) raf = requestAnimationFrame(draw);
+  }
+  K.forms({ doneLabel: 'Received', message: (v) => `Subscribed. Issues go to ${v}.`, onSuccess: () => send() });
+})();
+</script>
+</body>
+</html>

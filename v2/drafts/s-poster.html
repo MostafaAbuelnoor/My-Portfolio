@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft S, See the Cloud | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@500..900&family=Onest:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft S: See the Cloud. A 1930s national-park travel poster: flat silkscreen planes of sky and desert dunes, you standing in the landscape, a ranger-voiced slogan below. Subscribing sends a small plane across the sky towing your welcome banner. */
+:root {
+  --stock: #F3E6C9;      /* poster stock showing through */
+  --ink: #1B1A17; --ink-rgb: 27 26 23;   /* 14:1 on stock */
+  --ink-2: #5A5040;
+  --sky: #9ED8D4;        /* black sweater on sky 11.6:1 */
+  --dune-1: #E2A23B; --dune-2: #C1702A; --dune-3: #8E4A1F;
+  --sun: #EE7B3A;
+  --gutter: clamp(20px, 4vw, 64px);
+  --px: 0;
+  --block: "Alumni Sans", "Arial Narrow", sans-serif;
+}
+html { scrollbar-color: #C9B58E var(--stock); }
+body { background: var(--stock); color: var(--ink); font-family: "Onest", system-ui, sans-serif; font-size: 18px; line-height: 28px; }
+::selection { background: var(--ink); color: var(--stock); }
+input { caret-color: var(--dune-3); }
+:focus-visible { outline: 2.5px solid var(--ink); outline-offset: 3px; }
+
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 20px var(--gutter); }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--block); font-weight: 800; font-size: 24px; letter-spacing: 0.04em; text-transform: uppercase; }
+.top-cta { font-family: var(--block); font-weight: 800; font-size: 20px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 6px 16px 4px; border: 2.5px solid var(--ink); transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { background: var(--ink); color: var(--stock); } }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(32px, 5vw, 88px); align-items: center; padding: 0 var(--gutter) 56px; min-height: calc(100svh - 82px); }
+.poster { --h: min(calc(100svh - 140px), 760px); position: relative; margin: 0; height: var(--h); aspect-ratio: 3 / 4; padding: 14px; background: var(--stock); box-shadow: inset 0 0 0 3px var(--ink), 0 30px 50px -30px rgba(70,40,10,.5); }
+.poster__inner { position: relative; height: 100%; overflow: hidden; background: var(--sky); }
+.poster svg.land { position: absolute; inset: 0; width: 100%; height: 100%; }
+.poster .plane-l { transform: translateX(calc(var(--px) * var(--d) * 1px)); transition: transform 600ms var(--ease-out); }
+.poster img { position: absolute; z-index: 2; bottom: 15%; left: 50%; height: 66%; width: auto; transform: translateX(calc(-50% + var(--px) * 3px)); transition: transform 600ms var(--ease-out); }
+.band { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: 15%; background: var(--ink); color: var(--stock); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 12px; }
+.band b { font-family: var(--block); font-weight: 900; font-size: calc(var(--h) * 0.075); line-height: 0.95; letter-spacing: 0.04em; text-transform: uppercase; }
+.band small { margin-top: 4px; font-family: var(--block); font-weight: 600; font-size: calc(var(--h) * 0.022); letter-spacing: 0.16em; text-transform: uppercase; }
+.flyer { position: absolute; z-index: 1; top: 16%; left: 0; display: flex; align-items: center; pointer-events: none; opacity: 0; will-change: transform; }
+.flyer .banner { position: relative; padding: 4px 14px 2px; background: var(--stock); border: 2px solid var(--ink); font-family: var(--block); font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; transform-origin: 100% 50%; animation: flutter 600ms ease-in-out infinite alternate; }
+.flyer .rope { width: 34px; height: 2px; background: var(--ink); }
+@keyframes flutter { from { transform: skewY(-2deg); } to { transform: skewY(2deg); } }
+
+h1 { margin: 0; font-family: var(--block); font-weight: 900; font-size: clamp(64px, 8vw, 128px); line-height: 0.86; letter-spacing: 0.01em; text-transform: uppercase; text-wrap: balance; }
+.roles { margin: 20px 0 0; font-size: 21px; line-height: 30px; font-weight: 600; max-width: 30ch; text-wrap: balance; }
+.pitch { margin: 12px 0 0; color: var(--ink-2); max-width: 44ch; text-wrap: pretty; }
+.form { margin-top: 28px; max-width: 500px; }
+.form__row { display: flex; gap: 8px; }
+.form input { flex: 1; min-width: 0; height: 54px; padding: 0 16px; border: 2.5px solid var(--ink); background: #FBF4E3; color: var(--ink); font: inherit; font-size: 18px; outline: none; }
+.form input::placeholder { color: #6E6350; opacity: 1; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 4px 22px 0; border: 0; background: var(--ink); color: var(--stock); font-family: var(--block); font-weight: 800; font-size: 24px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: var(--dune-3); } }
+.fine { margin: 10px 0 0; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+.msg { margin: 4px 0 0; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: #A3260F; }
+.is-invalid input { border-color: #A3260F; }
+
+/* ---------- sights ---------- */
+.sights { padding: 112px var(--gutter) 96px; }
+h2 { margin: 0; font-family: var(--block); font-weight: 900; font-size: 80px; line-height: 0.9; text-transform: uppercase; text-wrap: balance; }
+.sights > p { margin: 12px 0 0; color: var(--ink-2); max-width: 46ch; }
+.three { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.three li { padding: 0 0 8px; }
+.three .swatch { height: 120px; margin-bottom: 18px; border: 3px solid var(--ink); background: var(--c); position: relative; overflow: hidden; }
+.three .swatch::after { content: ""; position: absolute; left: -10%; right: -10%; bottom: -40%; height: 80%; border-radius: 50%; background: var(--c2); }
+.three h3 { margin: 0; font-family: var(--block); font-weight: 900; font-size: 48px; line-height: 0.95; text-transform: uppercase; }
+.three p { margin: 8px 0 0; text-wrap: pretty; }
+.tagline { padding: 40px var(--gutter) 144px; }
+.tagline p { margin: 0; max-width: 18ch; font-family: var(--block); font-weight: 900; font-size: clamp(56px, 8vw, 120px); line-height: 0.88; text-transform: uppercase; text-wrap: balance; }
+.final { margin: 0 var(--gutter); padding: 72px clamp(24px, 5vw, 72px); background: var(--sky); box-shadow: inset 0 0 0 3px var(--ink); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 500px); gap: 48px; align-items: end; }
+.final input { background: #EAF6F4; }
+.final .fine { color: #2F4643; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 14px; line-height: 20px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load: the inks are laid down one screen at a time ---------- */
+.js .poster .plane-l { opacity: 0; }
+.js .poster img { opacity: 0; }
+.js .band { clip-path: inset(100% 0 0 0); }
+.js .hero [data-in] { opacity: 0; transform: translateY(12px); }
+.js.is-loaded .poster .plane-l { opacity: 1; transition: opacity 500ms ease, transform 600ms var(--ease-out); transition-delay: calc(150ms + var(--k, 0) * 180ms), 0ms; }
+.js.is-loaded .poster img { opacity: 1; transition: opacity 700ms ease 900ms, transform 600ms var(--ease-out); }
+.js.is-loaded .band { clip-path: inset(0 0 0 0); transition: clip-path 700ms var(--ease-in-out) 1100ms; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(300ms + var(--i, 0) * 80ms); }
+@media (prefers-reduced-motion: reduce) { .js .band { clip-path: none; } .js .hero [data-in] { transform: none !important; } .flyer .banner { animation: none; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .poster { --h: min(124vw, 600px); justify-self: center; }
+  .three { grid-template-columns: minmax(0, 1fr); }
+  .final { grid-template-columns: minmax(0, 1fr); margin: 0 12px; }
+  h2 { font-size: 56px; }
+}
+@media (max-width: 520px) { .form__row { flex-direction: column; } .btn { justify-content: center; } .flyer .banner { font-size: 14px; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="38" height="38" viewBox="0 0 38 38" aria-hidden="true"><rect width="38" height="38" fill="#9ED8D4"/><path d="M0 26 C10 20 20 21 38 25 V38 H0Z" fill="#E2A23B"/><path d="M0 32 C14 27 26 28 38 31 V38 H0Z" fill="#8E4A1F"/><path d="M8 12 C10 8 16 8 18 11 C21 9 26 10 27 13 Z" fill="#F3E6C9"/><rect x="1.5" y="1.5" width="35" height="35" fill="none" stroke="#1B1A17" stroke-width="3"/></svg>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" id="hero" aria-labelledby="hello">
+    <figure class="poster" id="poster">
+      <div class="poster__inner">
+        <svg class="land" viewBox="0 0 600 800" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <g class="plane-l" style="--d:-10;--k:0"><circle cx="470" cy="150" r="54" fill="#EE7B3A"/></g>
+          <g class="plane-l" style="--d:-14;--k:0"><path d="M60 120 C80 92 140 92 160 112 C182 98 240 102 254 128 Z" fill="#F3E6C9"/><path d="M330 236 C346 214 394 212 410 230 C428 220 470 224 482 246 Z" fill="#F3E6C9"/></g>
+          <g class="plane-l" style="--d:4;--k:1"><path d="M0 470 C120 420 260 430 380 460 C470 482 540 470 600 450 V800 H0Z" fill="#E2A23B"/></g>
+          <g class="plane-l" style="--d:7;--k:2"><path d="M0 560 C90 520 200 520 300 545 C400 570 500 540 600 520 V800 H0Z" fill="#C1702A"/></g>
+          <g class="plane-l" style="--d:11;--k:3"><path d="M0 640 C140 600 280 610 420 630 C500 642 560 630 600 620 V800 H0Z" fill="#8E4A1F"/></g>
+        </svg>
+        <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck, standing in a flat-colour desert landscape">
+        <div class="flyer" id="flyer" aria-hidden="true">
+          <span class="banner" id="banner">Welcome aboard</span><span class="rope"></span>
+          <svg width="54" height="30" viewBox="0 0 54 30"><path d="M2 16 L40 12 C48 11 53 13 53 15 C53 17 48 19 40 18 Z" fill="#1B1A17"/><path d="M22 14 L32 2 L36 2 L32 14 Z M22 16 L32 28 L36 28 L32 16 Z M4 15 L2 6 L6 6 L10 14 Z" fill="#1B1A17"/></svg>
+        </div>
+        <div class="band"><b id="slogan">See the cloud</b><small>A newsletter on AI and cloud · Mostafa Saher</small></div>
+      </div>
+    </figure>
+
+    <div>
+      <h1 id="hello" data-in style="--i:0">Hello, I’m Mostafa.</h1>
+      <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:2">I write a newsletter about AI and cloud computing: a guided tour of what I think, where I stand, and the resources I’d actually hand a student.</p>
+      <form class="form" id="subscribe" data-signup data-hero data-in style="--i:3" novalidate>
+        <label class="sr-only" for="email-1">Email address</label>
+        <div class="form__row">
+          <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__label">Book the tour</span></button>
+        </div>
+        <p class="fine">Free newsletter. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="sights" aria-labelledby="sights">
+    <h2 id="sights" data-reveal>Three sights on every tour</h2>
+    <p data-reveal style="--i:1">Written the way I explain things in class, with the context guidebooks skip.</p>
+    <ul class="three">
+      <li data-reveal><div class="swatch" style="--c:#9ED8D4;--c2:#E2A23B" aria-hidden="true"></div><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></li>
+      <li data-reveal style="--i:1"><div class="swatch" style="--c:#E2A23B;--c2:#C1702A" aria-hidden="true"></div><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></li>
+      <li data-reveal style="--i:2"><div class="swatch" style="--c:#C1702A;--c2:#8E4A1F" aria-hidden="true"></div><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next">
+    <h2 id="next" data-reveal>Book the next tour.</h2>
+    <form class="form" data-signup data-reveal style="--i:1" novalidate>
+      <label class="sr-only" for="email-2">Email address</label>
+      <div class="form__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Book the tour</span></button>
+      </div>
+      <p class="fine">Free newsletter. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = DraftKit;
+  const poster = document.getElementById('poster');
+  K.ready(poster.querySelector('img'));
+  K.reveals();
+
+  // the planes of the poster slide a little against each other as the cursor moves (soft parallax)
+  K.pointer(document.getElementById('hero'), (x, y, inside) => {
+    const r = poster.getBoundingClientRect();
+    const nx = inside ? Math.max(-1, Math.min(1, (x - (r.left + r.width / 2)) / (r.width))) : 0;
+    poster.style.setProperty('--px', nx.toFixed(3));
+  }, 0.1);
+
+  // send-off: a small plane crosses the sky towing a welcome banner, then the slogan changes
+  async function flyover(email) {
+    const flyer = document.getElementById('flyer'), inner = poster.querySelector('.poster__inner');
+    document.getElementById('banner').textContent = `Welcome aboard, ${email}`;
+    if (K.reduce) { document.getElementById('slogan').textContent = 'See you inside'; return; }
+    flyer.style.opacity = 1;
+    const W = inner.clientWidth, fw = flyer.offsetWidth;
+    await flyer.animate([
+      { transform: `translateX(${-fw - 20}px) translateY(10px)` },
+      { transform: `translateX(${(W - fw) / 2}px) translateY(-6px)`, offset: 0.55 },
+      { transform: `translateX(${W + 40}px) translateY(-18px)` },
+    ], { duration: 5200, easing: 'linear', fill: 'forwards' }).finished;
+    flyer.style.opacity = 0;
+  }
+  K.forms({ doneLabel: 'Booked', message: (v) => `You’re booked. Issues go to ${v}.`, onSuccess: async (form, v) => { flyover(v); await K.sleep(K.reduce ? 0 : 2600); document.getElementById('slogan').textContent = 'See you inside'; } });
+})();
+</script>
+</body>
+</html>

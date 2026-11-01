@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft U, Loom | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Commissioner:wght@300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft U: Loom. The Jacquard loom ran on punched cards, the ancestor of every computer. Midnight silk, gold weft, cream cards. Subscribing punches your email into the card in binary and weaves it into the cloth below your portrait. */
+:root {
+  --midnight: #121C3B;
+  --cream: #EFE6CF; --ink-rgb: 239 230 207;   /* 13.5:1 on midnight */
+  --muted: #B7B3A4;      /* 8:1 */
+  --gold: #D9A93B;       /* black sweater on gold 8.5:1 */
+  --gold-2: #C79630;
+  --gutter: clamp(20px, 4vw, 64px);
+  --serif: "Young Serif", Georgia, serif;
+}
+html { scrollbar-color: #2E3A63 var(--midnight); color-scheme: dark; }
+body { background: var(--midnight); color: var(--cream); font-family: "Commissioner", system-ui, sans-serif; font-size: 18px; line-height: 28px; font-weight: 300; }
+::selection { background: var(--gold); color: var(--midnight); }
+input { caret-color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.hole-strip { display: grid; gap: 4px; }
+
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 22px var(--gutter); }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--serif); font-size: 20px; }
+.top-cta { font-weight: 500; font-size: 15px; text-decoration: none; padding: 8px 16px; border: 1px solid var(--gold); color: var(--gold); border-radius: 2px; transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.top-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { background: var(--gold); color: var(--midnight); } }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 96px); align-items: center; padding: 0 var(--gutter) 64px; min-height: calc(100svh - 84px); }
+h1 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 6.8vw, 108px); line-height: 0.98; letter-spacing: -0.02em; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--gold); }
+.roles { margin: 24px 0 0; font-size: 22px; line-height: 32px; font-weight: 400; max-width: 30ch; text-wrap: balance; }
+.pitch { margin: 12px 0 0; color: var(--muted); max-width: 44ch; text-wrap: pretty; }
+.form { margin-top: 30px; max-width: 520px; }
+.form__row { display: flex; gap: 8px; }
+.form input { flex: 1; min-width: 0; height: 54px; padding: 0 16px; border: 1px solid #3A4774; border-radius: 2px; background: #18244A; color: var(--cream); font: inherit; font-weight: 400; font-size: 18px; outline: none; transition: border-color 150ms ease; }
+.form input::placeholder { color: #9C9A8E; opacity: 1; }
+.form input:focus { border-color: var(--gold); }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 0 22px; border: 0; border-radius: 2px; background: var(--gold); color: var(--midnight); font: inherit; font-weight: 600; font-size: 17px; white-space: nowrap; cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #E7BB55; } }
+.fine { margin: 10px 0 0; font-size: 14px; line-height: 20px; color: var(--muted); }
+.msg { margin: 4px 0 0; font-size: 14px; line-height: 20px; font-weight: 500; }
+.msg.is-error { color: #FF9A8A; }
+.is-invalid input { border-color: #FF9A8A; }
+
+/* the loom */
+.loom { --h: min(calc(100svh - 150px), 740px); position: relative; margin: 0; height: var(--h); aspect-ratio: 3 / 4; display: grid; grid-template-rows: auto 1fr; }
+.card { position: relative; z-index: 2; height: calc(var(--h) * 0.16); margin: 0 14%; overflow: hidden; background: var(--cream); border-radius: 4px 4px 0 0; box-shadow: 0 8px 18px -10px rgba(0,0,0,.6); }
+.card__rows { position: absolute; left: 0; right: 0; top: 0; padding: 8px 14px; display: grid; gap: 5px; transition: transform 300ms var(--ease-out); }
+.row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
+.row i { height: 9px; border-radius: 5px; border: 1px solid rgba(18,28,59,.35); }
+.row i.p { background: var(--midnight); border-color: var(--midnight); }
+.row.new i.p { animation: punch 220ms var(--ease-out) both; animation-delay: calc(var(--b) * 22ms); }
+@keyframes punch { from { transform: scale(1.8); opacity: 0; } }
+.cloth { position: relative; overflow: hidden; background-color: var(--gold); background-image: repeating-linear-gradient(45deg, rgba(120,80,10,.16) 0 2px, transparent 2px 6px), repeating-linear-gradient(-45deg, rgba(255,240,200,.12) 0 1px, transparent 1px 7px); border-radius: 2px; }
+.cloth img { position: absolute; z-index: 1; bottom: 15%; left: 50%; height: 80%; width: auto; transform: translateX(-50%); }
+.sheen { position: absolute; z-index: 2; inset: 0; pointer-events: none; mix-blend-mode: soft-light; opacity: 0; transition: opacity 500ms ease; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 30%), rgba(255,250,230,.75), rgba(255,250,230,0) 70%); }
+.loom.is-hover .sheen { opacity: 1; }
+.band { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: 15%; background: var(--midnight); border-top: 2px solid var(--gold-2); display: flex; flex-direction: column; justify-content: center; padding: 6px 10px; overflow: hidden; }
+.band__rows { display: grid; gap: 2px; }
+.brow { display: grid; grid-template-columns: repeat(32, 1fr); gap: 2px; }
+.brow i { height: 7px; background: #24305A; }
+.brow i.g { background: var(--gold); }
+.brow.weaving i { opacity: 0; }
+.brow.weaving i.on { opacity: 1; transition: opacity 80ms linear; }
+.shuttle { position: absolute; z-index: 4; bottom: 4%; left: 0; width: 46px; height: 10px; border-radius: 50%; background: var(--cream); box-shadow: 0 0 0 2px var(--midnight); opacity: 0; pointer-events: none; }
+.readout { position: absolute; left: 0; right: 0; bottom: -36px; margin: 0; font-size: 13px; line-height: 18px; color: var(--muted); text-align: center; font-variant-numeric: tabular-nums; }
+
+/* ---------- threads ---------- */
+.threads { padding: 120px var(--gutter) 96px; }
+h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 60px; line-height: 1; letter-spacing: -0.02em; text-wrap: balance; }
+.threads > p { margin: 12px 0 0; color: var(--muted); max-width: 46ch; }
+.three { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.three .row { grid-template-columns: repeat(8, 12px); gap: 5px; margin-bottom: 20px; }
+.three .row i { height: 12px; border-color: rgba(239,230,207,.35); }
+.three .row i.p { background: var(--gold); border-color: var(--gold); }
+.three h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 36px; line-height: 40px; }
+.three .bin { margin: 4px 0 0; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0.06em; }
+.three p { margin: 10px 0 0; text-wrap: pretty; }
+.tagline { padding: 40px var(--gutter) 144px; }
+.tagline p { margin: 0; max-width: 20ch; font-family: var(--serif); font-size: clamp(44px, 6vw, 88px); line-height: 1.02; letter-spacing: -0.02em; text-wrap: balance; }
+.final { margin: 0 var(--gutter); padding: 72px clamp(24px, 5vw, 72px); background: var(--gold); color: var(--midnight); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 48px; align-items: end; background-image: repeating-linear-gradient(45deg, rgba(120,80,10,.14) 0 2px, transparent 2px 6px); }
+.final input { background: #F6EBCB; color: var(--midnight); border-color: rgba(18,28,59,.5); }
+.final input::placeholder { color: #5E5638; }
+.final .btn { background: var(--midnight); color: var(--gold); }
+@media (hover: hover) and (pointer: fine) { .final .btn:hover { background: #22305C; } }
+.final .fine { color: #3B3420; }
+.final .msg.is-error { color: #8A1C0C; }
+.final :focus-visible { outline-color: var(--midnight); }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 14px; line-height: 20px; color: var(--muted); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load ---------- */
+.js .card { transform: translateY(-30px); opacity: 0; }
+.js .cloth { clip-path: inset(0 0 100% 0); }
+.js .cloth img { opacity: 0; }
+.js .hero [data-in] { opacity: 0; transform: translateY(12px); }
+.js.is-loaded .card { transform: none; opacity: 1; transition: transform 800ms var(--ease-out), opacity 500ms ease; }
+.js.is-loaded .cloth { clip-path: inset(0 0 0 0); transition: clip-path 1300ms steps(26) 300ms; }
+.js.is-loaded .cloth img { opacity: 1; transition: opacity 800ms ease 1300ms; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(200ms + var(--i, 0) * 80ms); }
+@media (prefers-reduced-motion: reduce) { .js .card { transform: none; } .js .cloth { clip-path: none; } .js .hero [data-in] { transform: none !important; } .sheen { display: none; } .row.new i.p { animation: none; } }
+@media (hover: none), (pointer: coarse) { .sheen { display: none; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .loom { --h: min(128vw, 600px); justify-self: center; margin-bottom: 40px; }
+  .three { grid-template-columns: minmax(0, 1fr); }
+  .final { grid-template-columns: minmax(0, 1fr); margin: 0 12px; }
+  h2 { font-size: 44px; }
+}
+@media (max-width: 520px) { .form__row { flex-direction: column; } .btn { justify-content: center; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="3" fill="#EFE6CF"/><g fill="#121C3B"><circle cx="8" cy="8" r="2.4"/><circle cx="20" cy="8" r="2.4"/><circle cx="14" cy="14" r="2.4"/><circle cx="26" cy="14" r="2.4"/><circle cx="8" cy="20" r="2.4"/><circle cx="20" cy="20" r="2.4"/></g><rect x="0" y="24" width="34" height="10" rx="0" fill="#D9A93B"/></svg>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" id="hero" aria-labelledby="hello">
+    <div>
+      <h1 id="hello" data-in style="--i:0">Hello, I’m <em>Mostafa.</em></h1>
+      <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:2">I write a newsletter about AI and cloud computing. The Jacquard loom ran on punched cards two centuries before your laptop did; I like to start from first principles like that.</p>
+      <form class="form" id="subscribe" data-signup data-hero data-in style="--i:3" novalidate>
+        <label class="sr-only" for="email-1">Email address</label>
+        <div class="form__row">
+          <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__label">Weave me in</span></button>
+        </div>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <figure class="loom" id="loom">
+      <div class="card" aria-hidden="true"><div class="card__rows" id="card"></div></div>
+      <div class="cloth" id="cloth">
+        <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck, on woven gold cloth">
+        <div class="sheen" aria-hidden="true"></div>
+        <div class="band" aria-hidden="true"><div class="band__rows" id="band"></div></div>
+        <span class="shuttle" id="shuttle" aria-hidden="true"></span>
+      </div>
+      <p class="readout" id="readout">Card reads: MOSTAFA, in binary.</p>
+    </figure>
+  </section>
+
+  <section class="threads" aria-labelledby="threads">
+    <h2 id="threads" data-reveal>Three threads in every issue</h2>
+    <p data-reveal style="--i:1">Written the way I explain things in class, one instruction at a time.</p>
+    <ul class="three">
+      <li data-reveal><div class="row" data-ch="T" aria-hidden="true"></div><h3>Thoughts</h3><p class="bin" data-bin="T"></p><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></li>
+      <li data-reveal style="--i:1"><div class="row" data-ch="O" aria-hidden="true"></div><h3>Opinions</h3><p class="bin" data-bin="O"></p><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></li>
+      <li data-reveal style="--i:2"><div class="row" data-ch="R" aria-hidden="true"></div><h3>Resources</h3><p class="bin" data-bin="R"></p><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="next">
+    <h2 id="next" data-reveal>Weave in the next issue.</h2>
+    <form class="form" data-signup data-reveal style="--i:1" novalidate>
+      <label class="sr-only" for="email-2">Email address</label>
+      <div class="form__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Weave me in</span></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = DraftKit;
+  const loom = document.getElementById('loom');
+  K.ready(loom.querySelector('img'));
+  K.reveals();
+
+  const bits = (ch) => ch.charCodeAt(0).toString(2).padStart(8, '0');
+  const rowHTML = (ch, cls = '') => `<div class="row ${cls}">${[...bits(ch)].map((b, k) => `<i class="${b === '1' ? 'p' : ''}" style="--b:${k}"></i>`).join('')}</div>`;
+
+  // the card reads MOSTAFA; the woven band carries AI + CLOUD; the three threads below show their initials
+  const card = document.getElementById('card');
+  card.innerHTML = [...'MOSTAFA'].map((c) => rowHTML(c)).join('');
+  document.querySelectorAll('.three .row').forEach((r) => { r.outerHTML = rowHTML(r.dataset.ch); });
+  document.querySelectorAll('[data-bin]').forEach((p) => { p.textContent = `${p.dataset.bin} = ${bits(p.dataset.bin)}`; });
+  const band = document.getElementById('band');
+  const bandRow = (str, cls = '') => {
+    const b = [...str.padEnd(4, ' ').slice(0, 4)].map(bits).join('');
+    return `<div class="brow ${cls}">${[...b].map((x) => `<i class="${x === '1' ? 'g' : ''}"></i>`).join('')}</div>`;
+  };
+  band.innerHTML = ['AI +', ' CLO', 'UD  '].map((s) => bandRow(s)).join('');
+
+  // gold thread catches the light under the cursor (soft)
+  const sheen = loom.querySelector('.sheen'), cloth = document.getElementById('cloth');
+  K.pointer(loom, (x, y) => { const r = cloth.getBoundingClientRect(), l = loom.getBoundingClientRect(); sheen.style.setProperty('--mx', `${x - (r.left - l.left)}px`); sheen.style.setProperty('--my', `${y - (r.top - l.top)}px`); }, 0.12);
+
+  // send-off: the email is punched into the card byte by byte, then woven into the band as the shuttle passes
+  async function weave(email) {
+    const text = email.slice(0, 16);
+    document.getElementById('readout').textContent = `Card reads: ${text}${email.length > 16 ? '…' : ''}, in binary.`;
+    for (const ch of text) {
+      card.insertAdjacentHTML('afterbegin', rowHTML(ch, 'new'));
+      if (card.children.length > 12) card.lastElementChild.remove();
+      if (!K.reduce) await K.sleep(90);
+    }
+    const sh = document.getElementById('shuttle'), W = cloth.clientWidth;
+    const chunks = []; for (let i = 0; i < text.length; i += 4) chunks.push(text.slice(i, i + 4));
+    for (let n = 0; n < chunks.length; n++) {
+      band.insertAdjacentHTML('beforeend', bandRow(chunks[n], 'weaving'));
+      while (band.children.length > 4) band.firstElementChild.remove();
+      const row = band.lastElementChild, cells = [...row.children];
+      if (K.reduce) { row.classList.remove('weaving'); continue; }
+      const ltr = n % 2 === 0;
+      sh.style.opacity = 1;
+      const dur = 520;
+      sh.animate([{ transform: `translateX(${ltr ? -50 : W + 4}px)` }, { transform: `translateX(${ltr ? W + 4 : -50}px)` }], { duration: dur, easing: 'cubic-bezier(0.45, 0, 0.55, 1)', fill: 'forwards' });
+      cells.forEach((c, k) => setTimeout(() => c.classList.add('on'), (ltr ? k : 31 - k) * (dur / 34)));
+      await K.sleep(dur + 60);
+      row.classList.remove('weaving');
+    }
+    sh.style.opacity = 0;
+  }
+  K.forms({ doneLabel: 'Woven in', message: (v) => `Subscribed. Issues go to ${v}.`, onSuccess: (form, v) => weave(v) });
+})();
+</script>
+</body>
+</html>

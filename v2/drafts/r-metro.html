@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft R, Metro | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400..800&family=Overpass+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft R: Metro. A transit diagram: three coloured lines (thoughts, opinions, resources) meet at your interchange, and one line runs on to the visitor's inbox. Subscribing opens that line and sends the first train. */
+:root {
+  --white: #FAFAF7;
+  --ink: #121212; --ink-rgb: 18 18 18;
+  --ink-2: #57575A;
+  --red: #D7262E; --blue: #1F6FD1; --gold: #C98B00; --green: #1E9E5A;
+  --panel: #4FD39A;      /* black sweater on it 9.8:1 */
+  --gutter: clamp(20px, 4vw, 64px);
+  --mono: "Overpass Mono", ui-monospace, monospace;
+}
+html { scrollbar-color: #C9C9C4 var(--white); }
+body { background: var(--white); color: var(--ink); font-family: "Overpass", system-ui, sans-serif; font-size: 18px; line-height: 28px; }
+::selection { background: var(--panel); color: var(--ink); }
+input { caret-color: var(--green); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 22px var(--gutter); }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; font-size: 18px; }
+.top-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; text-decoration: none; padding: 8px 14px 6px; border-radius: 999px; background: var(--ink); color: var(--white); transition: transform 160ms var(--ease-out); }
+.top-cta i { width: 10px; height: 10px; border-radius: 50%; border: 2.5px solid var(--panel); }
+.top-cta:active { transform: scale(0.97); }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: center; padding: 0 var(--gutter) 56px; min-height: calc(100svh - 84px); }
+h1 { margin: 0; font-weight: 800; font-size: clamp(56px, 6.6vw, 104px); line-height: 0.92; letter-spacing: -0.04em; text-wrap: balance; }
+.roles { margin: 22px 0 0; font-size: 22px; line-height: 30px; font-weight: 600; max-width: 30ch; text-wrap: balance; }
+.pitch { margin: 12px 0 0; color: var(--ink-2); max-width: 44ch; text-wrap: pretty; }
+.form { margin-top: 28px; max-width: 520px; }
+.form label { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; line-height: 20px; }
+.form label i { width: 22px; height: 6px; border-radius: 3px; background: repeating-linear-gradient(90deg, var(--ink) 0 6px, transparent 6px 10px); }
+.form__row { display: flex; gap: 8px; margin-top: 8px; }
+.form input { flex: 1; min-width: 0; height: 54px; padding: 0 20px; border: 2.5px solid var(--ink); border-radius: 999px; background: #fff; color: var(--ink); font: inherit; font-size: 18px; outline: none; }
+.form input::placeholder { color: #6B6B6E; opacity: 1; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 0 22px; border: 0; border-radius: 999px; background: var(--green); color: #fff; font: inherit; font-size: 17px; font-weight: 800; white-space: nowrap; cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #17824A; } }
+.fine { margin: 10px 0 0 20px; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+.msg { margin: 4px 0 0 20px; font-size: 14px; line-height: 20px; font-weight: 700; }
+.msg.is-error { color: #B3121F; }
+.is-invalid input { border-color: #B3121F; }
+
+/* the map */
+.map { position: relative; margin: 0; width: 100%; max-width: 640px; justify-self: end; aspect-ratio: 600 / 700; max-height: calc(100svh - 150px); }
+.map svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.line { fill: none; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; transition: opacity 250ms ease; }
+.map.is-focus .line:not(.is-on), .map.is-focus .label:not(.is-on) { opacity: 0.18; }
+.stop { fill: #fff; stroke: var(--ink); stroke-width: 3.5; }
+.label { font-family: "Overpass", sans-serif; font-weight: 800; font-size: 19px; fill: var(--ink); transition: opacity 250ms ease; cursor: default; }
+.label tspan.sub { font-weight: 500; font-size: 13px; fill: var(--ink-2); }
+.out { stroke: var(--ink); stroke-dasharray: 2 18; }
+.out-solid { stroke: var(--ink); }
+.terminus { fill: #fff; stroke: var(--ink); stroke-width: 4; transition: fill 300ms ease; }
+.is-arrived .terminus { fill: var(--panel); }
+.train rect { fill: var(--ink); } .train .win { fill: var(--panel); }
+.interchange { position: absolute; left: 33.33%; top: 25.7%; width: 43.33%; height: 48.57%; border: 5px solid var(--ink); border-radius: 22px; background: var(--panel); overflow: hidden; }
+.interchange img { position: absolute; bottom: 0; left: 50%; height: 94%; width: auto; transform: translateX(-50%); }
+.interchange .sign { position: absolute; left: 10px; top: 10px; right: 10px; z-index: 2; display: flex; justify-content: space-between; gap: 8px; padding: 6px 10px 4px; border-radius: 8px; background: var(--ink); color: #fff; font-size: 13px; line-height: 16px; font-weight: 700; }
+.interchange .sign span:last-child { font-family: var(--mono); color: var(--panel); }
+.legend { position: absolute; left: 0; right: 0; bottom: -44px; margin: 0; font-size: 15px; line-height: 20px; color: var(--ink-2); min-height: 40px; }
+.legend b { color: var(--ink); }
+
+/* ---------- lines on the network ---------- */
+.network { padding: 120px var(--gutter) 96px; }
+h2 { margin: 0; font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -0.035em; text-wrap: balance; }
+.network > p { margin: 14px 0 0; color: var(--ink-2); max-width: 46ch; }
+.rows { list-style: none; margin: 48px 0 0; padding: 0; display: grid; gap: 0; }
+.rows li { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 32px; align-items: center; padding: 22px 0; border-top: 1px solid #DCDCD6; }
+.rows li:last-child { border-bottom: 1px solid #DCDCD6; }
+.chip { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; font-size: 26px; line-height: 30px; }
+.chip i { width: 44px; height: 12px; border-radius: 6px; background: var(--c); }
+.rows p { margin: 0; max-width: 54ch; text-wrap: pretty; }
+.tagline { padding: 40px var(--gutter) 144px; }
+.tagline p { margin: 0; max-width: 18ch; font-weight: 800; font-size: clamp(44px, 6vw, 88px); line-height: 0.96; letter-spacing: -0.04em; text-wrap: balance; }
+.final { margin: 0 var(--gutter); padding: 72px clamp(24px, 5vw, 72px); border-radius: 28px; background: var(--ink); color: var(--white); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 48px; align-items: end; }
+.final input { border-color: var(--white); }
+.final .fine { color: #C9C9C4; }
+.final .form label { color: var(--white); }
+.final .form label i { background: repeating-linear-gradient(90deg, var(--panel) 0 6px, transparent 6px 10px); }
+.final .msg.is-error { color: #FF9A8A; }
+.final :focus-visible { outline-color: var(--panel); }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--gutter); font-size: 14px; line-height: 20px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load: lines draw into the interchange ---------- */
+.js .map .line, .js .map .out { stroke-dashoffset: var(--len); stroke-dasharray: var(--len); }
+.js .map .out { stroke-dasharray: 2 18; stroke-dashoffset: 0; opacity: 0; }
+.js .interchange { opacity: 0; transform: scale(0.96); }
+.js .map .stop, .js .map .label { opacity: 0; }
+.js .hero [data-in] { opacity: 0; transform: translateY(12px); }
+.js.is-loaded .map .line { stroke-dashoffset: 0; transition: stroke-dashoffset 1100ms var(--ease-in-out); transition-delay: calc(200ms + var(--i, 0) * 160ms); }
+.js.is-loaded .map .out { opacity: 1; transition: opacity 600ms ease 1300ms; }
+.js.is-loaded .interchange { opacity: 1; transform: none; transition: opacity 500ms var(--ease-out) 900ms, transform 700ms var(--ease-out) 900ms; }
+.js.is-loaded .map .stop, .js.is-loaded .map .label { opacity: 1; transition: opacity 400ms ease 1200ms; }
+.js.is-loaded .hero [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(150ms + var(--i, 0) * 80ms); }
+@media (prefers-reduced-motion: reduce) { .js .map .line { stroke-dashoffset: 0 !important; stroke-dasharray: none !important; } .js .interchange, .js .hero [data-in] { transform: none !important; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .map { order: -1; justify-self: center; margin-bottom: 56px; max-height: none; }
+  .rows li { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .final { grid-template-columns: minmax(0, 1fr); margin: 0 12px; }
+  h2 { font-size: 40px; }
+}
+@media (max-width: 520px) { .form__row { flex-direction: column; } .btn { justify-content: center; } .label { font-size: 22px; } .label tspan.sub { display: none; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M2 10 H14 L22 18" stroke="#D7262E" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M2 18 H22" stroke="#1F6FD1" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M2 26 H14 L22 18" stroke="#C98B00" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M22 18 H34" stroke="#121212" stroke-width="4" stroke-dasharray="1 4" stroke-linecap="round" fill="none"/><circle cx="22" cy="18" r="6" fill="#4FD39A" stroke="#121212" stroke-width="2.5"/></svg>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta" href="#subscribe"><i aria-hidden="true"></i>Subscribe</a>
+</header>
+
+<main>
+  <section class="hero" id="hero" aria-labelledby="hello">
+    <div>
+      <h1 id="hello" data-in style="--i:0">Hello, I’m Mostafa.</h1>
+      <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:2">I write a newsletter about AI and cloud computing. Three lines run through every issue, and all of them meet here before heading to your inbox.</p>
+      <form class="form" id="subscribe" data-signup data-hero data-in style="--i:3" novalidate>
+        <label for="email-1"><i aria-hidden="true"></i>Extend the line to</label>
+        <div class="form__row">
+          <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__label">Open the line</span></button>
+        </div>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <figure class="map" id="map">
+      <svg viewBox="0 0 600 700" aria-hidden="true">
+        <path class="line" data-line="red" style="--i:0;stroke:var(--red)" d="M24 92 H150 L230 172 L250 192"/>
+        <path class="line" data-line="blue" style="--i:1;stroke:var(--blue)" d="M24 352 H210"/>
+        <path class="line" data-line="gold" style="--i:2;stroke:var(--gold)" d="M24 612 H150 L230 532 L250 512"/>
+        <path class="line out" id="out" d="M460 470 H520 L576 526 V640"/>
+        <path class="line out-solid" id="out-solid" d="M460 470 H520 L576 526 V640" style="opacity:0"/>
+        <g class="train" id="train" style="opacity:0"><rect x="-19" y="-9" width="38" height="18" rx="9"/><rect class="win" x="-12" y="-4" width="9" height="8" rx="2"/><rect class="win" x="3" y="-4" width="9" height="8" rx="2"/></g>
+        <circle class="stop" cx="24" cy="92" r="11"/><circle class="stop" cx="24" cy="352" r="11"/><circle class="stop" cx="24" cy="612" r="11"/>
+        <circle class="terminus" cx="576" cy="652" r="16"/>
+        <text class="label" data-line="red" x="2" y="46">Thoughts<tspan class="sub" x="2" dy="20">notes from class</tspan></text>
+        <text class="label" data-line="blue" x="2" y="306">Opinions<tspan class="sub" x="2" dy="20">where I stand</tspan></text>
+        <text class="label" data-line="gold" x="2" y="566">Resources<tspan class="sub" x="2" dy="20">tools I use</tspan></text>
+        <text class="label" x="600" y="694" text-anchor="end" id="term-label">Your inbox</text>
+      </svg>
+      <div class="interchange">
+        <div class="sign" aria-hidden="true"><span>Mostafa · interchange</span><span id="next">Next: soon</span></div>
+        <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+      </div>
+      <p class="legend" id="legend" aria-live="polite">Hover a line to see where it goes.</p>
+    </figure>
+  </section>
+
+  <section class="network" aria-labelledby="network">
+    <h2 id="network" data-reveal>Lines on the network</h2>
+    <p data-reveal style="--i:1">Every issue runs all three, written the way I explain things in class.</p>
+    <ul class="rows">
+      <li data-reveal><span class="chip" style="--c:var(--red)"><i aria-hidden="true"></i>Thoughts</span><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></li>
+      <li data-reveal style="--i:1"><span class="chip" style="--c:var(--blue)"><i aria-hidden="true"></i>Opinions</span><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></li>
+      <li data-reveal style="--i:2"><span class="chip" style="--c:var(--gold)"><i aria-hidden="true"></i>Resources</span><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" aria-labelledby="final-h">
+    <h2 id="final-h" data-reveal>Catch the next train.</h2>
+    <form class="form" data-signup data-reveal style="--i:1" novalidate>
+      <label for="email-2"><i aria-hidden="true"></i>Extend the line to</label>
+      <div class="form__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Open the line</span></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = DraftKit;
+  const map = document.getElementById('map');
+  document.querySelectorAll('.map .line').forEach((p) => p.style.setProperty('--len', Math.ceil(p.getTotalLength())));
+  K.ready(map.querySelector('img'));
+  K.reveals();
+
+  // hover a line or its station: it lights up, the rest step back, and the legend says where it goes
+  const info = { red: '<b>Red line, Thoughts.</b> Notes from teaching and the explanations that land.', blue: '<b>Blue line, Opinions.</b> Where I stand on models, services and hype.', gold: '<b>Gold line, Resources.</b> Labs, docs and tools I actually use.' };
+  const legend = document.getElementById('legend');
+  if (K.finePointer) map.querySelectorAll('[data-line]').forEach((el) => {
+    el.style.pointerEvents = 'stroke';
+    el.addEventListener('pointerenter', () => {
+      const k = el.dataset.line;
+      map.classList.add('is-focus');
+      map.querySelectorAll('[data-line]').forEach((x) => x.classList.toggle('is-on', x.dataset.line === k));
+      legend.innerHTML = info[k];
+    });
+    el.addEventListener('pointerleave', () => { map.classList.remove('is-focus'); legend.textContent = 'Hover a line to see where it goes.'; });
+  });
+
+  // send-off: the dashed extension becomes track, the first train runs to the visitor's inbox, the terminus lights
+  async function departure(email) {
+    const solid = document.getElementById('out-solid'), dash = document.getElementById('out'), train = document.getElementById('train');
+    const len = solid.getTotalLength();
+    document.getElementById('next').textContent = 'Next: your inbox';
+    if (K.reduce) { solid.style.opacity = 1; map.classList.add('is-arrived'); document.getElementById('term-label').textContent = 'Your inbox · issue 01'; return; }
+    solid.style.opacity = 1; solid.style.strokeDasharray = len; solid.style.strokeDashoffset = len;
+    await solid.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 800, easing: 'cubic-bezier(0.77, 0, 0.175, 1)', fill: 'forwards' }).finished;
+    dash.style.opacity = 0;
+    train.style.opacity = 1;
+    const t0 = performance.now(), D = 1500;
+    await new Promise((done) => {
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / D), e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        const a = solid.getPointAtLength(e * len), b = solid.getPointAtLength(Math.min(len, e * len + 1));
+        train.setAttribute('transform', `translate(${a.x} ${a.y}) rotate(${Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI})`);
+        if (p < 1) requestAnimationFrame(step); else done();
+      };
+      requestAnimationFrame(step);
+    });
+    map.classList.add('is-arrived');
+    document.getElementById('term-label').textContent = 'Your inbox · issue 01';
+    document.querySelector('.terminus').animate([{ r: 16 }, { r: 24 }, { r: 16 }], { duration: 500, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+  }
+  K.forms({ doneLabel: 'Line open', message: (v) => `Subscribed. Issues run to ${v}.`, onSuccess: (form, v) => departure(v) });
+})();
+</script>
+</body>
+</html>

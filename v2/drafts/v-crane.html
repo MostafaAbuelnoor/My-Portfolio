@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft V, Crane | Mostafa Saher</title>
+<meta name="description" content="After Class: a free newsletter by Mostafa Saher on AI and cloud computing. Thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400..800&family=Hanken+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<style>
+/* Draft V: Crane. E's lime cover and living name, with G's crane folded in. The name leans toward the mouse; subscribing folds a paper square into a crane that flies across the name and perches on the F. */
+:root {
+  --lime: #D9F24B;       /* black sweater on lime 14.7:1 */
+  --ink: #111111;        /* 15:1 on lime */
+  --olive: #3A4210;      /* secondary on lime 8.5:1 */
+  --page: #F6F6F0;
+  --ink-2: #4D4D47;
+  --paper: #FFFFFF;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --gutter: clamp(20px, 3.6vw, 56px);
+  --display: "Big Shoulders Display", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: #9DAF34 var(--page); }
+body { margin: 0; background: var(--page); color: var(--ink); overflow-x: clip; font-family: "Hanken Grotesk", system-ui, sans-serif; font-size: 18px; line-height: 28px; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--ink); color: var(--lime); }
+input { caret-color: var(--ink); }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- cover: one sheet of lime paper ---------- */
+.cover { position: relative; min-height: 100svh; background: var(--lime); overflow: hidden; isolation: isolate; }
+.creases { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+.creases line { stroke: rgba(255,255,255,.55); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.creases .v { stroke-dasharray: 7 6; }
+.sheen {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity 500ms ease; mix-blend-mode: soft-light;
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 40%), rgba(255,255,255,.9), rgba(255,255,255,0) 70%);
+}
+.cover.is-hover .sheen { opacity: 1; }
+
+.strip { position: relative; z-index: 4; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 16px; padding: 16px var(--gutter) 0; }
+.brand { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1; letter-spacing: 0.01em; text-transform: uppercase; text-decoration: none; }
+.brand svg { width: 30px; height: 30px; fill: var(--ink); transition: transform 300ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .brand:hover svg { transform: translateY(-2px) rotate(-8deg); } }
+.strip__note { font-size: 13px; line-height: 20px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.pill { justify-self: end; font-size: 13px; line-height: 20px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 6px 12px; border: 1.5px solid var(--ink); border-radius: 999px; transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.pill:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .pill:hover { background: var(--ink); color: var(--lime); } }
+
+.masthead {
+  position: relative; z-index: 0; margin: 0; padding: 0 var(--gutter); display: flex; justify-content: space-between;
+  font-family: var(--display); font-weight: 700; font-size: 25.5vw; line-height: 0.8; letter-spacing: -0.01em; text-transform: uppercase; user-select: none;
+}
+.masthead span { display: inline-block; transform-origin: 50% 100%; font-variation-settings: "wght" var(--w, 640); }
+.portrait { position: absolute; z-index: 1; bottom: 0; left: 62%; height: 84%; width: auto; transform: translateX(-50%); }
+.left { position: absolute; z-index: 2; left: var(--gutter); bottom: 40px; width: min(460px, 34vw); }
+h1 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 72px; line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; text-wrap: balance; }
+.roles { margin: 16px 0 0; font-size: 18px; line-height: 26px; font-weight: 600; text-wrap: balance; }
+.pitch { margin: 8px 0 0; color: var(--olive); font-size: 16px; line-height: 24px; text-wrap: pretty; }
+.pitch b { color: var(--ink); font-weight: 700; }
+.lines { position: absolute; z-index: 2; right: var(--gutter); bottom: 40px; width: 200px; text-align: right; display: grid; gap: 20px; }
+.lines b { display: block; font-family: var(--display); font-weight: 800; font-size: 36px; line-height: 0.95; text-transform: uppercase; }
+.lines span { display: block; margin-top: 4px; font-size: 14px; line-height: 20px; color: var(--olive); }
+
+/* the crane: folded from a square of paper on signup */
+.crane { position: absolute; z-index: 6; left: 0; top: 0; width: 100px; height: 100px; overflow: visible; pointer-events: none; filter: drop-shadow(0 12px 10px rgba(40,50,0,.26)); }
+.crane .paper { fill: var(--paper); stroke: rgba(17,17,17,.55); stroke-width: 1.2; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.crane .far { fill: #E2E9C0; stroke: rgba(17,17,17,.45); stroke-width: 1; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.crane .facet { fill: rgba(58,66,16,.12); }
+.crane .diag { stroke: rgba(58,66,16,.4); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.crane .crease { stroke: rgba(17,17,17,.35); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.crane.is-perched { filter: drop-shadow(0 3px 3px rgba(40,50,0,.3)); transition: filter 500ms ease; }
+
+/* form */
+.form { margin-top: 24px; }
+.form__row { display: flex; gap: 8px; }
+.form input { flex: 1; min-width: 0; height: 52px; padding: 0 16px; border: 1.5px solid var(--ink); border-radius: 999px; background: rgba(255,255,255,.55); color: var(--ink); font: inherit; font-size: 17px; outline: none; transition: background-color 150ms ease; }
+.form input::placeholder { color: #4B5216; opacity: 1; }
+.form input:focus { background: #fff; }
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 52px; padding: 0 22px; border: 0; border-radius: 999px; background: var(--ink); color: var(--lime); font: inherit; font-size: 16px; font-weight: 600; white-space: nowrap; cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { cursor: default; }
+.btn svg { transition: transform 200ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn:not(:disabled):hover { background: #2B2B2B; } .btn:not(:disabled):hover svg { transform: translate(2px, -2px) rotate(-8deg); } }
+.btn__label { transition: opacity 180ms ease, filter 180ms ease; }
+.is-busy .btn__label { opacity: 0.6; filter: blur(2px); }
+.fine { margin: 10px 0 0 16px; font-size: 13px; line-height: 20px; color: var(--olive); }
+.msg { margin: 4px 0 0 16px; min-height: 20px; font-size: 13px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: #8A1C0C; }
+.is-invalid input { border-color: #8A1C0C; }
+
+/* ---------- inside every issue ---------- */
+.inside { padding: 128px var(--gutter) 96px; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 48px; }
+h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 96px; line-height: 0.85; text-transform: uppercase; text-wrap: balance; }
+.inside .intro { margin: 16px 0 0; color: var(--ink-2); max-width: 32ch; }
+.folds { list-style: none; margin: 0; padding: 0; }
+.folds li { display: grid; grid-template-columns: 88px minmax(0, 1fr); column-gap: 32px; align-items: start; padding: 28px 0; border-top: 1.5px solid var(--ink); }
+.folds li:last-child { border-bottom: 1.5px solid var(--ink); }
+.folds svg { width: 88px; height: 88px; overflow: visible; transition: transform 400ms var(--ease-out); }
+.folds .paper { fill: var(--lime); }
+.folds line { stroke: var(--ink); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.folds .v { stroke-dasharray: 4 3; }
+.folds b { display: block; font-family: var(--display); font-weight: 800; font-size: 48px; line-height: 1; text-transform: uppercase; }
+.folds p { margin: 8px 0 0; max-width: 56ch; color: var(--ink-2); text-wrap: pretty; }
+@media (hover: hover) and (pointer: fine) { .folds li:hover svg { transform: rotate(-6deg) scale(1.04); } }
+
+/* ---------- pull quote ---------- */
+.quote { padding: 80px var(--gutter) 144px; }
+.quote p { margin: 0; max-width: 16ch; font-family: var(--display); font-weight: 700; font-size: 88px; line-height: 0.92; text-transform: uppercase; text-wrap: balance; }
+.w { color: rgba(17,17,17,.15); transition: color 500ms var(--ease-out); }
+.w.is-on { color: var(--ink); }
+
+/* ---------- closing ---------- */
+.back { background: var(--lime); padding: 112px var(--gutter); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 48px; align-items: end; }
+.back h2 { font-size: 112px; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 28px var(--gutter); font-size: 14px; line-height: 20px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load + reveal ---------- */
+.js .masthead span { opacity: 0; transform: translateY(18%); }
+.js .portrait { opacity: 0; transform: translate(-50%, 40px); }
+.js .cover [data-in] { opacity: 0; transform: translateY(14px); }
+.js.is-loaded .masthead span { opacity: 1; transform: none; transition: opacity 600ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(var(--i, 0) * 55ms); }
+.js.is-loaded .portrait { opacity: 1; transform: translateX(-50%); transition: opacity 800ms var(--ease-out) 380ms, transform 1100ms var(--ease-out) 380ms; }
+.js.is-loaded .cover [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(650ms + var(--i, 0) * 80ms); }
+.js [data-reveal] { opacity: 0; transform: translateY(16px); }
+.js [data-reveal].is-in { opacity: 1; transform: none; transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(var(--i, 0) * 80ms); }
+/* each fold diagram turns into place, then its creases appear */
+.js .folds .sheet { opacity: 0; transform: rotate(-35deg) scale(0.7); transform-origin: 50px 50px; }
+.js .folds .marks { opacity: 0; }
+.js .folds li.is-in .sheet { opacity: 1; transform: none; transition: opacity 400ms ease, transform 900ms var(--ease-out); transition-delay: calc(120ms + var(--i, 0) * 80ms); }
+.js .folds li.is-in .marks { opacity: 1; transition: opacity 500ms ease; transition-delay: calc(600ms + var(--i, 0) * 80ms); }
+@media (prefers-reduced-motion: reduce) {
+  .js .masthead span, .js .cover [data-in], .js [data-reveal], .js .folds .sheet { transform: none !important; }
+  .js .portrait { transform: translateX(-50%) !important; }
+  .sheen { display: none; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1180px) { .lines { display: none; } .portrait { left: 70%; } h1 { font-size: 60px; } }
+@media (max-width: 860px) {
+  .cover { min-height: 0; padding-bottom: 32px; }
+  .strip { grid-template-columns: minmax(0, 1fr) auto; padding-bottom: 12px; }
+  .strip__note { display: none; }
+  .cover-body { display: flex; flex-direction: column; }
+  .portrait { position: relative; left: auto; bottom: auto; height: min(110vw, 520px); align-self: center; margin-top: -12vw; transform: none; }
+  .js .portrait { transform: translateY(40px); }
+  .js.is-loaded .portrait { transform: none; }
+  .left { position: relative; left: auto; bottom: auto; width: auto; padding: 24px var(--gutter) 0; }
+  h1 { font-size: 52px; }
+  .inside, .back { grid-template-columns: minmax(0, 1fr); }
+  h2 { font-size: 72px; } .back h2 { font-size: 80px; }
+  .folds li { grid-template-columns: 64px minmax(0, 1fr); column-gap: 20px; }
+  .folds svg { width: 64px; height: 64px; }
+  .folds b { font-size: 36px; }
+  .quote p { font-size: 56px; }
+}
+@media (max-width: 520px) { .form__row { flex-direction: column; } .btn { justify-content: center; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="cover" id="cover">
+  <svg class="creases" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+    <line x1="0" y1="0" x2="1000" y2="1000"/><line x1="1000" y1="0" x2="0" y2="1000"/>
+    <line class="v" x1="500" y1="0" x2="500" y2="1000"/><line class="v" x1="0" y1="500" x2="1000" y2="500"/>
+    <line x1="500" y1="0" x2="293" y2="500"/><line x1="500" y1="0" x2="707" y2="500"/><line x1="500" y1="1000" x2="293" y2="500"/><line x1="500" y1="1000" x2="707" y2="500"/>
+    <line class="v" x1="293" y1="500" x2="0" y2="207"/><line class="v" x1="707" y1="500" x2="1000" y2="207"/><line class="v" x1="293" y1="500" x2="0" y2="793"/><line class="v" x1="707" y1="500" x2="1000" y2="793"/>
+  </svg>
+  <div class="sheen" aria-hidden="true"></div>
+  <div class="cover-body">
+    <div class="strip">
+      <a class="brand" href="#"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="46,2 58,54 86,14 96,22 88,20 64,62 52,74 40,66 6,22 38,56"/></svg>After Class</a>
+      <span class="strip__note">Thoughts, opinions and resources on AI and cloud</span>
+      <a class="pill" href="#subscribe">Subscribe</a>
+    </div>
+    <p class="masthead" id="masthead" aria-hidden="true"><span style="--i:0">M</span><span style="--i:1">o</span><span style="--i:2">s</span><span style="--i:3">t</span><span style="--i:4">a</span><span style="--i:5">f</span><span style="--i:6">a</span></p>
+    <img class="portrait" src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+
+    <div class="left">
+      <h1 data-in style="--i:0">Hello, I’m Mostafa.</h1>
+      <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:2">I write <b>After Class</b>, a free newsletter with my thoughts, my opinions, and the resources I’d actually hand a student.</p>
+      <form class="form" id="subscribe" data-in style="--i:3" novalidate>
+        <label class="sr-only" for="email-1">Email address</label>
+        <div class="form__row">
+          <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__label">Subscribe free</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M2 12 L22 3 L15 21 L11 13 Z M11 13 L22 3"/></svg></button>
+        </div>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div class="lines" aria-label="In every issue" data-in style="--i:2">
+      <div><b>Thoughts</b><span>Notes from the classroom</span></div>
+      <div><b>Opinions</b><span>Where I stand on the hype</span></div>
+      <div><b>Resources</b><span>Labs and tools I actually use</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="inside" aria-labelledby="inside">
+    <div>
+      <h2 id="inside" data-reveal>Inside every issue</h2>
+      <p class="intro" data-reveal style="--i:1">Written the way I explain things in class, one clear step at a time.</p>
+    </div>
+    <ul class="folds">
+      <li data-reveal>
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g class="sheet"><rect class="paper" x="12" y="12" width="76" height="76"/></g><g class="marks"><line x1="12" y1="12" x2="88" y2="88"/><line class="v" x1="88" y1="12" x2="12" y2="88"/></g></svg>
+        <div><b>Thoughts</b><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></div>
+      </li>
+      <li data-reveal style="--i:1">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g class="sheet"><polygon class="paper" points="50,6 80,50 50,94 20,50"/></g><g class="marks"><line x1="50" y1="6" x2="50" y2="94"/><line class="v" x1="20" y1="50" x2="80" y2="50"/><line x1="50" y1="6" x2="35" y2="50"/><line x1="50" y1="6" x2="65" y2="50"/></g></svg>
+        <div><b>Opinions</b><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></div>
+      </li>
+      <li data-reveal style="--i:2">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g class="sheet"><polygon class="paper" points="46,2 58,54 86,14 96,22 88,20 64,62 52,74 40,66 6,22 38,56"/></g><g class="marks"><line x1="38" y1="56" x2="58" y2="54"/><line class="v" x1="58" y1="54" x2="52" y2="74"/></g></svg>
+        <div><b>Resources</b><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="quote" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This newsletter is what I’d tell you after class.</p>
+  </section>
+
+  <section class="back" aria-labelledby="back">
+    <h2 id="back" data-reveal>Get the next issue.</h2>
+    <form class="form" data-reveal style="--i:1" novalidate>
+      <label class="sr-only" for="email-2">Email address</label>
+      <div class="form__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Subscribe free</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M2 12 L22 3 L15 21 L11 13 Z M11 13 L22 3"/></svg></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher · After Class</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const cover = document.getElementById('cover');
+  const img = cover.querySelector('.portrait');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce;
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => 1 - Math.pow(1 - t, 3);
+  const inOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const quad = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+
+  // ---------- the name: each letter gets bolder near whatever is moving over it (cursor, the intro sweep, the crane) ----------
+  const REST = 640, PEAK = 800;
+  const letters = [...document.querySelectorAll('#masthead span')].map((el) => ({ el, w: REST, cx: 0, bonus: 0 }));
+  const F = letters[5];
+  let spread2 = 2 * 140 * 140;
+  const measure = () => {
+    letters.forEach((l) => { const r = l.el.getBoundingClientRect(); l.cx = r.left + r.width / 2; });
+    const fs = parseFloat(getComputedStyle(F.el).fontSize); spread2 = 2 * Math.pow(fs * 0.38, 2);
+  };
+  measure(); document.fonts && document.fonts.ready.then(measure);
+
+  const src = { mouse: null, sweep: null, crane: null };
+  const sheen = cover.querySelector('.sheen');
+  let tx = innerWidth / 2, ty = 200, sx = tx, sy = ty, raf = 0, last = 0;
+  function tick(now) {
+    const dt = last ? Math.min(4, (now - last) / 16.67) : 1; last = now;
+    const a = 1 - Math.pow(0.86, dt), b = 1 - Math.pow(0.88, dt);
+    let moving = src.sweep !== null || src.crane !== null;
+    if (fine) {
+      sx += (tx - sx) * b; sy += (ty - sy) * b;
+      sheen.style.setProperty('--mx', `${sx}px`); sheen.style.setProperty('--my', `${sy}px`);
+      if (Math.abs(tx - sx) + Math.abs(ty - sy) > 0.5) moving = true;
+    }
+    for (const l of letters) {
+      let k = 0;
+      for (const x of [src.mouse, src.sweep, src.crane]) { if (x === null) continue; const d = x - l.cx; k = Math.max(k, Math.exp(-(d * d) / spread2)); }
+      const target = Math.min(PEAK, REST + (PEAK - REST) * k + l.bonus);
+      l.w += (target - l.w) * a;
+      if (Math.abs(target - l.w) > 0.5) moving = true;
+      l.el.style.setProperty('--w', l.w.toFixed(1));
+    }
+    if (moving) raf = requestAnimationFrame(tick); else { raf = 0; last = 0; }
+  }
+  const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+
+  if (fine) {
+    cover.addEventListener('pointermove', (e) => {
+      const r = cover.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top;
+      src.mouse = e.clientX; cover.classList.add('is-hover'); poke(tx, ty); kick();
+    });
+    cover.addEventListener('pointerleave', () => { cover.classList.remove('is-hover'); src.mouse = null; kick(); });
+  } else if (!reduce) {
+    // touch: pressing the cover leans the name toward your finger
+    cover.addEventListener('pointerdown', (e) => { src.mouse = e.clientX; kick(); });
+    cover.addEventListener('pointermove', (e) => { if (src.mouse !== null) { src.mouse = e.clientX; kick(); } });
+    ['pointerup', 'pointercancel'].forEach((t) => cover.addEventListener(t, () => { src.mouse = null; kick(); }));
+  }
+
+  // once the cover has loaded, a single swell runs through the name so people know it moves
+  function intro() {
+    if (reduce) return;
+    setTimeout(() => {
+      const t0 = performance.now(), D = 1500, from = -200, to = innerWidth + 200;
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / D);
+        src.sweep = from + (to - from) * inOut(p); kick();
+        if (p < 1) requestAnimationFrame(step); else { src.sweep = null; kick(); }
+      };
+      requestAnimationFrame(step);
+    }, 1000);
+  }
+  let loaded = false;
+  const go = () => { if (loaded) return; loaded = true; requestAnimationFrame(() => { root.classList.add('is-loaded'); intro(); }); };
+  Promise.all([document.fonts ? document.fonts.ready : 0, img.decode ? img.decode().catch(() => 0) : 0]).then(go);
+  setTimeout(go, 1500);
+
+  // ---------- the crane ----------
+  // fold keyframes from G (square, diamond, base, kite), then the crane in side view, all in a 100 box.
+  // Crane points: wing tip, wing root, neck tip, beak, under the head, neck root, belly, tail root, tail tip, back of the wing.
+  const lerpP = (A, B, t) => A.map((p, i) => [p[0] + (B[i][0] - p[0]) * t, p[1] + (B[i][1] - p[1]) * t]);
+  const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  const ten = (k) => [k[0], k[1], k[2], mid(k[2], k[3]), k[3], k[4], k[5], mid(k[5], k[6]), k[6], k[7]];
+  const CRANE = [[46,2],[58,54],[86,14],[96,22],[88,20],[64,62],[52,74],[40,66],[6,22],[38,56]];
+  const K = [
+    ten([[10,10],[50,10],[90,10],[90,50],[90,90],[50,90],[10,90],[10,50]]),
+    ten([[50,4],[73,27],[96,50],[73,73],[50,96],[27,73],[4,50],[27,27]]),
+    ten([[50,10],[60,35],[66,58],[58,78],[50,94],[42,78],[34,58],[40,35]]),
+    ten([[50,6],[58,40],[62,60],[55,80],[50,96],[45,80],[38,60],[42,40]]),
+    CRANE,
+  ];
+  const withWing = (tip) => CRANE.map((p, i) => (i === 0 ? tip : p));
+  const DOWN = withWing([22,52]), SIT = withWing([40,10]);
+  const pts = (P) => P.map((p) => `${p[0].toFixed(2)},${p[1].toFixed(2)}`).join(' ');
+  let crane = null;
+
+  function makeCrane() {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'crane'); svg.setAttribute('viewBox', '0 0 100 100'); svg.setAttribute('aria-hidden', 'true');
+    svg.innerHTML = '<polygon class="far"/><polygon class="paper"/><polygon class="facet"/><line class="diag" x1="10" y1="10" x2="90" y2="90"/><line class="diag" x1="90" y1="10" x2="10" y2="90"/><line class="crease" x1="38" y1="56" x2="58" y2="54"/>';
+    svg.style.opacity = 0;
+    cover.appendChild(svg);
+    return { svg, poly: svg.querySelector('.paper'), far: svg.querySelector('.far'), facet: svg.querySelector('.facet'), diags: svg.querySelectorAll('.diag'), crease: svg.querySelector('.crease'), perched: false, size: 0, perch: null };
+  }
+  function draw(c, P, x, y, s, ang = 0, face = 1) {
+    c.poly.setAttribute('points', pts(P));
+    c.facet.setAttribute('points', pts([P[9], P[0], P[1]]));
+    // the far wing sits just behind the near one and beats with it
+    c.far.setAttribute('points', pts([[P[9][0] - 3, P[9][1] - 1], [P[0][0] - 13, P[0][1] + 7], [P[1][0] - 8, P[1][1] - 3]]));
+    c.svg.style.width = c.svg.style.height = `${s}px`;
+    c.svg.style.transform = `translate(${(x - s / 2).toFixed(1)}px, ${(y - s / 2).toFixed(1)}px) rotate(${(face < 0 ? -ang : ang).toFixed(2)}deg) scaleX(${face.toFixed(3)})`;
+  }
+
+  // where the crane stands: on the F's middle arm, tucked under the top bar. The F is drawn to a canvas and scanned so this follows the real glyph.
+  function perchPoint() {
+    const r = F.el.getBoundingClientRect(), cr = cover.getBoundingClientRect();
+    const cs = getComputedStyle(F.el), fs = parseFloat(cs.fontSize);
+    const W = Math.ceil(fs * 0.8), H = Math.ceil(fs * 1.2), base = Math.round(fs);
+    const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    const ctx = cv.getContext('2d', { willReadFrequently: true });
+    ctx.font = `${REST} ${fs}px ${cs.fontFamily}`;
+    ctx.fillText('F', 0, base);
+    const m = ctx.measureText('F'), data = ctx.getImageData(0, 0, W, H).data;
+    const ink = (x, y) => data[(y * W + x) * 4 + 3] > 128;
+    // stem: the only ink just above the baseline
+    const low = base - Math.round(fs * 0.04); let x = 0;
+    while (x < W && !ink(x, low)) x++;
+    while (x < W && ink(x, low)) x++;
+    const stemRight = x, probe = Math.min(W - 1, stemRight + 3);
+    // walking down just right of the stem: the first run of ink is the top bar, the second is the middle arm
+    const runs = []; let y = 0;
+    while (y < H && runs.length < 2) { if (ink(probe, y)) { const y0 = y; while (y < H && ink(probe, y)) y++; runs.push([y0, y]); } else y++; }
+    if (runs.length < 2) runs.push([Math.round(base - fs * 0.32), 0]);
+    const armTop = runs[1][0], gap = armTop - runs[0][1];
+    let armRight = probe; while (armRight < W && ink(armRight, armTop + 2)) armRight++;
+    // canvas to cover coordinates, using the same baseline maths the browser uses for the line box
+    const baseline = r.top + (r.height - (m.fontBoundingBoxAscent + m.fontBoundingBoxDescent)) / 2 + m.fontBoundingBoxAscent;
+    const toY = (cy) => baseline + (cy - base) - cr.top, toX = (cx) => r.left + cx - cr.left;
+    const s = Math.max(36, Math.min(84, gap * 0.85));
+    return { s, x: toX(stemRight + (armRight - stemRight) * 0.55), y: toY(armTop) - 0.24 * s, top: toY(runs[0][0]) };
+  }
+  function placePerched() {
+    if (!crane || !crane.perched) return;
+    crane.perch = perchPoint(); crane.size = crane.perch.s;
+    draw(crane, SIT, crane.perch.x, crane.perch.y, crane.size);
+  }
+  addEventListener('resize', () => { measure(); placePerched(); });
+
+  // Catmull-Rom through the waypoints, resampled so the crane moves at an even speed
+  const cat = (p0, p1, p2, p3, t) => 0.5 * (2 * p1 + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (-p0 + 3 * p1 - 3 * p2 + p3) * t * t * t);
+  function route(W) {
+    const n = W.length - 1, N = 240, out = []; let L = 0;
+    for (let k = 0; k <= N; k++) {
+      const f = Math.min(n - 1e-6, (k / N) * n), i = Math.floor(f), t = f - i;
+      const a = W[Math.max(0, i - 1)], b = W[i], c = W[i + 1], d = W[Math.min(n, i + 2)];
+      const p = [cat(a[0], b[0], c[0], d[0], t), cat(a[1], b[1], c[1], d[1], t)];
+      if (k) L += Math.hypot(p[0] - out[k - 1][0], p[1] - out[k - 1][1]);
+      p[2] = L; out.push(p);
+    }
+    return { L, at(dist) {
+      let lo = 0, hi = N;
+      while (hi - lo > 1) { const m = (lo + hi) >> 1; if (out[m][2] < dist) lo = m; else hi = m; }
+      const A = out[lo], B = out[hi], t = (dist - A[2]) / ((B[2] - A[2]) || 1);
+      return [A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t];
+    } };
+  }
+  const frames = (fn) => new Promise((done) => { const t0 = performance.now(); let prev = t0; const f = (now) => { const more = fn(Math.max(0, now - t0), Math.max(0, now - prev)); prev = Math.max(prev, now); if (more) requestAnimationFrame(f); else done(); }; requestAnimationFrame(f); });
+
+  // send-off: a square of paper lifts off the button, folds into a crane, flies across the name and lands on the F
+  async function sendOff(form) {
+    measure();
+    if (!crane) crane = makeCrane();
+    const c = crane, perch = perchPoint(), S = perch.s, cr = cover.getBoundingClientRect();
+    c.size = S; c.perch = perch;
+    if (reduce) { draw(c, SIT, perch.x, perch.y, S); c.svg.style.opacity = 1; c.diags.forEach((l) => (l.style.opacity = 0)); c.svg.classList.add('is-perched'); c.perched = true; return; }
+
+    const btn = form.querySelector('.btn').getBoundingClientRect();
+    const sq = Math.max(104, Math.min(140, btn.height * 2.6)), size0 = sq / 0.8;
+    // start at the button, but never below the visible screen (on phones the button can sit under the fold)
+    const x0 = btn.left - cr.left + btn.width / 2, y0 = Math.min(btn.top - cr.top + btn.height / 2 - 24, innerHeight - cr.top - size0 * 0.6);
+    const HOLD = 240, FOLD = 1200, RISE = 80;
+    await frames((t) => {
+      const grow = ease(Math.min(1, t / HOLD)), p = Math.min(1, Math.max(0, t - HOLD) / FOLD);
+      const k = p * (K.length - 1), i = Math.min(K.length - 2, Math.floor(k));
+      const s = (size0 + (S - size0) * ease(p)) * (0.45 + 0.55 * grow);
+      c.svg.style.opacity = grow;
+      c.diags.forEach((l) => (l.style.opacity = 1 - Math.min(1, p * 3)));
+      c.facet.style.opacity = p; c.far.style.opacity = Math.max(0, (p - 0.8) / 0.2); c.crease.style.opacity = p > 0.8 ? 1 : 0;
+      draw(c, lerpP(K[i], K[i + 1], inOut(k - i)), x0, y0 - RISE * ease(p), s);
+      return p < 1;
+    });
+
+    // waypoints: up to the M, low across the name past your face, then up and down onto the F
+    const fs = parseFloat(getComputedStyle(F.el).fontSize), lx = (i) => letters[i].cx - cr.left;
+    const W = [
+      [x0, y0 - RISE],
+      [lx(0) + fs * 0.08, perch.top + fs * 0.3],
+      [lx(3), perch.top + fs * 0.46],
+      [(lx(4) + perch.x) / 2, Math.max(S * 0.6, perch.top - fs * 0.12)],
+      [perch.x, perch.y],
+    ];
+    const R = route(W), FLY = Math.max(2000, Math.min(2800, R.L * 1.1));
+    let px = W[0][0], py = W[0][1], face = 1, ang = 0, phase = 0;
+    await frames((t, dms) => {
+      const p = Math.min(1, t / FLY), dt = Math.min(4, dms / 16.67);
+      const [x, y] = R.at(R.L * quad(p)), vx = x - px, vy = y - py; px = x; py = y;
+      if (Math.abs(vx) > 0.2) face += ((vx > 0 ? 1 : -1) - face) * (1 - Math.pow(0.86, dt));
+      const want = p > 0.88 ? 0 : Math.max(-40, Math.min(30, (Math.atan2(vy, Math.abs(vx) + 0.001) * 180) / Math.PI));
+      ang += (want - ang) * (1 - Math.pow(0.85, dt));
+      phase += dms * 0.017;
+      const amp = p < 0.72 ? 1 : Math.max(0, 1 - (p - 0.72) / 0.14);
+      let P = lerpP(K[4], DOWN, Math.max(0, Math.sin(phase)) * 0.9 * amp);
+      if (p > 0.86) P = lerpP(P, SIT, (p - 0.86) / 0.14);
+      draw(c, P, x, y, S * (1 + 0.22 * Math.sin(Math.PI * p)), ang, p > 0.97 ? 1 : face);
+      src.crane = cr.left + x; kick();
+      return p < 1;
+    });
+    draw(c, SIT, perch.x, perch.y, S);
+    src.crane = null; c.perched = true; c.svg.classList.add('is-perched');
+    // the F takes the weight: it thickens and dips under the landing, then relaxes
+    F.bonus = 200; kick(); setTimeout(() => { F.bonus = 0; kick(); }, 380);
+    F.el.animate([{ transform: 'none' }, { transform: 'translateY(1.5%) scaleY(0.96)' }, { transform: 'none' }], { duration: 460, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+  }
+
+  // the perched crane flutters when the cursor comes close
+  let fluttering = false;
+  function poke(x, y) {
+    const c = crane;
+    if (!c || !c.perched || fluttering) return;
+    if (Math.hypot(x - c.perch.x, y - c.perch.y) > c.size * 0.9) return;
+    fluttering = true;
+    frames((t) => {
+      const p = Math.min(1, t / 640);
+      draw(c, lerpP(SIT, DOWN, Math.abs(Math.sin(p * Math.PI * 3)) * (1 - p * 0.5)), c.perch.x, c.perch.y - Math.sin(p * Math.PI) * c.size * 0.14, c.size);
+      return p < 1;
+    }).then(() => { draw(c, SIT, c.perch.x, c.perch.y, c.size); setTimeout(() => (fluttering = false), 900); });
+  }
+
+  // ---------- reveals ----------
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+  document.querySelectorAll('[data-words]').forEach((p) => {
+    p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+    const wio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.target.classList.toggle('is-on', e.isIntersecting || e.boundingClientRect.top < 0));
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 1 });
+    p.querySelectorAll('.w').forEach((w) => wio.observe(w));
+  });
+
+  // ---------- signup ----------
+  const ENDPOINT = null; // newsletter service endpoint goes here later
+  const valid = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  const hero = document.getElementById('subscribe');
+  const done = (form, v) => {
+    form.classList.add('is-done'); form.querySelector('.btn').disabled = true; form.querySelector('input').value = v;
+    form.querySelector('.btn__label').textContent = 'Subscribed';
+    form.querySelector('.msg').textContent = `You’re in. The first After Class lands at ${v}.`;
+  };
+  async function toTop() {
+    if (cover.getBoundingClientRect().top > -8) return;
+    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    const t0 = performance.now();
+    while (scrollY > 4 && performance.now() - t0 < 1500) await sleep(50);
+    await sleep(150);
+  }
+  document.querySelectorAll('.form').forEach((form) => {
+    const input = form.querySelector('input'), msg = form.querySelector('.msg'), btn = form.querySelector('.btn');
+    input.addEventListener('input', () => { form.classList.remove('is-invalid'); msg.classList.remove('is-error'); msg.textContent = ''; input.removeAttribute('aria-invalid'); });
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (form.classList.contains('is-done')) return;
+      const v = input.value.trim();
+      if (!valid(v)) {
+        form.classList.add('is-invalid'); msg.classList.add('is-error'); input.setAttribute('aria-invalid', 'true');
+        msg.textContent = v ? 'That address is missing something. Check it and try again.' : 'Add your email address first.';
+        input.focus(); return;
+      }
+      form.classList.add('is-busy'); btn.disabled = true;
+      await sleep(450);
+      form.classList.remove('is-busy');
+      document.querySelectorAll(".form").forEach((f) => done(f, v));
+      if (matchMedia('(pointer: coarse)').matches) input.blur(); // drop the keyboard so the crane is visible
+      await toTop();
+      sendOff(hero);
+    });
+  });
+})();
+</script>
+</body>
+</html>

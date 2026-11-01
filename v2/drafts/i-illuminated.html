@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft I, Illuminated | Mostafa Saher</title>
+<meta name="description" content="Mostafa Saher writes a newsletter about AI and cloud computing: thoughts, opinions and resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500..800&family=EB+Garamond:wght@400..600&display=swap" rel="stylesheet">
+<style>
+/* Draft I: Illuminated. The page is a manuscript folio. Your portrait lives inside the historiated initial M of your own name; a lapis vine grows down the margin as you read; subscribing grows a vine from the form to the initial and gilds it. */
+:root {
+  --vellum: #F3EBD9;
+  --ink: #1E1A16;        /* 14.6:1 */
+  --ink-2: #5C5248;      /* 6.4:1 */
+  --lapis: #213C8F;      /* 8.4:1 on vellum, vellum on lapis 8.4:1 */
+  --minium: #A82D18;     /* rubrics, 5.8:1 */
+  --gold: #D9AE45;       /* black sweater on gold 8.9:1 */
+  --gold-deep: #B88A2A;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --margin: clamp(20px, 7vw, 120px);
+  --goth: "Grenze Gotisch", serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: #C9B58A var(--vellum); }
+body { position: relative; margin: 0; background: var(--vellum); color: var(--ink); overflow-x: clip; font-family: "EB Garamond", Georgia, serif; font-size: 21px; line-height: 32px; -webkit-font-smoothing: antialiased; font-variant-numeric: oldstyle-nums; }
+body::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.35; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006' numOctaves='3' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .45 0 0 0 0 .3 0 0 0 .5 -.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+::selection { background: var(--gold); color: var(--ink); }
+input { caret-color: var(--minium); }
+a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--lapis); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.rubric { color: var(--minium); font-variant: small-caps; letter-spacing: 0.06em; }
+
+/* the vine lives in the left margin, drawn as you read */
+.vine { position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; overflow: visible; }
+.vine path { fill: none; stroke: var(--lapis); stroke-width: 2.2; stroke-linecap: round; }
+.vine .leaf { transform-box: fill-box; transform-origin: center; transform: scale(0); transition: transform 500ms var(--ease-out); }
+.vine .leaf.on { transform: scale(1); }
+.flourish path { stroke: var(--lapis); stroke-width: 2.4; fill: none; stroke-linecap: round; }
+.flourish .petal { fill: var(--minium); transform-box: fill-box; transform-origin: center; }
+.flourish .heart { fill: var(--gold); }
+
+/* ---------- header ---------- */
+.top { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 28px var(--margin) 0; }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-size: 20px; letter-spacing: 0.02em; }
+.top-cta { text-decoration: none; color: var(--minium); font-variant: small-caps; letter-spacing: 0.08em; font-size: 20px; padding: 6px 4px; border-bottom: 1.5px solid currentColor; transition: color 150ms ease; }
+@media (hover: hover) and (pointer: fine) { .top-cta:hover { color: var(--lapis); } }
+
+/* ---------- folio ---------- */
+.folio { position: relative; z-index: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 clamp(16px, 2vw, 32px); align-items: start; padding: 40px var(--margin) 64px; min-height: calc(100svh - 70px); align-content: center; }
+.initial { --h: min(calc(100svh - 190px), 640px); position: relative; height: var(--h); aspect-ratio: 5 / 6; padding: 10px; background: var(--lapis); box-shadow: inset 0 0 0 3px var(--lapis), inset 0 0 0 5px var(--gold); }
+.chamber { position: relative; height: 100%; overflow: hidden; background: var(--gold); isolation: isolate; }
+.chamber::before { content: ""; position: absolute; inset: 0; z-index: 0; opacity: 0.4; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='turbulence' baseFrequency='.04' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .6 0 0 0 0 .45 0 0 0 0 .1 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"); }
+.big-m { position: absolute; z-index: 1; left: 50%; bottom: -8%; transform: translateX(-50%); margin: 0; font-family: var(--goth); font-weight: 700; font-size: calc(var(--h) * 1.02); line-height: 1; color: var(--minium); user-select: none; }
+.chamber img { position: absolute; z-index: 2; bottom: 0; left: 50%; height: 84%; width: auto; transform: translateX(-50%); }
+/* gold catches the light under the cursor */
+.glint { position: absolute; inset: 0; z-index: 3; pointer-events: none; mix-blend-mode: soft-light; opacity: 0; transition: opacity 400ms ease; background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 30%), rgba(255,255,255,1), rgba(255,255,255,0) 70%); }
+.initial.is-hover .glint { opacity: 1; }
+.sweep { position: absolute; inset: 0; z-index: 4; pointer-events: none; background: linear-gradient(110deg, transparent 35%, rgba(255,250,220,.85) 50%, transparent 65%); background-size: 300% 100%; background-position: 120% 0; mix-blend-mode: soft-light; opacity: 0; }
+.is-gilded .sweep { animation: sweep 1100ms var(--ease-in-out) 1300ms both; }
+@keyframes sweep { 0% { opacity: 1; background-position: 120% 0; } 100% { opacity: 1; background-position: -20% 0; } }
+
+.text { padding-top: 4px; max-width: 620px; }
+h1 { margin: 0; font-weight: 400; }
+h1 .hello { display: block; font-size: 26px; line-height: 32px; }
+h1 .rest { display: block; margin-top: 4px; font-family: var(--goth); font-weight: 700; font-size: 132px; line-height: 0.85; letter-spacing: -0.01em; color: var(--ink); }
+.roles { margin: 28px 0 0; font-size: 26px; line-height: 34px; max-width: 26ch; text-wrap: balance; }
+.pitch { margin: 16px 0 0; color: var(--ink-2); max-width: 44ch; text-wrap: pretty; }
+.pitch::first-letter { color: var(--minium); }
+
+/* form */
+.form { position: relative; margin-top: 32px; max-width: 520px; }
+.form label { display: block; margin-bottom: 4px; }
+.form__row { display: flex; align-items: flex-end; gap: 16px; }
+.form input { flex: 1; min-width: 0; height: 52px; padding: 0 2px; border: 0; border-bottom: 1.5px solid var(--ink); background: transparent; color: var(--ink); font: inherit; font-size: 22px; outline: none; transition: border-color 150ms ease; }
+.form input::placeholder { color: #66594C; opacity: 1; }
+.form input:focus { border-bottom-color: var(--lapis); }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px; border: 0; background: var(--lapis); color: var(--vellum); font: inherit; font-size: 20px; letter-spacing: 0.06em; font-variant: small-caps; white-space: nowrap; cursor: pointer; box-shadow: inset 0 0 0 2px var(--lapis), inset 0 0 0 3.5px var(--gold); transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+.btn svg { transition: transform 300ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #2A4AA8; } .btn:hover svg { transform: rotate(45deg); } }
+.btn__label { transition: opacity 180ms ease, filter 180ms ease; }
+.is-busy .btn__label { opacity: 0.6; filter: blur(2px); }
+.fine { margin: 10px 0 0; font-size: 17px; line-height: 24px; color: var(--ink-2); }
+.msg { margin: 4px 0 0; min-height: 24px; font-size: 17px; line-height: 24px; }
+.msg.is-error { color: var(--minium); }
+.is-invalid input { border-bottom-color: var(--minium); }
+.gloss { margin: 8px 0 0; font-size: 18px; line-height: 26px; color: var(--minium); font-variant: small-caps; letter-spacing: 0.04em; clip-path: inset(0 100% 0 0); }
+.gloss.on { clip-path: inset(0 0 0 0); transition: clip-path 1400ms linear 1100ms; }
+
+/* ---------- the three rubrics ---------- */
+.rubrics { position: relative; z-index: 1; padding: 112px var(--margin) 80px; max-width: calc(760px + 2 * var(--margin)); }
+h2 { margin: 0; font-family: var(--goth); font-weight: 700; font-size: 72px; line-height: 0.95; text-wrap: balance; }
+.rubrics > p { margin: 16px 0 0; color: var(--ink-2); }
+.entries { list-style: none; margin: 56px 0 0; padding: 0; display: grid; gap: 40px; }
+.entry { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 24px; align-items: start; }
+.mini { display: grid; place-items: center; width: 76px; height: 76px; background: var(--gold); box-shadow: inset 0 0 0 3px var(--lapis); font-family: var(--goth); font-weight: 700; font-size: 60px; line-height: 1; color: var(--lapis); padding-top: 6px; }
+.entry h3 { margin: 0; font-size: 30px; line-height: 36px; font-weight: 600; }
+.entry p { margin: 6px 0 0; max-width: 52ch; text-wrap: pretty; }
+
+.tagline { position: relative; z-index: 1; padding: 48px var(--margin) 144px; }
+.tagline p { margin: 0; max-width: 20ch; font-family: var(--goth); font-weight: 600; font-size: 76px; line-height: 0.98; text-wrap: balance; }
+.w { color: rgba(30,26,22,.14); transition: color 500ms var(--ease-out); }
+.w.is-on { color: var(--ink); }
+
+.final { position: relative; z-index: 1; margin: 0 var(--margin); padding: 80px clamp(24px, 5vw, 72px); background: var(--lapis); color: var(--vellum); box-shadow: inset 0 0 0 6px var(--lapis), inset 0 0 0 8px var(--gold); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 48px; align-items: end; }
+.final h2 { color: var(--vellum); }
+.final input { color: var(--vellum); border-bottom-color: var(--vellum); }
+.final input::placeholder { color: #B9C3E3; }
+.final .btn { background: var(--gold); color: var(--ink); box-shadow: none; }
+@media (hover: hover) and (pointer: fine) { .final .btn:hover { background: #E6BE5A; } }
+.final .fine { color: #C9D1EC; }
+.final .msg.is-error { color: #FFC2B5; }
+.final :focus-visible { outline-color: var(--gold); }
+.final .gloss { color: var(--gold); }
+footer { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px var(--margin); font-size: 17px; line-height: 24px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load + reveal ---------- */
+.js .initial { clip-path: inset(0 0 100% 0); }
+.js .big-m { opacity: 0; }
+.js .chamber img { opacity: 0; transform: translate(-50%, 24px); }
+.js .folio [data-in] { opacity: 0; transform: translateY(12px); }
+.js.is-loaded .initial { clip-path: inset(0 0 0 0); transition: clip-path 1000ms var(--ease-in-out); }
+.js.is-loaded .big-m { opacity: 1; transition: opacity 900ms ease 600ms; }
+.js.is-loaded .chamber img { opacity: 1; transform: translateX(-50%); transition: opacity 800ms var(--ease-out) 800ms, transform 1100ms var(--ease-out) 800ms; }
+.js.is-loaded .folio [data-in] { opacity: 1; transform: none; transition: opacity 800ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(500ms + var(--i, 0) * 110ms); }
+.js [data-reveal] { opacity: 0; transform: translateY(16px); }
+.js [data-reveal].is-in { opacity: 1; transform: none; transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(var(--i, 0) * 90ms); }
+@media (prefers-reduced-motion: reduce) {
+  .js .initial { clip-path: none; } .js .chamber img { transform: translateX(-50%) !important; }
+  .js .folio [data-in], .js [data-reveal] { transform: none !important; }
+  .glint { display: none; } .is-gilded .sweep { animation: none; }
+  .gloss { clip-path: none; }
+}
+@media (hover: none), (pointer: coarse) { .glint { display: none; } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1180px) { h1 .rest { font-size: 100px; } }
+@media (max-width: 900px) {
+  .vine { display: none; }
+  .folio { grid-template-columns: 1fr; gap: 24px; padding-top: 24px; min-height: 0; }
+  .initial { --h: min(calc((100vw - 2 * var(--margin)) * 1.2), 480px); justify-self: start; }
+  h1 .rest { font-size: 80px; }
+  .roles { font-size: 22px; line-height: 30px; }
+  .final { grid-template-columns: 1fr; margin: 0 16px; }
+  h2 { font-size: 52px; }
+  .tagline p { font-size: 48px; }
+}
+@media (max-width: 520px) { .form__row { flex-direction: column; align-items: stretch; } .btn { justify-content: center; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<svg class="vine" id="vine" aria-hidden="true"></svg>
+<header class="top">
+  <a class="brand" href="#" aria-label="Mostafa Saher, home">
+    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" fill="#213C8F"/><rect x="3" y="3" width="28" height="28" fill="#D9AE45"/><text x="17" y="28" text-anchor="middle" font-family="Grenze Gotisch" font-weight="700" font-size="28" fill="#A82D18">M</text></svg>
+    <span>Mostafa Saher</span>
+  </a>
+  <a class="top-cta" href="#subscribe">Subscribe</a>
+</header>
+
+<main>
+  <section class="folio" aria-labelledby="hello">
+    <figure class="initial" id="initial" style="margin:0">
+      <div class="chamber">
+        <p class="big-m" aria-hidden="true">M</p>
+        <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck, inside a gilded letter M">
+        <div class="glint" aria-hidden="true"></div>
+        <div class="sweep" aria-hidden="true"></div>
+      </div>
+    </figure>
+
+    <div class="text">
+      <h1 id="hello"><span class="sr-only">Hello, I’m Mostafa.</span><span aria-hidden="true"><span class="hello rubric" data-in style="--i:0">Hello, I’m</span><span class="rest" data-in style="--i:1">ostafa.</span></span></h1>
+      <p class="roles" data-in style="--i:2">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:3">I write a newsletter about AI and cloud computing: what I think, where I stand, and the resources I’d actually hand a student.</p>
+      <form class="form" id="subscribe" data-in style="--i:4" novalidate>
+        <label class="rubric" for="email-1">Your address</label>
+        <div class="form__row">
+          <input id="email-1" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__label">Subscribe</span><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.5 9.5 L22 12 L14.5 14.5 L12 22 L9.5 14.5 L2 12 L9.5 9.5 Z" fill="#D9AE45"/></svg></button>
+        </div>
+        <p class="fine">Free. Unsubscribe in one click.</p>
+        <p class="msg" role="status" aria-live="polite"></p>
+        <p class="gloss" aria-hidden="true"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="rubrics" aria-labelledby="inside">
+    <h2 id="inside" data-reveal>In every issue</h2>
+    <p data-reveal style="--i:1">Three parts, written the way I explain things in class.</p>
+    <ul class="entries">
+      <li class="entry" data-reveal><span class="mini" aria-hidden="true">T</span><div><h3>Thoughts</h3><p>Notes from teaching. What students get stuck on, and the explanation that finally made it click.</p></div></li>
+      <li class="entry" data-reveal style="--i:1"><span class="mini" aria-hidden="true">O</span><div><h3>Opinions</h3><p>Where I stand on new models, cloud services and the hype around them. Short, specific and honest.</p></div></li>
+      <li class="entry" data-reveal style="--i:2"><span class="mini" aria-hidden="true">R</span><div><h3>Resources</h3><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></div></li>
+    </ul>
+  </section>
+
+  <section class="tagline" aria-label="Why I write">
+    <p data-words>I teach AI and cloud for a living. This is what I’d tell you after class.</p>
+  </section>
+
+  <section class="final" id="final" aria-labelledby="next">
+    <h2 id="next" data-reveal>Get the next issue.</h2>
+    <form class="form" data-reveal style="--i:1" novalidate>
+      <label class="rubric" for="email-2" style="color:#E6C46A">Your address</label>
+      <div class="form__row">
+        <input id="email-2" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Subscribe</span><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.5 9.5 L22 12 L14.5 14.5 L12 22 L9.5 14.5 L2 12 L9.5 9.5 Z" fill="#213C8F"/></svg></button>
+      </div>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+      <p class="msg" role="status" aria-live="polite"></p>
+      <p class="gloss" aria-hidden="true"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mostafa Saher</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const initial = document.getElementById('initial');
+  const img = initial.querySelector('img');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NS = 'http://www.w3.org/2000/svg';
+  const go = () => requestAnimationFrame(() => { root.classList.add('is-loaded'); buildVine(); });
+  Promise.all([document.fonts ? document.fonts.ready : 0, img.decode ? img.decode().catch(() => 0) : 0]).then(go);
+  setTimeout(go, 1500);
+
+  // gold catches light under the cursor
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce) {
+    const glint = initial.querySelector('.glint');
+    let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+    const tick = () => { x += (tx - x) * 0.12; y += (ty - y) * 0.12; glint.style.setProperty('--mx', `${x}px`); glint.style.setProperty('--my', `${y}px`); raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.4 ? requestAnimationFrame(tick) : 0; };
+    document.addEventListener('pointermove', (e) => { const r = initial.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; initial.classList.toggle('is-hover', tx > -200 && ty > -200 && tx < r.width + 200 && ty < r.height + 200); if (!raf) raf = requestAnimationFrame(tick); });
+  }
+
+  // the margin vine: grows with the reader's progress down the page
+  const vine = document.getElementById('vine');
+  let vinePath = null, vineLen = 0, leaves = [];
+  function buildVine() {
+    if (getComputedStyle(vine).display === 'none') return;
+    const ir = initial.getBoundingClientRect(), sy = scrollY;
+    const x0 = ir.left + 26, y0 = ir.bottom + sy, H = document.body.scrollHeight;
+    const mx = Math.max(16, ir.left / 2);
+    vine.setAttribute('width', innerWidth); vine.setAttribute('height', H);
+    let d = `M${x0} ${y0} C${x0} ${y0 + 60} ${mx} ${y0 + 40} ${mx} ${y0 + 120}`;
+    let y = y0 + 120, side = 1;
+    while (y < H - 260) { const ny = y + 150; d += ` S${mx + side * 22} ${ny - 30} ${mx} ${ny}`; y = ny; side *= -1; }
+    vine.innerHTML = `<path d="${d}"/>`;
+    vinePath = vine.querySelector('path'); vineLen = vinePath.getTotalLength();
+    vinePath.style.strokeDasharray = vineLen;
+    leaves = [];
+    const fills = ['#213C8F', '#A82D18', '#D9AE45'];
+    for (let l = 120, i = 0; l < vineLen; l += 95, i++) {
+      const p = vinePath.getPointAtLength(l), q = vinePath.getPointAtLength(Math.min(vineLen, l + 2));
+      const ang = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI + (i % 2 ? 50 : -50);
+      const e = document.createElementNS(NS, 'ellipse');
+      e.setAttribute('cx', p.x + (i % 2 ? 9 : -9)); e.setAttribute('cy', p.y); e.setAttribute('rx', 9); e.setAttribute('ry', 4.2);
+      e.setAttribute('fill', fills[i % 3]); e.setAttribute('transform', `rotate(${ang} ${p.x} ${p.y})`); e.setAttribute('class', 'leaf');
+      vine.appendChild(e); leaves.push({ e, l });
+    }
+    grow();
+  }
+  function grow() {
+    if (!vinePath) return;
+    const prog = Math.min(1, (scrollY + innerHeight * 0.75) / document.body.scrollHeight);
+    const drawn = reduce ? vineLen : vineLen * Math.max(0.06, prog * 1.05);
+    vinePath.style.strokeDashoffset = Math.max(0, vineLen - drawn);
+    leaves.forEach((lf) => lf.e.classList.toggle('on', lf.l < drawn));
+  }
+  let ticking = false;
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { grow(); ticking = false; }); } }, { passive: true });
+  let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(buildVine, 150); });
+
+  // send-off: a vine grows from the form to the initial, blooms on its corner, the gold flashes, and your name is written into the margin
+  function illuminate(form, email) {
+    const d = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    const gloss = form.querySelector('.gloss');
+    gloss.textContent = `Entered in the roll: ${email}, ${d}`;
+    gloss.classList.add('on');
+    const fr = form.querySelector('.btn').getBoundingClientRect(), ir = initial.getBoundingClientRect(), sy = scrollY;
+    const sx = fr.left + fr.width / 2, syy = fr.bottom + sy + 6, ex = ir.right - 6, ey = ir.bottom + sy - 6;
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'flourish'); svg.setAttribute('aria-hidden', 'true');
+    Object.assign(svg.style, { position: 'absolute', left: 0, top: 0, width: '100%', height: `${document.body.scrollHeight}px`, pointerEvents: 'none', zIndex: 5, overflow: 'visible' });
+    const midY = Math.max(syy, ey) + 70;
+    svg.innerHTML = `<path d="M${sx} ${syy} C${sx} ${midY} ${ex + 40} ${midY} ${ex + 18} ${ey + 14} S${ex - 4} ${ey + 4} ${ex} ${ey}"/>` +
+      [0, 72, 144, 216, 288].map((a) => `<ellipse class="petal" cx="${ex}" cy="${ey - 11}" rx="6" ry="11" transform="rotate(${a} ${ex} ${ey})"/>`).join('') +
+      `<circle class="heart" cx="${ex}" cy="${ey}" r="5"/>`;
+    document.body.appendChild(svg);
+    const path = svg.querySelector('path'), len = path.getTotalLength();
+    if (reduce) { initial.classList.add('is-gilded'); return; }
+    path.animate([{ strokeDasharray: len, strokeDashoffset: len }, { strokeDasharray: len, strokeDashoffset: 0 }], { duration: 1200, easing: 'cubic-bezier(0.77, 0, 0.175, 1)', fill: 'both' });
+    svg.querySelectorAll('.petal, .heart').forEach((p, i) => p.animate([{ transform: `${p.getAttribute('transform') || ''} scale(0)` }, { transform: `${p.getAttribute('transform') || ''} scale(1)` }], { duration: 520, delay: 1150 + i * 50, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'both' }));
+    initial.classList.remove('is-gilded'); void initial.offsetWidth; initial.classList.add('is-gilded');
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+  document.querySelectorAll('[data-words]').forEach((p) => {
+    p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+    const wio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.target.classList.toggle('is-on', e.isIntersecting || e.boundingClientRect.top < 0));
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 1 });
+    p.querySelectorAll('.w').forEach((w) => wio.observe(w));
+  });
+
+  const ENDPOINT = null; // newsletter service endpoint goes here later
+  const valid = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  document.querySelectorAll('.form').forEach((form) => {
+    const input = form.querySelector('input'), msg = form.querySelector('.msg'), btn = form.querySelector('.btn'), lbl = form.querySelector('.btn__label');
+    input.addEventListener('input', () => { form.classList.remove('is-invalid'); msg.classList.remove('is-error'); msg.textContent = ''; input.removeAttribute('aria-invalid'); });
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (form.classList.contains('is-done')) return;
+      const v = input.value.trim();
+      if (!valid(v)) {
+        form.classList.add('is-invalid'); msg.classList.add('is-error'); input.setAttribute('aria-invalid', 'true');
+        msg.textContent = v ? 'That address is missing something. Check it and try again.' : 'Add your email address first.';
+        input.focus(); return;
+      }
+      form.classList.add('is-busy'); btn.disabled = true;
+      await new Promise((r) => setTimeout(r, 450));
+      form.classList.remove('is-busy'); form.classList.add('is-done'); lbl.textContent = 'Entered';
+      msg.textContent = `Subscribed. Issues go to ${v}.`;
+      if (form.id === 'subscribe') illuminate(form, v);
+      else { const g = form.querySelector('.gloss'); g.textContent = `Entered in the roll: ${v}`; g.classList.add('on'); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

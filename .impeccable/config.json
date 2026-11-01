@@ -1,0 +1,275 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "archivo",
+        "createdAt": "2026-10-01T13:08:44.509Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded and will be rewritten at finish"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "funnel display",
+        "createdAt": "2026-10-01T13:08:44.798Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded and will be rewritten at finish"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "funnel sans",
+        "createdAt": "2026-10-01T13:08:44.956Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded and will be rewritten at finish"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "geist",
+        "createdAt": "2026-10-01T13:08:45.106Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded and will be rewritten at finish"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "geist mono",
+        "createdAt": "2026-10-01T13:08:45.264Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded and will be rewritten at finish"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "b612",
+        "createdAt": "2026-10-05T13:43:48.303Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "b612 mono",
+        "createdAt": "2026-10-05T13:43:48.463Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "big shoulders display",
+        "createdAt": "2026-10-05T13:43:48.602Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "hanken grotesk",
+        "createdAt": "2026-10-05T13:43:48.747Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "martian mono",
+        "createdAt": "2026-10-05T13:43:48.885Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "schibsted grotesk",
+        "createdAt": "2026-10-05T13:43:49.026Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "alegreya sans",
+        "createdAt": "2026-10-05T15:14:04.140Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "reem kufi",
+        "createdAt": "2026-10-05T15:14:04.297Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "sofia sans",
+        "createdAt": "2026-10-05T15:14:04.454Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "sofia sans condensed",
+        "createdAt": "2026-10-05T15:14:04.608Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "grenze gotisch",
+        "createdAt": "2026-10-05T15:14:04.762Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "eb garamond",
+        "createdAt": "2026-10-05T15:14:04.919Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "league gothic",
+        "createdAt": "2026-10-05T15:57:37.513Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "courier prime",
+        "createdAt": "2026-10-05T15:57:37.676Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "libre franklin",
+        "createdAt": "2026-10-05T15:57:37.827Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "radio canada big",
+        "createdAt": "2026-10-05T15:57:37.977Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "red hat mono",
+        "createdAt": "2026-10-05T15:57:38.147Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "manrope",
+        "createdAt": "2026-10-05T15:57:38.308Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "syncopate",
+        "createdAt": "2026-10-05T15:57:38.462Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "zilla slab",
+        "createdAt": "2026-10-05T15:57:38.618Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "albert sans",
+        "createdAt": "2026-10-05T15:57:38.770Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "caveat brush",
+        "createdAt": "2026-10-05T15:57:38.931Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "caveat",
+        "createdAt": "2026-10-05T15:57:39.074Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "lexend",
+        "createdAt": "2026-10-05T15:57:39.209Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "anybody",
+        "createdAt": "2026-10-05T15:57:39.368Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "public sans",
+        "createdAt": "2026-10-05T15:57:39.507Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "bodoni moda",
+        "createdAt": "2026-10-05T16:55:57.749Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "source serif 4",
+        "createdAt": "2026-10-05T16:55:57.878Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "host grotesk",
+        "createdAt": "2026-10-05T16:55:58.034Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "overpass",
+        "createdAt": "2026-10-05T16:55:58.188Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "overpass mono",
+        "createdAt": "2026-10-05T16:55:58.339Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "alumni sans",
+        "createdAt": "2026-10-05T16:55:58.498Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "onest",
+        "createdAt": "2026-10-05T16:55:58.665Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "federo",
+        "createdAt": "2026-10-05T16:55:58.821Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "jost",
+        "createdAt": "2026-10-05T16:55:58.975Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "young serif",
+        "createdAt": "2026-10-05T16:55:59.132Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "commissioner",
+        "createdAt": "2026-10-05T16:55:59.288Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "mrs saint delafield",
+        "createdAt": "2026-10-05T20:09:20.427Z",
+        "reason": "agent: v2 drafts explore a replacement visual world requested by the user; signature face for the editor's letter; DESIGN.md (exam console) is superseded"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "v2/drafts/w-issue.html"
+        ],
+        "createdAt": "2026-10-05T21:14:19.115Z",
+        "reason": "agent: body overflow-x clip is the intentional guard against sideways page scroll; the theme popover lives in a fixed bar outside any clip"
+      }
+    ]
+  }
+}

@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft WA, Issue One revised | Mostafa Saher</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="After Class: a free newsletter by Mostafa Saher on AI and cloud computing. Thoughts, opinions and resources.">
+<script>
+  // apply a saved cover colour before first paint; with none saved, CSS follows the system light or dark setting
+  (() => { const modes = { lime: 'light', sky: 'light', blush: 'light', cobalt: 'dark', forest: 'dark', plum: 'dark' };
+    try { const c = localStorage.getItem('after-class-cover'); if (modes[c]) { document.documentElement.dataset.cover = c; document.documentElement.dataset.mode = modes[c]; } } catch (e) {} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400..800&family=Hanken+Grotesk:wght@400..700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<style>
+/* Draft WA: W revised against the taste skill and Impeccable. Same cover, colours, motion and send-off as W, minus:
+   the monospace face, tiny tracked capitals, gradients and glows, shadows on things at rest, hairlines, the label above
+   the cover lines, the 1-2-3 numbers and the over-long letter heading. Two typefaces, a smaller set of sizes, a neutral page. */
+:root {
+  /* light page */
+  --page: #F4F4F2; --text: #111111; --text-rgb: 17 17 17; --text-2: #57564F;         /* text-2 6.8:1 */
+  --field-bg: #FFFFFF; --field-text: #111111; --field-line: #111111; --field-ph: #6B6B63;
+  /* lime cover (default light) */
+  --cover: #D9F24B; --on-cover: #111111; --on-cover-2: #3A4210;                         /* sweater 14.7:1, secondary 8.5:1 */
+  --hi: #D9F24B; --glow: transparent; --card-bg: #FFFFFF; --stamp: #3A4210; --scroll: #9DAF34;
+  color-scheme: light;
+  --error: #8A1C0C;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --gutter: clamp(20px, 3.6vw, 56px);
+  --display: "Big Shoulders Display", system-ui, sans-serif;
+  --disc-x: 58.5%;
+}
+/* every dark cover shares the dark page */
+:root[data-mode="dark"] {
+  --page: #131311; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;     /* text-2 7.5:1 */
+  --field-bg: rgba(255,255,255,.08); --field-text: #F5F4EE; --field-line: var(--on-cover-2); --field-ph: var(--on-cover-2);
+  color-scheme: dark; --error: #FFB4AB;
+}
+:root[data-cover="sky"]   { --cover: #A7D8F5; --on-cover: #111111; --on-cover-2: #123A52; --hi: #A7D8F5; --stamp: #123A52; --scroll: #5E9CC2; }  /* sweater 12.1:1 */
+:root[data-cover="blush"] { --cover: #FFB3C7; --on-cover: #111111; --on-cover-2: #5A1F2E; --hi: #FFB3C7; --stamp: #5A1F2E; --scroll: #D97F98; }  /* sweater 11.0:1 */
+/* dark covers: a black sweater barely separates from a dark field, so each has a backdrop light behind you */
+:root[data-cover="cobalt"] { --cover: #2335C7; --on-cover: #D9F24B; --on-cover-2: #C8D0FF; --hi: #D9F24B; --glow: #4A5EF7; --stamp: #2335C7; --scroll: #4A5EF7; }  /* lime 6.9:1, secondary 5.8:1 */
+:root[data-cover="forest"] { --cover: #0F3D2E; --on-cover: #D9F24B; --on-cover-2: #B8D6C6; --hi: #D9F24B; --glow: #23704F; --stamp: #0F3D2E; --scroll: #23704F; }  /* lime 9.6:1, secondary 7.8:1 */
+:root[data-cover="plum"]   { --cover: #4A1430; --on-cover: #FFB3C7; --on-cover-2: #F2CFD8; --hi: #FFB3C7; --glow: #842A55; --stamp: #4A1430; --scroll: #842A55; }  /* blush 7.8:1, secondary 10.3:1 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-cover]) {
+    --page: #131311; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;
+    --field-bg: rgba(255,255,255,.08); --field-text: #F5F4EE; --field-line: var(--on-cover-2); --field-ph: var(--on-cover-2);
+    color-scheme: dark; --error: #FFB4AB;
+    --cover: #2335C7; --on-cover: #D9F24B; --on-cover-2: #C8D0FF; --hi: #D9F24B; --glow: #4A5EF7; --stamp: #2335C7; --scroll: #4A5EF7;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: var(--scroll) var(--page); scroll-behavior: smooth; }
+body { margin: 0; background: var(--page); color: var(--text); overflow-x: clip; font-family: "Hanken Grotesk", system-ui, sans-serif; font-size: 18px; line-height: 28px; -webkit-font-smoothing: antialiased; transition: background-color 400ms ease, color 400ms ease; }
+::selection { background: var(--hi); color: #111111; }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- one field, one button ---------- */
+.field { position: relative; display: flex; align-items: center; gap: 4px; height: 56px; padding: 4px; background: var(--field-bg); border: 1.5px solid var(--field-line); border-radius: 999px; transition: border-color 150ms ease, background-color 400ms ease; }
+.field:focus-within { outline: 2px solid var(--on-cover); outline-offset: 3px; }
+.field input { flex: 1 1 0; min-width: 0; height: 100%; padding: 0 14px; border: 0; background: transparent; color: var(--field-text); caret-color: var(--field-text); font: inherit; font-size: 17px; outline: none; transition: opacity 200ms ease; }
+.field input::placeholder { color: var(--field-ph); opacity: 1; }
+/* a ring that pulses out from the field when someone is sent up here to sign up */
+.field::after { content: ""; position: absolute; inset: -2px; border: 2px solid var(--on-cover); border-radius: inherit; opacity: 0; pointer-events: none; }
+.field.is-pulse::after { animation: pulse 1000ms var(--ease-out) 2; }
+@keyframes pulse { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.12, 1.5); } }
+
+.btn { position: relative; isolation: isolate; overflow: hidden; flex: none; height: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 20px; border: 0; border-radius: 999px; background: var(--on-cover); color: var(--cover); font: inherit; font-size: 16px; font-weight: 600; white-space: nowrap; text-decoration: none; cursor: pointer; transition: background-color 400ms ease, color 400ms ease, transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { cursor: default; }
+/* sending: a lighter band fills the button left to right while the arrow launches off */
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: currentColor; opacity: 0.18; transform: scaleX(0); transform-origin: 0 50%; }
+.is-busy .btn::before { transform: scaleX(1); transition: transform 650ms cubic-bezier(0.4, 0, 0.2, 1); }
+.is-done .btn::before { transform: scaleX(1); opacity: 0; transition: opacity 400ms ease; }
+.btn__label { transition: opacity 180ms ease, filter 180ms ease; }
+.is-busy .btn__label { opacity: 0.7; filter: blur(1.5px); }
+.btn__icon { display: grid; }
+.btn__icon svg { grid-area: 1 / 1; transition: opacity 200ms ease, transform 300ms var(--ease-out); }
+.btn__icon .check { opacity: 0; transform: scale(0.4); }
+.is-busy .btn__icon .arrow { opacity: 0; transform: translateX(28px); transition: opacity 250ms ease 80ms, transform 340ms cubic-bezier(0.55, 0, 1, 0.45); }
+.is-done .btn__icon .arrow { opacity: 0; transform: translateX(28px); }
+.is-done .btn__icon .check { opacity: 1; transform: none; transition: opacity 150ms ease 260ms, transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1) 260ms; }
+@media (hover: hover) and (pointer: fine) { .btn:not(:disabled):hover .arrow { transform: translateX(3px); } .btn--up:not(:disabled):hover .arrow { transform: translateY(-3px); } }
+/* subscribed: the email field folds away and the button takes the whole pill */
+.is-done .field { justify-content: flex-end; }
+.is-done .field input { flex: 0 0 0; padding: 0; opacity: 0; }
+.is-done .field .btn { flex: 1 1 auto; }
+.msg { margin: 8px 0 0 18px; min-height: 20px; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: var(--error); }
+.is-invalid .field { border-color: var(--error); }
+
+/* ---------- swatches (the cover colour picker) ---------- */
+.sw { position: relative; width: 28px; height: 28px; padding: 0; border: 1.5px solid rgb(var(--text-rgb) / 0.2); border-radius: 50%; background: var(--a); cursor: pointer; transition: transform 160ms var(--ease-out); }
+.sw::after { content: ""; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: var(--b); }
+.sw:active { transform: scale(0.9); }
+.sw[aria-pressed="true"] { outline: 1.5px solid currentColor; outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .sw:hover { transform: scale(1.1); } }
+
+/* ---------- top bar: appears once your name has scrolled away ---------- */
+.topbar { position: fixed; z-index: 40; top: 0; left: 0; right: 0; height: 60px; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 16px; padding: 0 var(--gutter); background: var(--page); color: var(--text); transform: translateY(-101%); transition: transform 360ms var(--ease-out), background-color 400ms ease, color 400ms ease; }
+.topbar.is-shown { transform: none; }
+.wordmark { justify-self: start; font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1; letter-spacing: 0.01em; text-transform: uppercase; text-decoration: none; }
+.issue { font-size: 15px; line-height: 20px; font-weight: 600; }
+.topbar__end { justify-self: end; display: flex; align-items: center; gap: 12px; }
+.pill { padding: 7px 16px; border-radius: 999px; background: var(--text); color: var(--page); font-size: 15px; line-height: 20px; font-weight: 600; text-decoration: none; transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.pill:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .pill:hover { opacity: 0.85; } }
+.theme { position: relative; }
+.theme__btn { position: relative; display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 1.5px solid currentColor; border-radius: 50%; background: var(--cover); cursor: pointer; transition: transform 160ms var(--ease-out); }
+.theme__btn::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--on-cover); }
+.theme__btn:active { transform: scale(0.94); }
+.theme__panel { position: absolute; top: calc(100% + 12px); right: 0; width: 232px; padding: 14px 16px 12px; background: var(--page); color: var(--text); border-radius: 14px; box-shadow: 0 18px 40px -18px rgba(0,0,0,.45); /* taste-skill-ignore: a real floating menu */ opacity: 0; visibility: hidden; transform: translateY(-4px) scale(0.96); transform-origin: top right; transition: opacity 150ms ease, transform 200ms var(--ease-out), visibility 0s linear 200ms; }
+.theme.is-open .theme__panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.theme__panel p { margin: 0 0 8px; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--text-2); }
+.theme__row { display: flex; gap: 10px; margin-bottom: 14px; }
+.theme__auto { width: 100%; padding: 6px 0 2px; border: 0; background: none; color: var(--text); font: inherit; font-size: 13px; line-height: 20px; font-weight: 600; text-align: left; cursor: pointer; }
+.theme__auto[aria-pressed="true"] { font-weight: 700; }
+.theme__auto[aria-pressed="true"]::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-radius: 50%; background: currentColor; vertical-align: 2px; }
+@media (hover: hover) and (pointer: fine) { .theme__auto:hover { text-decoration: underline; } }
+
+/* ---------- the cover ---------- */
+.cover { position: relative; min-height: 100svh; background-color: var(--cover); color: var(--on-cover); overflow: hidden; isolation: isolate; transition: background-color 400ms ease, color 400ms ease; }
+/* dark covers: a flat lighter disc behind you, so the black sweater still separates (W used a soft glow) */
+.disc { position: absolute; z-index: 0; left: var(--disc-x); bottom: -16%; width: 50vw; aspect-ratio: 1; border-radius: 50%; background: var(--glow); transform: translateX(-50%); pointer-events: none; transition: background-color 400ms ease; }
+/* fills the cover so the absolutely placed parts anchor to it, and the landing thud moves them all together */
+.cover-body { position: relative; min-height: 100svh; }
+.masthead { position: relative; z-index: 0; margin: 0; padding: 32px var(--gutter) 0; display: flex; justify-content: space-between; font-family: var(--display); font-weight: 700; font-size: 25.5vw; line-height: 0.8; letter-spacing: -0.01em; text-transform: uppercase; user-select: none; }
+.masthead .l { display: block; clip-path: inset(-4% -12% 0 -12%); }
+.masthead i { display: block; font-style: normal; font-variation-settings: "wght" var(--w, 640); transform-origin: 50% 100%; }
+.portrait { position: absolute; z-index: 1; bottom: 0; left: 58.5%; height: 82%; width: auto; transform: translateX(-50%); }
+
+.lede { position: absolute; z-index: 2; left: var(--gutter); bottom: 48px; width: min(440px, max(33vw, 360px)); }
+h1 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 72px; line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; text-wrap: balance; }
+.roles { margin: 14px 0 0; font-size: 18px; line-height: 26px; font-weight: 600; text-wrap: balance; }
+.pitch { margin: 8px 0 20px; font-size: 16px; line-height: 24px; color: var(--on-cover-2); text-wrap: pretty; }
+.pitch b { color: var(--on-cover); font-weight: 700; }
+
+.side { position: absolute; z-index: 2; right: var(--gutter); bottom: 56px; width: 280px; display: grid; gap: 24px; justify-items: end; text-align: right; }
+.covers { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+.covers span { font-size: 15px; line-height: 20px; font-weight: 600; color: var(--on-cover-2); }
+.covers__row { display: flex; align-items: center; gap: 8px; }
+.covers__row i { width: 1.5px; height: 18px; margin: 0 2px; background: var(--on-cover); opacity: 0.35; }
+.covers .sw { width: 24px; height: 24px; border-color: rgba(17,17,17,.25); }
+.lines { width: 100%; }
+.lines a { display: block; padding: 12px 0 14px; border-top: 3px solid currentColor; text-decoration: none; }
+.lines a:last-child { border-bottom: 3px solid currentColor; }
+.lines b { display: block; font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 0.95; text-transform: uppercase; transition: transform 300ms var(--ease-out); }
+.lines span { display: block; margin-top: 4px; font-size: 14px; line-height: 20px; color: var(--on-cover-2); }
+@media (hover: hover) and (pointer: fine) { .lines a:hover b { transform: translateX(-6px); } }
+.barcode { padding: 8px 10px 6px; background: #FFFFFF; color: #111111; }
+.barcode svg { display: block; }
+.barcode p { margin: 4px 0 0; font-size: 13px; line-height: 16px; font-weight: 600; text-align: center; }
+
+/* the page corner lifts as the cursor comes near; it turns to the contents */
+.corner { position: absolute; z-index: 5; right: 0; bottom: 0; width: var(--c, 0px); height: var(--c, 0px); }
+.corner::before, .corner::after { content: ""; position: absolute; inset: 0; }
+.corner::before { background: var(--page); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.corner::after { background: #E4E4E0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.corner:focus-visible { --c: 56px !important; outline-offset: -4px; }
+
+/* send-off: the subscriber label lands, the address types itself on, and a SUBSCRIBED stamp is pressed onto it */
+.mailer {
+  position: absolute; z-index: 5; top: 25%; right: calc(var(--gutter) + 24px); width: 300px; padding: 12px 16px 34px; border-radius: 2px;
+  background: #FFFFFF; color: #111111; font-size: 13px; line-height: 18px; font-weight: 600;
+  opacity: 0; pointer-events: none; transform: translate(40px, -80px) rotate(-12deg) scale(1.12);
+}
+.mailer.is-on { opacity: 1; transform: rotate(-3deg); transition: opacity 120ms linear, transform 420ms var(--ease-out); }
+.mailer__row { display: flex; justify-content: space-between; gap: 12px; }
+.mailer__to { margin: 8px 0 8px; min-height: 22px; font-size: 17px; line-height: 22px; font-weight: 500; word-break: break-all; }
+.mailer__to::after { content: ""; display: inline-block; width: 7px; height: 13px; margin-left: 2px; vertical-align: -2px; background: #111111; animation: caret 800ms steps(1) infinite; }
+.mailer.is-stamped .mailer__to::after { display: none; }
+@keyframes caret { 50% { opacity: 0; } }
+.mailer__stamp { position: absolute; right: 12px; bottom: 9px; padding: 4px 9px 3px; border: 2.5px solid var(--stamp); border-radius: 6px; color: var(--stamp); font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1; letter-spacing: 0.02em; text-align: center; mix-blend-mode: multiply; opacity: 0; transform: rotate(-6deg) scale(1.9); }
+.mailer__stamp small { display: block; margin-top: 3px; font-family: "Hanken Grotesk", system-ui, sans-serif; font-size: 13px; line-height: 16px; font-weight: 600; letter-spacing: 0; }
+.mailer.is-stamped .mailer__stamp { animation: stamp 360ms cubic-bezier(0.55, 0, 0.6, 1) forwards; }
+@keyframes stamp { 0% { opacity: 0; transform: rotate(-6deg) scale(1.9); } 65% { opacity: 0.92; transform: rotate(-9deg) scale(0.96); } 100% { opacity: 0.92; transform: rotate(-9deg) scale(1); } }
+
+/* ---------- contents ---------- */
+.contents { padding: 128px var(--gutter) 112px; }
+.contents__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: 32px; align-items: end; padding-bottom: 40px; }
+h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 112px; line-height: 0.85; text-transform: uppercase; text-wrap: balance; }
+.contents__head p { margin: 0; color: var(--text-2); text-wrap: pretty; }
+.toc { list-style: none; margin: 0; padding: 0; }
+.toc li { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 32px; align-items: baseline; padding: 28px 0 32px; scroll-margin-top: 80px; }
+.toc li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: currentColor; transform-origin: 0 50%; }
+.toc li:last-child::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: currentColor; }
+.toc h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 72px; line-height: 0.9; text-transform: uppercase; transition: transform 300ms var(--ease-out); }
+.toc .dek { margin: 0; font-weight: 600; }
+.toc .dek + p { margin: 6px 0 0; max-width: 46ch; color: var(--text-2); text-wrap: pretty; }
+@media (hover: hover) and (pointer: fine) { .toc li:hover h3 { transform: translateX(8px); } }
+
+/* ---------- editor's letter ---------- */
+.letter { padding: 24px var(--gutter) 144px; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 48px; }
+.letter h2 { align-self: start; font-size: 72px; line-height: 0.92; }
+.letter__lede { margin: 0; max-width: 34ch; font-size: 24px; line-height: 34px; font-weight: 600; text-wrap: balance; }
+.w { color: rgb(var(--text-rgb) / 0.16); transition: color 500ms var(--ease-out); }
+.w.is-on { color: var(--text); }
+.letter__body { margin-top: 32px; columns: 2; column-gap: 40px; }
+.letter__body p { margin: 0 0 16px; text-wrap: pretty; }
+.sig { display: flex; align-items: center; gap: 20px; margin-top: 32px; }
+.sig__hand { font-family: "Mrs Saint Delafield", cursive; font-size: 76px; line-height: 1; padding: 0 12px 0 4px; }
+.sig__name { font-size: 15px; line-height: 20px; color: var(--text-2); }
+.sig__name b { display: block; color: var(--text); font-weight: 600; }
+
+/* ---------- back cover: the reply card sends you up to the signup ---------- */
+.back { background: var(--cover); color: var(--on-cover); padding: 112px var(--gutter); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px); gap: 48px; align-items: center; transition: background-color 400ms ease, color 400ms ease; }
+.back__note { margin: 20px 0 0; max-width: 34ch; color: var(--on-cover-2); }
+.card { position: relative; padding: 28px; background: #FFFFFF; color: #111111; border-radius: 4px; }
+/* perforated top edge, as if torn out of the issue */
+.card::before { content: ""; position: absolute; left: 0; right: 0; top: -3px; border-top: 6px dotted var(--cover); }
+.card__top { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+.card__title { margin: 0; font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 0.95; text-transform: uppercase; }
+.card__stamp { flex: none; display: grid; place-items: center; width: 92px; height: 104px; padding: 8px; background: #EFEFEC; border-radius: 2px; font-size: 13px; line-height: 17px; font-weight: 600; text-align: center; color: #57564F; transition: background-color 200ms ease, color 200ms ease; }
+.is-subscribed .card__stamp { background: var(--hi); color: #111111; }
+.card__text { margin: 12px 0 20px; color: #57564F; text-wrap: pretty; }
+.card .btn { height: 56px; width: 100%; background: #111111; color: var(--hi); }
+.card .fine { margin: 10px 0 0; font-size: 13px; line-height: 20px; color: #57564F; text-align: center; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 28px var(--gutter); font-size: 14px; line-height: 20px; color: var(--text-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- load ---------- */
+.js .masthead i { transform: translateY(120%); }
+.js .portrait { opacity: 0; transform: translate(-50%, 48px) scale(1.02); transform-origin: 50% 100%; }
+.js .cover [data-in] { opacity: 0; transform: translateY(14px); }
+.js.is-loaded .masthead i { transform: none; transition: transform 1000ms var(--ease-out); transition-delay: calc(var(--i, 0) * 60ms); }
+.js.is-loaded .portrait { opacity: 1; transform: translateX(-50%); transition: opacity 700ms var(--ease-out) 420ms, transform 1100ms var(--ease-out) 420ms; }
+.js.is-loaded .cover [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(250ms + var(--i, 0) * 70ms); }
+
+/* ---------- scroll: each section moves its own way ---------- */
+/* contents: each rule is drawn across, then its entry settles */
+.js .toc li::before { transform: scaleX(0); }
+.js .toc li > * { opacity: 0; transform: translateY(12px); }
+.js .toc li.is-in::before { transform: none; transition: transform 900ms var(--ease-in-out); transition-delay: calc(var(--i, 0) * 120ms); }
+.js .toc li.is-in > * { opacity: 1; transform: none; transition: opacity 600ms var(--ease-out), transform 700ms var(--ease-out), background-color 200ms ease, color 200ms ease; transition-delay: calc(350ms + var(--i, 0) * 120ms), calc(350ms + var(--i, 0) * 120ms), 0s, 0s; }
+.js .contents__head[data-reveal], .js .letter h2[data-reveal], .js .back h2[data-reveal] { opacity: 0; transform: translateY(16px); }
+.js .contents__head.is-in, .js .letter h2.is-in, .js .back h2.is-in { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); }
+/* letter: the text fades in, then the signature is written left to right */
+.js .letter__body[data-reveal] { opacity: 0; }
+.js .letter__body.is-in { opacity: 1; transition: opacity 900ms ease; }
+.js .sig__hand { clip-path: inset(0 100% 0 0); }
+.js .letter__body.is-in .sig__hand { clip-path: inset(-20% -10% -20% 0); transition: clip-path 1400ms var(--ease-in-out) 700ms; }
+/* back cover: the reply card drops out of the issue and lands */
+.js .card[data-reveal] { opacity: 0; transform: translateY(-48px) rotate(-7deg); }
+.js .card.is-in { opacity: 1; transform: none; transition: opacity 300ms ease, transform 900ms cubic-bezier(0.34, 1.3, 0.5, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .masthead i, .js .cover [data-in], .js .toc li > *, .js [data-reveal] { transform: none !important; }
+  .js .portrait { transform: translateX(-50%) !important; }
+  .js .toc li::before { transform: none !important; }
+  .corner { display: none; }
+  .theme:not(.is-open) .theme__panel { display: none; }
+  .mailer, .mailer.is-on { transform: rotate(-3deg); transition: opacity 200ms ease; }
+  .mailer.is-stamped .mailer__stamp { animation: none; opacity: 0.92; transform: rotate(-6deg); }
+  .js .sig__hand { clip-path: none !important; }
+  .field.is-pulse::after { animation: none; }
+  .topbar { transition: none; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1180px) { .side { display: none; } .portrait { left: 66%; } :root { --disc-x: 66%; } h1 { font-size: 60px; } .mailer { top: 23%; } }
+/* phones, and any screen taller than it is wide: stack the cover */
+@media (max-width: 860px), (max-aspect-ratio: 1/1) {
+  .disc { left: 50%; top: 22vw; bottom: auto; width: 96vw; }
+  .cover { min-height: 0; padding-bottom: 32px; }
+  .cover-body { min-height: 0; display: flex; flex-direction: column; }
+  .masthead { padding-top: 20px; }
+  .portrait { position: relative; left: auto; bottom: auto; height: min(110vw, 520px); align-self: center; margin-top: -12vw; transform: none; }
+  .js .portrait { transform: translateY(40px); }
+  .js.is-loaded .portrait { transform: none; }
+  .lede { position: relative; left: auto; bottom: auto; width: auto; padding: 24px var(--gutter) 0; }
+  h1 { font-size: 52px; }
+  .corner { display: none; }
+  .theme:not(.is-open) .theme__panel { display: none; }
+  /* below the face: the portrait starts under the masthead, and the face fills its top third */
+  .mailer { top: calc(68px + 8.4vw + min(50vw, 236px)); right: 14px; width: 248px; padding: 10px 12px 32px; }
+  .topbar { grid-template-columns: minmax(0, 1fr) auto; }
+  .topbar .issue { display: none; }
+  .contents { padding: 88px var(--gutter) 72px; }
+  .contents__head, .letter, .back { grid-template-columns: minmax(0, 1fr); }
+  h2 { font-size: 72px; } .letter h2 { font-size: 52px; }
+  .letter__lede { font-size: 21px; line-height: 30px; }
+  .toc li { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .toc h3 { font-size: 52px; }
+  .letter { padding-bottom: 96px; gap: 20px; }
+  .letter__body { columns: 1; margin-top: 32px; }
+}
+@media (max-width: 520px) {
+  .field { height: auto; flex-direction: column; align-items: stretch; padding: 4px; border-radius: 28px; }
+  .field input { flex: none; height: 48px; }
+  .btn { height: 48px; }
+  .is-done .field input { height: 0; }
+  .card { padding: 22px; }
+  .topbar__end { gap: 8px; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<nav class="topbar" id="topbar" aria-label="After Class">
+  <a class="wordmark" href="#top">After Class</a>
+  <span class="issue">Issue one<span data-date="dot-month"></span></span>
+  <div class="topbar__end">
+    <div class="theme" id="theme">
+      <button class="theme__btn" type="button" aria-expanded="false" aria-controls="theme-panel" aria-label="Change the cover colour"></button>
+      <div class="theme__panel" id="theme-panel" role="group" aria-label="Cover colour">
+        <p>Light</p>
+        <div class="theme__row">
+          <button type="button" class="sw" data-c="lime" style="--a:#D9F24B;--b:#111111" aria-label="Lime, light"></button>
+          <button type="button" class="sw" data-c="sky" style="--a:#A7D8F5;--b:#111111" aria-label="Sky, light"></button>
+          <button type="button" class="sw" data-c="blush" style="--a:#FFB3C7;--b:#111111" aria-label="Blush, light"></button>
+        </div>
+        <p>Dark</p>
+        <div class="theme__row">
+          <button type="button" class="sw" data-c="cobalt" style="--a:#2335C7;--b:#D9F24B" aria-label="Cobalt, dark"></button>
+          <button type="button" class="sw" data-c="forest" style="--a:#0F3D2E;--b:#D9F24B" aria-label="Forest, dark"></button>
+          <button type="button" class="sw" data-c="plum" style="--a:#4A1430;--b:#FFB3C7" aria-label="Plum, dark"></button>
+        </div>
+        <button type="button" class="theme__auto" data-c="" aria-pressed="false">Match my system</button>
+      </div>
+    </div>
+    <a class="pill" href="#top" data-to-signup>Subscribe</a>
+  </div>
+</nav>
+
+<header class="cover" id="top">
+  <div class="disc" aria-hidden="true"></div>
+  <div class="cover-body">
+    <p class="masthead" id="masthead" aria-hidden="true"><span class="l"><i style="--i:0">M</i></span><span class="l"><i style="--i:1">o</i></span><span class="l"><i style="--i:2">s</i></span><span class="l"><i style="--i:3">t</i></span><span class="l"><i style="--i:4">a</i></span><span class="l"><i style="--i:5">f</i></span><span class="l"><i style="--i:6">a</i></span></p>
+    <img class="portrait" src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+
+    <div class="lede">
+      <h1 data-in style="--i:0">Hello, I’m Mostafa.</h1>
+      <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+      <p class="pitch" data-in style="--i:2">I write <b>After Class</b>, a free newsletter with my thoughts, my opinions, and the resources I’d actually hand a student.</p>
+      <form id="subscribe" data-in style="--i:3" novalidate>
+        <label class="sr-only" for="email">Email address</label>
+        <div class="field">
+          <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit"><span class="btn__label">Subscribe free</span><span class="btn__icon" aria-hidden="true"><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></button>
+        </div>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div class="side" data-in style="--i:2">
+      <nav class="lines" aria-label="In every issue">
+        <a href="#thoughts"><b>Thoughts</b><span>Notes from the classroom</span></a>
+        <a href="#opinions"><b>Opinions</b><span>Where I stand on the hype</span></a>
+        <a href="#resources"><b>Resources</b><span>Labs and tools I actually use</span></a>
+      </nav>
+      <div class="covers" role="group" aria-label="Cover colour">
+        <span>Cover</span>
+        <div class="covers__row">
+          <button type="button" class="sw" data-c="lime" style="--a:#D9F24B;--b:#111111" aria-label="Lime, light"></button>
+          <button type="button" class="sw" data-c="sky" style="--a:#A7D8F5;--b:#111111" aria-label="Sky, light"></button>
+          <button type="button" class="sw" data-c="blush" style="--a:#FFB3C7;--b:#111111" aria-label="Blush, light"></button>
+          <i aria-hidden="true"></i>
+          <button type="button" class="sw" data-c="cobalt" style="--a:#2335C7;--b:#D9F24B" aria-label="Cobalt, dark"></button>
+          <button type="button" class="sw" data-c="forest" style="--a:#0F3D2E;--b:#D9F24B" aria-label="Forest, dark"></button>
+          <button type="button" class="sw" data-c="plum" style="--a:#4A1430;--b:#FFB3C7" aria-label="Plum, dark"></button>
+        </div>
+      </div>
+      <div class="barcode" aria-hidden="true"><svg id="bars-cover" width="132" height="30"></svg><p>Issue one<span data-date="dot-short"></span></p></div>
+    </div>
+
+    <div class="mailer" id="mailer" aria-hidden="true">
+      <div class="mailer__row"><span>After Class</span><span>Issue one</span></div>
+      <div class="mailer__to" id="mailer-to"></div>
+      <div class="mailer__row"><span>Subscriber copy</span></div>
+      <div class="mailer__stamp">Subscribed<small data-date="day"></small></div>
+    </div>
+  </div>
+  <a class="corner" href="#contents" aria-label="Turn to the contents"></a>
+</header>
+
+<main>
+  <section class="contents" id="contents" aria-labelledby="contents-h">
+    <div class="contents__head" data-reveal>
+      <h2 id="contents-h">Contents</h2>
+      <p>Every issue has three parts, written the way I explain things in class: one clear step at a time.</p>
+    </div>
+    <ol class="toc">
+      <li id="thoughts" data-reveal style="--i:0"><h3>Thoughts</h3><div><p class="dek">Notes from the classroom</p><p>What students get stuck on, and the explanation that finally made it click.</p></div></li>
+      <li id="opinions" data-reveal style="--i:1"><h3>Opinions</h3><div><p class="dek">Where I stand, plainly</p><p>New models, cloud services and the hype around them. Short, specific and honest.</p></div></li>
+      <li id="resources" data-reveal style="--i:2"><h3>Resources</h3><div><p class="dek">Tested before I share them</p><p>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="letter" aria-labelledby="letter-h">
+    <h2 id="letter-h" data-reveal>Best part? After class.</h2>
+    <div>
+      <p class="letter__lede" data-words>The best part of every class happens after it ends.</p>
+      <div class="letter__body" data-reveal>
+        <p>I teach AI and cloud for a living, and the best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links I send people afterwards.</p>
+        <p>After Class is where that goes now. Every issue carries my thoughts from teaching, where I stand on the latest models and cloud services, and the resources I’d actually hand a student.</p>
+        <p>No filler and no recycled press releases. It’s free, and leaving takes one click.</p>
+        <p class="sig"><span class="sig__hand" aria-hidden="true">Mostafa</span><span class="sig__name"><b>Mostafa Saher</b>Editor, After Class</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="back" aria-labelledby="back-h">
+    <div>
+      <h2 id="back-h" data-reveal>Get every issue.</h2>
+      <p class="back__note">Issue one goes out to everyone who signs up before it lands.</p>
+    </div>
+    <div class="card" id="card" data-reveal>
+      <div class="card__top"><p class="card__title">Subscription card</p><span class="card__stamp" id="stamp">No stamp needed</span></div>
+      <p class="card__text">Issue one and every one after it, free, straight to your inbox. Your subscriber copy is waiting on the cover.</p>
+      <a class="btn btn--up" href="#top" data-to-signup><span class="btn__label" id="card-label">Subscribe on the cover</span><span class="btn__icon" aria-hidden="true"><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span></a>
+      <p class="fine">Free. Unsubscribe in one click.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© <span data-date="year"></span> Mostafa Saher · After Class</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const cover = document.getElementById('top');
+  const img = cover.querySelector('.portrait');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce;
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const inOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+  // ---------- dates: always today's, never typed in ----------
+  const now = new Date(), fmt = (o) => now.toLocaleDateString('en-GB', o);
+  const DATES = {
+    'dot-month': () => ` · ${fmt({ month: 'long', year: 'numeric' })}`,
+    'dot-short': () => ` · ${fmt({ month: 'long', year: 'numeric' })}`,
+    day: () => fmt({ day: '2-digit', month: 'short', year: 'numeric' }),
+    year: () => String(now.getFullYear()),
+  };
+  document.querySelectorAll('[data-date]').forEach((el) => (el.textContent = DATES[el.dataset.date]()));
+
+  // barcode from a seed string, so it looks printed rather than random
+  (function bars(svg, seed, w, h) {
+    let x = 0, out = '', s = 0;
+    for (const c of seed) s = (s * 31 + c.charCodeAt(0)) >>> 0;
+    while (x < w - 2) { s = (s * 1103515245 + 12345) >>> 0; const bw = 1 + (s % 3), gap = 1 + ((s >> 3) % 2); out += `<rect x="${x}" y="0" width="${bw}" height="${h}" fill="currentColor"/>`; x += bw + gap; }
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`); svg.innerHTML = out;
+  })(document.getElementById('bars-cover'), 'after-class-issue-01', 132, 30);
+
+  // ---------- cover colour: follows the system until the visitor picks one ----------
+  const MODES = { lime: 'light', sky: 'light', blush: 'light', cobalt: 'dark', forest: 'dark', plum: 'dark' };
+  const KEY = 'after-class-cover', dark = matchMedia('(prefers-color-scheme: dark)');
+  const current = () => root.dataset.cover || (dark.matches ? 'cobalt' : 'lime');
+  function syncSwatches() {
+    const c = current(), picked = !!root.dataset.cover;
+    document.querySelectorAll('.sw[data-c]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.c === c)));
+    document.querySelector('.theme__auto').setAttribute('aria-pressed', String(!picked));
+  }
+  function setCover(c) {
+    if (c && MODES[c]) { root.dataset.cover = c; root.dataset.mode = MODES[c]; } else { delete root.dataset.cover; delete root.dataset.mode; }
+    try { c ? localStorage.setItem(KEY, c) : localStorage.removeItem(KEY); } catch (e) {}
+    syncSwatches();
+  }
+  dark.addEventListener('change', syncSwatches);
+  document.addEventListener('click', (e) => { const b = e.target.closest('[data-c]'); if (b) setCover(b.dataset.c); });
+  syncSwatches();
+
+  const theme = document.getElementById('theme'), themeBtn = theme.querySelector('.theme__btn');
+  const openTheme = (open) => { theme.classList.toggle('is-open', open); themeBtn.setAttribute('aria-expanded', String(open)); };
+  themeBtn.addEventListener('click', () => openTheme(!theme.classList.contains('is-open')));
+  document.addEventListener('pointerdown', (e) => { if (!theme.contains(e.target)) openTheme(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && theme.classList.contains('is-open')) { openTheme(false); themeBtn.focus(); } });
+
+  // ---------- top bar: hidden while your name is on screen ----------
+  const topbar = document.getElementById('topbar');
+  new IntersectionObserver(([e]) => {
+    const show = !e.isIntersecting && e.boundingClientRect.top < 0;
+    topbar.classList.toggle('is-shown', show);
+    if (!show) openTheme(false);
+  }).observe(document.getElementById('masthead'));
+
+  // ---------- the name: letters get bolder near whatever moves over them (cursor, the load sweep, the label's landing) ----------
+  const REST = 640, PEAK = 800;
+  const letters = [...document.querySelectorAll('#masthead .l')].map((el) => ({ el, w: REST, cx: 0 }));
+  let spread2 = 2 * 140 * 140;
+  const measure = () => {
+    letters.forEach((l) => { const r = l.el.getBoundingClientRect(); l.cx = r.left + r.width / 2; });
+    spread2 = 2 * Math.pow(parseFloat(getComputedStyle(letters[0].el).fontSize) * 0.38, 2);
+  };
+  measure(); addEventListener('resize', measure); document.fonts && document.fonts.ready.then(measure);
+
+  const src = { mouse: null, sweep: null }, ripples = [];
+  const corner = cover.querySelector('.corner');
+  let tx = innerWidth / 2, ty = 200, sx = tx, sy = ty, cc = 0, cTarget = 0, raf = 0, last = 0;
+  function tick(now) {
+    const dt = last ? Math.min(4, (now - last) / 16.67) : 1; last = now;
+    const a = 1 - Math.pow(0.86, dt), b = 1 - Math.pow(0.88, dt);
+    let moving = src.sweep !== null || ripples.length > 0;
+    if (fine) {
+      sx += (tx - sx) * b; sy += (ty - sy) * b; cc += (cTarget - cc) * (1 - Math.pow(0.8, dt));
+      corner.style.setProperty('--c', `${cc.toFixed(1)}px`);
+      if (Math.abs(tx - sx) + Math.abs(ty - sy) > 0.5 || Math.abs(cTarget - cc) > 0.3) moving = true;
+    }
+    const S = [];
+    if (src.mouse !== null) S.push([src.mouse, 1]);
+    if (src.sweep !== null) S.push([src.sweep, 1]);
+    const t0 = performance.now();
+    for (let i = ripples.length - 1; i >= 0; i--) {
+      const r = ripples[i], t = Math.max(0, t0 - r.t0);
+      if (t > r.d) { ripples.splice(i, 1); continue; }
+      const amp = 1 - t / r.d; S.push([r.x - t * r.v, amp], [r.x + t * r.v, amp]);
+    }
+    for (const l of letters) {
+      let k = 0;
+      for (const [x, amp] of S) { const d = x - l.cx; k = Math.max(k, amp * Math.exp(-(d * d) / spread2)); }
+      const target = REST + (PEAK - REST) * k;
+      l.w += (target - l.w) * a;
+      if (Math.abs(target - l.w) > 0.5) moving = true;
+      l.el.style.setProperty('--w', l.w.toFixed(1));
+    }
+    if (moving) raf = requestAnimationFrame(tick); else { raf = 0; last = 0; }
+  }
+  const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+
+  if (fine) {
+    cover.addEventListener('pointermove', (e) => {
+      const r = cover.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; src.mouse = e.clientX;
+      const d = Math.hypot(r.width - tx, r.height - ty); // distance to the page corner
+      cTarget = e.target === corner ? 56 : d < 260 ? 10 + 24 * (1 - d / 260) : 0;
+      kick();
+    });
+    cover.addEventListener('pointerleave', () => { src.mouse = null; cTarget = 0; kick(); });
+  } else if (!reduce) {
+    // touch: pressing the cover leans the name toward your finger
+    cover.addEventListener('pointerdown', (e) => { src.mouse = e.clientX; kick(); });
+    cover.addEventListener('pointermove', (e) => { if (src.mouse !== null) { src.mouse = e.clientX; kick(); } });
+    ['pointerup', 'pointercancel'].forEach((t) => cover.addEventListener(t, () => { src.mouse = null; kick(); }));
+  }
+
+  // after the cover is set, one swell runs through the name so people find out it moves
+  function intro() {
+    if (reduce) return;
+    setTimeout(() => {
+      const t0 = performance.now(), D = 1500, from = -200, to = innerWidth + 200;
+      const step = (now) => {
+        const p = Math.min(1, Math.max(0, now - t0) / D);
+        src.sweep = from + (to - from) * inOut(p); kick();
+        if (p < 1) requestAnimationFrame(step); else { src.sweep = null; kick(); }
+      };
+      requestAnimationFrame(step);
+    }, 1200);
+  }
+  let loaded = false;
+  const go = () => { if (loaded) return; loaded = true; requestAnimationFrame(() => { root.classList.add('is-loaded'); intro(); }); };
+  Promise.all([document.fonts ? document.fonts.ready : 0, img.decode ? img.decode().catch(() => 0) : 0]).then(go);
+  setTimeout(go, 1500);
+
+  // ---------- reveals ----------
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+  document.querySelectorAll('[data-words]').forEach((p) => {
+    p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+    const wio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.target.classList.toggle('is-on', e.isIntersecting || e.boundingClientRect.top < 0));
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 1 });
+    p.querySelectorAll('.w').forEach((w) => wio.observe(w));
+  });
+
+  // ---------- send-off: the label lands, the address types itself on, and the stamp comes down ----------
+  const mailer = document.getElementById('mailer'), mailTo = document.getElementById('mailer-to');
+  async function stick(email) {
+    if (reduce) { mailTo.textContent = email; mailer.classList.add('is-on', 'is-stamped'); return; }
+    mailTo.textContent = ''; mailer.classList.add('is-on');
+    await sleep(320);
+    // the cover takes the hit, and a ripple runs out through the name from where the label landed
+    cover.querySelector('.cover-body').animate([{ transform: 'none' }, { transform: 'translateY(3px)' }, { transform: 'none' }], { duration: 320, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    const r = mailer.getBoundingClientRect(); ripples.push({ x: r.left + r.width / 2, t0: performance.now(), d: 1100, v: 1.1 }); kick();
+    for (const ch of email) { mailTo.textContent += ch; await sleep(26); }
+    await sleep(180);
+    mailer.classList.add('is-stamped');
+    await sleep(230);
+    mailer.animate([{ transform: 'rotate(-3deg)' }, { transform: 'rotate(-3deg) translateY(2px) scale(0.995)' }, { transform: 'rotate(-3deg)' }], { duration: 260, easing: 'ease-out' });
+  }
+
+  // ---------- signup lives on the cover; everything else sends people up to it ----------
+  const ENDPOINT = null; // newsletter service endpoint goes here later
+  const valid = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  const form = document.getElementById('subscribe'), field = form.querySelector('.field'), input = form.querySelector('input'), msg = form.querySelector('.msg'), btn = form.querySelector('.btn');
+  let subscribed = false;
+  // glide back to the cover; if the glide is cut short or never reports finishing, land there anyway
+  async function toTop() {
+    if (scrollY < 4) return;
+    await new Promise((done) => {
+      const t = setTimeout(done, 2500);
+      addEventListener('scrollend', () => { clearTimeout(t); done(); }, { once: true });
+      scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+    if (scrollY > 4) scrollTo({ top: 0, behavior: 'auto' });
+    await sleep(100);
+  }
+  document.querySelectorAll('[data-to-signup]').forEach((a) => a.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await toTop();
+    if (subscribed) { mailer.animate([{ transform: 'rotate(-3deg)' }, { transform: 'rotate(-5deg) scale(1.03)' }, { transform: 'rotate(-3deg)' }], { duration: 420, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }); return; }
+    input.focus({ preventScroll: true });
+    field.classList.remove('is-pulse'); void field.offsetWidth; field.classList.add('is-pulse');
+  }));
+  field.addEventListener('animationend', () => field.classList.remove('is-pulse'));
+
+  input.addEventListener('input', () => { form.classList.remove('is-invalid'); msg.classList.remove('is-error'); msg.textContent = ''; input.removeAttribute('aria-invalid'); });
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    if (subscribed) return;
+    const v = input.value.trim();
+    if (!valid(v)) {
+      form.classList.add('is-invalid'); msg.classList.add('is-error'); input.setAttribute('aria-invalid', 'true');
+      msg.textContent = v ? 'That address is missing something. Check it and try again.' : 'Add your email address first.';
+      if (!reduce) field.animate([{ transform: 'none' }, { transform: 'translateX(-7px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(-4px)' }, { transform: 'translateX(2px)' }, { transform: 'none' }], { duration: 380, easing: 'ease-out' });
+      input.focus(); return;
+    }
+    subscribed = true;
+    form.classList.add('is-busy'); btn.disabled = true;
+    await sleep(650);
+    // the field folds away and the button grows across the whole pill, keeping its right edge
+    const w0 = btn.getBoundingClientRect().width;
+    form.classList.remove('is-busy'); form.classList.add('is-done');
+    form.querySelector('.btn__label').textContent = 'Subscribed';
+    input.readOnly = true; input.tabIndex = -1;
+    if (!reduce && getComputedStyle(field).flexDirection === 'row') {
+      const w1 = btn.getBoundingClientRect().width;
+      btn.animate([{ width: `${w0}px`, flexGrow: 0 }, { width: `${w1}px`, flexGrow: 0 }], { duration: 560, easing: 'cubic-bezier(0.77, 0, 0.175, 1)' });
+    }
+    msg.textContent = `You’re subscribed. Issue one goes to ${v}.`;
+    document.getElementById('card').classList.add('is-subscribed');
+    document.getElementById('stamp').textContent = 'Received, thank you';
+    document.getElementById('card-label').textContent = 'See your subscriber copy';
+    document.querySelector('.pill[data-to-signup]').textContent = 'Subscribed';
+    if (matchMedia('(pointer: coarse)').matches) input.blur(); // drop the keyboard so the cover is visible
+    await toTop();
+    stick(v);
+  });
+})();
+</script>
+</body>
+</html>

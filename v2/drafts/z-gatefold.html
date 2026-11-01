@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en" data-draft="z">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft Z, Gatefold | Mostafa Saher</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="After Class: a free newsletter by Mostafa Saher on AI and cloud computing. Thoughts, opinions and resources.">
+<script src="assets/mode-kit.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500..900&family=Hanken+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft Z: Gatefold. W's cover, nearly as it was, printed as a gatefold: scrolling opens it down the spine and the
+   inside spread (contents and editor's letter) is underneath. Subscribing drops a ribbon bookmark down the spine. */
+:root {
+  --cover: #FFB3C7; --on-cover: #141414; --on-cover-2: #5A1F2E; --disc: #FFC7D5;   /* sweater 11:1, secondary 7.9:1 */
+  --paper: #F4F4F2; --ink: #141414; --ink-rgb: 20 20 20; --ink-2: #57524F;          /* ink 17:1, ink-2 7.3:1 */
+  --ribbon: #141414; --on-ribbon: #FFB3C7;
+  --field: #FFFFFF; --ph: #6E6560; --error: #8A1C0C;
+  --gutter: clamp(20px, 3.6vw, 56px);
+  --display: "Big Shoulders Display", system-ui, sans-serif;
+  color-scheme: light;
+}
+:root[data-mode="dark"] {
+  --cover: #4A1430; --on-cover: #FFB3C7; --on-cover-2: #F2CFD8; --disc: #6E2148;    /* blush on plum 7.8:1 */
+  --paper: #171315; --ink: #F1ECEE; --ink-rgb: 241 236 238; --ink-2: #B4A9AE;        /* ink 16:1, ink-2 8:1 */
+  --ribbon: #FFB3C7; --on-ribbon: #4A1430;
+  --field: rgba(255, 255, 255, .08); --ph: #E3B9C6; --error: #FFB4AB;
+  color-scheme: dark;
+}
+html { scrollbar-color: var(--on-cover-2) var(--paper); }
+body { background: var(--paper); color: var(--ink); font-family: "Hanken Grotesk", system-ui, sans-serif; font-size: 18px; line-height: 28px; }
+.is-moding body, .is-moding .face, .is-moding .back { transition: background-color 400ms ease, color 400ms ease; }
+::selection { background: var(--on-cover); color: var(--cover); }
+input { caret-color: currentColor; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+/* ---------- the gate: a sticky stage with two flaps over the inside spread ---------- */
+.gate { position: relative; }
+.stage { position: relative; display: flex; flex-direction: column; }
+.flap--l { order: -1; }
+.gate--on.is-open .flap { visibility: hidden; }
+.flap { position: relative; overflow: hidden; }
+.flap--r { display: none; }
+.face { position: relative; min-height: 100svh; background: var(--cover); color: var(--on-cover); }
+/* a flat disc of lighter colour behind the portrait, so a black sweater still separates on the dark cover */
+.face::before { content: ""; position: absolute; left: 58.5%; bottom: -18%; width: 54vw; aspect-ratio: 1; border-radius: 50%; background: var(--disc); transform: translateX(-50%); }
+.gate--on { height: 280svh; }
+.gate--on .stage { position: sticky; top: 0; height: 100svh; perspective: 2200px; overflow: hidden; }
+.gate--on .flap { position: absolute; top: 0; height: 100svh; width: 50%; backface-visibility: hidden; will-change: transform; }
+.gate--on .flap--l { left: 0; transform-origin: 0 50%; transform: rotateY(calc(var(--open, 0) * -104deg)); }
+.gate--on .flap--r { display: block; left: 50%; transform-origin: 100% 50%; transform: rotateY(calc(var(--open, 0) * 104deg)); }
+.gate--on .face { position: absolute; top: 0; width: 200%; height: 100svh; }
+.gate--on .flap--r .face { left: -100%; }
+/* the fold in the middle: the two halves shade a little as they turn */
+.gate--on .flap::after { content: ""; position: absolute; inset: 0; background: #000; opacity: calc(var(--open, 0) * 0.35); pointer-events: none; }
+
+.masthead { position: relative; margin: 0; padding: 32px var(--gutter) 0; display: flex; justify-content: space-between; font-family: var(--display); font-weight: 700; font-size: 25.5vw; line-height: 0.8; letter-spacing: -0.01em; text-transform: uppercase; user-select: none; }
+.masthead i { display: block; font-style: normal; font-variation-settings: "wght" var(--w, 640); }
+.portrait { position: absolute; z-index: 1; bottom: 0; left: 58.5%; height: 82%; width: auto; transform: translateX(-50%); }
+.lede { position: absolute; z-index: 2; left: var(--gutter); bottom: 48px; width: min(440px, max(33vw, 360px)); }
+h1 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 72px; line-height: 0.9; text-transform: uppercase; text-wrap: balance; }
+.roles { margin: 14px 0 0; font-size: 18px; line-height: 26px; font-weight: 600; text-wrap: balance; }
+.pitch { margin: 8px 0 20px; font-size: 16px; line-height: 24px; color: var(--on-cover-2); text-wrap: pretty; }
+.pitch b { color: var(--on-cover); }
+.side { position: absolute; z-index: 2; right: var(--gutter); bottom: 56px; width: 236px; display: grid; gap: 22px; text-align: right; }
+.side a { display: block; text-decoration: none; }
+.side b { display: block; font-family: var(--display); font-weight: 800; font-size: 40px; line-height: 0.95; text-transform: uppercase; transition: transform 300ms var(--ease-out); }
+.side span { display: block; margin-top: 2px; font-size: 15px; line-height: 20px; color: var(--on-cover-2); }
+@media (hover: hover) and (pointer: fine) { .side a:hover b { transform: translateX(-6px); } }
+
+.field { position: relative; display: flex; align-items: center; gap: 4px; height: 56px; padding: 4px; background: var(--field); border-radius: 999px; border: 1.5px solid var(--on-cover); }
+.field:focus-within { outline: 2px solid var(--on-cover); outline-offset: 3px; }
+.field input { flex: 1 1 0; min-width: 0; height: 100%; padding: 0 14px; border: 0; background: transparent; color: var(--on-cover); font: inherit; font-size: 17px; outline: none; }
+.field input::placeholder { color: var(--ph); opacity: 1; }
+.btn { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 100%; padding: 0 20px; border: 0; border-radius: 999px; background: var(--on-cover); color: var(--cover); font: inherit; font-size: 16px; font-weight: 600; text-decoration: none; white-space: nowrap; cursor: pointer; transition: transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+.btn svg { transition: transform 300ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn:hover svg { transform: translateX(3px); } .btn--up:hover svg { transform: translateY(-3px); } }
+.msg { margin: 8px 0 0 18px; min-height: 20px; font-size: 14px; line-height: 20px; font-weight: 600; }
+.msg.is-error { color: var(--error); }
+.is-invalid .field { border: 2px solid var(--error); }
+.field.is-pulse { animation: nudge 900ms var(--ease-out); }
+@keyframes nudge { 30% { transform: scale(1.03); } }
+
+.mode { position: absolute; z-index: 6; top: 20px; right: var(--gutter); display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: var(--on-cover); color: var(--cover); cursor: pointer; transition: transform 160ms var(--ease-out); }
+.mode:active { transform: scale(0.92); }
+
+/* send-off: a ribbon bookmark drops down the spine with the reader's address on it */
+.ribbon { position: absolute; z-index: 5; top: 0; left: 50%; width: 64px; height: 62%; padding: 36px 0 44px; background: var(--ribbon); color: var(--on-ribbon); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 26px), 0 100%); transform: translate(-50%, -101%); pointer-events: none; }
+.ribbon p { margin: 0 auto; writing-mode: vertical-rl; font-weight: 700; font-size: 16px; line-height: 22px; white-space: nowrap; }
+.ribbon b { font-family: var(--display); font-weight: 800; font-size: 20px; text-transform: uppercase; }
+.is-sent .ribbon { transform: translate(-50%, 0); transition: transform 1100ms cubic-bezier(0.34, 1.25, 0.5, 1); }
+
+/* ---------- the inside spread ---------- */
+.spread { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: var(--paper); }
+.gate--on .spread { position: absolute; inset: 0; }
+.page { padding: 112px var(--gutter) 64px; }
+.page + .page { background: rgb(var(--ink-rgb) / 0.04); }
+.gate--on .page { display: flex; flex-direction: column; justify-content: center; padding-top: 48px; padding-bottom: 48px; }
+.gate--on .toc h3 { font-size: clamp(52px, 5vw, 80px); }
+.gate--on .toc p, .gate--on .page p.body { font-size: 20px; line-height: 30px; }
+.gate--on .pull { font-size: clamp(36px, 3.2vw, 52px); }
+h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(56px, 5.6vw, 96px); line-height: 0.88; text-transform: uppercase; text-wrap: balance; }
+.toc { margin: 40px 0 0; padding: 0; list-style: none; display: grid; gap: 28px; }
+.toc li { scroll-margin-top: 24px; }
+.toc h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 52px; line-height: 0.9; text-transform: uppercase; }
+.toc p { margin: 6px 0 0; max-width: 44ch; color: var(--ink-2); }
+.toc p b { color: var(--ink); font-weight: 600; }
+.pull { margin: 28px 0 0; max-width: 24ch; font-family: var(--display); font-weight: 700; font-size: 36px; line-height: 1; text-transform: uppercase; text-wrap: balance; }
+.page p.body { margin: 20px 0 0; max-width: 52ch; text-wrap: pretty; }
+.sig { margin: 24px 0 0; font-size: 15px; line-height: 20px; color: var(--ink-2); }
+.sig b { display: block; font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1; color: var(--ink); text-transform: uppercase; }
+
+/* ---------- back cover ---------- */
+.back { background: var(--cover); color: var(--on-cover); padding: 128px var(--gutter); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: end; }
+.back h2 { font-size: clamp(72px, 9vw, 144px); }
+.back p { margin: 20px 0 0; max-width: 36ch; color: var(--on-cover-2); }
+.back .btn { height: 60px; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 28px var(--gutter); font-size: 15px; line-height: 20px; color: var(--ink-2); }
+footer nav { display: flex; gap: 24px; }
+
+/* ---------- motion ---------- */
+.js .masthead i { transform: translateY(110%); }
+.js .masthead .l { display: block; overflow: hidden; padding-top: 0.04em; }
+.js .portrait { opacity: 0; transform: translate(-50%, 48px); }
+.js .face [data-in] { opacity: 0; transform: translateY(14px); }
+.js.is-loaded .masthead i { transform: none; transition: transform 1000ms var(--ease-out); transition-delay: calc(var(--i, 0) * 60ms); }
+.js.is-loaded .portrait { opacity: 1; transform: translateX(-50%); transition: opacity 700ms var(--ease-out) 420ms, transform 1100ms var(--ease-out) 420ms; }
+.js.is-loaded .face [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(700ms + var(--i, 0) * 80ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .masthead i, .js .face [data-in] { transform: none !important; }
+  .js .portrait { transform: translateX(-50%) !important; }
+  .is-sent .ribbon { transition: none; }
+}
+
+@media (max-width: 1180px) { .side { display: none; } .portrait { left: 66%; } .face::before { left: 66%; } h1 { font-size: 60px; } }
+@media (max-width: 860px), (max-aspect-ratio: 1/1) {
+  .face { min-height: 0; padding-bottom: 32px; display: flex; flex-direction: column; }
+  .face::before { left: 50%; top: 26vw; bottom: auto; width: 96vw; }
+  .masthead { padding-top: 72px; }
+  .portrait { position: relative; left: auto; bottom: auto; height: min(110vw, 520px); align-self: center; margin-top: -12vw; transform: none; }
+  .js .portrait { transform: translateY(40px); }
+  .js.is-loaded .portrait { transform: none; }
+  .lede { position: relative; left: auto; bottom: auto; width: auto; padding: 24px var(--gutter) 0; }
+  h1 { font-size: 52px; }
+  .ribbon { left: auto; right: 20px; width: 52px; height: min(110vw, 520px); transform: translate(0, -101%); }
+  .is-sent .ribbon { transform: none; }
+  .spread { grid-template-columns: minmax(0, 1fr); }
+  .page { padding: 96px var(--gutter) 88px; }
+  .pull { font-size: 24px; line-height: 1.15; }
+  .back { grid-template-columns: minmax(0, 1fr); padding: 96px var(--gutter); }
+}
+@media (max-width: 520px) {
+  .field { height: auto; flex-direction: column; align-items: stretch; border-radius: 28px; }
+  .field input { flex: none; height: 48px; }
+  .btn { height: 48px; }
+  .toc h3 { font-size: 44px; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<div class="gate" id="gate">
+  <div class="stage">
+    <div class="spread" id="inside">
+      <section class="page" aria-labelledby="inside-h">
+        <h2 id="inside-h">Inside every issue</h2>
+        <ul class="toc">
+          <li id="thoughts"><h3>Thoughts</h3><p><b>Notes from the classroom.</b> What students get stuck on, and the explanation that finally made it click.</p></li>
+          <li id="opinions"><h3>Opinions</h3><p><b>Where I stand, plainly.</b> New models, cloud services and the hype around them. Short, specific and honest.</p></li>
+          <li id="resources"><h3>Resources</h3><p><b>Tested before I share them.</b> The labs, docs, courses and tools I actually use, each with one line on why.</p></li>
+        </ul>
+      </section>
+      <section class="page" aria-labelledby="letter-h">
+        <h2 id="letter-h">Editor’s letter</h2>
+        <p class="pull">The best part of every class happens after it ends.</p>
+        <p class="body">I teach AI and cloud for a living, and the best part comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links I send people afterwards. After Class is where that goes now. No filler, no recycled press releases. It’s free, and leaving takes one click.</p>
+        <p class="sig"><b>Mostafa Saher</b>Editor, After Class</p>
+      </section>
+    </div>
+
+    <header class="flap flap--l" id="top">
+      <div class="face">
+        <p class="masthead" data-name aria-hidden="true"></p>
+        <img class="portrait" src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck">
+        <div class="lede">
+          <h1 data-in style="--i:0">Hello, I’m Mostafa.</h1>
+          <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+          <p class="pitch" data-in style="--i:2">I write <b>After Class</b>, a free newsletter with my thoughts, my opinions, and the resources I’d actually hand a student.</p>
+          <form id="signup" data-in style="--i:3" data-hero novalidate>
+            <label class="sr-only" for="email">Email address</label>
+            <div class="field">
+              <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+              <button class="btn" type="submit"><span class="btn__label">Subscribe free</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            </div>
+            <p class="msg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="ribbon" aria-hidden="true"><p><b>Subscriber</b> · <span id="ribbon-to"></span></p></div>
+      </div>
+    </header>
+
+    <div class="flap flap--r" aria-hidden="true">
+      <div class="face">
+        <p class="masthead" data-name></p>
+        <img class="portrait" src="assets/mostafa-cutout.png" width="1100" height="1433" alt="">
+        <nav class="side" data-in style="--i:2" aria-label="In every issue">
+          <a href="#thoughts" tabindex="-1"><b>Thoughts</b><span>Notes from the classroom</span></a>
+          <a href="#opinions" tabindex="-1"><b>Opinions</b><span>Where I stand on the hype</span></a>
+          <a href="#resources" tabindex="-1"><b>Resources</b><span>Labs and tools I actually use</span></a>
+        </nav>
+      </div>
+    </div>
+
+    <button class="mode" type="button" data-mode-toggle></button>
+  </div>
+</div>
+
+<main>
+  <section class="back" aria-labelledby="back-h">
+    <div>
+      <h2 id="back-h">Get every issue.</h2>
+      <p>Issue one goes out to everyone who signs up before it lands. Free, and one click to leave.</p>
+    </div>
+    <a class="btn btn--up" href="#top" data-to-signup><span id="back-label">Subscribe on the cover</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+  </section>
+</main>
+
+<footer>
+  <span>© <span id="year"></span> Mostafa Saher · After Class</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = window.DraftKit, root = document.documentElement;
+  DraftMode.bind();
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('[data-name]').forEach((p) => { p.innerHTML = [...'Mostafa'].map((c, i) => `<span class="l"><i style="--i:${i}">${c}</i></span>`).join(''); });
+  K.ready(document.querySelector('.flap--l .portrait'));
+
+  // ---------- the gatefold: only on wide screens with motion allowed ----------
+  const gate = document.getElementById('gate');
+  const wide = matchMedia('(min-width: 861px) and (min-aspect-ratio: 1/1)');
+  let on = false;
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  function update() {
+    if (!on) return;
+    const travel = gate.offsetHeight - innerHeight;
+    const p = Math.min(1, Math.max(0, (scrollY - gate.offsetTop) / (travel * 0.75)));
+    gate.style.setProperty('--open', ease(p).toFixed(4));
+    gate.classList.toggle('is-open', p >= 0.995);
+  }
+  function setGate() {
+    on = wide.matches && !K.reduce;
+    gate.classList.toggle('gate--on', on);
+    if (!on) gate.style.removeProperty('--open');
+    update();
+  }
+  wide.addEventListener('change', setGate); setGate();
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+
+  // ---------- the name thickens near the cursor, on both halves at once ----------
+  const copies = [...document.querySelectorAll('[data-name]')].map((p) => [...p.querySelectorAll('i')]);
+  const first = document.querySelector('.flap--l');
+  K.pointer(document.querySelector('.stage'), (x, y, inside) => {
+    const sr = document.querySelector('.stage').getBoundingClientRect();
+    const fs = parseFloat(getComputedStyle(copies[0][0]).fontSize), spread2 = 2 * Math.pow(fs * 0.38, 2);
+    // measure letter centres on the unfolded cover: the left copy holds the true positions
+    const fr = first.getBoundingClientRect();
+    copies[0].forEach((el, i) => {
+      const r = el.getBoundingClientRect(), cx = r.left + r.width / 2 - fr.left, d = cx - x;
+      const w = inside && sr.top <= 0.5 && scrollY - gate.offsetTop < 40 ? 640 + 160 * Math.exp(-(d * d) / spread2) : 640;
+      copies.forEach((c) => c[i].style.setProperty('--w', w.toFixed(1)));
+    });
+  }, 0.14);
+
+  // a hint after the cover lands: the gate breathes open a few degrees and closes
+  if (!K.reduce) setTimeout(() => {
+    if (!on || scrollY > 4) return;
+    const t0 = performance.now();
+    const step = (now) => { const t = Math.min(1, (now - t0) / 1400); if (scrollY > 4) return; gate.style.setProperty('--open', (Math.sin(t * Math.PI) * 0.07).toFixed(4)); if (t < 1) requestAnimationFrame(step); else update(); };
+    requestAnimationFrame(step);
+  }, 2400);
+
+  // ---------- signup lives on the cover ----------
+  const form = document.getElementById('signup'), field = form.querySelector('.field'), input = form.querySelector('input');
+  async function toTop() {
+    if (scrollY < 4) return;
+    scrollTo({ top: 0, behavior: K.reduce ? 'auto' : 'smooth' });
+    await new Promise((done) => { const t = setTimeout(done, 1600); addEventListener('scrollend', () => { clearTimeout(t); done(); }, { once: true }); });
+    if (scrollY > 4) scrollTo({ top: 0, behavior: 'auto' });
+  }
+  document.querySelectorAll('[data-to-signup]').forEach((a) => a.addEventListener('click', async (e) => {
+    e.preventDefault(); await toTop();
+    if (form.classList.contains('is-done')) return;
+    input.focus({ preventScroll: true });
+    field.classList.remove('is-pulse'); void field.offsetWidth; field.classList.add('is-pulse');
+  }));
+  K.forms({
+    selector: '#signup', doneLabel: 'Subscribed',
+    message: (v) => `You’re subscribed. Issue one goes to ${v}.`,
+    onSuccess: (f, v) => {
+      input.readOnly = true;
+      document.getElementById('ribbon-to').textContent = v;
+      document.getElementById('back-label').textContent = 'You’re on the list';
+      if (matchMedia('(pointer: coarse)').matches) input.blur();
+      root.classList.add('is-sent');
+    },
+  });
+})();
+</script>
+</body>
+</html>

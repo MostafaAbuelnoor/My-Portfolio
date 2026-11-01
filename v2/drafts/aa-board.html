@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en" data-draft="aa">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft AA, Board | Mostafa Saher</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="After Class: a free newsletter by Mostafa Saher on AI and cloud computing. Thoughts, opinions and resources.">
+<script src="assets/mode-kit.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft AA: Board. After Class taken literally: the board once everyone has left. Light is a whiteboard with markers,
+   dark is a chalkboard. Last lesson's diagram is still half there; the signup is a printed sheet held up by magnets.
+   Subscribing wipes the diagram and writes the reader's address on the board. */
+:root {
+  --board: #F3F4F0; --frame: #C5C9CC; --ink: #1B1D22; --ink-rgb: 27 29 34; --ink-2: #474B54;   /* ink 16:1, ink-2 8.4:1 */
+  --blue: #1C55C9; --red: #CC1F3D; --ghost: rgb(27 29 34 / 0.055);                                   /* blue 6.4:1, red 5:1 */
+  --sheet: #FFFFFF; --sheet-ink: #1B1D22; --sheet-2: #4A4E57; --print: #F6C64A;                    /* sweater on yellow 12:1 */
+  --magnet: #CC1F3D;
+  --btn: #1C55C9; --on-btn: #FFFFFF; --field-line: #1B1D22; --ph: #6A6E76; --error: #A3260C;
+  --gutter: clamp(16px, 3.4vw, 48px);
+  --hand: "Kalam", "Comic Sans MS", cursive;
+  color-scheme: light;
+}
+:root[data-mode="dark"] {
+  --board: #1E2924; --frame: #5A4430; --ink: #ECEBE3; --ink-rgb: 236 235 227; --ink-2: #B5BBB2;   /* chalk 13:1, ink-2 8:1 */
+  --blue: #9CC7F2; --red: #F2A7B5; --ghost: rgb(236 235 227 / 0.06);
+  --sheet: #2A3530; --sheet-ink: #ECEBE3; --sheet-2: #B5BBB2; --print: #F1D46B;
+  --magnet: #F1D46B;
+  --btn: #F1D46B; --on-btn: #1E2924; --field-line: #ECEBE3; --ph: #9DA59B; --error: #FFB4A3;
+  color-scheme: dark;
+}
+html { scrollbar-color: var(--frame) var(--board); }
+body { background: var(--board); color: var(--ink); font-family: "Instrument Sans", system-ui, sans-serif; font-size: 18px; line-height: 28px; }
+.is-moding body, .is-moding .sheet, .is-moding .board, .is-moding .tray { transition: background-color 450ms ease, color 450ms ease, border-color 450ms ease; }
+::selection { background: var(--blue); color: var(--board); }
+input { caret-color: var(--blue); }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+/* ---------- the board ---------- */
+.board { position: relative; min-height: 100svh; margin: 0; border: 14px solid var(--frame); border-bottom-width: 0; overflow: hidden; }
+.bar { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px var(--gutter) 0; }
+.wordmark { font-family: var(--hand); font-weight: 700; font-size: 30px; line-height: 1; text-decoration: none; color: var(--blue); }
+.bar__end { display: flex; align-items: center; gap: 20px; font-weight: 600; font-size: 16px; }
+.bar__end a { text-decoration: none; }
+@media (hover: hover) and (pointer: fine) { .bar__end a:hover { text-decoration: underline; } }
+.mode { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: var(--ink); color: var(--board); cursor: pointer; transition: transform 160ms var(--ease-out); }
+.mode:active { transform: scale(0.92); }
+
+.lesson { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.lesson svg { position: absolute; display: block; }
+.lesson text { font-family: var(--hand); fill: currentColor; }
+.flow { right: 4%; bottom: 7%; width: min(58vw, 820px); color: var(--ink); opacity: 0.4; }
+.smear { left: 30%; top: 8%; width: 48vw; color: var(--ink); }
+canvas.doodle { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; }
+
+.hero { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px; padding: clamp(28px, 5vh, 64px) var(--gutter) 40px; pointer-events: none; }
+.hero > * { pointer-events: auto; }
+h1 { margin: 0; font-family: var(--hand); font-weight: 700; font-size: clamp(64px, 8.2vw, 128px); line-height: 0.98; letter-spacing: -0.01em; color: var(--blue); text-wrap: balance; }
+.roles { margin: 18px 0 0; max-width: 32ch; font-family: var(--hand); font-weight: 400; font-size: clamp(26px, 2.3vw, 34px); line-height: 1.2; text-wrap: balance; }
+.roles u { text-decoration: underline; text-decoration-thickness: 0.2em; text-underline-offset: -0.05em; text-decoration-skip-ink: none; text-decoration-color: color-mix(in srgb, var(--red) 40%, transparent); }
+
+/* a printed sheet held up by two magnets */
+.sheet { position: relative; max-width: 560px; margin-top: 36px; padding: 32px 32px 28px; background: var(--sheet); color: var(--sheet-ink); transform: rotate(-1deg); }
+.sheet::before, .sheet::after { content: ""; position: absolute; top: -12px; width: 26px; height: 26px; border-radius: 50%; background: var(--magnet); }
+.sheet::before { left: 28px; } .sheet::after { right: 28px; }
+.sheet p { margin: 0 0 20px; color: var(--sheet-2); text-wrap: pretty; }
+.sheet p b { color: var(--sheet-ink); }
+.sheet h2 { margin: 0 0 8px; font-family: var(--hand); font-weight: 700; font-size: 34px; line-height: 1.1; color: var(--sheet-ink); }
+
+.photo { justify-self: end; align-self: start; position: relative; width: min(100%, 420px); margin-top: 8px; padding: 14px 14px 56px; background: #FFFFFF; transform: rotate(2.5deg); }
+.photo::before { content: ""; position: absolute; z-index: 2; top: -13px; left: 50%; width: 30px; height: 30px; margin-left: -15px; border-radius: 50%; background: var(--magnet); }
+.photo__print { position: relative; aspect-ratio: 4 / 4.6; background: var(--print); overflow: hidden; }
+.photo img { position: absolute; bottom: 0; left: 50%; height: 94%; width: auto; transform: translateX(-50%); }
+.photo figcaption { position: absolute; left: 14px; right: 14px; bottom: 12px; font-family: var(--hand); font-size: 24px; line-height: 30px; color: #1B1D22; text-align: center; }
+
+.field { display: flex; height: 58px; background: transparent; border: 2px solid var(--field-line); border-radius: 6px; }
+.field:focus-within { outline: 2px solid var(--blue); outline-offset: 3px; }
+.field input { flex: 1 1 0; min-width: 0; padding: 0 16px; border: 0; background: transparent; color: var(--sheet-ink); font: inherit; font-size: 17px; outline: none; }
+.field input::placeholder { color: var(--ph); opacity: 1; }
+.btn { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 20px; border: 0; border-radius: 6px; background: var(--btn); color: var(--on-btn); font: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; transition: transform 160ms var(--ease-out); }
+.field .btn { margin: 4px; }
+.btn:active { transform: scale(0.97); }
+.btn svg { transition: transform 300ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn:hover svg { transform: translateX(3px); } .btn--up:hover svg { transform: translateY(-3px); } }
+.msg { margin: 10px 0 0; min-height: 22px; font-size: 15px; line-height: 22px; font-weight: 600; color: var(--sheet-ink); }
+.msg.is-error { color: var(--error); }
+.is-invalid .field { border-color: var(--error); }
+.field.is-pulse { animation: nudge 900ms var(--ease-out); }
+@keyframes nudge { 30% { transform: scale(1.03); } }
+
+/* send-off: an eraser wipes the old diagram and the reader's address is written on the board */
+.eraser { position: absolute; z-index: 3; width: 120px; height: 52px; border-radius: 8px; background: var(--frame); opacity: 0; pointer-events: none; }
+.eraser::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 16px; border-radius: 0 0 8px 8px; background: var(--ink); opacity: 0.55; }
+.note { position: absolute; z-index: 2; right: 4%; bottom: 8%; width: min(46vw, 660px); margin: 0; font-family: var(--hand); font-weight: 700; font-size: clamp(32px, 3.4vw, 54px); line-height: 1.15; color: var(--red); clip-path: inset(0 100% 0 0); pointer-events: none; }
+.note span { position: relative; display: inline-block; }
+.note svg { position: absolute; left: -8%; top: -18%; width: 116%; height: 136%; overflow: visible; }
+.note ellipse { fill: none; stroke: var(--blue); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.note small { display: block; margin-top: 6px; font-weight: 400; font-size: 0.62em; color: var(--ink); word-break: break-all; }
+.is-written .note { clip-path: inset(-20% -10% -20% -10%); transition: clip-path 1600ms steps(28, end); }
+.is-written .note ellipse { stroke-dashoffset: 0; transition: stroke-dashoffset 900ms var(--ease-in-out) 1500ms; }
+.js.is-loaded.is-wiped .flow, .is-wiped .flow { opacity: 0; transition: opacity 300ms ease; }
+
+/* ---------- the map of an issue ---------- */
+.mapsec { position: relative; padding: 176px var(--gutter) 160px; }
+.mapsec > h2, .homework h2, .letter h2 { margin: 0; font-family: var(--hand); font-weight: 700; font-size: clamp(48px, 5vw, 80px); line-height: 1; color: var(--blue); }
+.mapsec > p { margin: 16px 0 0; max-width: 44ch; font-size: 20px; line-height: 30px; }
+.map { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto; gap: 72px 56px; margin-top: 72px; }
+.map svg.links { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; color: var(--ink); }
+.map > div { position: relative; z-index: 1; }
+.map svg.links path { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.map.is-in svg.links path { stroke-dashoffset: 0; transition: stroke-dashoffset 1100ms var(--ease-in-out); }
+.map.is-in svg.links path:nth-child(2) { transition-delay: 200ms; } .map.is-in svg.links path:nth-child(3) { transition-delay: 400ms; }
+.hub { grid-column: 2; grid-row: 1 / span 2; align-self: center; justify-self: center; display: grid; place-items: center; width: 280px; aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--red); font-family: var(--hand); font-weight: 700; font-size: 48px; line-height: 1; text-align: center; color: var(--red); }
+.node { position: relative; scroll-margin-top: 24px; }
+.node h3 { margin: 0; font-family: var(--hand); font-weight: 700; font-size: 52px; line-height: 1; }
+.node h3 u { text-decoration: underline; text-decoration-thickness: 0.18em; text-underline-offset: -0.04em; text-decoration-skip-ink: none; text-decoration-color: color-mix(in srgb, var(--blue) 35%, transparent); }
+.node p { margin: 10px 0 0; max-width: 34ch; }
+.node p b { display: block; font-weight: 700; }
+.node--a { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
+.node--b { grid-column: 3; grid-row: 1; }
+.node--c { grid-column: 3; grid-row: 2; }
+
+/* ---------- the letter, on lined paper ---------- */
+.letter { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 56px; padding: 0 var(--gutter) 176px; align-items: start; }
+.paper { position: relative; padding: 44px 48px 40px 72px; background: var(--sheet); color: var(--sheet-ink); transform: rotate(0.6deg); /* taste-skill-ignore: ruled lines of real lined paper */ background-image: repeating-linear-gradient(transparent 0 31px, color-mix(in srgb, var(--blue) 22%, transparent) 31px 32px); background-position: 0 40px; }
+.paper::before { content: ""; position: absolute; top: 0; bottom: 0; left: 48px; width: 2px; background: color-mix(in srgb, var(--red) 45%, transparent); }
+.paper::after { content: ""; position: absolute; top: -12px; left: 50%; width: 26px; height: 26px; margin-left: -13px; border-radius: 50%; background: var(--magnet); }
+.paper p { margin: 0 0 32px; font-size: 19px; line-height: 32px; text-wrap: pretty; }
+.paper .sig { margin: 0; font-family: var(--hand); font-weight: 700; font-size: 40px; line-height: 32px; color: var(--blue); }
+.paper .sig small { display: block; margin-top: 8px; font-family: "Instrument Sans", system-ui, sans-serif; font-weight: 400; font-size: 15px; color: var(--sheet-2); }
+.letter__side p { margin: 20px 0 0; font-family: var(--hand); font-size: 30px; line-height: 1.25; max-width: 18ch; }
+
+/* ---------- homework ---------- */
+.homework { position: relative; padding: 120px var(--gutter) 144px; background: var(--ink); color: var(--board); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: end; }
+.homework h2 { color: var(--board); }
+.homework ul { margin: 28px 0 0; padding: 0; list-style: none; font-family: var(--hand); font-size: 32px; line-height: 1.5; }
+.homework li { display: flex; align-items: center; gap: 16px; }
+.box { flex: none; position: relative; width: 30px; height: 30px; border: 3px solid currentColor; border-radius: 4px; }
+.box svg { position: absolute; inset: -9px; width: 42px; height: 42px; opacity: 0; }
+.box path { fill: none; stroke: var(--print); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.is-done-all .box svg { opacity: 1; transition: opacity 300ms ease; }
+.homework .btn { height: 60px; background: var(--board); color: var(--ink); }
+
+/* the marker tray closes the page */
+.tray { position: relative; padding: 20px var(--gutter) 28px; background: var(--frame); color: var(--ink); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-size: 16px; line-height: 24px; }
+:root[data-mode="dark"] .tray { color: #F3EEE6; }
+.markers { display: flex; gap: 10px; }
+.markers i { display: block; width: 92px; height: 18px; border-radius: 9px 4px 4px 9px; background: var(--c); }
+.tray nav { display: flex; gap: 24px; }
+.tray b { font-weight: 600; }
+
+/* ---------- motion ---------- */
+.js h1 { clip-path: inset(-10% 100% -10% 0); }
+.js.is-loaded h1 { clip-path: inset(-10% -5% -10% 0); transition: clip-path 1500ms steps(22, end) 200ms; }
+.js .roles, .js .sheet, .js .photo { opacity: 0; }
+.js .sheet { transform: rotate(-1deg) translateY(30px); }
+.js .photo { transform: rotate(9deg) translateY(-30px); }
+.js.is-loaded .roles { opacity: 1; transition: opacity 700ms ease 1300ms; }
+.js.is-loaded .sheet { opacity: 1; transform: rotate(-1deg); transition: opacity 500ms ease 900ms, transform 900ms cubic-bezier(0.34, 1.3, 0.5, 1) 900ms; }
+.js.is-loaded .photo { opacity: 1; transform: rotate(2.5deg); transition: opacity 400ms ease 600ms, transform 1000ms cubic-bezier(0.34, 1.4, 0.5, 1) 600ms; }
+.js .flow { opacity: 0; }
+.js.is-loaded .flow { opacity: 0.4; transition: opacity 1200ms ease 1600ms; }
+.js .paper[data-reveal] { transform: rotate(4deg) translateY(40px); }
+.js .paper[data-reveal].is-in { transform: rotate(0.6deg); transition: opacity 500ms ease, transform 1000ms cubic-bezier(0.34, 1.3, 0.5, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js h1 { clip-path: none !important; }
+  .js .sheet { transform: rotate(-1deg) !important; } .js .photo { transform: rotate(2.5deg) !important; }
+  .js .paper[data-reveal] { transform: rotate(0.6deg) !important; }
+  .is-written .note { transition: none; } .note ellipse { transition: none !important; }
+  .map svg.links path { stroke-dashoffset: 0; }
+}
+
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .photo { justify-self: start; width: min(78%, 380px); margin-top: 20px; grid-row: 2; }
+  .sheet { grid-row: 3; }
+  .flow { position: relative; right: auto; bottom: auto; width: calc(100% - 2 * var(--gutter)); margin: 0 var(--gutter) 32px; }
+  .lesson { position: relative; inset: auto; }
+  .smear { display: none; }
+  .note { left: var(--gutter); right: var(--gutter); bottom: 24px; width: auto; }
+  .map { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .map svg.links { display: none; }
+  .hub { grid-column: 1; grid-row: auto; justify-self: start; width: 200px; font-size: 36px; }
+  .node--a, .node--b, .node--c { grid-column: 1; grid-row: auto; }
+  .letter { grid-template-columns: minmax(0, 1fr); }
+  .homework { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .board { border-width: 8px 8px 0; }
+  .bar__end a { display: none; }
+  .wordmark { font-size: 26px; }
+  h1 { font-size: 56px; }
+  .roles { font-size: 24px; }
+  .sheet { padding: 28px 20px 22px; }
+  .field { flex-direction: column; height: auto; }
+  .field input { flex: none; height: 52px; }
+  .field .btn { height: 50px; }
+  .mapsec { padding-top: 112px; padding-bottom: 104px; }
+  .node h3 { font-size: 44px; }
+  .paper { padding: 36px 20px 28px 44px; }
+  .paper::before { left: 28px; }
+  .letter__side p { font-size: 24px; }
+  .paper p { font-size: 17px; }
+  .homework { padding: 96px var(--gutter) 104px; }
+  .homework ul { font-size: 26px; }
+  .markers i { width: 56px; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<header class="board" id="top">
+  <div class="lesson" aria-hidden="true">
+    <!-- what is left of the last lesson: half wiped, the way a board looks after class -->
+    <svg class="smear" viewBox="0 0 700 260" fill="none"><path d="M20 70 C 180 40, 420 60, 680 50" stroke="var(--ghost)" stroke-width="54" stroke-linecap="round"/><path d="M60 170 C 240 150, 380 190, 620 160" stroke="var(--ghost)" stroke-width="40" stroke-linecap="round" opacity=".7"/></svg>
+    <svg class="flow" id="flow" viewBox="0 0 820 200" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="6" y="60" width="150" height="76" rx="14"/><text x="81" y="108" font-size="30" text-anchor="middle" stroke="none">Prompt</text>
+      <path d="M164 98 H 238 M 226 86 l 12 12 -12 12"/>
+      <rect x="246" y="60" width="170" height="76" rx="14"/><text x="331" y="108" font-size="30" text-anchor="middle" stroke="none">Bedrock</text>
+      <path d="M424 98 H 498 M 486 86 l 12 12 -12 12"/>
+      <rect x="506" y="60" width="150" height="76" rx="14"/><text x="581" y="108" font-size="30" text-anchor="middle" stroke="none">Claude</text>
+      <path d="M664 98 H 724 M 712 86 l 12 12 -12 12"/>
+      <text x="732" y="108" font-size="30" stroke="none">answer</text>
+      <text x="246" y="40" font-size="22" stroke="none">guardrails?</text><path d="M330 46 q 6 10 2 14"/>
+      <text x="506" y="182" font-size="22" stroke="none">cost per 1k tokens</text>
+      <path d="M0 196 C 160 184, 420 200, 620 188" stroke="var(--board)" stroke-width="26" opacity=".85"/>
+    </svg>
+  </div>
+  <canvas class="doodle" id="doodle" aria-hidden="true"></canvas>
+
+  <div class="bar">
+    <a class="wordmark" href="#top">After Class</a>
+    <div class="bar__end"><a href="#map">Every issue</a><a href="#letter">Letter</a><button class="mode" type="button" data-mode-toggle></button></div>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>Hello, I’m Mostafa.</h1>
+      <p class="roles">Technical instructor, computer engineer, <u>AI enthusiast</u> and cloud specialist.</p>
+      <div class="sheet">
+        <h2>Stay after class</h2>
+        <p>I write <b>After Class</b>, a free newsletter with my thoughts, my opinions, and the resources I’d actually hand a student.</p>
+        <form id="signup" data-hero novalidate>
+          <label class="sr-only" for="email">Email address</label>
+          <div class="field">
+            <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+            <button class="btn" type="submit"><span class="btn__label">Subscribe free</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+          <p class="msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+    <figure class="photo">
+      <div class="photo__print"><img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="Mostafa Saher smiling, arms crossed, in a black quarter zip over a white turtleneck"></div>
+      <figcaption>your instructor</figcaption>
+    </figure>
+  </div>
+
+  <div class="eraser" id="eraser" aria-hidden="true"></div>
+  <p class="note" id="note" aria-hidden="true">See you <span>after class<svg viewBox="0 0 100 40" preserveAspectRatio="none"><ellipse cx="50" cy="20" rx="48" ry="18" pathLength="1"/></svg></span>,<small id="note-to"></small></p>
+</header>
+
+<main>
+  <section class="mapsec" id="map" aria-labelledby="map-h">
+    <h2 id="map-h">What’s in every issue</h2>
+    <p>Three parts, the way I’d map it out on the board: one clear step at a time.</p>
+    <div class="map" data-reveal>
+      <svg class="links" id="links" aria-hidden="true"></svg>
+      <div class="node node--a" id="thoughts"><h3><u>Thoughts</u></h3><p><b>Notes from the classroom</b>What students get stuck on, and the explanation that finally made it click.</p></div>
+      <div class="hub" aria-hidden="true">After<br>Class</div>
+      <div class="node node--b" id="opinions"><h3><u>Opinions</u></h3><p><b>Where I stand, plainly</b>New models, cloud services and the hype around them. Short, specific and honest.</p></div>
+      <div class="node node--c" id="resources"><h3><u>Resources</u></h3><p><b>Tested before I share them</b>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</p></div>
+    </div>
+  </section>
+
+  <section class="letter" id="letter" aria-labelledby="letter-h">
+    <div class="letter__side" data-reveal>
+      <h2 id="letter-h">A note from me</h2>
+      <p>The best part of every class happens after it ends.</p>
+    </div>
+    <div class="paper" data-reveal>
+      <p>I teach AI and cloud for a living, and the best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links I send people afterwards.</p>
+      <p>After Class is where that goes now. Every issue carries my thoughts from teaching, where I stand on the latest models and cloud services, and the resources I’d actually hand a student.</p>
+      <p>No filler and no recycled press releases. It’s free, and leaving takes one click.</p>
+      <p class="sig">Mostafa<small>Mostafa Saher, Editor, After Class</small></p>
+    </div>
+  </section>
+
+  <section class="homework" id="homework" aria-labelledby="hw-h">
+    <div data-reveal>
+      <h2 id="hw-h">Tonight’s homework</h2>
+      <ul>
+        <li><span class="box"><svg viewBox="0 0 42 42"><path d="M9 22l8 8 17-19"/></svg></span>Subscribe to After Class</li>
+        <li><span class="box"><svg viewBox="0 0 42 42"><path d="M9 22l8 8 17-19"/></svg></span>Read issue one when it lands</li>
+      </ul>
+    </div>
+    <a class="btn btn--up" href="#top" data-to-signup data-reveal style="--i:1"><span id="hw-label">Do the first one</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+  </section>
+</main>
+
+<footer class="tray">
+  <div class="markers" aria-hidden="true"><i style="--c:#1B1D22"></i><i style="--c:#1C55C9"></i><i style="--c:#CC1F3D"></i></div>
+  <span><b>© <span id="year"></span> Mostafa Saher</b> · After Class</span>
+  <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = window.DraftKit, root = document.documentElement;
+  DraftMode.bind();
+  document.getElementById('year').textContent = new Date().getFullYear();
+  K.ready(document.querySelector('.photo img'));
+  K.reveals();
+
+  // ---------- the map's connecting strokes are drawn between the real boxes ----------
+  const map = document.querySelector('.map'), links = document.getElementById('links');
+  function drawLinks() {
+    const m = map.getBoundingClientRect(), hub = map.querySelector('.hub').getBoundingClientRect();
+    const hx = hub.left - m.left + hub.width / 2, hy = hub.top - m.top + hub.height / 2, R = hub.width / 2 + 10;
+    links.innerHTML = ['.node--a', '.node--b', '.node--c'].map((s) => {
+      const r = map.querySelector(s + ' h3').getBoundingClientRect();
+      const left = s === '.node--a';
+      const nx = left ? r.right - m.left + 16 : r.left - m.left - 16, ny = r.top - m.top + r.height / 2;
+      const a = Math.atan2(ny - hy, nx - hx), sx = hx + Math.cos(a) * R, sy = hy + Math.sin(a) * R;
+      const cx = (sx + nx) / 2, cy = Math.min(sy, ny) - 30;
+      return `<path pathLength="1" d="M${sx.toFixed(1)} ${sy.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${nx.toFixed(1)} ${ny.toFixed(1)}"/>`;
+    }).join('');
+  }
+  drawLinks(); addEventListener('resize', drawLinks); document.fonts && document.fonts.ready.then(drawLinks);
+
+  // ---------- the board can be written on with a mouse: the marks fade, like a dry-wipe marker being cleaned ----------
+  const board = document.getElementById('top'), cv = document.getElementById('doodle'), ctx = cv.getContext('2d');
+  let strokes = [], cur = null, raf = 0;
+  const size = () => { const r = board.getBoundingClientRect(), d = devicePixelRatio || 1; cv.width = r.width * d; cv.height = r.height * d; ctx.setTransform(d, 0, 0, d, 0, 0); };
+  size(); addEventListener('resize', size);
+  const LIFE = 3500;
+  function paint() {
+    const now = performance.now(); ctx.clearRect(0, 0, cv.width, cv.height);
+    strokes = strokes.filter((s) => s === cur || now - s.t < LIFE);
+    const col = getComputedStyle(root).getPropertyValue('--red').trim();
+    for (const s of strokes) {
+      const age = s === cur ? 0 : (now - s.t) / LIFE;
+      ctx.globalAlpha = 0.85 * (1 - age); ctx.strokeStyle = col; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.beginPath(); s.p.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.stroke();
+    }
+    raf = strokes.length ? requestAnimationFrame(paint) : 0;
+  }
+  if (K.finePointer) {
+    board.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('a, button, input, label, form, .sheet, .photo, .bar')) return;
+      const r = board.getBoundingClientRect(); cur = { p: [[e.clientX - r.left, e.clientY - r.top]], t: performance.now() }; strokes.push(cur);
+      if (!raf) raf = requestAnimationFrame(paint);
+    });
+    board.addEventListener('pointermove', (e) => { if (!cur) return; const r = board.getBoundingClientRect(); cur.p.push([e.clientX - r.left, e.clientY - r.top]); });
+    addEventListener('pointerup', () => { if (cur) { cur.t = performance.now(); cur = null; } });
+    board.style.cursor = 'crosshair';
+  }
+
+  // ---------- signup ----------
+  const form = document.getElementById('signup'), field = form.querySelector('.field'), input = form.querySelector('input');
+  document.querySelectorAll('[data-to-signup]').forEach((a) => a.addEventListener('click', async (e) => {
+    e.preventDefault();
+    scrollTo({ top: 0, behavior: K.reduce ? 'auto' : 'smooth' }); await K.sleep(K.reduce ? 0 : 650);
+    if (form.classList.contains('is-done')) return;
+    input.focus({ preventScroll: true });
+    field.classList.remove('is-pulse'); void field.offsetWidth; field.classList.add('is-pulse');
+  }));
+
+  async function wipe() {
+    const flow = document.getElementById('flow'), er = document.getElementById('eraser');
+    const b = board.getBoundingClientRect(), f = flow.getBoundingClientRect();
+    if (K.reduce || f.width === 0) { root.classList.add('is-wiped'); return; }
+    // the eraser makes three passes over the old diagram, then it is gone
+    const x0 = f.left - b.left - 40, x1 = f.right - b.left - 80, y = f.top - b.top + f.height * 0.35;
+    const path = [[x0, y], [x1, y - 10], [x0 + 40, y + 34], [x1, y + 30]];
+    er.animate(path.map(([x, yy], i) => ({ transform: `translate(${x}px, ${yy}px) rotate(${i % 2 ? 6 : -4}deg)`, opacity: i === 0 ? 0 : 1 })), { duration: 1100, easing: 'ease-in-out', fill: 'forwards' });
+    await K.sleep(500); root.classList.add('is-wiped');
+    await K.sleep(650);
+    er.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 250, fill: 'forwards' });
+  }
+
+  K.forms({
+    selector: '#signup', doneLabel: 'Subscribed',
+    message: (v) => `You’re subscribed. Issue one goes to ${v}.`,
+    onSuccess: async (f, v) => {
+      input.readOnly = true;
+      document.getElementById('note-to').textContent = v;
+      document.getElementById('hw-label').textContent = 'Homework done';
+      document.getElementById('homework').classList.add('is-done-all');
+      if (matchMedia('(pointer: coarse)').matches) input.blur();
+      await wipe();
+      root.classList.add('is-written');
+      // on narrow screens the note is below the sheet: bring it into view
+      if (matchMedia('(max-width: 1000px)').matches) document.getElementById('note').scrollIntoView({ behavior: K.reduce ? 'auto' : 'smooth', block: 'center' });
+    },
+  });
+})();
+</script>
+</body>
+</html>

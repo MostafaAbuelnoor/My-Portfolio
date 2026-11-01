@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en" data-draft="y">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft Y, Newsstand | Mostafa Saher</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="After Class: a free newsletter by Mostafa Saher on AI and cloud computing. Thoughts, opinions and resources.">
+<script src="assets/mode-kit.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/draft-kit.css">
+<style>
+/* Draft Y: Newsstand. W's cover printed and put on the table: issue one sits on top of the stack, the hello and the
+   signup sit beside it like the shop's card. Pick the cover of your copy; subscribing wraps it in a mailing band. */
+:root {
+  --ground: #E6E6E3; --tone: #DADAD6; --ink: #151515; --ink-rgb: 21 21 21; --ink-2: #4F4E48;   /* ink 15:1, ink-2 7.3:1 */
+  --cover: #D9F24B; --on-cover: #151515; --on-cover-2: #3A4210;
+  --i2: #A7D8F5; --i3: #FFB3C7;                                                                   /* the issues underneath */
+  --btn: #151515; --on-btn: #D9F24B;
+  --field: #FFFFFF; --ph: #66655E; --error: #8A1C0C;
+  --gutter: clamp(16px, 3.4vw, 48px);
+  --serif: "Gloock", Georgia, serif;
+  color-scheme: light;
+}
+:root[data-mode="dark"] {
+  --ground: #121212; --tone: #1C1C1B; --ink: #EDEDE8; --ink-rgb: 237 237 232; --ink-2: #A9A8A0;  /* ink 16:1, ink-2 7.9:1 */
+  --cover: #2335C7; --on-cover: #D9F24B; --on-cover-2: #C8D0FF;                                    /* lime on cobalt 6.9:1 */
+  --i2: #0F3D2E; --i3: #4A1430;
+  --btn: #D9F24B; --on-btn: #121212;
+  --field: #1C1C1B; --ph: #8F8E87; --error: #FFB4AB;
+  color-scheme: dark;
+}
+/* the three covers to pick from, per mode */
+:root[data-cover="sky"]   { --cover: #A7D8F5; --on-cover: #151515; --on-cover-2: #123A52; }
+:root[data-cover="blush"] { --cover: #FFB3C7; --on-cover: #151515; --on-cover-2: #5A1F2E; }
+:root[data-mode="dark"][data-cover="sky"]   { --cover: #0F3D2E; --on-cover: #D9F24B; --on-cover-2: #B8D6C6; }
+:root[data-mode="dark"][data-cover="blush"] { --cover: #4A1430; --on-cover: #FFB3C7; --on-cover-2: #F2CFD8; }
+
+html { scrollbar-color: var(--ink-2) var(--ground); }
+body { background: var(--ground); color: var(--ink); font-family: "Figtree", system-ui, sans-serif; font-size: 18px; line-height: 28px; }
+.is-moding body { transition: background-color 400ms ease, color 400ms ease; }
+::selection { background: var(--ink); color: var(--ground); }
+input { caret-color: var(--ink); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.bar { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 24px var(--gutter) 0; }
+.wordmark { font-family: var(--serif); font-size: 28px; line-height: 1; text-decoration: none; }
+.bar nav { display: flex; gap: 28px; align-items: center; font-size: 16px; font-weight: 600; }
+.bar nav a { text-decoration: none; }
+@media (hover: hover) and (pointer: fine) { .bar nav a:hover { text-decoration: underline; } }
+.mode { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: var(--tone); color: var(--ink); cursor: pointer; transition: transform 160ms var(--ease-out); }
+.mode:active { transform: scale(0.92); }
+.bar nav a.go { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border-radius: 999px; background: var(--btn); color: var(--on-btn); text-decoration: none; }
+
+/* ---------- the stand ---------- */
+.stand { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 88px); align-items: center; min-height: calc(100svh - 64px); padding: 32px var(--gutter) 48px; }
+.stack { position: relative; justify-self: center; width: min(100%, calc((100svh - 150px) * 0.78)); aspect-ratio: 4 / 5.1; perspective: 1400px; }
+.under-issue { position: absolute; inset: 0; border-radius: 2px; }
+.under-issue--3 { background: var(--i3); transform: translate(22px, 14px) rotate(4.5deg); }
+.under-issue--2 { background: var(--i2); transform: translate(10px, 6px) rotate(2deg); }
+.mag { position: absolute; inset: 0; overflow: hidden; border-radius: 2px; background: var(--cover); color: var(--on-cover); transform: rotate(-1.5deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transform-style: preserve-3d; transition: background-color 450ms ease, color 450ms ease; }
+.mag__name { position: absolute; top: 4.5%; left: 6%; right: 6%; margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(48px, 7.4vw, 124px); line-height: 0.82; letter-spacing: -0.03em; text-align: center; white-space: nowrap; }
+.mag__name span { display: block; font-size: 0.5em; letter-spacing: -0.01em; }
+.mag__issue { position: absolute; top: 3.2%; right: 6%; margin: 0; font-size: 14px; line-height: 18px; font-weight: 700; }
+.mag img { position: absolute; bottom: 0; left: 64%; height: 66%; width: auto; transform: translateX(-50%); }
+.mag__lines { position: absolute; left: 6%; top: 34%; width: 32%; margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+.mag__lines b { display: block; font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 2.3vw, 36px); line-height: 1; }
+.mag__lines span { display: block; margin-top: 2px; font-size: 14px; line-height: 18px; font-weight: 600; color: var(--on-cover-2); }
+.mag__free { position: absolute; bottom: 6%; left: 6%; display: grid; place-items: center; width: clamp(68px, 6.6vw, 96px); aspect-ratio: 1; border-radius: 50%; background: var(--on-cover); color: var(--cover); font-weight: 800; font-size: clamp(18px, 1.6vw, 24px); line-height: 1.1; text-align: center; transform: rotate(-10deg); }
+/* send-off: a mailing band wraps across the cover with the reader's address */
+.band { position: absolute; left: -10%; right: -10%; top: 56%; padding: 14px 18% 14px 16%; background: #FFFFFF; color: #151515; font-size: 15px; line-height: 20px; transform: rotate(-8deg) translateX(-110%); }
+.band b { display: block; font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1.1; word-break: break-all; }
+.is-wrapped .band { transform: rotate(-8deg); transition: transform 900ms var(--ease-in-out); }
+
+.card h1 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 6vw, 96px); line-height: 0.95; letter-spacing: -0.03em; text-wrap: balance; }
+.roles { margin: 20px 0 0; font-size: 22px; line-height: 30px; font-weight: 700; text-wrap: balance; }
+.pitch { margin: 10px 0 28px; max-width: 44ch; color: var(--ink); text-wrap: pretty; }
+.pitch b { color: var(--ink); }
+.pick { display: flex; align-items: center; gap: 14px; margin: 0 0 24px; font-size: 16px; font-weight: 600; }
+.pick__row { display: flex; gap: 10px; }
+.sw { width: 34px; height: 34px; padding: 0; border: 0; border-radius: 50%; background: var(--a); cursor: pointer; border: 1.5px solid rgb(var(--ink-rgb) / 0.2); transition: transform 160ms var(--ease-out), box-shadow 200ms ease; }
+.sw:active { transform: scale(0.9); }
+.sw[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .sw:hover { transform: scale(1.1); } }
+
+.field { display: flex; gap: 4px; height: 62px; padding: 5px; background: var(--field); border-radius: 999px; border: 1.5px solid rgb(var(--ink-rgb) / 0.5); }
+.field:focus-within { outline: 2px solid var(--ink); outline-offset: 3px; }
+.field input { flex: 1 1 0; min-width: 0; padding: 0 18px; border: 0; background: transparent; color: var(--ink); font: inherit; font-size: 17px; outline: none; }
+.field input::placeholder { color: var(--ph); opacity: 1; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--btn); color: var(--on-btn); font: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; transition: transform 160ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+.btn svg { transition: transform 300ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn:hover svg { transform: translateX(3px); } .btn--up:hover svg { transform: translateY(-3px); } }
+.msg { margin: 10px 0 0 20px; font-size: 15px; line-height: 22px; font-weight: 600; }
+.msg.is-error { color: var(--error); }
+.is-invalid .field { border: 2px solid var(--error); }
+.field.is-pulse { animation: nudge 900ms var(--ease-out); }
+@keyframes nudge { 30% { transform: scale(1.03); } }
+
+/* ---------- inside: the contents page ---------- */
+.inside { padding: 176px var(--gutter); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 56px; }
+h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(48px, 5.4vw, 88px); line-height: 0.95; letter-spacing: -0.03em; text-wrap: balance; }
+.inside__lead p { margin: 24px 0 0; max-width: 30ch; font-size: 20px; line-height: 30px; text-wrap: pretty; }
+.toc { margin: 0; padding: 0; list-style: none; }
+.toc li { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 40px; align-items: end; padding: 36px 0; scroll-margin-top: 24px; }
+
+.toc h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 6.4vw, 104px); line-height: 0.9; letter-spacing: -0.03em; transition: transform 300ms var(--ease-out); }
+.toc p { margin: 0; }
+.toc p b { display: block; font-weight: 700; }
+.toc p span { display: block; margin-top: 4px; color: var(--ink-2); }
+@media (hover: hover) and (pointer: fine) { .toc li:hover h3 { transform: translateX(10px); } }
+
+/* ---------- letter ---------- */
+.letter { background: var(--tone); padding: 160px var(--gutter); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 56px; }
+.is-moding .letter { transition: background-color 400ms ease; }
+.letter__body { font-size: 20px; line-height: 32px; max-width: 60ch; }
+.letter__body p { margin: 0 0 20px; text-wrap: pretty; }
+.letter__body p:first-child::first-letter { float: left; margin: 8px 12px 0 0; font-family: var(--serif); font-size: 96px; line-height: 0.75; }
+.sig { margin-top: 32px; font-size: 16px; line-height: 24px; color: var(--ink-2); }
+.sig b { display: block; font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1.1; color: var(--ink); }
+
+/* ---------- the run: issue one and the ones still to come, as spines ---------- */
+.run { padding: 176px var(--gutter) 160px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: end; }
+.run p { margin: 24px 0 32px; max-width: 34ch; font-size: 20px; line-height: 30px; }
+.run .btn { height: 60px; }
+.spines { display: flex; align-items: flex-end; gap: 10px; height: 440px; }
+.spine { position: relative; flex: 1 1 0; height: 100%; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 24px; border-radius: 2px; }
+.spine b { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--serif); font-weight: 400; font-size: 40px; line-height: 1; white-space: nowrap; }
+.spine span { position: absolute; top: 20px; left: 0; right: 0; text-align: center; font-size: 14px; line-height: 18px; font-weight: 700; }
+.spine--1 { background: var(--cover); color: var(--on-cover); flex-grow: 1.6; }
+.spine--2 { background: var(--i2); color: var(--on-i, #151515); height: 92%; }
+.spine--3 { background: var(--i3); color: var(--on-i, #151515); height: 86%; }
+.spine--4 { background: var(--tone); color: var(--ink-2); height: 80%; }
+:root[data-mode="dark"] { --on-i: #EDEDE8; }
+
+footer { padding: 0 var(--gutter) 32px; }
+.foot-name { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 17.4vw; line-height: 0.85; letter-spacing: -0.04em; white-space: nowrap; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: 24px; font-size: 16px; line-height: 24px; color: var(--ink-2); }
+.foot nav { display: flex; gap: 24px; }
+
+/* ---------- motion ---------- */
+.js .stack { opacity: 0; transform: translateY(40px) rotate(-4deg); }
+.js .under-issue { transform: none; }
+.js .card [data-in] { opacity: 0; transform: translateY(18px); }
+.js.is-loaded .stack { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 1100ms var(--ease-out); }
+/* signature: the issues underneath fan out after the cover lands */
+.js.is-loaded .under-issue--2 { transform: translate(10px, 6px) rotate(2deg); transition: transform 900ms var(--ease-out) 600ms; }
+.js.is-loaded .under-issue--3 { transform: translate(22px, 14px) rotate(4.5deg); transition: transform 900ms var(--ease-out) 700ms; }
+.js.is-loaded .card [data-in] { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: calc(300ms + var(--i, 0) * 80ms); }
+.mag { transition: background-color 450ms ease, color 450ms ease, transform 500ms var(--ease-out); }
+.js .spine[data-reveal] { transform: translateY(60px); }
+.js .spine[data-reveal].is-in { transform: none; transition: opacity 600ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(var(--i, 0) * 110ms); }
+.js .foot-name { transform: translateY(30%); opacity: 0; }
+.js .foot-name.is-in { transform: none; opacity: 1; transition: transform 1100ms var(--ease-out), opacity 700ms ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .stack, .js .card [data-in], .js .spine[data-reveal], .js .foot-name { transform: none !important; }
+  .js .under-issue--2 { transform: translate(10px, 6px) rotate(2deg) !important; }
+  .js .under-issue--3 { transform: translate(22px, 14px) rotate(4.5deg) !important; }
+  .band, .is-wrapped .band { transition: none; }
+}
+
+@media (max-width: 960px) {
+  .stand { grid-template-columns: minmax(0, 1fr); min-height: 0; padding-top: 24px; }
+  .stack { width: min(100%, 520px); }
+  .inside, .letter, .run { grid-template-columns: minmax(0, 1fr); }
+  .inside, .run { padding-top: 120px; padding-bottom: 120px; }
+  .letter { padding-top: 112px; padding-bottom: 112px; }
+}
+@media (max-width: 600px) {
+  .bar nav a:not(.go) { display: none; }
+  .stack { width: calc(100% - 24px); justify-self: start; }
+  .mag__name { top: 9%; font-size: 15.5vw; }
+  .mag__issue { font-size: 13px; }
+  .mag__lines { gap: 8px; }
+  .mag__lines b { font-size: 21px; }
+  .mag__free { width: 64px; font-size: 13px; }
+  .band b { font-size: 18px; }
+  .band { font-size: 13px; }
+  .card h1 { font-size: 52px; }
+  .roles { font-size: 20px; line-height: 28px; }
+  .field { flex-direction: column; height: auto; border-radius: 30px; }
+  .field input { flex: none; height: 52px; }
+  .btn { height: 52px; }
+  .toc li { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .letter__body { font-size: 18px; line-height: 28px; }
+  .spines { height: 300px; gap: 6px; }
+  .spine b { font-size: 26px; }
+  .spine span { font-size: 13px; top: 12px; }
+}
+</style>
+</head>
+<body>
+<script>
+  // the picked cover is remembered on this device
+  try { const c = localStorage.getItem('y-cover'); if (c === 'sky' || c === 'blush') document.documentElement.dataset.cover = c; } catch (e) {}
+  document.documentElement.classList.add('js');
+</script>
+
+<div class="bar">
+  <a class="wordmark" href="#top">After Class</a>
+  <nav aria-label="Sections"><a href="#inside">Inside</a><a href="#letter">Letter</a><button class="mode" type="button" data-mode-toggle></button><a class="go" href="#signup" data-to-signup>Subscribe</a></nav>
+</div>
+
+<header class="stand" id="top">
+  <div class="stack" id="stack">
+    <div class="under-issue under-issue--3" aria-hidden="true"></div>
+    <div class="under-issue under-issue--2" aria-hidden="true"></div>
+    <div class="mag" id="mag" role="img" aria-label="Cover of After Class, issue one, with Mostafa on the front">
+      <p class="mag__name" aria-hidden="true"><span>After</span>Class</p>
+      <p class="mag__issue" aria-hidden="true">Issue 01 · <span data-month></span></p>
+      <img src="assets/mostafa-cutout.png" width="1100" height="1433" alt="">
+      <span class="mag__free" aria-hidden="true">Free</span>
+      <ul class="mag__lines" aria-hidden="true">
+        <li><b>Thoughts</b></li>
+        <li><b>Opinions</b></li>
+        <li><b>Resources</b></li>
+      </ul>
+      <div class="band" aria-hidden="true">Subscriber copy · Issue 01<b id="band-to"></b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h1 data-in style="--i:0">Hello, I’m Mostafa.</h1>
+    <p class="roles" data-in style="--i:1">Technical instructor, computer engineer, AI enthusiast and cloud specialist.</p>
+    <p class="pitch" data-in style="--i:2">I write <b>After Class</b>, a free newsletter with my thoughts, my opinions, and the resources I’d actually hand a student.</p>
+    <div class="pick" data-in style="--i:3" role="group" aria-label="Cover of your copy">
+      <span>Your cover</span>
+      <div class="pick__row">
+        <button type="button" class="sw" data-c="" aria-label="First cover"></button>
+        <button type="button" class="sw" data-c="sky" aria-label="Second cover"></button>
+        <button type="button" class="sw" data-c="blush" aria-label="Third cover"></button>
+      </div>
+    </div>
+    <form id="signup" data-in style="--i:4" data-hero novalidate>
+      <label class="sr-only" for="email">Email address</label>
+      <div class="field">
+        <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn" type="submit"><span class="btn__label">Get issue one</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <p class="msg" role="status" aria-live="polite">Free. Unsubscribe in one click.</p>
+    </form>
+  </div>
+</header>
+
+<main>
+  <section class="inside" id="inside" aria-labelledby="inside-h">
+    <div class="inside__lead" data-reveal>
+      <h2 id="inside-h">Inside every issue</h2>
+      <p>Three parts, written the way I explain things in class: one clear step at a time.</p>
+    </div>
+    <ol class="toc">
+      <li id="thoughts" data-reveal style="--i:0"><h3>Thoughts</h3><p><b>Notes from the classroom</b><span>What students get stuck on, and the explanation that finally made it click.</span></p></li>
+      <li id="opinions" data-reveal style="--i:1"><h3>Opinions</h3><p><b>Where I stand, plainly</b><span>New models, cloud services and the hype around them. Short, specific and honest.</span></p></li>
+      <li id="resources" data-reveal style="--i:2"><h3>Resources</h3><p><b>Tested before I share them</b><span>The labs, docs, courses and tools I actually use, each with one line on why it’s worth your time.</span></p></li>
+    </ol>
+  </section>
+
+  <section class="letter" id="letter" aria-labelledby="letter-h">
+    <h2 id="letter-h" data-reveal>Editor’s letter</h2>
+    <div class="letter__body" data-reveal style="--i:1">
+      <p>I teach AI and cloud for a living, and the best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links I send people afterwards.</p>
+      <p>After Class is where that goes now. Every issue carries my thoughts from teaching, where I stand on the latest models and cloud services, and the resources I’d actually hand a student.</p>
+      <p>No filler and no recycled press releases. It’s free, and leaving takes one click.</p>
+      <p class="sig"><b>Mostafa Saher</b>Editor, After Class</p>
+    </div>
+  </section>
+
+  <section class="run" aria-labelledby="run-h">
+    <div data-reveal>
+      <h2 id="run-h">Keep the whole run.</h2>
+      <p>Issue one goes out to everyone who signs up before it lands, and every issue after it follows by email.</p>
+      <a class="btn btn--up" href="#top" data-to-signup><span id="run-label">Get issue one</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+    </div>
+    <div class="spines" aria-hidden="true">
+      <div class="spine spine--1" data-reveal style="--i:0"><span>This month</span><b>Issue one</b></div>
+      <div class="spine spine--2" data-reveal style="--i:1"><span>Next</span><b>Issue two</b></div>
+      <div class="spine spine--3" data-reveal style="--i:2"><span>Then</span><b>Issue three</b></div>
+      <div class="spine spine--4" data-reveal style="--i:3"><span>And on</span><b>Issue four</b></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p class="foot-name" data-reveal aria-hidden="true">After Class</p>
+  <div class="foot">
+    <span>© <span id="year"></span> Mostafa Saher</span>
+    <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" rel="noopener">LinkedIn</a><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></nav>
+  </div>
+</footer>
+
+<script src="assets/draft-kit.js"></script>
+<script>
+(() => {
+  const K = window.DraftKit, root = document.documentElement;
+  DraftMode.bind();
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('[data-month]').forEach((el) => (el.textContent = K.today({ month: 'long', year: 'numeric' })));
+  K.ready(document.querySelector('.mag img'));
+  K.reveals();
+
+  // ---------- pick your cover: the swatches show this mode's three covers ----------
+  const COVERS = { light: ['#D9F24B', '#A7D8F5', '#FFB3C7'], dark: ['#2335C7', '#0F3D2E', '#4A1430'] };
+  const NAMES = { light: ['Lime', 'Sky', 'Blush'], dark: ['Cobalt', 'Forest', 'Plum'] };
+  const sws = [...document.querySelectorAll('.sw')];
+  const paint = () => {
+    const m = root.dataset.mode, c = root.dataset.cover || '';
+    sws.forEach((b, i) => { b.style.setProperty('--a', COVERS[m][i]); b.setAttribute('aria-label', `${NAMES[m][i]} cover`); b.setAttribute('aria-pressed', String(b.dataset.c === c)); });
+    // the issues underneath are the two covers you did not pick
+    const rest = COVERS[m].filter((_, i) => sws[i].dataset.c !== c);
+    root.style.setProperty('--i2', rest[0]); root.style.setProperty('--i3', rest[1]);
+  };
+  sws.forEach((b) => b.addEventListener('click', () => {
+    if (b.dataset.c) root.dataset.cover = b.dataset.c; else delete root.dataset.cover;
+    try { b.dataset.c ? localStorage.setItem('y-cover', b.dataset.c) : localStorage.removeItem('y-cover'); } catch (e) {}
+    paint();
+  }));
+  DraftMode.onChange(paint); paint();
+
+  // ---------- the cover leans toward the cursor ----------
+  const stack = document.getElementById('stack'), mag = document.getElementById('mag');
+  K.pointer(stack, (x, y, inside) => {
+    const r = stack.getBoundingClientRect();
+    mag.style.setProperty('--ry', inside ? `${((x / r.width) - 0.5) * 8}deg` : '0deg');
+    mag.style.setProperty('--rx', inside ? `${(0.5 - (y / r.height)) * 6}deg` : '0deg');
+  }, 0.1);
+
+  // ---------- signup lives beside the cover ----------
+  const form = document.getElementById('signup'), field = form.querySelector('.field'), input = form.querySelector('input');
+  document.querySelectorAll('[data-to-signup]').forEach((a) => a.addEventListener('click', async (e) => {
+    e.preventDefault();
+    scrollTo({ top: 0, behavior: K.reduce ? 'auto' : 'smooth' }); await K.sleep(K.reduce ? 0 : 650);
+    if (form.classList.contains('is-done')) { mag.animate([{ transform: 'rotate(-1.5deg)' }, { transform: 'rotate(-3deg) scale(1.02)' }, { transform: 'rotate(-1.5deg)' }], { duration: 420, easing: 'ease-out' }); return; }
+    input.focus({ preventScroll: true });
+    field.classList.remove('is-pulse'); void field.offsetWidth; field.classList.add('is-pulse');
+  }));
+  K.forms({
+    selector: '#signup', doneLabel: 'On its way',
+    message: (v) => `You’re subscribed. Issue one goes to ${v}.`,
+    onSuccess: async (f, v) => {
+      input.readOnly = true;
+      document.getElementById('run-label').textContent = 'You’re on the list';
+      document.getElementById('band-to').textContent = v;
+      if (matchMedia('(pointer: coarse)').matches) input.blur();
+      // send-off: the mailing band wraps across your copy, then the stack settles
+      if (stack.getBoundingClientRect().top < 0) { stack.scrollIntoView({ behavior: K.reduce ? 'auto' : 'smooth', block: 'start' }); await K.sleep(K.reduce ? 0 : 700); }
+      root.classList.add('is-wrapped');
+      if (!K.reduce) { await K.sleep(900); mag.animate([{ transform: 'rotate(-1.5deg)' }, { transform: 'rotate(-1.5deg) translateY(4px)' }, { transform: 'rotate(-1.5deg)' }], { duration: 300, easing: 'ease-out' }); }
+    },
+  });
+})();
+</script>
+</body>
+</html>

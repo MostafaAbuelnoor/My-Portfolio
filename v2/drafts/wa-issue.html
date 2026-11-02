@@ -50,7 +50,7 @@
     --page: #131311; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;
     --field-bg: rgba(255,255,255,.08); --field-text: #F5F4EE; --field-line: var(--on-cover-2); --field-ph: var(--on-cover-2);
     color-scheme: dark; --error: #FFB4AB;
-    --cover: #2335C7; --on-cover: #D9F24B; --on-cover-2: #C8D0FF; --hi: #D9F24B; --glow: #4A5EF7; --stamp: #2335C7; --scroll: #4A5EF7;
+    --cover: #0F3D2E; --on-cover: #D9F24B; --on-cover-2: #B8D6C6; --hi: #D9F24B; --glow: #23704F; --stamp: #0F3D2E; --scroll: #23704F;
   }
 }
 
@@ -130,7 +130,8 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 /* ---------- the cover ---------- */
 .cover { position: relative; min-height: 100svh; background-color: var(--cover); color: var(--on-cover); overflow: hidden; isolation: isolate; transition: background-color 400ms ease, color 400ms ease; }
 /* every cover: a flat lighter disc behind you, a halo that also keeps the black sweater clear on dark covers (W used a soft glow) */
-.disc { position: absolute; z-index: 0; left: var(--disc-x); bottom: -16%; width: 50vw; aspect-ratio: 1; border-radius: 50%; background: var(--glow); transform: translateX(-50%); pointer-events: none; transition: background-color 400ms ease; }
+/* sized from the portrait's height (--ph), so the halo keeps the same size and place around you at every window shape */
+.disc { --ph: 82svh; position: absolute; z-index: 0; left: var(--disc-x); top: calc(100svh - var(--ph) * 0.78); width: calc(var(--ph) * 0.98); aspect-ratio: 1; border-radius: 50%; background: var(--glow); transform: translateX(-50%); pointer-events: none; transition: background-color 400ms ease; }
 /* fills the cover so the absolutely placed parts anchor to it, and the landing thud moves them all together */
 .cover-body { position: relative; min-height: 100svh; }
 .masthead { position: relative; z-index: 0; margin: 0; padding: 32px var(--gutter) 0; display: flex; justify-content: space-between; font-family: var(--display); font-weight: 700; font-size: 25.5vw; line-height: 0.8; letter-spacing: -0.01em; text-transform: uppercase; user-select: none; }
@@ -270,7 +271,7 @@ footer nav { display: flex; gap: 24px; }
 @media (max-width: 1180px) { .side { display: none; } .portrait { left: 66%; } :root { --disc-x: 66%; } h1 { font-size: 60px; } .mailer { top: 23%; } }
 /* phones, and any screen taller than it is wide: stack the cover */
 @media (max-width: 860px), (max-aspect-ratio: 1/1) {
-  .disc { left: 50%; top: 22vw; bottom: auto; width: 96vw; }
+  .disc { --ph: min(110vw, 520px); left: 50%; top: calc(20px + 8.4vw + var(--ph) * 0.22); }
   .cover { min-height: 0; padding-bottom: 32px; }
   .cover-body { min-height: 0; display: flex; flex-direction: column; }
   .masthead { padding-top: 20px; }
@@ -461,7 +462,7 @@ footer nav { display: flex; gap: 24px; }
   // ---------- cover colour: follows the system until the visitor picks one ----------
   const MODES = { lime: 'light', sky: 'light', blush: 'light', cobalt: 'dark', forest: 'dark', plum: 'dark' };
   const KEY = 'after-class-cover', dark = matchMedia('(prefers-color-scheme: dark)');
-  const current = () => root.dataset.cover || (dark.matches ? 'cobalt' : 'lime');
+  const current = () => root.dataset.cover || (dark.matches ? 'forest' : 'lime');
   function syncSwatches() {
     const c = current(), picked = !!root.dataset.cover;
     document.querySelectorAll('.sw[data-c]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.c === c)));

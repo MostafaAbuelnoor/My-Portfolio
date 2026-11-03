@@ -20,7 +20,7 @@
    the cover lines, the 1-2-3 numbers and the over-long letter heading. Two typefaces, a smaller set of sizes, a neutral page. */
 :root {
   /* light page */
-  --page: #F4F4F2; --text: #111111; --text-rgb: 17 17 17; --text-2: #57564F;         /* text-2 6.8:1 */
+  --page: #F4F4F2; --sub: #5E1A3E; --text: #111111; --text-rgb: 17 17 17; --text-2: #57564F;         /* text-2 6.8:1 */
   --field-bg: #FFFFFF; --field-text: #111111; --field-line: #111111; --field-ph: #6B6B63;
   /* lime cover (default light) */
   --cover: #D9F24B; --on-cover: #111111; --on-cover-2: #3A4210;                         /* sweater 14.7:1, secondary 8.5:1 */
@@ -35,7 +35,7 @@
 }
 /* every dark cover shares the dark page */
 :root[data-mode="dark"] {
-  --page: #131311; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;     /* text-2 7.5:1 */
+  --page: #131311; --sub: #FFB3C7; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;     /* text-2 7.5:1 */
   --field-bg: rgba(255,255,255,.08); --field-text: #F5F4EE; --field-line: var(--on-cover-2); --field-ph: var(--on-cover-2);
   color-scheme: dark; --error: #FFB4AB;
 }
@@ -47,7 +47,7 @@
 :root[data-cover="plum"]   { --cover: #3A0E25; --on-cover: #FFB3C7; --on-cover-2: #FFF2F6; --hi: #FFB3C7; --glow: #7A2650; --glow-o: 0.85; --stamp: #3A0E25; --scroll: #7A2650; }  /* pink headings 9.6:1, near-white reading text 16.5:1 */
 @media (prefers-color-scheme: dark) {
   :root:not([data-cover]) {
-    --page: #131311; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;
+    --page: #131311; --sub: #FFB3C7; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;
     --field-bg: rgba(255,255,255,.08); --field-text: #F5F4EE; --field-line: var(--on-cover-2); --field-ph: var(--on-cover-2);
     color-scheme: dark; --error: #FFB4AB;
     --cover: #0F3D2E; --on-cover: #D9F24B; --on-cover-2: #B8D6C6; --hi: #D9F24B; --glow: #23704F; --glow-o: 0.85; --stamp: #0F3D2E; --scroll: #23704F;
@@ -194,7 +194,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 112px;
 .toc li { position: relative; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 48px; align-items: start; padding: 36px 0 40px; scroll-margin-top: 80px; }
 .toc li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: currentColor; transform-origin: 0 50%; }
 .toc li:last-child::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: currentColor; }
-.toc h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 72px; line-height: 0.9; text-transform: uppercase; transition: transform 300ms var(--ease-out); }
+.toc h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 72px; line-height: 0.9; text-transform: uppercase; color: var(--sub); transition: transform 300ms var(--ease-out); }
 /* the description starts level with the top of its title, one size step down from it */
 .toc li > div { padding-top: 6px; }
 .toc .dek { margin: 0; font-size: 26px; line-height: 32px; font-weight: 600; }

@@ -20,7 +20,7 @@
    the cover lines, the 1-2-3 numbers and the over-long letter heading. Two typefaces, a smaller set of sizes, a neutral page. */
 :root {
   /* light page */
-  --page: #F4F4F2; --sub: #5E1A3E; --text: #111111; --text-rgb: 17 17 17; --text-2: #57564F;         /* text-2 6.8:1 */
+  --page: #F4F4F2; --sub: #3A4210; --text: #111111; --text-rgb: 17 17 17; --text-2: #57564F;         /* text-2 6.8:1 */
   --field-bg: #FFFFFF; --field-text: #111111; --field-line: #111111; --field-ph: #6B6B63;
   /* lime cover (default light) */
   --cover: #D9F24B; --on-cover: #111111; --on-cover-2: #3A4210;                         /* sweater 14.7:1, secondary 8.5:1 */
@@ -35,19 +35,19 @@
 }
 /* every dark cover shares the dark page */
 :root[data-mode="dark"] {
-  --page: #131311; --sub: #FFB3C7; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;     /* text-2 7.5:1 */
+  --page: #131311; --sub: #6FD3A3; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;     /* text-2 7.5:1 */
   --field-bg: rgba(255,255,255,.08); --field-text: #F5F4EE; --field-line: var(--on-cover-2); --field-ph: var(--on-cover-2);
   color-scheme: dark; --error: #FFB4AB;
 }
-:root[data-cover="sky"]   { --cover: #A7D8F5; --on-cover: #111111; --on-cover-2: #123A52; --hi: #A7D8F5; --glow: #F2FAFF; --stamp: #123A52; --scroll: #5E9CC2; }  /* sweater 12.1:1 */
-:root[data-cover="blush"] { --cover: #FFB3C7; --on-cover: #111111; --on-cover-2: #5A1F2E; --hi: #FFB3C7; --glow: #FFF2F6; --stamp: #5A1F2E; --scroll: #D97F98; }  /* sweater 11.0:1 */
+:root[data-cover="sky"]   { --cover: #A7D8F5; --on-cover: #111111; --on-cover-2: #123A52; --hi: #A7D8F5; --glow: #F2FAFF; --sub: #1D5F86; --stamp: #123A52; --scroll: #5E9CC2; }  /* sweater 12.1:1 */
+:root[data-cover="blush"] { --cover: #FFB3C7; --on-cover: #111111; --on-cover-2: #5A1F2E; --hi: #FFB3C7; --glow: #FFF2F6; --sub: #9C2F52; --stamp: #5A1F2E; --scroll: #D97F98; }  /* sweater 11.0:1 */
 /* dark covers: a black sweater barely separates from a dark field, so each has a backdrop light behind you */
-:root[data-cover="cobalt"] { --cover: #2335C7; --on-cover: #D9F24B; --on-cover-2: #C8D0FF; --hi: #D9F24B; --glow: #4A5EF7; --glow-o: 0.85; --stamp: #2335C7; --scroll: #4A5EF7; }  /* lime 6.9:1, secondary 5.8:1 */
-:root[data-cover="forest"] { --cover: #0F3D2E; --on-cover: #D9F24B; --on-cover-2: #B8D6C6; --hi: #D9F24B; --glow: #23704F; --glow-o: 0.85; --stamp: #0F3D2E; --scroll: #23704F; }  /* lime 9.6:1, secondary 7.8:1 */
-:root[data-cover="plum"]   { --cover: #3A0E25; --on-cover: #FFB3C7; --on-cover-2: #FFF2F6; --hi: #FFB3C7; --glow: #7A2650; --glow-o: 0.85; --stamp: #3A0E25; --scroll: #7A2650; }  /* pink headings 9.6:1, near-white reading text 16.5:1 */
+:root[data-cover="cobalt"] { --cover: #2335C7; --on-cover: #D9F24B; --on-cover-2: #C8D0FF; --hi: #D9F24B; --glow: #4A5EF7; --glow-o: 0.85; --sub: #8A98FF; --stamp: #2335C7; --scroll: #4A5EF7; }  /* lime 6.9:1, secondary 5.8:1 */
+:root[data-cover="forest"] { --cover: #0F3D2E; --on-cover: #D9F24B; --on-cover-2: #B8D6C6; --hi: #D9F24B; --glow: #23704F; --glow-o: 0.85; --sub: #6FD3A3; --stamp: #0F3D2E; --scroll: #23704F; }  /* lime 9.6:1, secondary 7.8:1 */
+:root[data-cover="plum"]   { --cover: #3A0E25; --on-cover: #FFB3C7; --on-cover-2: #FFF2F6; --hi: #FFB3C7; --glow: #7A2650; --glow-o: 0.85; --sub: #FFB3C7; --stamp: #3A0E25; --scroll: #7A2650; }  /* pink headings 9.6:1, near-white reading text 16.5:1 */
 @media (prefers-color-scheme: dark) {
   :root:not([data-cover]) {
-    --page: #131311; --sub: #FFB3C7; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;
+    --page: #131311; --sub: #6FD3A3; --text: #EEEDE6; --text-rgb: 238 237 230; --text-2: #A8A69D;
     --field-bg: rgba(255,255,255,.08); --field-text: #F5F4EE; --field-line: var(--on-cover-2); --field-ph: var(--on-cover-2);
     color-scheme: dark; --error: #FFB4AB;
     --cover: #0F3D2E; --on-cover: #D9F24B; --on-cover-2: #B8D6C6; --hi: #D9F24B; --glow: #23704F; --glow-o: 0.85; --stamp: #0F3D2E; --scroll: #23704F;

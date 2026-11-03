@@ -191,12 +191,14 @@ h1 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 72px; 
 h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 112px; line-height: 0.85; text-transform: uppercase; text-wrap: balance; }
 .contents__head p { margin: 0; color: var(--text-2); text-wrap: pretty; }
 .toc { list-style: none; margin: 0; padding: 0; }
-.toc li { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 32px; align-items: baseline; padding: 28px 0 32px; scroll-margin-top: 80px; }
+.toc li { position: relative; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 48px; align-items: start; padding: 36px 0 40px; scroll-margin-top: 80px; }
 .toc li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: currentColor; transform-origin: 0 50%; }
 .toc li:last-child::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: currentColor; }
 .toc h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 72px; line-height: 0.9; text-transform: uppercase; transition: transform 300ms var(--ease-out); }
-.toc .dek { margin: 0; font-weight: 600; }
-.toc .dek + p { margin: 6px 0 0; max-width: 46ch; color: var(--text-2); text-wrap: pretty; }
+/* the description starts level with the top of its title, one size step down from it */
+.toc li > div { padding-top: 6px; }
+.toc .dek { margin: 0; font-size: 26px; line-height: 32px; font-weight: 600; }
+.toc .dek + p { margin: 8px 0 0; max-width: 42ch; font-size: 20px; line-height: 30px; color: var(--text-2); text-wrap: pretty; }
 @media (hover: hover) and (pointer: fine) { .toc li:hover h3 { transform: translateX(8px); } }
 
 /* ---------- editor's letter ---------- */
@@ -291,7 +293,10 @@ footer nav { display: flex; gap: 24px; }
   .contents__head, .letter, .back { grid-template-columns: minmax(0, 1fr); }
   h2 { font-size: 72px; } .letter h2 { font-size: 52px; }
   .letter__lede { font-size: 21px; line-height: 30px; }
-  .toc li { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .toc li { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 28px 0 32px; }
+  .toc li > div { padding-top: 0; }
+  .toc .dek { font-size: 21px; line-height: 28px; }
+  .toc .dek + p { font-size: 18px; line-height: 28px; }
   .toc h3 { font-size: 52px; }
   .letter { padding-bottom: 96px; gap: 20px; }
   .letter__body { columns: 1; margin-top: 32px; }

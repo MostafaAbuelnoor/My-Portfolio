@@ -31,14 +31,14 @@ A working technical instructor who explains AI and cloud the way he does in clas
 ## Brand Commitments
 
 - Reference sites named by Mostafa as the model: nicksaraev.com and nateherk.com.
+- Minimalist: he rejected the yellow hero design (`v2/drafts/hub.html`) and asked for a minimal one.
 - Plain, direct, first-person voice.
 
 ## Evidence on Hand
 
-- Portrait cut-out: `v2/drafts/assets/mostafa-cutout.png`.
-- Biography facts: technical instructor in AI and cloud; computer engineer; BSc Computer Engineering with a Computer Science minor, American University of Sharjah, 2020; summer internship at an indie game studio in Abu Dhabi.
-- Projects with public repositories: Arab COVID-19 Map, ASIM, Maze Runner, LabServe.
+- Biography: technical instructor who teaches AI and cloud.
 - Links: LinkedIn, GitHub, email.
+- Not to be used (Mostafa, Nov 2026): the old portrait photos, the old résumé and its details, and the old university projects.
 - Absent, never to be invented: subscriber or student counts, employer names, certifications, testimonials, press, video or social links beyond the above.
 
 ## Product Principles

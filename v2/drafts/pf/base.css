@@ -1,5 +1,5 @@
 /* Shared mechanics for the pafolios-inspired drafts: reset, sign-up states, entrance. Looks live in each page. */
-*, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; min-width: 0; }
 html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
 body { margin: 0; overflow-x: clip; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
 h1, h2, h3, p, ul, figure { margin: 0; }
@@ -11,7 +11,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; }
 :root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
 
 .signup__stack { display: grid; grid-template-columns: minmax(0, 1fr); }
-.signup__stack > * { grid-area: 1 / 1; }
+.signup__stack > * { grid-area: 1 / 1; align-self: start; }
 .field { display: flex; gap: 6px; padding: var(--f-pad, 6px); border: var(--f-border, 0); border-radius: var(--f-radius, 16px); background: var(--f-bg, #fff); transition: opacity 160ms ease, filter 160ms ease, box-shadow 200ms var(--ease-out); }
 .field:focus-within { box-shadow: 0 0 0 2px var(--focus, currentColor); }
 .field input { flex: 1; width: 100%; min-width: 0; height: 46px; padding: 0 12px; border: 0; border-radius: 0; background: none; color: var(--f-text, #111); caret-color: var(--f-text, #111); font: inherit; font-size: 16px; }
@@ -39,3 +39,22 @@ img { display: block; max-width: 100%; height: auto; user-select: none; }
 	@keyframes in { from { opacity: 0; transform: translateY(14px); } }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
+
+/* Presets used by drafts 11 onward */
+.face { overflow: hidden; }
+.face img { width: 170%; max-width: none; margin: 4% 0 0 -36%; }
+.l-go { flex: none; transition: transform 200ms var(--ease-out); }
+.li-inline { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.li-inline a { display: inline-flex; align-items: center; gap: 6px; }
+.li-inline .l-meta { display: none; }
+.li-rows a { display: flex; align-items: baseline; gap: 12px; padding-block: 13px; border-top: 1px solid var(--line, currentColor); }
+.li-rows li:last-child a { border-bottom: 1px solid var(--line, currentColor); }
+.li-rows .l-meta { margin-left: auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0.65; font-size: 0.9em; }
+.li-rows .l-go { align-self: center; }
+.tp li { padding-block: 12px; border-top: 1px solid var(--line, currentColor); }
+.tp b { display: block; font-weight: 600; }
+.tp span { opacity: 0.72; }
+@media (hover: hover) and (pointer: fine) { a:hover > .l-go { transform: translate(2px, -2px); } }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 18px; }
+.wrap { width: 100%; max-width: var(--w, 1160px); margin-inline: auto; padding-inline: clamp(18px, 4vw, 36px); }
+.foot { font-size: 0.85rem; opacity: 0.65; padding-block: 28px; }

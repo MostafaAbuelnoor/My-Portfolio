@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FFFFFF">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Schibsted+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+:root { --green: #55703A; --line: #E7E7E2; --focus: var(--green); --f-bg: #fff; --f-border: 1px solid #DAD9D2; --b-bg: var(--green); --b-text: #fff; --note: #6D6D66; --f-radius: 999px; --b-radius: 999px; --w: 660px; }
+body { background: #fff; color: #1C1C1A; font: 17px/1.65 "Schibsted Grotesk", system-ui, sans-serif; }
+::selection { background: #DDE7CF; }
+.top b { font: 400 1.6rem "Instrument Serif", serif; } .top a { font-size: 0.92rem; color: #55554F; }
+.ink { width: min(330px, 78%); margin: 20px auto 8px; }
+.ink img { filter: grayscale(1) contrast(1.9) brightness(1.12); -webkit-mask-image: radial-gradient(closest-side at 50% 46%, #000 62%, transparent 100%); mask-image: radial-gradient(closest-side at 50% 46%, #000 62%, transparent 100%); }
+.bio p + p { margin-top: 1em; }
+.bio a, .rows a span:first-child { text-decoration: underline; text-decoration-color: #B9C7A6; text-underline-offset: 4px; }
+h2 { margin: 48px 0 8px; font: 400 1.5rem "Instrument Serif", serif; }
+.rows li { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; padding-block: 5px; }
+.rows a { display: contents; } .rows small { font-size: 0.8rem; color: #6D6D66; white-space: nowrap; }
+.box { margin-top: 56px; padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: #F8F8F4; }
+.box h2 { margin: 0 0 4px; } .box p.lead { color: #6D6D66; font-size: 0.92rem; margin-bottom: 14px; }
+.foot { margin-top: 40px; border-top: 1px solid var(--line); }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+	<header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
+	<main>
+		<div class="ink" data-in><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
+		<div class="bio" data-in style="--i:1"><p>Mostafa Saher teaches people AI and cloud, one clear step at a time. He is a technical instructor.</p><p>The best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links he sends people afterwards. His <a href="#email" data-focus-signup>newsletter</a> is where that goes now.</p></div>
+		<h2>Writing</h2>
+		<ul class="rows"><li><span>Thoughts from the classroom</span><small>notes</small></li><li><span>Opinions on new models and cloud services</span><small>takes</small></li><li><span>Resources I’d hand a student</span><small>links</small></li></ul>
+		<h2>Elsewhere</h2>
+		<ul class="rows"><li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span>LinkedIn</span><small>Mostafa Abuelnoor</small></a></li><li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span>GitHub</span><small>@MostafaAbuelnoor</small></a></li><li><a href="mailto:mostafasaher@gmail.com"><span>Email</span><small>mostafasaher@gmail.com</small></a></li></ul>
+		<section class="box"><h2>Newsletter</h2><p class="lead">Mostafa writes down what comes up after class. Get it by email.</p><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></section>
+	</main>
+	<footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer>
+</div>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

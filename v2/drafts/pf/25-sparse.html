@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F5F4F0">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+:root { --line: #DDDBD3; --focus: #18181A; --f-bg: transparent; --f-border: 0; --b-bg: transparent; --b-text: #18181A; --note: #77756C; --f-radius: 0; --b-radius: 0; --f-pad: 0; }
+body { background: #F5F4F0; color: #18181A; font: 14px/1.6 "Funnel Display", system-ui, sans-serif; }
+::selection { background: #18181A; color: #F5F4F0; }
+.screen { min-height: 100svh; display: grid; gap: 40px; align-content: center; padding-block: 48px; }
+.left { max-width: 22em; color: #5F5D55; font-size: 0.86rem; }
+.face { width: 34px; height: 34px; border-radius: 50%; background: #DDDBD3; margin-bottom: 14px; }
+h1 { font-size: clamp(1.7rem, 1.2rem + 2vw, 2.6rem); font-weight: 400; line-height: 1.18; letter-spacing: -0.03em; max-width: 15em; }
+.field { border-bottom: 1px solid #18181A; margin-top: 28px; max-width: 420px; }
+.field:focus-within { box-shadow: 0 2px 0 #18181A; }
+.field input { padding-left: 0; } .btn { padding-right: 0; }
+.left .li-inline { margin-top: 16px; color: #18181A; }
+@media (min-width: 860px) { .screen { grid-template-columns: 1fr 1.6fr; align-items: center; gap: 80px; } }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+	<main class="screen">
+		<div class="left" data-in style="--i:1"><div class="face"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div><p>Mostafa Saher is a technical instructor. The best part of every class comes once it’s over, and his newsletter is where that goes now.</p><ul class="links li-inline">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div>
+		<div data-in><h1>Teaching AI and cloud, one clear step at a time. Currently writing it all down.</h1><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div>
+	</main>
+</div>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

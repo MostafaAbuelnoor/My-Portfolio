@@ -31,14 +31,15 @@ A working technical instructor who explains AI and cloud the way he does in clas
 ## Brand Commitments
 
 - Reference sites named by Mostafa as the model: nicksaraev.com and nateherk.com.
-- Minimalist: he rejected the yellow hero design (`v2/drafts/hub.html`) and asked for a minimal one.
+- He rejected the yellow hero design (`v2/drafts/hub.html`) as too much and the text-only page (`v2/drafts/minimal.html`) as too bare; the target sits between them.
 - Plain, direct, first-person voice.
 
 ## Evidence on Hand
 
 - Biography: technical instructor who teaches AI and cloud.
 - Links: LinkedIn, GitHub, email.
-- Not to be used (Mostafa, Nov 2026): the old portrait photos, the old résumé and its details, and the old university projects.
+- Portrait to use: the new cut-out, `v2/drafts/assets/mostafa-cutout.webp`.
+- Not to be used (Mostafa, Nov 2026): the old photos in `images/`, the old résumé and its details, and the old university projects.
 - Absent, never to be invented: subscriber or student counts, employer names, certifications, testimonials, press, video or social links beyond the above.
 
 ## Product Principles

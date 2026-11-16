@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F6F2E7">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { --bg: #F6F2E7; --fg: #1B1A17; --soft: #6E6A5E; --acc: #F28C28; --panel: #fff; --line: #DCD6C6; --focus: var(--fg); --f-bg: var(--panel); --f-text: var(--fg); --f-ph: var(--soft); --f-border: 1px solid var(--line); --b-bg: var(--fg); --b-text: var(--bg); --note: var(--soft); --f-radius: 999px; --b-radius: 999px; }
+:root.night { --bg: #0B1026; --fg: #EEF1FF; --soft: #9AA4CF; --acc: #8FB0FF; --panel: #151C3D; --line: #253064; --err: #FF9B8F; color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.55 "Sora", system-ui, sans-serif; }
+::selection { background: var(--acc); color: var(--bg); }
+.tog { position: relative; width: 64px; height: 34px; border: 0; border-radius: 999px; background: var(--fg); cursor: pointer; }
+.tog i { position: absolute; left: 4px; top: 4px; width: 26px; height: 26px; border-radius: 50%; background: var(--acc); transition: translate 400ms var(--spring); } .night .tog i { translate: 30px 0; box-shadow: inset -7px -2px 0 0 var(--fg); }
+.hero { display: grid; gap: 20px 48px; align-items: end; min-height: calc(100svh - 70px); }
+.copy { align-self: center; padding-block: 12px 36px; }
+h1 { font-size: clamp(2.3rem, 1.2rem + 4.4vw, 5rem); font-weight: 700; line-height: 0.98; letter-spacing: -0.045em; max-width: 10em; }
+h1 em { font-style: normal; color: var(--acc); }
+.copy p { margin: 18px 0 22px; max-width: 30em; color: var(--soft); }
+.signup { max-width: 440px; }
+.sky { position: relative; justify-self: center; width: min(330px, 76%); }
+.sky::before { content: ""; position: absolute; left: 50%; top: 2%; width: 78%; aspect-ratio: 1; margin-left: -39%; border-radius: 50%; background: var(--acc); opacity: 0.9; transition: translate 900ms var(--ease-out); } .night .sky::before { translate: 18% -6%; }
+.sky img { position: relative; }
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(root) { animation: iris 900ms cubic-bezier(0.77, 0, 0.175, 1); }
+@keyframes iris { from { clip-path: circle(0 at var(--ix, 90%) var(--iy, 5%)); } to { clip-path: circle(150vmax at var(--ix, 90%) var(--iy, 5%)); } }
+@media (min-width: 900px) { .hero { grid-template-columns: 1.15fr 0.85fr; } .sky { width: min(100%, 460px); justify-self: end; } }
+.more { display: grid; gap: 28px 56px; padding-block: 48px 8px; } @media (min-width: 860px) { .more { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+	<header class="top"><b>Mostafa Saher</b><button class="tog" id="tog" type="button" aria-label="Switch between day and night" aria-pressed="false"><i></i></button></header>
+	<main class="hero">
+		<div class="copy"><h1 data-split>Class by day. <em>Notes by night.</em></h1><p data-reveal style="--wait:500ms">I’m Mostafa Saher. I teach AI and cloud, one clear step at a time, and I write down what comes up after class. Try the switch in the corner.</p><div data-reveal style="--wait:650ms"><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div></div>
+		<div class="sky" data-reveal="scale" style="--wait:300ms"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
+	</main>
+</div><section class="wrap more"><div data-reveal><ul class="tp">
+	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
+	<li><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
+	<li><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
+</ul></div><div data-reveal style="--i:1"><ul class="links li-rows">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div></section>
+<div class="wrap"><footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const tog = document.getElementById('tog'), root = document.documentElement;
+tog.addEventListener('click', (e) => { const r = tog.getBoundingClientRect(); root.style.setProperty('--ix', (r.left + r.width / 2) + 'px'); root.style.setProperty('--iy', (r.top + r.height / 2) + 'px');
+	const flip = () => { const on = root.classList.toggle('night'); tog.setAttribute('aria-pressed', on); };
+	if (document.startViewTransition && !FX.RM) document.startViewTransition(flip); else flip(); });
+});
+</script>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

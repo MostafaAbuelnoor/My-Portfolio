@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Schibsted+Grotesk:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
 <style>
 :root { --green: #55703A; --line: #E7E7E2; --focus: var(--green); --f-bg: #fff; --f-border: 1px solid #DAD9D2; --b-bg: var(--green); --b-text: #fff; --note: #6D6D66; --f-radius: 999px; --b-radius: 999px; --w: 660px; }
 body { background: #fff; color: #1C1C1A; font: 17px/1.65 "Schibsted Grotesk", system-ui, sans-serif; }
@@ -33,7 +34,7 @@ h2 { margin: 48px 0 8px; font: 400 1.5rem "Instrument Serif", serif; }
 <div class="wrap">
 	<header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
 	<main>
-		<div class="ink" data-in><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
+		<div class="ink" data-wipe data-par="14"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
 		<div class="bio" data-in style="--i:1"><p>Mostafa Saher teaches people AI and cloud, one clear step at a time. He is a technical instructor.</p><p>The best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links he sends people afterwards. His <a href="#email" data-focus-signup>newsletter</a> is where that goes now.</p></div>
 		<h2>Writing</h2>
 		<ul class="rows"><li><span>Thoughts from the classroom</span><small>notes</small></li><li><span>Opinions on new models and cloud services</span><small>takes</small></li><li><span>Resources I’d hand a student</span><small>links</small></li></ul>
@@ -46,7 +47,7 @@ h2 { margin: 48px 0 8px; font: 400 1.5rem "Instrument Serif", serif; }
 		<div class="field">
 			<label class="sr" for="email">Email address</label>
 			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
-			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+			<button class="btn" type="submit" data-mag="0.22"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 		</div>
 		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
 	</div>
@@ -55,6 +56,7 @@ h2 { margin: 48px 0 8px; font: 400 1.5rem "Instrument Serif", serif; }
 	</main>
 	<footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer>
 </div>
+<script src="fx.js" defer></script>
 <script src="signup.js" defer></script>
 </body>
 

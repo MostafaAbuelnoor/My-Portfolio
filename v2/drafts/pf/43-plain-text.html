@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
 <style>
 :root { --line: #E3DDCE; --focus: #1B1A17; --f-bg: #fff; --f-border: 1px solid #1B1A17; --b-bg: #1B1A17; --b-text: #FBF8F1; --note: #7A7566; --f-radius: 0; --b-radius: 0; --f-pad: 3px; --w: 720px; }
 body { background: #FBF8F1; color: #1B1A17; font: 14px/1.7 "JetBrains Mono", ui-monospace, monospace; }
@@ -30,7 +31,7 @@ mark { padding: 0 3px; color: inherit; } .m1 { background: #FFE27A; } .m2 { back
 <body>
 <div class="wrap">
 	<main>
-		<h1 data-in>Mostafa Saher</h1>
+		<h1 data-split data-fx="pop">Mostafa Saher</h1>
 		<p data-in style="--i:1">I’m a <mark class="m1">technical instructor</mark>. I teach <mark class="m2">AI</mark> and <mark class="m3">cloud</mark>, one clear step at a time.</p>
 		<p data-in style="--i:1">The best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links I send people afterwards. My newsletter is where that goes now.</p>
 		<h2>newsletter</h2>
@@ -41,7 +42,7 @@ mark { padding: 0 3px; color: inherit; } .m1 { background: #FFE27A; } .m2 { back
 		<div class="field">
 			<label class="sr" for="email">Email address</label>
 			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
-			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+			<button class="btn" type="submit" data-mag="0.22"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 		</div>
 		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
 	</div>
@@ -51,10 +52,11 @@ mark { padding: 0 3px; color: inherit; } .m1 { background: #FFE27A; } .m2 { back
 		<ul class="list"><li><b>thoughts</b>: what students get stuck on, and the explanation that finally made it click.</li><li><b>opinions</b>: where I stand on new models, cloud services and the hype.</li><li><b>resources</b>: the labs, docs, courses and tools I actually use.</li></ul>
 		<h2>elsewhere</h2>
 		<ul class="list"><li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener">linkedin</a></li><li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener">github</a></li><li><a href="mailto:mostafasaher@gmail.com">mostafasaher@gmail.com</a></li></ul>
-		<div class="strip"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
+		<div class="strip" data-wipe data-par="14"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
 	</main>
 	<footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer>
 </div>
+<script src="fx.js" defer></script>
 <script src="signup.js" defer></script>
 </body>
 

@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
 <style>
 :root { --red: #E8452C; --ink: #170A07; --focus: #fff; --f-bg: #fff; --b-bg: var(--red); --b-text: #170A07; --note: #B9AEA8; --err: #FFB3A6; --f-radius: 4px; --b-radius: 2px; }
 body { background: #151312; color: #F4EFEA; font-family: "Archivo", system-ui, sans-serif; font-size: 16px; line-height: 1.55; }
@@ -42,14 +43,14 @@ h2 { font-size: clamp(2rem, 1.2rem + 3.2vw, 3.6rem); font-weight: 700; line-heig
 
 <body>
 <header class="poster">
-	<div class="meta">
+	<div class="meta" data-wipe data-par="14">
 		<p><b>Mostafa Saher</b>Technical instructor</p>
 		<p><b>Teaching</b>AI and cloud</p>
 		<p><b>Newsletter</b><a href="#email" data-focus-signup>Subscribe</a></p>
 		<p><b>Elsewhere</b><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener">LinkedIn</a>, <a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener">GitHub</a></p>
 	</div>
 	<img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed">
-	<h1 class="name">Mostafa</h1>
+	<h1 class="name" data-split="chars" style="--stag:35ms" data-fx="flip">Mostafa</h1>
 </header>
 <main class="below">
 	<h2>I teach AI and cloud, one clear step at a time.</h2>
@@ -62,20 +63,21 @@ h2 { font-size: clamp(2rem, 1.2rem + 3.2vw, 3.6rem); font-weight: 700; line-heig
 		<div class="field">
 			<label class="sr" for="email">Email address</label>
 			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
-			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+			<button class="btn" type="submit" data-mag="0.22"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 		</div>
 		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
 	</div>
 	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
 </form>
 		<ul class="links">
-	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
-	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
-	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:0"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:1"><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:2"><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
 </ul>
 	</div>
 </main>
 <footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer>
+<script src="fx.js" defer></script>
 <script src="signup.js" defer></script>
 </body>
 

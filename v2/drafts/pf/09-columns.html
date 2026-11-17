@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500..700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
 <style>
 :root { --focus: #161512; --f-bg: #F4F1EA; --f-radius: 6px; --b-radius: 3px; --b-bg: #C9C2B6; --b-text: #161512; --note: #A8A297; --err: #FFB3A6; --f-pad: 5px; }
 body { background: #C9C2B6; color: #161512; font-family: "Source Serif 4", Georgia, serif; font-size: 16px; line-height: 1.5; }
@@ -46,16 +47,16 @@ h1 { margin-top: 10px; font-family: "Archivo", sans-serif; font-size: clamp(2.1r
 <div class="page">
 	<p class="tag">Mostafa Saher</p>
 	<main>
-		<h1 data-in>I teach AI and cloud, one clear step at a time.</h1>
+		<h1 data-split data-fx="drop">I teach AI and cloud, one clear step at a time.</h1>
 		<div class="cols" data-in style="--i:1">
 			<div class="wide">
 				<p>I am a technical instructor, and I teach AI and cloud for a living. The best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links I send people afterwards.</p>
 				<p>My newsletter is where that goes now. Each one carries my thoughts from teaching, an honest opinion on the latest models and cloud services, and the resources I’d actually hand a student.</p>
 			</div>
 			<div><h2>Contact</h2><ul class="links">
-	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
-	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
-	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:0"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:1"><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:2"><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
 </ul></div>
 			<div><h2>Writing</h2><ul class="topics">
 	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
@@ -64,7 +65,7 @@ h1 { margin-top: 10px; font-family: "Archivo", sans-serif; font-size: clamp(2.1r
 			</ul></div>
 		</div>
 		<div class="lower" data-in style="--i:2">
-			<div class="shot"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
+			<div class="shot" data-wipe data-par="14"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
 			<section class="news">
 				<div><h2>Get the newsletter.</h2><p class="lead">Everything that used to stay in the corridor after class, sent to your inbox.</p></div>
 				<form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
@@ -74,7 +75,7 @@ h1 { margin-top: 10px; font-family: "Archivo", sans-serif; font-size: clamp(2.1r
 		<div class="field">
 			<label class="sr" for="email">Email address</label>
 			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
-			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+			<button class="btn" type="submit" data-mag="0.22"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 		</div>
 		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
 	</div>
@@ -85,6 +86,7 @@ h1 { margin-top: 10px; font-family: "Archivo", sans-serif; font-size: clamp(2.1r
 	</main>
 	<footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer>
 </div>
+<script src="fx.js" defer></script>
 <script src="signup.js" defer></script>
 </body>
 

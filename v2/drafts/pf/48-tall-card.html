@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=Geist:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
 <style>
 :root { --line: #E5E5E5; --focus: #222; --f-bg: #fff; --f-border: 1px solid #D4D4D4; --b-bg: #222; --b-text: #fff; --note: #6B6B6B; --f-radius: 8px; --b-radius: 4px; --f-pad: 4px; }
 body { background: #fff; color: #222; font: 400 18px/1.55 "Source Serif 4", Georgia, serif; }
@@ -36,7 +37,7 @@ h2 { margin: 44px 0 14px; font-size: 1.4rem; font-weight: 700; letter-spacing: -
 <div class="wrap">
 	<div class="lay">
 		<main>
-			<h1 data-in>@mostafa</h1>
+			<h1 data-split data-fx="pop">@mostafa</h1>
 			<div class="tabs"><span>Bio</span><b>Default</b></div>
 			<div class="bio" data-in style="--i:1"><p>I’m an instructor and writer. I teach AI and cloud, one clear step at a time.</p><p>The best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links I send people afterwards. My newsletter is where that goes now.</p></div>
 			<h2>Newsletter</h2>
@@ -47,7 +48,7 @@ h2 { margin: 44px 0 14px; font-size: 1.4rem; font-weight: 700; letter-spacing: -
 		<div class="field">
 			<label class="sr" for="email">Email address</label>
 			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
-			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+			<button class="btn" type="submit" data-mag="0.22"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 		</div>
 		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
 	</div>
@@ -62,6 +63,7 @@ h2 { margin: 44px 0 14px; font-size: 1.4rem; font-weight: 700; letter-spacing: -
 		<aside class="card" data-in style="--i:2"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></aside>
 	</div>
 </div>
+<script src="fx.js" defer></script>
 <script src="signup.js" defer></script>
 </body>
 

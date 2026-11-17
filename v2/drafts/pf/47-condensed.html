@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
 <style>
 :root { color-scheme: dark; --cyan: #19B5FE; --line: #1C2738; --focus: var(--cyan); --f-bg: #0F1826; --f-text: #F3F6FA; --f-ph: #8996A8; --f-border: 1px solid #22304A; --b-bg: var(--cyan); --b-text: #04121E; --note: #8996A8; --err: #FF9B8F; --f-radius: 999px; --b-radius: 999px; }
 body { background: #060C16; color: #F3F6FA; font: 16px/1.55 "Barlow", system-ui, sans-serif; }
@@ -18,7 +19,7 @@ body { background: #060C16; color: #F3F6FA; font: 16px/1.55 "Barlow", system-ui,
 .top a { padding: 8px 16px; border-radius: 999px; background: var(--cyan); color: #04121E; font-size: 0.9rem; font-weight: 600; }
 .hero { display: grid; gap: 28px 48px; align-items: end; padding-block: clamp(16px, 5vh, 56px) 40px; }
 h1 { font: 700 clamp(3.6rem, 1.6rem + 9vw, 8.6rem)/0.86 "Barlow Condensed", sans-serif; text-transform: uppercase; letter-spacing: -0.01em; }
-h1 span { color: var(--cyan); display: block; }
+h1 > span { color: var(--cyan); display: block; }
 .hero p { margin: 20px 0 22px; max-width: 30em; color: #B3BECC; }
 .signup { max-width: 440px; }
 .frame { justify-self: center; width: min(400px, 88%); aspect-ratio: 4 / 4.6; overflow: hidden; background: linear-gradient(160deg, #24364F, #0B1422); display: flex; justify-content: center; align-items: flex-end; }
@@ -36,20 +37,20 @@ h1 span { color: var(--cyan); display: block; }
 	<header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
 	<main>
 		<section class="hero">
-			<div data-in><h1>AI and cloud, <span>made clear.</span></h1><p>You can understand this. I’m Mostafa Saher, a technical instructor, and I teach it one clear step at a time.</p><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+			<div data-in><h1 data-split data-fx="flip">AI and cloud, <span>made clear.</span></h1><p>You can understand this. I’m Mostafa Saher, a technical instructor, and I teach it one clear step at a time.</p><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
 	<input type="hidden" name="form-name" value="newsletter">
 	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
 	<div class="signup__stack">
 		<div class="field">
 			<label class="sr" for="email">Email address</label>
 			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
-			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+			<button class="btn" type="submit" data-mag="0.22"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 		</div>
 		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
 	</div>
 	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
 </form></div>
-			<div class="frame" data-in style="--i:1"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
+			<div class="frame" style="--i:1" data-wipe data-par="14"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
 		</section>
 		<ul class="stats">
 	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
@@ -57,13 +58,14 @@ h1 span { color: var(--cyan); display: block; }
 	<li><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
 		</ul>
 		<ul class="links li-inline">
-	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
-	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
-	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:0"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:1"><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:2"><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
 </ul>
 	</main>
 	<footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer>
 </div>
+<script src="fx.js" defer></script>
 <script src="signup.js" defer></script>
 </body>
 

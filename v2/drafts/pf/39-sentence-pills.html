@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
 <style>
 :root { --line: #EAEAEA; --focus: #6B4CE6; --f-bg: #F4F4F4; --b-bg: #6B4CE6; --b-text: #fff; --note: #6A6A6A; --f-radius: 12px; --b-radius: 8px; --w: 900px; }
 body { background: #fff; color: #161616; font: 15px/1.65 "Geist", system-ui, sans-serif; }
@@ -32,7 +33,7 @@ h1 em { font: italic 400 1.12em "Instrument Serif", serif; }
 <div class="wrap">
 	<header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
 	<main>
-		<h1 data-in><span class="face"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></span> Hi, I’m Mostafa, a technical instructor, <i class="p1">AI</i> an AI explainer, <i class="p2">Cloud</i> a cloud guide, <i class="p3">Notes</i> and an <em>after-class note-taker.</em></h1>
+		<h1 data-split data-fx="drop"><span class="fx-float face"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></span> Hi, I’m Mostafa, a technical instructor, <i class="p1">AI</i> an AI explainer, <i class="p2">Cloud</i> a cloud guide, <i class="p3">Notes</i> and an <em>after-class note-taker.</em></h1>
 		<p class="say" data-in style="--i:1">I teach <b>AI and cloud</b>, one clear step at a time. The best part of every class comes once it’s over: <b>the questions in the corridor</b>, the “wait, so why does that work?”, the links I send people afterwards. My newsletter is where that goes now.</p>
 		<div data-in style="--i:2"><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
 	<input type="hidden" name="form-name" value="newsletter">
@@ -41,24 +42,25 @@ h1 em { font: italic 400 1.12em "Instrument Serif", serif; }
 		<div class="field">
 			<label class="sr" for="email">Email address</label>
 			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
-			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+			<button class="btn" type="submit" data-mag="0.22"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 		</div>
 		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
 	</div>
 	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
 </form></div>
 		<section class="two"><ul class="tp">
-	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
-	<li><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
-	<li><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
+	<li data-reveal style="--i:0"><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
+	<li data-reveal style="--i:1"><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
+	<li data-reveal style="--i:2"><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
 </ul><ul class="links li-rows">
-	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
-	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
-	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:0"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:1"><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:2"><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
 </ul></section>
 	</main>
 	<footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer>
 </div>
+<script src="fx.js" defer></script>
 <script src="signup.js" defer></script>
 </body>
 

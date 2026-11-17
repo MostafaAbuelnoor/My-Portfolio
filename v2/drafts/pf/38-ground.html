@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
 <style>
 :root { --line: rgb(255 255 255 / 0.4); --focus: #fff; --f-bg: #fff; --b-bg: #0B2A7A; --b-text: #fff; --note: #D6E2FF; --err: #FFD9D2; --f-radius: 4px; --b-radius: 2px; --f-pad: 4px; }
 body { background: #1456F0; color: #fff; font: 14px/1.6 "Geist", system-ui, sans-serif; }
@@ -44,7 +45,7 @@ body { background: #1456F0; color: #fff; font: 14px/1.6 "Geist", system-ui, sans
 		<div class="field">
 			<label class="sr" for="email">Email address</label>
 			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
-			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+			<button class="btn" type="submit" data-mag="0.22"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 		</div>
 		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
 	</div>
@@ -52,8 +53,9 @@ body { background: #1456F0; color: #fff; font: 14px/1.6 "Geist", system-ui, sans
 </form>
 		</div>
 	</div>
-	<div class="floor"><figure><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></figure></div>
+	<div class="floor"><figure data-wipe><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></figure></div>
 </main>
+<script src="fx.js" defer></script>
 <script src="signup.js" defer></script>
 </body>
 

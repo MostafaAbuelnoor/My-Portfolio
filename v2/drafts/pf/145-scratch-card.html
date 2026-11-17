@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1C1530">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { color-scheme: dark; --line: #2F2650; --focus: #FFD23F; --f-bg: #261D42; --f-text: #F5F2FF; --f-ph: #A49BC7; --f-border: 1px solid #3A2F60; --b-bg: #FFD23F; --b-text: #1C1530; --note: #A49BC7; --err: #FF9B8F; --f-radius: 12px; --b-radius: 8px; }
+body { background: #1C1530; color: #F5F2FF; font: 16px/1.5 "Gabarito", system-ui, sans-serif; }
+.hero { display: grid; gap: 24px 48px; align-items: center; min-height: calc(100svh - 70px); padding-bottom: 36px; } @media (min-width: 900px) { .hero { grid-template-columns: 1.1fr 0.9fr; } }
+h1 { font-size: clamp(2.3rem, 1.2rem + 4.4vw, 5rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.045em; } h1 em { font-style: normal; color: #FFD23F; }
+.hero p.s { margin: 16px 0 22px; max-width: 30em; color: #C9C2E6; }
+.signup { max-width: 440px; }
+.tk { position: relative; justify-self: center; width: min(360px, 84vw); aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; background: linear-gradient(160deg, #FF6FB5, #7B5BFF); box-shadow: 0 30px 60px -30px #000; touch-action: none; }
+.tk .prize { position: absolute; inset: 0; display: grid; align-content: end; justify-items: center; text-align: center; }
+.tk .prize b { position: absolute; top: 16px; left: 0; right: 0; font-size: 1.6rem; font-weight: 900; letter-spacing: -0.03em; color: #fff; }
+.tk .prize img { width: 90%; }
+.tk canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; }
+.hint2 { text-align: center; margin-top: 10px; color: #A49BC7; font-size: 0.9rem; }
+.more { display: grid; gap: 28px 56px; padding-block: 48px 8px; } @media (min-width: 860px) { .more { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+
+<body>
+<div class="wrap"><header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
+	<main class="hero">
+		<div><h1 data-split>Scratch to reveal <em>your instructor.</em></h1><p class="s" data-reveal style="--wait:500ms">Every ticket wins: AI and cloud, one clear step at a time. I’m Mostafa Saher, and I write down what comes up after class.</p><div data-reveal style="--wait:650ms"><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div></div>
+		<div><div class="tk" data-reveal="scale"><div class="prize"><b>You won: Mostafa!</b><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div><canvas id="sc" aria-label="Scratch card covering the portrait"></canvas></div><p class="hint2">Drag across the card to scratch it.</p></div>
+	</main>
+</div><section class="wrap more"><div data-reveal><ul class="tp">
+	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
+	<li><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
+	<li><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
+</ul></div><div data-reveal style="--i:1"><ul class="links li-rows">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div></section>
+<div class="wrap"><footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const cv = document.getElementById('sc'), ctx = cv.getContext('2d'); let w, h, down = false, last = null;
+const paint = () => { const r = cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2); w = r.width; h = r.height; cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+	const g = ctx.createLinearGradient(0, 0, w, h); g.addColorStop(0, '#C9C9D6'); g.addColorStop(0.5, '#F2F2F7'); g.addColorStop(1, '#A9A9BA'); ctx.globalCompositeOperation = 'source-over'; ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+	ctx.fillStyle = '#6B6B80'; ctx.font = '900 ' + Math.round(w / 9) + 'px Gabarito, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('SCRATCH', w / 2, h / 2); ctx.font = '600 ' + Math.round(w / 22) + 'px Gabarito, sans-serif'; ctx.fillText('to reveal', w / 2, h / 2 + w / 12); };
+const at = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+const scratch = (p) => { ctx.globalCompositeOperation = 'destination-out'; ctx.lineWidth = 46; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(...(last || p)); ctx.lineTo(...p); ctx.stroke(); last = p; };
+cv.addEventListener('pointerdown', (e) => { down = true; last = null; cv.setPointerCapture(e.pointerId); scratch(at(e)); }); cv.addEventListener('pointermove', (e) => { if (down) scratch(at(e)); }); ['pointerup', 'pointercancel'].forEach((n) => cv.addEventListener(n, () => { down = false; }));
+paint(); if (FX.RM) { ctx.clearRect(0, 0, w, h); return; }
+setTimeout(() => { let t = 0; const demo = () => { t += 0.05; scratch([w * (0.2 + 0.6 * (t % 1)), h * (0.3 + 0.12 * Math.floor(t))]); if (t < 3) requestAnimationFrame(demo); else last = null; }; demo(); }, 1200);
+});
+</script>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

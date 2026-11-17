@@ -217,7 +217,7 @@ body { background: #1A1A1D; color: #111; font: 16px/1.5 "Geist", system-ui, sans
 .fl p { position: relative; max-width: 28em; font-size: 1.15rem; }
 .fl figure { position: absolute; right: 12%; bottom: 0; height: 70%; aspect-ratio: 1100 / 1433; } .fl figure img { height: 100%; width: auto; max-width: none; }
 .fl .signup { position: relative; max-width: 440px; }
-@media (max-width: 700px) { .fl figure { height: 46%; right: 14%; } }
+@media (max-width: 700px) { .fl figure { height: 34%; right: 10%; } .fl { align-content: start; padding-top: 80px; } }
 ''', '''
 <nav class="panel" aria-hidden="true"><div class="disp" id="disp">4</div><b>4</b><b>3</b><b>2</b><b>1</b><b>G</b></nav>
 <main id="floors">

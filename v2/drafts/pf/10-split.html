@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0D0D0D">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { --focus: #fff; --f-bg: #1B1B1B; --f-text: #F4F4F2; --f-ph: #9A9A96; --f-border: 1px solid #303030; --f-radius: 12px; --b-radius: 7px; --b-bg: #F4F4F2; --b-text: #0D0D0D; --note: #9A9A96; --err: #FF9B8F; }
+body { background: #0D0D0D; color: #F4F4F2; font-family: "Manrope", system-ui, sans-serif; font-size: 16px; line-height: 1.6; }
+::selection { background: #F4F4F2; color: #0D0D0D; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr); }
+.panel { position: relative; overflow: hidden; height: 62svh; background: #D8D8D4; display: flex; justify-content: center; align-items: flex-end; }
+.panel img { height: 94%; width: auto; max-width: none; }
+.side { display: flex; flex-direction: column; gap: 40px; padding: 28px 20px 32px; }
+.side b.name { font-weight: 700; letter-spacing: -0.01em; }
+h1 { font-size: clamp(1.9rem, 1.3rem + 2vw, 2.7rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.035em; text-wrap: balance; }
+.side p.intro { margin: 16px 0 22px; color: #B5B5B0; }
+.links a { display: flex; align-items: center; justify-content: space-between; padding-block: 12px; border-top: 1px solid #262626; font-weight: 600; }
+.links li:last-child a { border-bottom: 1px solid #262626; }
+.l-meta { display: none; } .l-go { color: #9A9A96; transition: transform 200ms var(--ease-out); }
+.foot { color: #7C7C78; font-size: 0.85rem; }
+@media (hover: hover) and (pointer: fine) { .links a:hover .l-go { transform: translate(2px, -2px); color: #fff; } }
+@media (min-width: 900px) {
+	.split { grid-template-columns: minmax(380px, 36%) minmax(0, 1fr); min-height: 100svh; }
+	.side { order: -1; justify-content: space-between; padding: 32px 36px; min-height: 100svh; }
+	.panel { position: sticky; top: 0; height: 100svh; }
+	.panel img { height: 92%; }
+}
+@media (prefers-reduced-motion: no-preference) { .panel img { animation: stand 1000ms var(--ease-out) 100ms backwards; } @keyframes stand { from { transform: translateY(6%); opacity: 0; } } }
+</style>
+</head>
+
+<body>
+<div class="split">
+	<div class="panel" data-wipe><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
+	<main class="side">
+		<b class="name" data-in>Mostafa Saher</b>
+		<div data-in style="--i:1">
+			<h1 data-split>I teach AI and cloud, one clear step at a time.</h1>
+			<p class="intro">The best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?” My newsletter is where that goes now.</p>
+			<form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit" data-mag="0.22"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form>
+		</div>
+		<div data-in style="--i:2">
+			<ul class="links">
+	<li data-reveal style="--i:0"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:1"><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:2"><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul>
+			<p class="foot" style="margin-top:20px">© <span data-year>2026</span> Mostafa Saher</p>
+		</div>
+	</main>
+</div>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

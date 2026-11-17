@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0E3A8A">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;500&family=Chivo:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { color-scheme: dark; --ink: #DCE9FF; --line: rgb(220 233 255 / 0.35); --focus: #fff; --f-bg: rgb(255 255 255 / 0.08); --f-text: #fff; --f-ph: #B5C8EE; --f-border: 1.5px dashed rgb(220 233 255 / 0.7); --b-bg: #DCE9FF; --b-text: #0E3A8A; --note: #B5C8EE; --err: #FFD2CB; --f-radius: 0; --b-radius: 0; --f-pad: 4px; }
+body { background-color: #0E3A8A; background-image: linear-gradient(rgb(255 255 255 / 0.1) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.1) 1px, transparent 1px); background-size: 28px 28px; color: var(--ink); font: 15px/1.55 "Chivo", system-ui, sans-serif; }
+.mono, .top { font-family: "Chivo Mono", monospace; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.hero { display: grid; gap: 24px 48px; align-items: center; min-height: calc(100svh - 70px); padding-bottom: 36px; } @media (min-width: 900px) { .hero { grid-template-columns: 1.1fr 0.9fr; } }
+h1 { font-size: clamp(2.2rem, 1.2rem + 4vw, 4.6rem); font-weight: 800; line-height: 0.98; letter-spacing: -0.035em; }
+.hero p.s { margin: 16px 0 22px; max-width: 30em; color: #C4D5F5; }
+.signup { max-width: 440px; }
+.plan { position: relative; justify-self: center; width: min(360px, 80vw); margin: 34px 40px 34px 0; }
+.plan .bx { position: relative; border: 1.5px solid var(--ink); aspect-ratio: 1100 / 1433; }
+.plan img { width: 100%; filter: grayscale(1) brightness(1.5) contrast(1.2); mix-blend-mode: screen; opacity: 0.9; }
+.dim { position: absolute; color: var(--ink); font: 400 0.7rem "Chivo Mono", monospace; white-space: nowrap; }
+.dim.h { left: 0; right: 0; top: -26px; text-align: center; border-top: 1px solid var(--ink); padding-top: 3px; } .dim.h::before, .dim.h::after, .dim.v::before, .dim.v::after { content: ""; position: absolute; background: var(--ink); }
+.dim.h::before, .dim.h::after { top: -5px; width: 1px; height: 9px; } .dim.h::before { left: 0; } .dim.h::after { right: 0; }
+.dim.v { top: 0; bottom: 0; right: -30px; writing-mode: vertical-rl; text-align: center; border-left: 1px solid var(--ink); padding-left: 3px; } .dim.v::before, .dim.v::after { left: -5px; height: 1px; width: 9px; } .dim.v::before { top: 0; } .dim.v::after { bottom: 0; }
+.tagl { position: absolute; left: var(--x); top: var(--y); font: 400 0.7rem "Chivo Mono", monospace; padding-left: 34px; } .tagl::before { content: ""; position: absolute; left: 0; top: 50%; width: 28px; height: 1px; background: var(--ink); } .tagl::after { content: ""; position: absolute; left: -3px; top: calc(50% - 3px); width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+.fx:not(.fx-rm) .plan:not(.in) .bx { clip-path: inset(0 100% 0 0); } .fx .plan .bx { transition: clip-path 1400ms var(--ease-io); clip-path: inset(-40px -60px); } .fx:not(.fx-rm) .plan:not(.in) .tagl { opacity: 0; } .fx .plan.in .tagl { transition: opacity 400ms ease calc(1200ms + var(--k) * 250ms); }
+.stamp { margin-top: 12px; display: inline-block; padding: 4px 10px; border: 1.5px solid var(--ink); }
+.more { display: grid; gap: 28px 56px; padding-block: 48px 8px; } @media (min-width: 860px) { .more { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+
+<body>
+<div class="wrap"><header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
+	<main class="hero">
+		<div><p class="mono" style="margin-bottom:12px">Drawing no. 01 · scale 1:1</p><h1 data-split>How an AI and cloud class is built.</h1><p class="s" data-reveal style="--wait:500ms">I’m Mostafa Saher, a technical instructor. One clear step at a time, drawn up and sent by email.</p><div data-reveal style="--wait:650ms"><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div></div>
+		<div class="plan" data-inview><div class="bx"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"><span class="dim h">1 instructor</span><span class="dim v">patience: plenty</span>
+			<span class="tagl" style="--x:62%;--y:16%;--k:0">explains twice</span><span class="tagl" style="--x:70%;--y:52%;--k:1">arms: crossed</span><span class="tagl" style="--x:58%;--y:80%;--k:2">notes: taken</span></div><span class="mono stamp">Approved for learning</span></div>
+	</main>
+</div><section class="wrap more"><div data-reveal><ul class="tp">
+	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
+	<li><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
+	<li><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
+</ul></div><div data-reveal style="--i:1"><ul class="links li-rows">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div></section>
+<div class="wrap"><footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer></div>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

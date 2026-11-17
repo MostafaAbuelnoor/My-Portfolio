@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FFFFFF">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { --blue: #1B3BFF; --line: #5C73FF; --focus: #fff; --f-bg: #fff; --b-bg: #0B0E1F; --b-text: #fff; --note: #D3D9FF; --err: #FFD2CB; --f-radius: 0; --b-radius: 0; --f-pad: 0; }
+body { background: #fff; color: #0B0E1F; font: 16px/1.5 "Familjen Grotesk", system-ui, sans-serif; }
+::selection { background: var(--blue); color: #fff; }
+.hero { position: relative; padding-block: 8px 48px; overflow: hidden; }
+.hero::after { content: ""; position: absolute; top: 0; bottom: 0; left: 62%; width: clamp(28px, 6vw, 64px); background: var(--blue); mix-blend-mode: multiply; }
+h1 { margin-top: clamp(28px, 8vh, 80px); max-width: 13em; font-size: clamp(2.3rem, 1.2rem + 4.4vw, 4.6rem); font-weight: 700; line-height: 0.98; letter-spacing: -0.04em; }
+.hero p { margin-top: 20px; max-width: 30em; color: #555A70; }
+.blue { background: var(--blue); color: #fff; padding-block: 40px 8px; }
+.blue .inr { display: grid; gap: 32px 56px; }
+.blue h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+.field { gap: 0; }
+.blue .tp b { font-size: 1.2rem; }
+.close { display: grid; gap: 20px 56px; align-items: end; padding-block: 36px 0; }
+.close figure { width: 180px; }
+.close p { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; max-width: 14em; padding-bottom: 20px; }
+@media (min-width: 860px) { .blue .inr { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .blue .right { text-align: right; } .blue .right .li-rows a { flex-direction: row-reverse; } .blue .right .l-meta { margin: 0 auto 0 0; } .close { grid-template-columns: 180px minmax(0, 1fr); } }
+</style>
+</head>
+
+<body>
+<header class="hero"><div class="wrap"><header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
+	<h1 data-split>AI, cloud and the systems behind them, taught from first idea to working form.</h1>
+	<p data-in style="--i:1">Mostafa Saher. Technical instructor.</p>
+</div></header>
+<main>
+	<section class="blue"><div class="wrap inr">
+		<div data-in style="--i:2"><h2>Selected notes, sent by email.</h2><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit" data-mag="0.22"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div>
+		<div class="right"><ul class="tp">
+	<li data-reveal style="--i:0"><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
+	<li data-reveal style="--i:1"><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
+	<li data-reveal style="--i:2"><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
+</ul><div style="margin-top:24px"><ul class="links li-rows">
+	<li data-reveal style="--i:0"><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:1"><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li data-reveal style="--i:2"><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div></div>
+	</div></section>
+	<section class="wrap close"><figure data-wipe data-par="14"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></figure><p>Hype is what people see. Understanding is what makes it work.</p></section>
+</main>
+<div class="wrap"><footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer></div>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

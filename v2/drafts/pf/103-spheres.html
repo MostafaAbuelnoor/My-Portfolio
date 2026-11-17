@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FFFFFF">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { --line: #E7E7EC; --focus: #6C3DF4; --f-bg: #F3F3F7; --b-bg: #15151F; --b-text: #fff; --note: #6B6B7B; --f-radius: 999px; --b-radius: 999px; }
+body { background: #fff; color: #15151F; font: 15px/1.6 "Sora", system-ui, sans-serif; }
+::selection { background: #6C3DF4; color: #fff; }
+.orbs { position: relative; height: min(74svh, 620px); margin-top: 4px; }
+.o { position: absolute; left: var(--x); top: var(--y); width: var(--s); aspect-ratio: 1; margin: calc(var(--s) / -2); border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: calc(var(--s) * 0.17); letter-spacing: -0.02em; text-align: center; box-shadow: inset -0.12em -0.16em 0.5em rgb(0 0 0 / 0.45), inset 0.1em 0.12em 0.4em rgb(255 255 255 / 0.5), 0 0.4em 0.9em -0.3em rgb(0 0 0 / 0.5); background: radial-gradient(circle at 32% 26%, #fff 0 6%, var(--c1) 22%, var(--c2) 70%, #0B0B14 115%); overflow: hidden; transition: scale 400ms var(--spring); }
+.o.pic img { width: 132%; max-width: none; margin: 10% 0 0 0; } .o.pic { background: radial-gradient(circle at 32% 26%, #fff 0 4%, #C9B8FF 30%, #6C3DF4 100%); place-items: start center; }
+.o.big { --s: clamp(150px, 26vw, 250px); } .o.mid { --s: clamp(96px, 15vw, 150px); } .o.sm { --s: clamp(64px, 9vw, 96px); }
+@media (hover: hover) and (pointer: fine) { .o:hover { scale: 1.12; } }
+.txt { text-align: center; padding-block: 8px 0; }
+h1 { max-width: 15em; margin-inline: auto; font-size: clamp(1.7rem, 1.1rem + 2.4vw, 3rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.035em; }
+.signup { max-width: 430px; margin: 22px auto 0; text-align: left; } .note { text-align: center; }
+.more { display: grid; gap: 28px 56px; padding-block: 48px 8px; } @media (min-width: 860px) { .more { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+
+<body>
+<div class="wrap"><header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
+	<main>
+		<div class="orbs" aria-hidden="true">
+			<div class="o big pic fx-float" style="--x:50%;--y:50%;--dur:7s" data-par="10"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
+			<div class="o mid fx-float" style="--x:22%;--y:30%;--c1:#7FE7FF;--c2:#1667E0;--dur:5.5s" data-par="34">AI</div>
+			<div class="o mid fx-float" style="--x:79%;--y:28%;--c1:#FFD08A;--c2:#F2542D;--dur:6.5s" data-par="-28">Cloud</div>
+			<div class="o sm fx-float" style="--x:16%;--y:72%;--c1:#B9FFB0;--c2:#0E9F6E;--dur:4.8s" data-par="-40">Notes</div>
+			<div class="o sm fx-float" style="--x:84%;--y:70%;--c1:#FFB3E6;--c2:#C2189A;--dur:6s" data-par="46">Takes</div>
+			<div class="o sm fx-float" style="--x:36%;--y:88%;--c1:#E8E8F0;--c2:#3B3B52;--dur:5.2s" data-par="22">Links</div>
+			<div class="o sm fx-float" style="--x:66%;--y:10%;--c1:#FFF3A6;--c2:#E0A100;--dur:7.4s" data-par="-18">Steps</div>
+		</div>
+		<div class="txt"><h1 data-split data-fx="blur">I teach AI and cloud, one clear step at a time.</h1><div data-reveal style="--wait:600ms"><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div></div>
+	</main>
+</div><section class="wrap more"><div data-reveal><ul class="tp">
+	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
+	<li><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
+	<li><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
+</ul></div><div data-reveal style="--i:1"><ul class="links li-rows">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div></section>
+<div class="wrap"><footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer></div>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

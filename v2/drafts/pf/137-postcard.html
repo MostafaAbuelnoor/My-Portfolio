@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#D7E7E4">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Archivo:wght@500..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { --line: #B9CFCB; --focus: #1D3B36; --f-bg: #fff; --f-border: 1.5px solid #1D3B36; --b-bg: #1D3B36; --b-text: #fff; --note: #5B7570; --f-radius: 6px; --b-radius: 3px; --f-pad: 4px; }
+body { background: #D7E7E4; color: #1D3B36; font: 15px/1.5 "Archivo", system-ui, sans-serif; }
+.stage { min-height: calc(100svh - 70px); display: grid; align-content: center; justify-items: center; gap: 20px; padding-block: 12px 36px; perspective: 1600px; }
+.card { position: relative; width: min(100%, 680px); aspect-ratio: 3 / 2; transform-style: preserve-3d; transition: transform 1100ms var(--ease-io); }
+.card.flip { transform: rotateY(180deg); }
+.fc { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 10px; overflow: hidden; box-shadow: 0 30px 50px -28px #000; }
+.fr { background: linear-gradient(#57B6E8, #BFE6F7 60%, #F6E2B3); display: flex; align-items: flex-end; justify-content: flex-end; }
+.fr img { height: 92%; width: auto; max-width: none; margin-right: 4%; }
+.fr h1 { position: absolute; left: 5%; top: 8%; font-size: clamp(1.8rem, 6vw, 4rem); font-weight: 800; line-height: 0.92; letter-spacing: -0.04em; text-transform: uppercase; color: #fff; text-shadow: 3px 3px 0 #1D3B36; max-width: 7em; }
+.bk { transform: rotateY(180deg); background: #FBF8EE; display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; padding: 5%; }
+.msg { font: 400 clamp(0.85rem, 2.4vw, 1.25rem)/1.35 "Kalam", cursive; padding-right: 5%; border-right: 1.5px solid #1D3B36; overflow: hidden; }
+.addr { padding-left: 6%; display: grid; align-content: space-between; }
+.stampx { justify-self: end; width: 22%; min-width: 46px; aspect-ratio: 4 / 5; border: 2px dashed #1D3B36; background: #F2B84B; overflow: hidden; } .stampx img { width: 150%; max-width: none; margin-left: -25%; }
+.addr .signup { font-size: 14px; } .addr .btn { padding-inline: 10px; } .addr .btn svg { display: none; } .addr .note { font-size: 0.75rem; }
+.flipbtn { padding: 10px 18px; border: 1.5px solid #1D3B36; border-radius: 999px; background: none; color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
+@media (max-width: 600px) { .card { aspect-ratio: 3 / 4; } .bk { grid-template-columns: 1fr; grid-template-rows: auto 1fr; } .msg { border-right: 0; border-bottom: 1.5px solid #1D3B36; padding: 0 0 4%; } .addr { padding: 4% 0 0; } .stampx { display: none; } }
+.more { display: grid; gap: 28px 56px; padding-block: 48px 8px; } @media (min-width: 860px) { .more { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+
+<body>
+<div class="wrap"><header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
+	<main class="stage">
+		<div class="card" id="card"><div class="fc fr"><h1>Greetings from the classroom</h1><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
+			<div class="fc bk"><p class="msg">Hi! I’m Mostafa. I teach AI and cloud, one clear step at a time. The best part of every class comes once it’s over, so I write it down and post it to you. Wish you were here!</p><div class="addr"><div class="stampx"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div><div><p style="margin-bottom:8px;font-weight:600">Send to:</p><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div></div></div></div>
+		<button class="flipbtn" id="flipbtn" type="button">Turn the card over</button>
+	</main>
+</div><section class="wrap more"><div data-reveal><ul class="tp">
+	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
+	<li><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
+	<li><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
+</ul></div><div data-reveal style="--i:1"><ul class="links li-rows">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div></section>
+<div class="wrap"><footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const card = document.getElementById('card'), btn = document.getElementById('flipbtn'); const set = (on) => { card.classList.toggle('flip', on); btn.textContent = on ? 'See the front' : 'Turn the card over'; };
+btn.addEventListener('click', () => set(!card.classList.contains('flip'))); setTimeout(() => set(true), FX.RM ? 0 : 1800);
+});
+</script>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

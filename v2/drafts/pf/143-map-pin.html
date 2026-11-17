@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#E9EEE6">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { --line: #D3DACE; --focus: #E5341D; --f-bg: #fff; --b-bg: #E5341D; --b-text: #fff; --note: #66705F; --f-radius: 12px; --b-radius: 8px; }
+body { background: #E9EEE6; color: #1F2A1B; font: 15px/1.5 "Figtree", system-ui, sans-serif; }
+.map { position: relative; height: min(84svh, 760px); overflow: hidden; background: #E9EEE6; }
+.map svg.roads { position: absolute; inset: -10%; width: 120%; height: 120%; }
+.roads path { fill: none; stroke: #fff; stroke-linecap: round; } .roads .w { stroke: #F7D774; } .roads .r { stroke: #9CC6E8; }
+.park { position: absolute; border-radius: 40% 60% 55% 45%; background: #C6E3B5; }
+.pin { position: absolute; left: 56%; top: 46%; translate: -50% -100%; display: grid; justify-items: center; }
+.pin .hd { width: 86px; height: 86px; border-radius: 50% 50% 50% 0; rotate: -45deg; background: #E5341D; display: grid; place-items: center; box-shadow: 0 10px 20px -8px rgb(0 0 0 / 0.5); }
+.pin .face { width: 70px; height: 70px; rotate: 45deg; border-radius: 50%; background: #fff; }
+.fx:not(.fx-rm) .pin { animation: drop 900ms cubic-bezier(0.3, 1.4, 0.5, 1) 300ms backwards; } @keyframes drop { from { translate: -50% -260%; opacity: 0; } }
+.pin::after { content: ""; position: absolute; bottom: -10px; width: 30px; height: 10px; border-radius: 50%; background: rgb(0 0 0 / 0.2); }
+.pulse { position: absolute; left: 56%; top: 46%; width: 20px; height: 20px; margin: -10px; border-radius: 50%; border: 2px solid #E5341D; }
+@media (prefers-reduced-motion: no-preference) { .pulse { animation: ping 2s ease-out 1.2s infinite; } @keyframes ping { from { scale: 1; opacity: 1; } to { scale: 8; opacity: 0; } } }
+.sheet { position: absolute; left: 50%; bottom: 16px; translate: -50% 0; width: min(94%, 520px); padding: 18px; border-radius: 22px; background: #fff; box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.45); }
+.sheet h1 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; } .sheet .meta { color: #66705F; margin: 4px 0 12px; } .sheet .meta b { color: #1F8A3A; }
+.lab { position: absolute; font-size: 0.75rem; font-weight: 600; color: #66705F; letter-spacing: 0.04em; text-transform: uppercase; }
+.more { display: grid; gap: 28px 56px; padding-block: 48px 8px; } @media (min-width: 860px) { .more { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+
+<body>
+<div class="wrap"><header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header></div>
+<main class="map">
+	<svg class="roads" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path class="r" stroke-width="40" d="M-50 620 C300 560 500 700 1250 600"/><path stroke-width="14" d="M0 200 H1200 M0 420 H1200 M180 0 V800 M520 0 V800 M880 0 V800"/><path class="w" stroke-width="22" d="M-40 760 L640 300 L1260 120"/><path stroke-width="8" d="M0 300 H520 M880 520 H1200 M340 0 V420 M700 420 V800"/></svg>
+	<i class="park" style="left:6%;top:10%;width:22%;height:24%"></i><i class="park" style="left:72%;top:58%;width:20%;height:22%"></i>
+	<span class="lab" style="left:8%;top:40%">AI district</span><span class="lab" style="left:76%;top:30%">Cloud quarter</span><span class="lab" style="left:30%;top:72%">The corridor</span>
+	<i class="pulse"></i><div class="pin"><div class="hd"><div class="face"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div></div></div>
+	<div class="sheet" data-reveal style="--wait:900ms"><h1>Mostafa Saher · Technical instructor</h1><p class="meta"><b>Open now</b> · AI and cloud, one clear step at a time</p><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div>
+</main><section class="wrap more"><div data-reveal><ul class="tp">
+	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
+	<li><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
+	<li><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
+</ul></div><div data-reveal style="--i:1"><ul class="links li-rows">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div></section>
+<div class="wrap"><footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer></div>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

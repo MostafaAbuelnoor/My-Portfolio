@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#3B82F6">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { --line: rgb(255 255 255 / 0.3); --focus: #fff; --f-bg: rgb(255 255 255 / 0.18); --f-text: #fff; --f-ph: #E3EEFF; --f-border: 1px solid rgb(255 255 255 / 0.4); --b-bg: #fff; --b-text: #1E4FC2; --note: #E3EEFF; --err: #FFE0DA; --f-radius: 14px; --b-radius: 10px; }
+body { background: #8DBCF7 linear-gradient(#2F6FE8, #6CA8F5 520px, #8DBCF7 1100px) no-repeat; color: #fff; font: 15px/1.5 "Manrope", system-ui, sans-serif; }
+.app { max-width: 520px; margin-inline: auto; padding: 8px 16px 40px; text-align: center; }
+.city { font-size: 1.6rem; font-weight: 600; margin-top: 18px; } .big { font-size: clamp(5rem, 22vw, 8rem); font-weight: 300; line-height: 1; letter-spacing: -0.04em; } .cond { font-size: 1.15rem; font-weight: 600; }
+.face { width: 110px; height: 110px; margin: 14px auto 0; border-radius: 50%; background: rgb(255 255 255 / 0.25); }
+.sunx { display: inline-block; width: 22px; height: 22px; vertical-align: -4px; margin-right: 6px; border-radius: 50%; background: #FFD166; box-shadow: 0 0 0 4px rgb(255 209 102 / 0.35); }
+.card { margin-top: 14px; padding: 14px; border-radius: 20px; background: rgb(255 255 255 / 0.16); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); text-align: left; }
+.card h2 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E3EEFF; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.hours { display: flex; justify-content: space-between; gap: 8px; text-align: center; } .hours div { display: grid; gap: 6px; font-size: 0.85rem; } .hours b { font-size: 1.1rem; }
+.fx:not(.fx-rm) .hours:not(.in) div { opacity: 0; translate: 0 12px; } .fx .hours.in div { transition: opacity 500ms ease calc(var(--k) * 90ms), translate 500ms var(--ease-out) calc(var(--k) * 90ms); }
+.days li { display: grid; grid-template-columns: 5.5em 1fr auto; align-items: center; gap: 10px; padding-block: 8px; border-top: 1px solid var(--line); font-weight: 600; } .days li:first-child { border-top: 0; }
+.days li i { height: 5px; border-radius: 5px; background: linear-gradient(90deg, #8FD3FF, #FFD166); } .days small { font-weight: 400; color: #E3EEFF; }
+.foot { text-align: center; }
+</style>
+</head>
+
+<body>
+<main class="app">
+	<p class="city" data-reveal>Mostafa Saher</p>
+	<p class="big" data-reveal style="--i:1"><span id="deg">100</span>°</p>
+	<p class="cond" data-reveal style="--i:2"><span class="sunx fx-pulse"></span>Clear, all day</p>
+	<p data-reveal style="--i:2;color:#E3EEFF">Forecast for AI and cloud: one clear step at a time.</p>
+	<div class="face" data-reveal="scale" style="--i:3"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></div>
+	<h1 class="sr">Mostafa Saher teaches AI and cloud, one clear step at a time</h1>
+	<section class="card" data-reveal><h2>Today in class</h2><div class="hours" data-inview><div style="--k:0">9am<b>AI</b>☀</div><div style="--k:1">11am<b>Cloud</b>☀</div><div style="--k:2">1pm<b>Lab</b>⛅</div><div style="--k:3">3pm<b>Q&amp;A</b>☀</div><div style="--k:4">After<b>Notes</b>✉</div></div></section>
+	<section class="card" data-reveal><h2>This week’s newsletter</h2><ul class="days"><li>Thoughts<i></i><small>clear</small></li><li>Opinions<i></i><small>hype: low</small></li><li>Resources<i></i><small>tested</small></li></ul></section>
+	<section class="card" data-reveal><h2>Get the forecast by email</h2><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></section>
+	<section class="card" data-reveal><h2>Elsewhere</h2><ul class="links li-rows">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></section>
+	<footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer>
+</main>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const d = document.getElementById('deg'); if (FX.RM) return; let n = 0; const t = setInterval(() => { n += 4; d.textContent = Math.min(n, 100); if (n >= 100) clearInterval(t); }, 24); d.textContent = 0;
+});
+</script>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

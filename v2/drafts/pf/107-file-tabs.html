@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FFFFFF">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { --line: rgb(0 0 0 / 0.2); --focus: #111; --f-bg: #fff; --b-bg: #111; --b-text: #fff; --note: #333; --f-radius: 6px; --b-radius: 3px; --f-pad: 4px; --w: 760px; }
+body { background: #fff; color: #111; font: 16px/1.5 "Barlow", system-ui, sans-serif; }
+::selection { background: #111; color: #fff; }
+h1 { margin: clamp(8px, 3vh, 28px) 0 12px; font: 700 clamp(4rem, 1rem + 17vw, 9.6rem)/0.84 "Barlow Condensed", sans-serif; text-transform: uppercase; letter-spacing: -0.01em; text-align: center; }
+.tabs { display: grid; }
+.tab { position: relative; border-radius: 10px 10px 0 0; background: var(--c); margin-top: -8px; box-shadow: 0 -6px 12px -8px rgb(0 0 0 / 0.35); transition: translate 350ms var(--ease-out); }
+.tab summary { list-style: none; cursor: pointer; padding: 12px 18px 16px; font: 700 clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem)/1 "Barlow Condensed", sans-serif; display: flex; justify-content: space-between; align-items: center; } .tab summary::-webkit-details-marker { display: none; }
+.tab summary small { font: 500 0.8rem "Barlow", sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+.tab .body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 450ms var(--ease-out); } .tab[open] .body { grid-template-rows: 1fr; } .tab .body > div { overflow: hidden; padding-inline: 18px; } .tab[open] .body > div { padding-bottom: 26px; }
+.tab p { max-width: 34em; font-size: 1.05rem; }
+.tab .pic { display: flex; gap: 16px; align-items: flex-end; } .tab .pic figure { flex: none; width: 130px; margin-bottom: -26px; }
+@media (hover: hover) and (pointer: fine) { .tab:not([open]):hover { translate: 0 -8px; } }
+.fx:not(.fx-rm) .tabs:not(.in) .tab { translate: 0 60px; opacity: 0; } .fx .tabs.in .tab { transition: translate 700ms var(--ease-out) calc(var(--k) * 70ms), opacity 500ms ease calc(var(--k) * 70ms); }
+.foot { text-align: center; }
+</style>
+</head>
+
+<body>
+<div class="wrap"><header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
+	<main>
+		<h1 data-split="chars" style="--stag:25ms">Mostafa</h1>
+		<div class="tabs" data-inview>
+			<details class="tab" name="f" style="--c:#F2F2F2;--k:0"><summary>Instructor<small>Open</small></summary><div class="body"><div class="pic"><figure><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></figure><p>Mostafa Saher. I teach AI and cloud, one clear step at a time.</p></div></div></details>
+			<details class="tab" name="f" style="--c:#C9B8FF;--k:1"><summary>After class<small>01</small></summary><div class="body"><div><p>The best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links I send people afterwards. My newsletter is where that goes now.</p></div></div></details>
+			<details class="tab" name="f" style="--c:#FFF27A;--k:2"><summary>Thoughts<small>02</small></summary><div class="body"><div><p>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</p></div></div></details>
+			<details class="tab" name="f" style="--c:#9BF29B;--k:3"><summary>Opinions<small>03</small></summary><div class="body"><div><p>Where I stand on new models, cloud services and the hype around them.</p></div></div></details>
+			<details class="tab" name="f" style="--c:#F6D9B8;--k:4"><summary>Resources<small>04</small></summary><div class="body"><div><p>The labs, docs, courses and tools I actually use, each with a line on why.</p></div></div></details>
+			<details class="tab" name="f" open style="--c:#7FE3F5;--k:5"><summary>Newsletter<small>Subscribe</small></summary><div class="body"><div><div style="max-width:440px"><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div></div></div></details>
+			<details class="tab" name="f" style="--c:#FFB3C7;--k:6"><summary>Elsewhere<small>Links</small></summary><div class="body"><div><ul class="links li-rows">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div></div></details>
+		</div>
+	</main>
+	<footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer>
+</div>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

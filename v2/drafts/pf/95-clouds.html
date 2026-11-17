@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#5AA9F2">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { --navy: #0E2A52; --line: rgb(14 42 82 / 0.2); --focus: var(--navy); --f-bg: #fff; --b-bg: var(--navy); --b-text: #fff; --note: #5A6B85; --f-radius: 999px; --b-radius: 999px; }
+body { background: #F4F8FD; color: var(--navy); font: 16px/1.55 "Bricolage Grotesque", system-ui, sans-serif; }
+::selection { background: var(--navy); color: #fff; }
+.sky { position: relative; min-height: 100svh; display: grid; grid-template-rows: auto auto 1fr; overflow: hidden; background: linear-gradient(#3F8FE8, #8FC6F7 60%, #DCEEFC); text-align: center; }
+.cl { position: absolute; left: 0; width: 46vmin; height: 15vmin; border-radius: 999px; background: #fff; filter: blur(2px); opacity: var(--o, 0.95); top: var(--t); }
+.cl::before, .cl::after { content: ""; position: absolute; border-radius: 50%; background: #fff; } .cl::before { width: 42%; height: 150%; left: 14%; top: -72%; } .cl::after { width: 34%; height: 120%; right: 16%; top: -50%; }
+@media (prefers-reduced-motion: no-preference) { .cl { animation: fly var(--d) linear infinite; animation-delay: var(--dl); } @keyframes fly { from { transform: translateX(-60vmin) scale(var(--sc, 1)); } to { transform: translateX(110vw) scale(var(--sc, 1)); } } }
+@media (prefers-reduced-motion: reduce) { .cl { left: var(--x); } }
+.sky > .wrap { position: relative; z-index: 3; }
+h1 { margin-top: clamp(8px, 4vh, 44px); font-size: clamp(2.6rem, 1.2rem + 6.4vw, 6.6rem); font-weight: 800; line-height: 0.92; letter-spacing: -0.05em; color: var(--navy); }
+.ask { max-width: 440px; margin: 22px auto 0; text-align: left; } .ask .note { text-align: center; color: var(--navy); } .field { box-shadow: 0 14px 34px -16px rgb(14 42 82 / 0.6); }
+.sky figure { position: relative; z-index: 2; align-self: end; justify-self: center; width: min(320px, 70%); margin-top: 20px; }
+.more { display: grid; gap: 28px 56px; padding-block: 48px 8px; } @media (min-width: 860px) { .more { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+
+<body>
+<div class="sky">
+	<i class="cl" style="--t:14%;--d:46s;--dl:-8s;--sc:1.1;--x:8%"></i><i class="cl" style="--t:34%;--d:64s;--dl:-40s;--sc:0.7;--o:0.8;--x:62%"></i><i class="cl" style="--t:52%;--d:38s;--dl:-20s;--sc:1.4;--x:30%"></i><i class="cl" style="--t:70%;--d:72s;--dl:-55s;--sc:0.9;--o:0.85;--x:74%"></i><i class="cl" style="--t:24%;--d:54s;--dl:-30s;--sc:0.55;--o:0.7;--x:44%"></i>
+	<div class="wrap"><header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header></div>
+	<div class="wrap"><h1 data-split data-fx="pop">Head in the cloud. Feet in the classroom.</h1><div class="ask" data-reveal style="--wait:700ms"><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div></div>
+	<figure data-reveal style="--wait:400ms" data-par="-12"><img src="../assets/mostafa-cutout.webp" width="1100" height="1433" alt="Mostafa Saher, smiling, arms crossed"></figure>
+</div>
+<section class="wrap more"><div data-reveal><p style="margin-bottom:18px">I’m Mostafa Saher. I teach AI and cloud, one clear step at a time. The best part of every class comes once it’s over: the questions in the corridor, the “wait, so why does that work?”, the links I send people afterwards. My newsletter is where that goes now.</p><ul class="links li-inline">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div><div data-reveal style="--i:1"><ul class="tp">
+	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
+	<li><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
+	<li><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
+</ul></div></section>
+<div class="wrap"><footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer></div>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

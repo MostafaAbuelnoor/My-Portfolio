@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F1EEE6">
+<title>Mostafa Saher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="fx.css">
+<style>
+:root { --line: #D9D4C6; --focus: #17171A; --f-bg: #fff; --b-bg: #17171A; --b-text: #fff; --note: #6A675C; --f-radius: 12px; --b-radius: 8px; }
+body { background: #F1EEE6; color: #17171A; font: 16px/1.55 "Figtree", system-ui, sans-serif; }
+::selection { background: #17171A; color: #F1EEE6; }
+.hero { display: grid; gap: 24px 48px; align-items: center; min-height: calc(100svh - 70px); padding-bottom: 36px; } @media (min-width: 900px) { .hero { grid-template-columns: 1.1fr 0.9fr; } }
+h1 { font-size: clamp(2.3rem, 1.2rem + 4vw, 4.6rem); font-weight: 800; line-height: 0.98; letter-spacing: -0.045em; max-width: 10em; }
+.hero p.s { margin: 16px 0 22px; max-width: 30em; color: #55524A; }
+.signup { max-width: 440px; }
+.mo { justify-self: center; width: min(380px, 84vw); aspect-ratio: 5 / 6; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(6, 1fr); gap: 3px; }
+.mo i { background-color: #9DB8F5; background-image: url(../assets/mostafa-cutout.webp); background-repeat: no-repeat; background-size: 520% auto; background-position: calc(var(--c) * 25%) calc(var(--r) * 21%); border-radius: 4px; transition: transform 1100ms var(--ease-out), opacity 700ms ease, border-radius 300ms ease; transition-delay: var(--d); }
+.fx:not(.fx-rm) .mo:not(.in) i { transform: translate(var(--tx), var(--ty)) rotate(var(--rt)) scale(0.4); opacity: 0; }
+@media (hover: hover) and (pointer: fine) { .mo.in i { transition-delay: 0ms; transition-duration: 400ms; } .mo.in i:hover { transform: scale(0.82) rotate(6deg); border-radius: 50%; } }
+.more { display: grid; gap: 28px 56px; padding-block: 48px 8px; } @media (min-width: 860px) { .more { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+
+<body>
+<div class="wrap"><header class="top"><b>Mostafa Saher</b><a href="#email" data-focus-signup>Subscribe</a></header>
+	<main class="hero">
+		<div><h1 data-split>The pieces fall into place.</h1><p class="s" data-reveal style="--wait:600ms">I’m Mostafa Saher. I teach AI and cloud, one clear step at a time, and I write down what comes up after class.</p><div data-reveal style="--wait:750ms"><form class="signup" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+	<input type="hidden" name="form-name" value="newsletter">
+	<p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+	<div class="signup__stack">
+		<div class="field">
+			<label class="sr" for="email">Email address</label>
+			<input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="note">
+			<button class="btn" type="submit"><span>Subscribe</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+		</div>
+		<p class="done" aria-hidden="true"><span class="done__tick"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You’re on the list. I’ll write when there’s something worth reading.</span></p>
+	</div>
+	<p class="note" id="note" role="status">Free. Leave whenever you like.</p>
+</form></div></div>
+		<div class="mo" data-inview role="img" aria-label="Mostafa Saher"><i style="--c:0;--r:0;--tx:71%;--ty:126%;--rt:29deg;--d:462ms"></i><i style="--c:1;--r:0;--tx:100%;--ty:140%;--rt:-42deg;--d:189ms"></i><i style="--c:2;--r:0;--tx:102%;--ty:83%;--rt:71deg;--d:628ms"></i><i style="--c:3;--r:0;--tx:-65%;--ty:-112%;--rt:24deg;--d:310ms"></i><i style="--c:4;--r:0;--tx:-88%;--ty:-114%;--rt:47deg;--d:649ms"></i><i style="--c:0;--r:1;--tx:-139%;--ty:144%;--rt:11deg;--d:463ms"></i><i style="--c:1;--r:1;--tx:155%;--ty:-80%;--rt:69deg;--d:15ms"></i><i style="--c:2;--r:1;--tx:110%;--ty:-128%;--rt:-75deg;--d:36ms"></i><i style="--c:3;--r:1;--tx:-63%;--ty:-37%;--rt:63deg;--d:30ms"></i><i style="--c:4;--r:1;--tx:77%;--ty:7%;--rt:22deg;--d:605ms"></i><i style="--c:0;--r:2;--tx:-60%;--ty:105%;--rt:-31deg;--d:655ms"></i><i style="--c:1;--r:2;--tx:-10%;--ty:95%;--rt:-89deg;--d:678ms"></i><i style="--c:2;--r:2;--tx:-117%;--ty:74%;--rt:77deg;--d:284ms"></i><i style="--c:3;--r:2;--tx:48%;--ty:122%;--rt:-69deg;--d:260ms"></i><i style="--c:4;--r:2;--tx:1%;--ty:-43%;--rt:41deg;--d:295ms"></i><i style="--c:0;--r:3;--tx:-145%;--ty:-125%;--rt:54deg;--d:110ms"></i><i style="--c:1;--r:3;--tx:45%;--ty:-105%;--rt:-16deg;--d:395ms"></i><i style="--c:2;--r:3;--tx:-126%;--ty:-152%;--rt:85deg;--d:0ms"></i><i style="--c:3;--r:3;--tx:-51%;--ty:-53%;--rt:-77deg;--d:481ms"></i><i style="--c:4;--r:3;--tx:32%;--ty:43%;--rt:17deg;--d:74ms"></i><i style="--c:0;--r:4;--tx:129%;--ty:-59%;--rt:82deg;--d:276ms"></i><i style="--c:1;--r:4;--tx:12%;--ty:-116%;--rt:-11deg;--d:340ms"></i><i style="--c:2;--r:4;--tx:-153%;--ty:49%;--rt:-60deg;--d:137ms"></i><i style="--c:3;--r:4;--tx:-34%;--ty:-109%;--rt:-88deg;--d:61ms"></i><i style="--c:4;--r:4;--tx:78%;--ty:89%;--rt:-45deg;--d:698ms"></i><i style="--c:0;--r:5;--tx:126%;--ty:-64%;--rt:24deg;--d:521ms"></i><i style="--c:1;--r:5;--tx:-63%;--ty:-93%;--rt:17deg;--d:659ms"></i><i style="--c:2;--r:5;--tx:36%;--ty:-101%;--rt:11deg;--d:430ms"></i><i style="--c:3;--r:5;--tx:-52%;--ty:-160%;--rt:-21deg;--d:606ms"></i><i style="--c:4;--r:5;--tx:-5%;--ty:-150%;--rt:-37deg;--d:191ms"></i></div>
+	</main>
+</div><section class="wrap more"><div data-reveal><ul class="tp">
+	<li><b>Thoughts</b><span>Notes from the classroom: what students get stuck on, and the explanation that finally made it click.</span></li>
+	<li><b>Opinions</b><span>Where I stand on new models, cloud services and the hype around them.</span></li>
+	<li><b>Resources</b><span>The labs, docs, courses and tools I actually use, each with a line on why.</span></li>
+</ul></div><div data-reveal style="--i:1"><ul class="links li-rows">
+	<li><a href="https://www.linkedin.com/in/mostafa-abuelnoor-96b2b1171/" target="_blank" rel="noopener"><span class="l-name">LinkedIn</span><span class="l-meta">Mostafa Abuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="https://github.com/MostafaAbuelnoor" target="_blank" rel="noopener"><span class="l-name">GitHub</span><span class="l-meta">@MostafaAbuelnoor</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+	<li><a href="mailto:mostafasaher@gmail.com"><span class="l-name">Email</span><span class="l-meta">mostafasaher@gmail.com</span><svg class="l-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+</ul></div></section>
+<div class="wrap"><footer class="foot">© <span data-year>2026</span> Mostafa Saher</footer></div>
+<script src="fx.js" defer></script>
+<script src="signup.js" defer></script>
+</body>
+
+</html>

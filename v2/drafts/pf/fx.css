@@ -1,0 +1,59 @@
+/* Motion kit for drafts 51 onward. Hidden start states apply only once fx.js has run (.fx) and motion is allowed. */
+:root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --ease-io: cubic-bezier(0.77, 0, 0.175, 1); --spring: cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+[data-split] .w { display: inline-block; vertical-align: top; }
+.fx:not(.fx-rm) [data-split]:not([data-fx]) .w, .fx:not(.fx-rm) [data-split][data-fx="rise"] .w { overflow: clip; overflow-clip-margin: 0.08em; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+[data-split] .c { display: inline-block; will-change: transform; }
+.fx:not(.fx-rm) [data-split] .c { transition: transform var(--dur, 900ms) var(--ease-out), opacity var(--dur, 900ms) var(--ease-out), filter var(--dur, 900ms) var(--ease-out); transition-delay: calc(var(--n) * var(--stag, 45ms) + var(--wait, 0ms)); }
+.fx:not(.fx-rm) [data-split]:not(.in):not([data-fx]) .c, .fx:not(.fx-rm) [data-split][data-fx="rise"]:not(.in) .c { transform: translateY(115%); }
+.fx:not(.fx-rm) [data-split][data-fx="blur"]:not(.in) .c { opacity: 0; filter: blur(14px); transform: translateY(0.25em); }
+.fx:not(.fx-rm) [data-split][data-fx="flip"]:not(.in) .c { opacity: 0; transform: perspective(600px) rotateX(-88deg) translateY(0.3em); transform-origin: 50% 100%; }
+.fx:not(.fx-rm) [data-split][data-fx="pop"]:not(.in) .c { opacity: 0; transform: scale(0.4) rotate(-8deg); }
+.fx:not(.fx-rm) [data-split][data-fx="pop"] .c { transition-timing-function: var(--spring), ease, ease; }
+.fx:not(.fx-rm) [data-split][data-fx="drop"]:not(.in) .c { opacity: 0; transform: translateY(-1.1em) rotate(6deg); }
+.fx:not(.fx-rm) [data-split][data-fx="fade"]:not(.in) .c { opacity: 0.12; }
+
+.fx:not(.fx-rm) [data-reveal] { transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out), filter 900ms var(--ease-out), clip-path 1000ms var(--ease-io); transition-delay: calc(var(--i, 0) * 90ms + var(--wait, 0ms)); }
+.fx:not(.fx-rm) [data-reveal]:not(.in) { opacity: 0; transform: translateY(28px); }
+.fx:not(.fx-rm) [data-reveal="left"]:not(.in) { transform: translateX(-40px); }
+.fx:not(.fx-rm) [data-reveal="right"]:not(.in) { transform: translateX(40px); }
+.fx:not(.fx-rm) [data-reveal="scale"]:not(.in) { transform: scale(0.9); }
+.fx:not(.fx-rm) [data-reveal="blur"]:not(.in) { transform: none; filter: blur(16px); }
+.fx:not(.fx-rm) [data-reveal="fade"]:not(.in) { transform: none; }
+.fx:not(.fx-rm) [data-wipe] { transition: clip-path 1100ms var(--ease-io); transition-delay: calc(var(--i, 0) * 90ms + var(--wait, 0ms)); clip-path: inset(0); }
+.fx:not(.fx-rm) [data-wipe]:not(.in) { clip-path: inset(100% 0 0 0); }
+.fx:not(.fx-rm) [data-wipe="down"]:not(.in) { clip-path: inset(0 0 100% 0); }
+.fx:not(.fx-rm) [data-wipe="right"]:not(.in) { clip-path: inset(0 100% 0 0); }
+.fx:not(.fx-rm) [data-wipe="circle"] { clip-path: circle(150% at 50% 50%); }
+.fx:not(.fx-rm) [data-wipe="circle"]:not(.in) { clip-path: circle(0% at 50% 50%); }
+.fx:not(.fx-rm) [data-draw] path, .fx:not(.fx-rm) [data-draw] circle, .fx:not(.fx-rm) [data-draw] ellipse { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 1100ms var(--ease-io); transition-delay: calc(var(--i, 0) * 200ms + var(--wait, 500ms)); }
+.fx:not(.fx-rm) [data-draw]:not(.in) path, .fx:not(.fx-rm) [data-draw]:not(.in) circle, .fx:not(.fx-rm) [data-draw]:not(.in) ellipse { stroke-dashoffset: 1; }
+
+[data-marquee] { overflow: hidden; white-space: nowrap; }
+.fx-track { display: inline-flex; }
+.fx-seg { flex: none; display: inline-flex; align-items: center; }
+.fx:not(.fx-rm) .fx-track { animation: fx-marquee var(--dur, 22s) linear infinite; animation-direction: var(--dir, normal); }
+@keyframes fx-marquee { to { transform: translateX(-25%); } }
+
+.fx-word { display: inline-block; transition: transform 450ms var(--ease-out), opacity 300ms ease; }
+.fx-word.out { transform: translateY(-55%); opacity: 0; }
+.fx-word.pre { transform: translateY(55%); opacity: 0; transition: none; }
+.fx-caret::after { content: ""; display: inline-block; width: 0.08em; height: 0.95em; margin-left: 0.06em; background: currentColor; vertical-align: -0.1em; animation: fx-blink 1s steps(1) infinite; }
+@keyframes fx-blink { 50% { opacity: 0; } }
+
+canvas[data-canvas] { display: block; width: 100%; height: 100%; }
+.fx-cursor { position: fixed; z-index: 99; left: 0; top: 0; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: #fff; mix-blend-mode: difference; pointer-events: none; transition: width 250ms var(--ease-out), height 250ms var(--ease-out), margin 250ms var(--ease-out), opacity 200ms; opacity: 0; }
+.fx-cursor.on { opacity: 1; }
+.fx-cursor.big { width: 84px; height: 84px; margin: -42px 0 0 -42px; }
+.fx-burst { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+	.fx-float { animation: fx-float var(--dur, 6s) ease-in-out infinite alternate; }
+	.fx-spin { animation: fx-spin var(--dur, 24s) linear infinite; }
+	.fx-sway { animation: fx-sway 7s ease-in-out infinite alternate; }
+	.fx-pulse { animation: fx-pulse var(--dur, 2.4s) ease-in-out infinite; }
+	@keyframes fx-float { from { translate: 0 -8px; } to { translate: 0 8px; } }
+	@keyframes fx-spin { to { rotate: 360deg; } }
+	@keyframes fx-sway { from { transform: perspective(900px) rotateY(-7deg) rotateX(3deg); } to { transform: perspective(900px) rotateY(7deg) rotateX(-3deg); } }
+	@keyframes fx-pulse { 50% { opacity: 0.35; } }
+}
